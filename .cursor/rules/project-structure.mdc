@@ -1,0 +1,64 @@
+---
+alwaysApply: true
+---
+
+# Project Structure and Naming Conventions
+
+This document describes the directory structure of the project and its naming conventions.
+
+## Monorepo layout
+
+```
+src/
+    eduriam-ui-core/                # Package: @eduriam-ui/core
+    eduriam-ui-<theme-variant>/     # Package: @eduriam-ui/<theme-variant> - (e.g. @eduriam-ui/minimal)
+```
+
+## Naming conventions
+
+- Directories use **kebab-case**, except component folders which use **PascalCase**.
+  - Examples:
+    - `theme/`, `utils/`, `hooks/` (kebab-case)
+    - `ExampleButton/`, `ExampleCheckbox/` (PascalCase component folders)
+- TypeScript sources in `src/` with explicit extensions (`.ts`, `.tsx`).
+- Each package exposes a single public entry via `src/index.ts`.
+
+## Package layout (applies to each package under `src/*`)
+
+```
+src/<package-name>/
+  package.json
+  tsconfig.json
+  src/
+    index.ts                   # Package public surface
+    theme/                     # Shared theme tokens
+      index.ts
+      palette.ts
+      typography.ts
+    components/                # Components grouped by folder (PascalCase)
+      ExampleButton/
+        ExampleButton.tsx
+        ExampleButton.stories.tsx
+        index.ts
+      ExampleCheckbox/
+        ExampleCheckbox.tsx
+        ExampleCheckbox.stories.tsx
+        index.ts
+```
+
+## Components
+
+- One component per folder using PascalCase naming convention
+- Inside each component folder:
+  - `<Name>.tsx`: component implementation
+  - `index.ts`: re-exports for convenient imports
+  - `<Name>.stories.tsx`: co-located Storybook story
+
+## Theme tokens
+
+- Keep shared tokens in `theme/` (kebab-case directory).
+- Example public exports: `palette`, `typography` from `@eduriam-ui/core`, and overrides in `@eduriam-ui/minimal`.
+
+## Storybook
+
+- Story placement is co-located with components in each package `components/<Name>/<Name>.stories.tsx`.
