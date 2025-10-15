@@ -1,4 +1,4 @@
-import { coreTypography } from "@eduriam-ui/core";
+import { coreTypography } from "@eduriam/ui-core";
 
 export const minimalTypography = {
   ...coreTypography,

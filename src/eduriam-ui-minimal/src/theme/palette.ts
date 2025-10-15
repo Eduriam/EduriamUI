@@ -1,4 +1,4 @@
-import { corePalette } from "@eduriam-ui/core";
+import { corePalette } from "@eduriam/ui-core";
 
 export const minimalPalette = {
   ...corePalette,

@@ -1,5 +1,5 @@
 {
-  "name": "@eduriam-ui/core",
+  "name": "@eduriam/ui-core",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.cjs",
@@ -41,6 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eduriam/EduriamUI.git"
+    "url": "git+https://github.com/Eduriam/EduriamUI.git",
+    "directory": "src/eduriam-ui-core"
   }
 }

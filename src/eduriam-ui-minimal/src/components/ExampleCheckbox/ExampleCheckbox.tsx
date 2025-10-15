@@ -2,7 +2,7 @@ import React from "react";
 import {
   ExampleCheckbox as CoreExampleCheckbox,
   ExampleCheckboxProps,
-} from "@eduriam-ui/core";
+} from "@eduriam/ui-core";
 
 export const ExampleCheckbox: React.FC<ExampleCheckboxProps> = (props) => {
   return (
