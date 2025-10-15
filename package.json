@@ -6,9 +6,9 @@
     "src/*"
   ],
   "scripts": {
-    "build": "yarn workspace @eduriam/ui-core build && yarn workspace @eduriam/ui-minimal build",
-    "clean": "yarn workspace @eduriam/ui-core clean && yarn workspace @eduriam/ui-minimal clean",
-    "typecheck": "yarn workspace @eduriam/ui-core typecheck && yarn workspace @eduriam/ui-minimal typecheck",
+    "build": "yarn workspace @eduriam/ui-core build && yarn workspace @eduriam/ui-minimal build && yarn workspace @eduriam/ui-x build",
+    "clean": "yarn workspace @eduriam/ui-core clean && yarn workspace @eduriam/ui-minimal clean && yarn workspace @eduriam/ui-x clean",
+    "typecheck": "yarn workspace @eduriam/ui-core typecheck && yarn workspace @eduriam/ui-minimal typecheck && yarn workspace @eduriam/ui-x typecheck",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "build-storybook": "storybook build"
