@@ -1,0 +1,53 @@
+name: Build and Publish Packages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: publish-packages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (GitHub Packages registry)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@eduriam-ui"
+
+      - name: Enable Corepack (Yarn v4)
+        run: |
+          corepack enable
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable
+
+      - name: Build all packages
+        run: |
+          yarn build
+
+      - name: Publish @eduriam-ui/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd src/eduriam-ui-core
+          npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"
+
+      - name: Publish @eduriam-ui/minimal
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd src/eduriam-ui-minimal
+          npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"

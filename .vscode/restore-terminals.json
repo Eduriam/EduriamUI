@@ -1,0 +1,16 @@
+{
+  "artificialDelayMilliseconds": 700,
+  "keepExistingTerminalsOpen": false,
+  "runOnStartup": true,
+  "terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "storybook",
+          "commands": ["yarn storybook"],
+          "shouldRunCommands": false
+        }
+      ]
+    }
+  ]
+}
