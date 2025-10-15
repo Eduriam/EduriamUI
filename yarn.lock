@@ -255,9 +255,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eduriam-ui/core@workspace:*, @eduriam-ui/core@workspace:src/eduriam-ui-core":
+"@eduriam/ui-core@workspace:*, @eduriam/ui-core@workspace:src/eduriam-ui-core":
   version: 0.0.0-use.local
-  resolution: "@eduriam-ui/core@workspace:src/eduriam-ui-core"
+  resolution: "@eduriam/ui-core@workspace:src/eduriam-ui-core"
   dependencies:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
@@ -275,11 +275,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@eduriam-ui/minimal@workspace:src/eduriam-ui-minimal":
+"@eduriam/ui-minimal@workspace:src/eduriam-ui-minimal":
   version: 0.0.0-use.local
-  resolution: "@eduriam-ui/minimal@workspace:src/eduriam-ui-minimal"
+  resolution: "@eduriam/ui-minimal@workspace:src/eduriam-ui-minimal"
   dependencies:
-    "@eduriam-ui/core": "workspace:*"
+    "@eduriam/ui-core": "workspace:*"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
     "@mui/material": "npm:^5.15.20"

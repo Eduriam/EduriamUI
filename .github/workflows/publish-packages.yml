@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
-          scope: "@eduriam-ui"
+          scope: "@eduriam"
 
       - name: Enable Corepack (Yarn v4)
         run: |
@@ -38,14 +38,14 @@ jobs:
         run: |
           yarn build
 
-      - name: Publish @eduriam-ui/core
+      - name: Publish @eduriam/ui-core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd src/eduriam-ui-core
           npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"
 
-      - name: Publish @eduriam-ui/minimal
+      - name: Publish @eduriam/ui-minimal
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

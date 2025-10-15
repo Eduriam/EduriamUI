@@ -2,7 +2,7 @@ import React from "react";
 import {
   ExampleButton as CoreExampleButton,
   ExampleButtonProps,
-} from "@eduriam-ui/core";
+} from "@eduriam/ui-core";
 
 export const ExampleButton: React.FC<ExampleButtonProps> = ({
   children,
