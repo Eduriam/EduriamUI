@@ -1,10 +1,8 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import { createEduriamTheme } from "../src/eduriam-ui-core/src/theme/eduriamTheme";
+import { theme } from "../src/eduriam-ui-core/src/theme/theme";
 import "../src/eduriam-ui-core/src/styles/fonts.css";
-
-const theme = createEduriamTheme();
 
 const preview: Preview = {
   parameters: {
