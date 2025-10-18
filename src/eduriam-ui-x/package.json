@@ -21,7 +21,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.1.0",
+    "@eduriam/ui-core": "^0.3.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
@@ -31,7 +31,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@eduriam/ui-core": "workspace:*",
+    "@eduriam/ui-core": "^0.3.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.15.20",

@@ -28,7 +28,7 @@
     "react-dom": "^18"
   },
   "dependencies": {
-    "@eduriam/ui-core": "workspace:*"
+    "@eduriam/ui-core": "0.3.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.13.3",
