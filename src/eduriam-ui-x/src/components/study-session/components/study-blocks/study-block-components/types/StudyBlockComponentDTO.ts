@@ -3,6 +3,7 @@ import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 
 interface BaseStudyBlockComponent {
   type: StudyBlockComponentType;
+  id: ID;
 }
 
 export interface HeaderComponent extends BaseStudyBlockComponent {
@@ -16,7 +17,6 @@ export interface ParagraphComponent extends BaseStudyBlockComponent {
 }
 
 export interface TextAnswerComponent extends BaseStudyBlockComponent {
-  id: ID;
   type: StudyBlockComponentType.TEXT_ANSWER;
   correctAnswer: string;
 
@@ -25,7 +25,13 @@ export interface TextAnswerComponent extends BaseStudyBlockComponent {
   characterButtons?: string[];
 }
 
+export interface ShortAudioComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.SHORT_AUDIO;
+  audioUrl: string;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
-  | TextAnswerComponent;
+  | TextAnswerComponent
+  | ShortAudioComponent;

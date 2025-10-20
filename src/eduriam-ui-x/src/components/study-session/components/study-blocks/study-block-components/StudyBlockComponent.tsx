@@ -5,6 +5,7 @@ import { StudyBlockComponentType } from "./types/StudyBlockComponentTypes";
 import { Header } from "./specific/Header/Header";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
+import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
@@ -27,6 +28,8 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           onAnswerStateChange={onAnswerStateChange}
         />
       );
+    case StudyBlockComponentType.SHORT_AUDIO:
+      return <ShortAudio component={component} />;
     default:
       return null;
   }
