@@ -16,19 +16,9 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
 }) => {
   switch (component.type) {
     case StudyBlockComponentType.HEADER:
-      return (
-        <Header
-          component={component}
-          onAnswerStateChange={onAnswerStateChange}
-        />
-      );
+      return <Header component={component} />;
     case StudyBlockComponentType.PARAGRAPH:
-      return (
-        <Paragraph
-          component={component}
-          onAnswerStateChange={onAnswerStateChange}
-        />
-      );
+      return <Paragraph component={component} />;
     default:
       return null;
   }

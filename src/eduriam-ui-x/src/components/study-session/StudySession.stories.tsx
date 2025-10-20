@@ -21,11 +21,11 @@ export const Base: Story = {
           components: [
             {
               type: StudyBlockComponentType.HEADER,
-              headerText: "Study Block Header Component",
+              text: "Study Block Header Component",
             },
             {
               type: StudyBlockComponentType.PARAGRAPH,
-              paragraphText: "This is an study block paragraph component.",
+              text: "This is an study block paragraph component.",
             },
           ],
         },
@@ -35,7 +35,7 @@ export const Base: Story = {
           components: [
             {
               type: StudyBlockComponentType.PARAGRAPH,
-              paragraphText: "Exercise placeholder content goes here.",
+              text: "Exercise placeholder content goes here.",
             },
           ],
         },

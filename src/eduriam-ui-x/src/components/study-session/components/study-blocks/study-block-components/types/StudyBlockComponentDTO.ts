@@ -6,12 +6,12 @@ interface BaseStudyBlockComponent {
 
 export interface HeaderComponent extends BaseStudyBlockComponent {
   type: StudyBlockComponentType.HEADER;
-  headerText: string;
+  text: string;
 }
 
 export interface ParagraphComponent extends BaseStudyBlockComponent {
   type: StudyBlockComponentType.PARAGRAPH;
-  paragraphText: string;
+  text: string;
 }
 
 export type StudyBlockComponentDTO = HeaderComponent | ParagraphComponent;
