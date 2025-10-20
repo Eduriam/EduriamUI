@@ -4,7 +4,7 @@ import { Header } from "./Header";
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
 
 const meta: Meta<typeof Header> = {
-  title: "x/study/Header",
+  title: "x/study-block-components/Header",
   component: Header,
 };
 

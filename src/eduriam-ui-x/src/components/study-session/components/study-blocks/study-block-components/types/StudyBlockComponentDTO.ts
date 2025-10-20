@@ -1,3 +1,4 @@
+import { ID } from "../../../../../../models/ID";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 
 interface BaseStudyBlockComponent {
@@ -14,4 +15,17 @@ export interface ParagraphComponent extends BaseStudyBlockComponent {
   text: string;
 }
 
-export type StudyBlockComponentDTO = HeaderComponent | ParagraphComponent;
+export interface TextAnswerComponent extends BaseStudyBlockComponent {
+  id: ID;
+  type: StudyBlockComponentType.TEXT_ANSWER;
+  correctAnswer: string;
+
+  evaluationStrategy?: "exact" | "case_insensitive";
+  variant?: "short" | "long";
+  characterButtons?: string[];
+}
+
+export type StudyBlockComponentDTO =
+  | HeaderComponent
+  | ParagraphComponent
+  | TextAnswerComponent;

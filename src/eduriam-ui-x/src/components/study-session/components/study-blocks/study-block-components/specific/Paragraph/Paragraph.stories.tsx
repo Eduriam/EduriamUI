@@ -4,7 +4,7 @@ import { Paragraph } from "./Paragraph";
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
 
 const meta: Meta<typeof Paragraph> = {
-  title: "x/study/Paragraph",
+  title: "x/study-block-components/Paragraph",
   component: Paragraph,
 };
 

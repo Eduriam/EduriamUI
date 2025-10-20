@@ -4,6 +4,7 @@ import { StudyBlockComponentDTO } from "./types/StudyBlockComponentDTO";
 import { StudyBlockComponentType } from "./types/StudyBlockComponentTypes";
 import { Header } from "./specific/Header/Header";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
+import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
@@ -19,6 +20,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
       return <Header component={component} />;
     case StudyBlockComponentType.PARAGRAPH:
       return <Paragraph component={component} />;
+    case StudyBlockComponentType.TEXT_ANSWER:
+      return (
+        <TextAnswer
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
     default:
       return null;
   }
