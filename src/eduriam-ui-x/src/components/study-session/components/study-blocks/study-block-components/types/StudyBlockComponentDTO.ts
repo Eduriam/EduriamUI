@@ -30,8 +30,14 @@ export interface ShortAudioComponent extends BaseStudyBlockComponent {
   audioUrl: string;
 }
 
+export interface LongAudioComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.LONG_AUDIO;
+  audioUrl: string;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
   | TextAnswerComponent
-  | ShortAudioComponent;
+  | ShortAudioComponent
+  | LongAudioComponent;

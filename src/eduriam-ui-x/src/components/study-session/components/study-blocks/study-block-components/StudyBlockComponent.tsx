@@ -6,6 +6,7 @@ import { Header } from "./specific/Header/Header";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
+import { LongAudio } from "./specific/LongAudio/LongAudio";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
@@ -30,6 +31,8 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
       );
     case StudyBlockComponentType.SHORT_AUDIO:
       return <ShortAudio component={component} />;
+    case StudyBlockComponentType.LONG_AUDIO:
+      return <LongAudio component={component} />;
     default:
       return null;
   }
