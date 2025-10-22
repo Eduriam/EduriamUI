@@ -6,6 +6,7 @@ import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
 import { LongAudio } from "./specific/LongAudio/LongAudio";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
+import { PronunciationAnswer } from "./specific/PronunciationAnswer/PronunciationAnswer";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 import Timer from "./specific/Timer/Timer";
@@ -44,6 +45,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.CHECKLIST:
       return (
         <CheckList
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.PRONUNCIATION_ANSWER:
+      return (
+        <PronunciationAnswer
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />

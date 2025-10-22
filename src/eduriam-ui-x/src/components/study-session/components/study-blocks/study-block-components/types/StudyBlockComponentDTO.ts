@@ -52,6 +52,12 @@ export interface CheckListComponent extends BaseStudyBlockComponent {
   items: string[];
 }
 
+export interface PronunciationAnswerComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.PRONUNCIATION_ANSWER;
+  id: ID;
+  correctAnswer: string;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -60,4 +66,5 @@ export type StudyBlockComponentDTO =
   | LongAudioComponent
   | ImageComponent
   | TimerComponent
-  | CheckListComponent;
+  | CheckListComponent
+  | PronunciationAnswerComponent;
