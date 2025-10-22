@@ -42,10 +42,16 @@ export interface ImageComponent extends BaseStudyBlockComponent {
   size?: "small" | "medium" | "large";
 }
 
+export interface TimerComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.TIMER;
+  seconds: number;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
   | TextAnswerComponent
   | ShortAudioComponent
   | LongAudioComponent
-  | ImageComponent;
+  | ImageComponent
+  | TimerComponent;

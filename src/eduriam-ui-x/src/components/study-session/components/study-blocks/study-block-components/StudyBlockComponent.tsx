@@ -7,6 +7,7 @@ import { LongAudio } from "./specific/LongAudio/LongAudio";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
+import Timer from "./specific/Timer/Timer";
 import { StudyBlockComponentDTO } from "./types/StudyBlockComponentDTO";
 import { StudyBlockComponentType } from "./types/StudyBlockComponentTypes";
 
@@ -37,6 +38,8 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
       return <LongAudio component={component} />;
     case StudyBlockComponentType.IMAGE:
       return <Image component={component} />;
+    case StudyBlockComponentType.TIMER:
+      return <Timer component={component} />;
     default:
       return null;
   }
