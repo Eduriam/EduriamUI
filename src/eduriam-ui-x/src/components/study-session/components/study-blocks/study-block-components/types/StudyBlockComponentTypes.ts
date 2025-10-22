@@ -3,5 +3,6 @@ export enum StudyBlockComponentType {
   PARAGRAPH = "PARAGRAPH",
   SHORT_AUDIO = "SHORT_AUDIO",
   LONG_AUDIO = "LONG_AUDIO",
+  IMAGE = "IMAGE",
   TEXT_ANSWER = "TEXT_ANSWER",
 }

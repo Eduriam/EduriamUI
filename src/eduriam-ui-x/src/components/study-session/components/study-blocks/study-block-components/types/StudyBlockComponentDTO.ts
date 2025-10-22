@@ -35,9 +35,17 @@ export interface LongAudioComponent extends BaseStudyBlockComponent {
   audioUrl: string;
 }
 
+export interface ImageComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.IMAGE;
+  url: string;
+  alt?: string;
+  size?: "small" | "medium" | "large";
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
   | TextAnswerComponent
   | ShortAudioComponent
-  | LongAudioComponent;
+  | LongAudioComponent
+  | ImageComponent;
