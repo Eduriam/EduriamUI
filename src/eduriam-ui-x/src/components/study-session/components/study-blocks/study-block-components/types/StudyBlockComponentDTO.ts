@@ -47,6 +47,11 @@ export interface TimerComponent extends BaseStudyBlockComponent {
   seconds: number;
 }
 
+export interface CheckListComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.CHECKLIST;
+  items: string[];
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -54,4 +59,5 @@ export type StudyBlockComponentDTO =
   | ShortAudioComponent
   | LongAudioComponent
   | ImageComponent
-  | TimerComponent;
+  | TimerComponent
+  | CheckListComponent;

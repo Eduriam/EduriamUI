@@ -6,4 +6,5 @@ export enum StudyBlockComponentType {
   IMAGE = "IMAGE",
   TEXT_ANSWER = "TEXT_ANSWER",
   TIMER = "TIMER",
+  CHECKLIST = "CHECKLIST",
 }

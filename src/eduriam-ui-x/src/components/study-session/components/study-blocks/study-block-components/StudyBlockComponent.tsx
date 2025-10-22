@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AnswerState } from "../../../types/AnswerState";
+import { CheckList } from "./specific/CheckList/CheckList";
 import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
 import { LongAudio } from "./specific/LongAudio/LongAudio";
@@ -40,6 +41,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
       return <Image component={component} />;
     case StudyBlockComponentType.TIMER:
       return <Timer component={component} />;
+    case StudyBlockComponentType.CHECKLIST:
+      return (
+        <CheckList
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
     default:
       return null;
   }
