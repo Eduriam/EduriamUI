@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
+
 import Box from "@mui/material/Box";
-import { TextAnswerComponent } from "../../types/StudyBlockComponentDTO";
+import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+
 import { AnswerState } from "../../../../../types/AnswerState";
+import { TextAnswerComponent } from "../../types/StudyBlockComponentDTO";
 
 export interface ITextAnswerStudyBlockComponent {
   component: TextAnswerComponent;
@@ -15,7 +17,7 @@ export interface ITextAnswerStudyBlockComponent {
 function evaluateAnswer(
   userAnswer: string,
   correctAnswer: string,
-  strategy: TextAnswerComponent["evaluationStrategy"]
+  strategy: TextAnswerComponent["evaluationStrategy"],
 ): AnswerState {
   const normalize = (s: string) => {
     let v = s.trim();
@@ -41,9 +43,9 @@ export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
       evaluateAnswer(
         value,
         component.correctAnswer,
-        component.evaluationStrategy
+        component.evaluationStrategy,
       ),
-    [value, component.correctAnswer, component.evaluationStrategy]
+    [value, component.correctAnswer, component.evaluationStrategy],
   );
 
   useEffect(() => {
@@ -69,8 +71,8 @@ export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
                 showAnswerState && state === "RIGHT"
                   ? "success.main"
                   : showAnswerState && state === "WRONG"
-                  ? "error.main"
-                  : undefined,
+                    ? "error.main"
+                    : undefined,
               borderWidth: 2,
             },
         }}
@@ -80,8 +82,8 @@ export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
           showAnswerState && state === "RIGHT"
             ? "success"
             : showAnswerState && state === "WRONG"
-            ? "error"
-            : undefined
+              ? "error"
+              : undefined
         }
         focused={
           showAnswerState && (state === "RIGHT" || state === "WRONG")

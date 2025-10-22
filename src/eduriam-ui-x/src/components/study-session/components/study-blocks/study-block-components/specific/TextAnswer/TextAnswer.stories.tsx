@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn, expect } from "storybook/test";
-import { TextAnswer } from "./TextAnswer";
+import { expect, fn } from "storybook/test";
+
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
+import { TextAnswer } from "./TextAnswer";
 
 const meta: Meta<typeof TextAnswer> = {
   title: "x/study-block-components/TextAnswer",

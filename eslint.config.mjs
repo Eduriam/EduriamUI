@@ -1,10 +1,10 @@
 // Flat ESLint config (ESM) for ESLint v9
-import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import storybookPlugin from "eslint-plugin-storybook";
-import prettierConfig from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [

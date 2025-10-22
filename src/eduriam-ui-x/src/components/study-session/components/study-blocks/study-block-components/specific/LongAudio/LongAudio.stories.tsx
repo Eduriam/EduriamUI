@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
-import LongAudio from "./LongAudio";
+
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
+import LongAudio from "./LongAudio";
 
 const meta: Meta<typeof LongAudio> = {
   title: "x/study-block-components/LongAudio",
@@ -23,5 +24,3 @@ export const Base: Story = {
     await expect(canvas.getByLabelText("Play audio")).toBeInTheDocument();
   },
 };
-
-

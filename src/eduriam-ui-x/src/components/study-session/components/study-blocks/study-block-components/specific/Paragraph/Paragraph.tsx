@@ -1,5 +1,7 @@
 import React from "react";
+
 import Typography from "@mui/material/Typography";
+
 import { ParagraphComponent } from "../../types/StudyBlockComponentDTO";
 
 export interface IParagraph {

@@ -4,8 +4,8 @@ import { ButtonProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export interface FullWidthButtonProps {
   onClick?: (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
@@ -63,8 +63,8 @@ export const FullWidthButton: React.FC<FullWidthButtonProps & ButtonProps> = ({
                 buttonVariant === "right"
                   ? "success"
                   : buttonVariant === "wrong"
-                  ? "error"
-                  : "primary"
+                    ? "error"
+                    : "primary"
               }
               {...rest}
             >

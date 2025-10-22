@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import { FullWidthButton } from "@eduriam/ui-core";
+
+import React, { useState } from "react";
+
+import Box from "@mui/material/Box";
+
 import { AnswerState } from "../../types/AnswerState";
-import { StudyBlockComponentDTO } from "./study-block-components/types/StudyBlockComponentDTO";
 import { StudyBlockComponent } from "./study-block-components/StudyBlockComponent";
+import { StudyBlockComponentDTO } from "./study-block-components/types/StudyBlockComponentDTO";
 
 export interface IStudyBlock {
   components: StudyBlockComponentDTO[];
@@ -21,7 +24,7 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
 
   function handleAnswerStateChange(
     newAnswerState: AnswerState,
-    componentIndex: number
+    componentIndex: number,
   ) {
     setAnswerStates((prev) => {
       const copy = [...prev];
@@ -34,7 +37,7 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
       const ready = isReadyToSubmit(
         answerStates,
         componentIndex,
-        newAnswerState
+        newAnswerState,
       );
       return ready ? "READY" : "NOT_READY";
     });
@@ -55,7 +58,7 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
   function isReadyToSubmit(
     currentStates: AnswerState[],
     changedIndex: number,
-    changedState: AnswerState
+    changedState: AnswerState,
   ) {
     const temp = [...currentStates];
     temp[changedIndex] = changedState;

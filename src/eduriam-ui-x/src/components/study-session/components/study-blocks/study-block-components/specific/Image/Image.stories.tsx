@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
-import Image from "./Image";
+
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
+import Image from "./Image";
 
 const meta: Meta<typeof Image> = {
   title: "x/study-block-components/Image",
@@ -25,5 +26,3 @@ export const Base: Story = {
     await expect(canvas.getByAltText("Sample image")).toBeInTheDocument();
   },
 };
-
-

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import CircularProgress from "@mui/material/CircularProgress";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+
 import PauseIcon from "@mui/icons-material/Pause";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Fab from "@mui/material/Fab";
+
 import { ShortAudioComponent } from "../../types/StudyBlockComponentDTO";
 
 export interface IShortAudioStudyBlockComponent {
@@ -11,11 +13,14 @@ export interface IShortAudioStudyBlockComponent {
   playOnMount?: boolean;
 }
 
-export const ShortAudio: React.FC<IShortAudioStudyBlockComponent> = ({ component, playOnMount = true }) => {
+export const ShortAudio: React.FC<IShortAudioStudyBlockComponent> = ({
+  component,
+  playOnMount = true,
+}) => {
   const { audioUrl } = component;
   const [value, setValue] = useState(0);
   const [state, setState] = useState<"STOPPED" | "RUNNING" | "PAUSED">(
-    playOnMount ? "RUNNING" : "STOPPED"
+    playOnMount ? "RUNNING" : "STOPPED",
   );
   const audioRef = useRef(new Audio(audioUrl));
 

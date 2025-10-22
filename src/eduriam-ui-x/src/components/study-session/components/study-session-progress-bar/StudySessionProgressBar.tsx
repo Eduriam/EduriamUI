@@ -1,7 +1,7 @@
+import { Icon } from "@eduriam/ui-core";
+
 import React from "react";
 
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
 import {
   Container,
   IconButton,
@@ -9,7 +9,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Icon } from "@eduriam/ui-core";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export interface IStudySessionProgressBar {
   value: number;

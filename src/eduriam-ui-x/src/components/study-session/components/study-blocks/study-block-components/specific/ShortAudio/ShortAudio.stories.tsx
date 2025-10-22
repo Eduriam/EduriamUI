@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
-import ShortAudio from "./ShortAudio";
+
 import { StudyBlockComponentType } from "../../types/StudyBlockComponentTypes";
+import ShortAudio from "./ShortAudio";
 
 const meta: Meta<typeof ShortAudio> = {
   title: "x/study-block-components/ShortAudio",

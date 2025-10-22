@@ -12,12 +12,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
 
-import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
-import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
-import { StudyBlock } from "./components/study-blocks/StudyBlock";
-import { AnswerState } from "./types/AnswerState";
 import { ID } from "../../models/ID";
+import { StudyBlock } from "./components/study-blocks/StudyBlock";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
+import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
+import { AnswerState } from "./types/AnswerState";
+import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
 
 export interface StudyStats {
   correctAnswerCount: number;
@@ -33,7 +33,7 @@ export interface IStudySession {
   studySession: StudySessionModel;
   onFinish: (
     studyStats: StudyStats,
-    atomProgressRatings: AtomProgressRating[]
+    atomProgressRatings: AtomProgressRating[],
   ) => void;
   onExit: () => void;
 }
@@ -52,10 +52,10 @@ const StudySession: React.FC<IStudySession> = ({
     wrong: number;
   }
   const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
-    new Map()
+    new Map(),
   );
   const [studyBlockQueue, setStudyBlockQueue] = useState(
-    studySession.studyBlocks
+    studySession.studyBlocks,
   );
 
   function rescheduleStudyBlock(studyBlock: StudyBlockModel) {
@@ -88,7 +88,7 @@ const StudySession: React.FC<IStudySession> = ({
       const studyStats = evaluateStats(atomStatsMap);
       const atomProgressRatings = computeAtomRatings(
         studySession.studyBlocks,
-        atomStatsMap
+        atomStatsMap,
       );
       onFinish(studyStats, atomProgressRatings);
     }
@@ -111,13 +111,13 @@ const StudySession: React.FC<IStudySession> = ({
 
   function computeAtomRatings(
     blocks: StudyBlockModel[],
-    statsMap: Map<ID, AtomStats>
+    statsMap: Map<ID, AtomStats>,
   ): AtomProgressRating[] {
     const totalBlocksPerAtom = new Map<ID, number>();
     blocks.forEach((b) => {
       totalBlocksPerAtom.set(
         b.atomId,
-        (totalBlocksPerAtom.get(b.atomId) ?? 0) + 1
+        (totalBlocksPerAtom.get(b.atomId) ?? 0) + 1,
       );
     });
 

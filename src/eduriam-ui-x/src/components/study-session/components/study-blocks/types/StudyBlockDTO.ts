@@ -1,5 +1,5 @@
-import { StudyBlockComponentDTO } from "../study-block-components/types/StudyBlockComponentDTO";
 import { ID } from "../../../../../models/ID";
+import { StudyBlockComponentDTO } from "../study-block-components/types/StudyBlockComponentDTO";
 
 export interface StudyBlockDTO {
   type: "exercise" | "explanation";

@@ -1,13 +1,14 @@
 import React from "react";
+
 import { AnswerState } from "../../../types/AnswerState";
+import { Header } from "./specific/Header/Header";
+import Image from "./specific/Image/Image";
+import { LongAudio } from "./specific/LongAudio/LongAudio";
+import { Paragraph } from "./specific/Paragraph/Paragraph";
+import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
+import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 import { StudyBlockComponentDTO } from "./types/StudyBlockComponentDTO";
 import { StudyBlockComponentType } from "./types/StudyBlockComponentTypes";
-import { Header } from "./specific/Header/Header";
-import { Paragraph } from "./specific/Paragraph/Paragraph";
-import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
-import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
-import { LongAudio } from "./specific/LongAudio/LongAudio";
-import Image from "./specific/Image/Image";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;

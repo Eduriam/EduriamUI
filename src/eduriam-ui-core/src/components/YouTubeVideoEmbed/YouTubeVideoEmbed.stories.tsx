@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { YouTubeVideoEmbed } from "./YouTubeVideoEmbed";
 
 const meta: Meta<typeof YouTubeVideoEmbed> = {

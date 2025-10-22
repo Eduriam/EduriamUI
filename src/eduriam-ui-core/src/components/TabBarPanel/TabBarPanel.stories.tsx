@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { useState } from "react";
+
 import Typography from "@mui/material/Typography";
+
 import { TabBarPanel } from "./TabBarPanel";
 
 const meta: Meta<typeof TabBarPanel> = {

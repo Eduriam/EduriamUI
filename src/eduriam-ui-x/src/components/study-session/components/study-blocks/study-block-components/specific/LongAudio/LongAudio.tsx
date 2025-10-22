@@ -1,8 +1,11 @@
+import { Icon } from "@eduriam/ui-core";
+
 import React, { useEffect, useRef, useState } from "react";
+
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import LinearProgress from "@mui/material/LinearProgress";
-import { Icon } from "@eduriam/ui-core";
+
 import { LongAudioComponent } from "../../types/StudyBlockComponentDTO";
 
 export interface ILongAudioStudyBlockComponent {
@@ -10,10 +13,13 @@ export interface ILongAudioStudyBlockComponent {
   playOnMount?: boolean;
 }
 
-export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({ component, playOnMount = false }) => {
+export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({
+  component,
+  playOnMount = false,
+}) => {
   const [value, setValue] = useState(0);
   const [state, setState] = useState<"STOPPED" | "RUNNING" | "PAUSED">(
-    playOnMount ? "RUNNING" : "STOPPED"
+    playOnMount ? "RUNNING" : "STOPPED",
   );
   const audioRef = useRef(new Audio(component.audioUrl));
 
@@ -38,7 +44,9 @@ export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({ component, 
       if (audioRef.current.currentTime >= audioRef.current.duration) {
         setState("STOPPED");
       }
-      setValue(() => (audioRef.current.currentTime / audioRef.current.duration) * 100);
+      setValue(
+        () => (audioRef.current.currentTime / audioRef.current.duration) * 100,
+      );
     }, 50);
     return () => clearInterval(interval);
   }, []);
@@ -78,7 +86,9 @@ export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({ component, 
         <LinearProgress value={value} variant="determinate" color="primary" />
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <Box>
           <IconButton onClick={handleReplay} size="medium">
             <Icon name="replay_10" color="primary" />
@@ -102,4 +112,3 @@ export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({ component, 
 };
 
 export default LongAudio;
-

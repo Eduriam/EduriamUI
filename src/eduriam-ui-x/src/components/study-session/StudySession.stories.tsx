@@ -20,10 +20,12 @@ export const Base: Story = {
           atomId: "atom-1",
           components: [
             {
+              id: "hdr-1",
               type: StudyBlockComponentType.HEADER,
               text: "Study Block Header Component",
             },
             {
+              id: "para-1",
               type: StudyBlockComponentType.PARAGRAPH,
               text: "This is an study block paragraph component.",
             },
@@ -34,6 +36,7 @@ export const Base: Story = {
           atomId: "atom-2",
           components: [
             {
+              id: "para-2",
               type: StudyBlockComponentType.PARAGRAPH,
               text: "Exercise placeholder content goes here.",
             },
