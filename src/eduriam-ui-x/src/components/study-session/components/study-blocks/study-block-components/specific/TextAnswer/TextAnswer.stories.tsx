@@ -45,3 +45,28 @@ export const Base: Story = {
     });
   },
 };
+
+export const WithCharacters: Story = {
+  args: {
+    component: {
+      type: StudyBlockComponentType.TEXT_ANSWER,
+      id: "char-1",
+      correctAnswer: "c'est",
+      evaluationStrategy: "case_insensitive",
+      variant: "short",
+      characterButtons: ["'", "á", "é"],
+    },
+    showAnswerState: false,
+    onAnswerStateChange: fn(),
+  },
+  play: async ({ canvas, userEvent, args, step }) => {
+    const input = canvas.getByRole("textbox") as HTMLInputElement;
+    await step?.("Type with buttons", async () => {
+      // click characters and complete answer
+      await userEvent.type(input, "c");
+      await userEvent.click(canvas.getByText("'"));
+      await userEvent.type(input, "est");
+      await expect(args.onAnswerStateChange).toHaveBeenLastCalledWith("RIGHT");
+    });
+  },
+};

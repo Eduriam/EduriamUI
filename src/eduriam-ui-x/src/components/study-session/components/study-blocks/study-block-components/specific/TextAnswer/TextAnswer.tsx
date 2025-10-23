@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 
 import { AnswerState } from "../../../../../types/AnswerState";
+import CharacterButton from "../../../../shared/CharacterButton/CharacterButton";
 import { TextAnswerComponent } from "../../types/StudyBlockComponentDTO";
 
 export interface ITextAnswerStudyBlockComponent {
@@ -91,31 +90,19 @@ export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
             : false
         }
         onChange={(e) => setValue(e.target.value)}
-        InputProps={{
-          endAdornment:
-            component.characterButtons &&
-            component.characterButtons.length > 0 ? (
-              <InputAdornment
-                position="end"
-                sx={{ alignItems: isLong ? "flex-start" : undefined }}
-              >
-                <Box sx={{ display: "flex", gap: 0.5 }}>
-                  {component.characterButtons.map((ch) => (
-                    <Button
-                      key={ch}
-                      onClick={() => setValue(`${value}${ch}`)}
-                      size="small"
-                      variant="outlined"
-                      disabled={showAnswerState}
-                    >
-                      {ch}
-                    </Button>
-                  ))}
-                </Box>
-              </InputAdornment>
-            ) : undefined,
-        }}
       />
+      {component.characterButtons && component.characterButtons.length > 0 ? (
+        <Box sx={{ display: "flex", gap: 0.5, mt: 1, flexWrap: "wrap" }}>
+          {component.characterButtons.map((ch) => (
+            <CharacterButton
+              key={ch}
+              character={ch}
+              onClick={() => setValue(`${value}${ch}`)}
+              disabled={showAnswerState}
+            />
+          ))}
+        </Box>
+      ) : null}
     </Box>
   );
 };
