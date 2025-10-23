@@ -8,6 +8,7 @@ import { LongAudio } from "./specific/LongAudio/LongAudio";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { PronunciationAnswer } from "./specific/PronunciationAnswer/PronunciationAnswer";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
+import TableFill from "./specific/TableFill/TableFill";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 import Timer from "./specific/Timer/Timer";
 import { StudyBlockComponentDTO } from "./types/StudyBlockComponentDTO";
@@ -52,6 +53,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.PRONUNCIATION_ANSWER:
       return (
         <PronunciationAnswer
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.TABLE_FILL:
+      return (
+        <TableFill
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />

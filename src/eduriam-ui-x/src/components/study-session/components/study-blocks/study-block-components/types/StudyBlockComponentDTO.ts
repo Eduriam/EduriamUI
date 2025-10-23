@@ -58,6 +58,14 @@ export interface PronunciationAnswerComponent extends BaseStudyBlockComponent {
   correctAnswer: string;
 }
 
+export interface TableFillComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.TABLE_FILL;
+  title?: string;
+  tableContent: Array<Array<string>>;
+  blankCellCoords: Array<Array<number>>;
+  characterButtons?: Array<string>;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -67,4 +75,5 @@ export type StudyBlockComponentDTO =
   | ImageComponent
   | TimerComponent
   | CheckListComponent
-  | PronunciationAnswerComponent;
+  | PronunciationAnswerComponent
+  | TableFillComponent;

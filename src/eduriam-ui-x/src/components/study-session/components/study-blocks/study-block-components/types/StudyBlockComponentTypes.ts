@@ -8,4 +8,5 @@ export enum StudyBlockComponentType {
   TIMER = "TIMER",
   CHECKLIST = "CHECKLIST",
   PRONUNCIATION_ANSWER = "PRONUNCIATION_ANSWER",
+  TABLE_FILL = "TABLE_FILL",
 }
