@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AnswerState } from "../../../types/AnswerState";
+import BuildWord from "./specific/BuildWord/BuildWord";
 import { CheckList } from "./specific/CheckList/CheckList";
 import FillInSentence from "./specific/FillInSentence/FillInSentence";
 import { Header } from "./specific/Header/Header";
@@ -61,6 +62,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.TABLE_FILL:
       return (
         <TableFill
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.BUILD_WORD:
+      return (
+        <BuildWord
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />

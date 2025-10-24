@@ -74,6 +74,13 @@ export interface FillInSentenceComponent extends BaseStudyBlockComponent {
   wordOptions: Array<string>;
 }
 
+export interface BuildWordComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.BUILD_WORD;
+  title?: string;
+  word: string;
+  letterOptions: Array<string>;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -85,4 +92,5 @@ export type StudyBlockComponentDTO =
   | CheckListComponent
   | PronunciationAnswerComponent
   | TableFillComponent
-  | FillInSentenceComponent;
+  | FillInSentenceComponent
+  | BuildWordComponent;
