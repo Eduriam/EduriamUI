@@ -1,4 +1,5 @@
 import { ID } from "../../../../../../models/ID";
+import { MatchOptionDTO } from "../specific/MatchingAnswer/matching-options/MatchOptionDTO";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 
 interface BaseStudyBlockComponent {
@@ -81,6 +82,13 @@ export interface BuildWordComponent extends BaseStudyBlockComponent {
   letterOptions: Array<string>;
 }
 
+export interface MatchingAnswerComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.MATCHING_ANSWER;
+  title?: string;
+  options1: Array<MatchOptionDTO>;
+  options2: Array<MatchOptionDTO>;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -93,4 +101,5 @@ export type StudyBlockComponentDTO =
   | PronunciationAnswerComponent
   | TableFillComponent
   | FillInSentenceComponent
-  | BuildWordComponent;
+  | BuildWordComponent
+  | MatchingAnswerComponent;

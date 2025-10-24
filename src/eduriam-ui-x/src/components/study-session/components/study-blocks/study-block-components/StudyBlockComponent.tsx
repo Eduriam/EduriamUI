@@ -7,6 +7,7 @@ import FillInSentence from "./specific/FillInSentence/FillInSentence";
 import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
 import { LongAudio } from "./specific/LongAudio/LongAudio";
+import MatchingAnswer from "./specific/MatchingAnswer/MatchingAnswer";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { PronunciationAnswer } from "./specific/PronunciationAnswer/PronunciationAnswer";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
@@ -69,6 +70,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.BUILD_WORD:
       return (
         <BuildWord
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.MATCHING_ANSWER:
+      return (
+        <MatchingAnswer
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
