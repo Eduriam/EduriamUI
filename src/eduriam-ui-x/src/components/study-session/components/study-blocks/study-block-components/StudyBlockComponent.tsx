@@ -2,6 +2,7 @@ import React from "react";
 
 import { AnswerState } from "../../../types/AnswerState";
 import { CheckList } from "./specific/CheckList/CheckList";
+import FillInSentence from "./specific/FillInSentence/FillInSentence";
 import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
 import { LongAudio } from "./specific/LongAudio/LongAudio";
@@ -60,6 +61,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.TABLE_FILL:
       return (
         <TableFill
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.FILL_IN_SENTENCE:
+      return (
+        <FillInSentence
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />

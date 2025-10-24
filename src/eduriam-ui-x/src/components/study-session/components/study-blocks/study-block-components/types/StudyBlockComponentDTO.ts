@@ -66,6 +66,14 @@ export interface TableFillComponent extends BaseStudyBlockComponent {
   characterButtons?: Array<string>;
 }
 
+export interface FillInSentenceComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.FILL_IN_SENTENCE;
+  title?: string;
+  sentence: string;
+  blankWordIndexes: Array<number>;
+  wordOptions: Array<string>;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -76,4 +84,5 @@ export type StudyBlockComponentDTO =
   | TimerComponent
   | CheckListComponent
   | PronunciationAnswerComponent
-  | TableFillComponent;
+  | TableFillComponent
+  | FillInSentenceComponent;
