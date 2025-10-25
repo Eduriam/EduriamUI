@@ -52,7 +52,7 @@ src/<package-name>/
 - Inside each component folder:
   - `<Name>.tsx`: component implementation
   - `index.ts`: re-exports for convenient imports
-  - `<Name>.stories.tsx`: co-located Storybook story
+  - `<Name>.stories.tsx`: co-located Storybook story with interaction tests
 
 ## Theme tokens
 
@@ -61,4 +61,4 @@ src/<package-name>/
 
 ## Storybook
 
-- Story placement is co-located with components in each package `components/<Name>/<Name>.stories.tsx`.
+- Story placement is co-located with components in each package `components/<Name>/<Name>.stories.tsx`. Interaction tests are located in the same file.
