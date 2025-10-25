@@ -513,6 +513,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     react-speech-recognition: ^3.10.0
+    regenerator-runtime: ^0.13.11
   languageName: unknown
   linkType: soft
 
