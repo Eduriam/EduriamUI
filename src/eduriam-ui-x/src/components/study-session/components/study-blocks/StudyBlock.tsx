@@ -11,11 +11,19 @@ import { StudyBlockComponentDTO } from "./study-block-components/types/StudyBloc
 export interface IStudyBlock {
   components: StudyBlockComponentDTO[];
   onContinue: (answer: AnswerState) => void;
+  localizedTexts?: {
+    continueButton: string;
+    checkButton: string;
+  };
 }
 
 export const StudyBlock: React.FC<IStudyBlock> = ({
   components,
   onContinue,
+  localizedTexts = {
+    continueButton: "Continue",
+    checkButton: "Check",
+  },
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
   const [studyBlockState, setStudyBlockState] = useState<
@@ -84,7 +92,9 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
             onClick={handleClick}
             disabled={studyBlockState === "NOT_READY"}
           >
-            {studyBlockState === "SUBMITTED" ? "Continue" : "Check"}
+            {studyBlockState === "SUBMITTED"
+              ? localizedTexts.continueButton
+              : localizedTexts.checkButton}
           </FullWidthButton>
         </Box>
       </Box>

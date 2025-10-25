@@ -36,12 +36,20 @@ export interface IStudySession {
     atomProgressRatings: AtomProgressRating[],
   ) => void;
   onExit: () => void;
+  localizedTexts?: {
+    continueButton: string;
+    checkButton: string;
+  };
 }
 
 const StudySession: React.FC<IStudySession> = ({
   studySession,
   onFinish,
   onExit,
+  localizedTexts = {
+    continueButton: "Continue",
+    checkButton: "Check",
+  },
 }) => {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -149,6 +157,7 @@ const StudySession: React.FC<IStudySession> = ({
                   key={index}
                   components={studyBlockQueue[index].components}
                   onContinue={handleContinue}
+                  localizedTexts={localizedTexts}
                 />
               )}
             </Container>
