@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@eduriam/ui-core": ["src/eduriam-ui-core/src/index.ts"],
+      "@eduriam/ui-minimal": ["src/eduriam-ui-minimal/src/index.ts"]
+    }
+  },
+  "include": ["tests/export-parity.test-d.ts"]
+}
