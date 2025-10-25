@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -29,7 +29,8 @@
     "@mui/material": "^5",
     "react": "^18",
     "react-dom": "^18",
-    "react-speech-recognition": "^3.10.0"
+    "react-speech-recognition": "^3.10.0",
+    "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {
     "@eduriam/ui-core": "^0.3.0",
