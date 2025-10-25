@@ -6,6 +6,15 @@
     {
       "splitTerminals": [
         {
+          "name": "build",
+          "commands": ["yarn install && yarn build"],
+          "shouldRunCommands": false
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
           "name": "storybook",
           "commands": ["yarn storybook"],
           "shouldRunCommands": false

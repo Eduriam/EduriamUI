@@ -51,3 +51,10 @@ jobs:
         run: |
           cd src/eduriam-ui-minimal
           npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"
+
+      - name: Publish @eduriam/ui-x
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd src/eduriam-ui-x
+          npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"

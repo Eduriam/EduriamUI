@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -21,17 +21,18 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.1.0",
+    "@eduriam/ui-core": "^0.3.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
     "@mui/lab": "^5",
     "@mui/material": "^5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-speech-recognition": "^3.10.0"
   },
   "devDependencies": {
-    "@eduriam/ui-core": "workspace:*",
+    "@eduriam/ui-core": "^0.3.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.15.20",
@@ -39,6 +40,8 @@
     "@mui/material": "^5.15.20",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-speech-recognition": "^3.10.0",
+    "regenerator-runtime": "^0.13.11",
     "tsup": "^8.5.0",
     "typescript": "^5.6.2"
   },

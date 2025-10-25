@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { FullWidthButton } from "./FullWidthButton";
 
 const meta: Meta<typeof FullWidthButton> = {
