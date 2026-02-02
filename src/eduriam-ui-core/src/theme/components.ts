@@ -1,28 +1,30 @@
 import type { Components, Theme } from "@mui/material/styles";
 
+const elevationLight1 = "0px 3px 8px 0px rgba(0, 0, 0, 0.08)";
+
 export const componentOverrides: Components<Omit<Theme, "components">> = {
   MuiCard: {
     styleOverrides: {
-      root: { boxShadow: "0px 1px 3px 2px rgba(0, 0, 0, .06)" },
+      root: { boxShadow: elevationLight1 },
     },
   },
   MuiPaper: {
     styleOverrides: {
-      root: { boxShadow: "0px 1px 3px 2px rgba(0, 0, 0, .06)" },
+      root: { boxShadow: elevationLight1 },
     },
   },
   MuiButton: {
     styleOverrides: {
       root: ({ ownerState }) => ({
         ...(ownerState.variant === "contained" && {
-          boxShadow: "0px 1px 3px 2px rgba(0, 0, 0, .06)",
+          boxShadow: elevationLight1,
         }),
       }),
     },
   },
   MuiAppBar: {
     styleOverrides: {
-      root: { boxShadow: "0px 1px 3px 2px rgba(0, 0, 0, .1)" },
+      root: { boxShadow: elevationLight1 },
     },
   },
   MuiInputBase: {
@@ -33,7 +35,11 @@ export const componentOverrides: Components<Omit<Theme, "components">> = {
     },
   },
   MuiOutlinedInput: {
-    styleOverrides: { root: { "& fieldset": { borderColor: "#b9b8b8" } } },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        "& fieldset": { borderColor: theme.palette.divider },
+      }),
+    },
   },
   MuiListItem: { styleOverrides: { root: { borderRadius: 16 } } },
   MuiListItemButton: { styleOverrides: { root: { borderRadius: 16 } } },
