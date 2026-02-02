@@ -33,8 +33,8 @@ export const corePalette: PaletteOptions = {
     contrastText: "#000000",
   },
   text: {
-    primary: "#ffffff",
-    secondary: "#989898",
+    primary: "#000000",
+    secondary: "#6F6F6F",
     disabled: "#a6a6a6",
   },
   common: { white: "#ffffff", black: "#000000" },
