@@ -1,4 +1,5 @@
 export * from "./components/data-display/Header";
+export * from "./components/data-display/Paragraph";
 export * from "./components/DividerWithText";
 export * from "./components/Emoji";
 export * from "./components/FullWidthButton";
