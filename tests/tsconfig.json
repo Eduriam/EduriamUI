@@ -4,8 +4,7 @@
     "noEmit": true,
     "baseUrl": "..",
     "paths": {
-      "@eduriam/ui-core": ["src/eduriam-ui-core/src/index.ts"],
-      "@eduriam/ui-minimal": ["src/eduriam-ui-minimal/src/index.ts"]
+      "@eduriam/ui-core": ["src/eduriam-ui-core/src/index.ts"]
     }
   },
   "include": ["export-parity.test-d.ts"],

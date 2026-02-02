@@ -11,9 +11,6 @@ The project consists of two main types of component libraries:
 - **@eduriam-ui/core**
   - This is the core library of components built on Material UI components.
   - It contains components, interfaces, types and default theme settings.
-  - All business logic of components is defined in this library.
-- **theme libraries** (e.g. @eduriam-ui/[theme-name])
-  - These libraries import the @eduriam-ui/core library
-  - Their main purpose is to create a custom theme (styles) for the components
-  - They can overwrite theme configurations and overwrite the styling of the individual components
-  - They must follow the interfaces exported by the @eduriam-ui/core library
+- **@eduriam-ui/x**
+  - This is a component library with more complex components.
+  - This library builds on top of @eduriam-ui/core and also on Material UI

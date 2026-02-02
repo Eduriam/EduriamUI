@@ -45,13 +45,6 @@ jobs:
           cd src/eduriam-ui-core
           npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"
 
-      - name: Publish @eduriam/ui-minimal
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd src/eduriam-ui-minimal
-          npm publish --ignore-scripts || echo "Publish skipped (likely version unchanged)"
-
       - name: Publish @eduriam/ui-x
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
