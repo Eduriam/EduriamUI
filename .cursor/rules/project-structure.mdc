@@ -24,4 +24,4 @@ Define tokens in the `theme/` directory.
 
 ## Storybook
 
-- Story placement is co-located with components in each package `components/<Name>/<Name>.stories.tsx`. Interaction tests are located in the same file.
+Story file is co-located with components. The story title should correspond with the story path (e.g. `core/inputs/LargeButton`)
