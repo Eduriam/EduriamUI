@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { LargeButton } from "./LargeButton";
 
 const meta: Meta<typeof LargeButton> = {
-  title: "core/components/inputs/LargeButton",
+  title: "core/inputs/LargeButton",
   component: LargeButton,
 };
 
