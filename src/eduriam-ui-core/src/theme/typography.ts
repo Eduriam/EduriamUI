@@ -1,5 +1,22 @@
+import type { CSSProperties } from "react";
+
 import createTheme from "@mui/material/styles/createTheme";
 import type { TypographyOptions } from "@mui/material/styles/createTypography";
+
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    fieldLabel: CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    fieldLabel?: CSSProperties;
+  }
+}
+
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    fieldLabel: true;
+  }
+}
 
 const baseTheme = createTheme();
 
@@ -23,4 +40,8 @@ export const coreTypography: TypographyOptions = {
   button: { ...responsiveFontSize(16, 16), fontWeight: 700 },
   caption: { ...responsiveFontSize(12, 12), fontWeight: 400 },
   overline: { ...responsiveFontSize(10, 10), fontWeight: 400 },
+  fieldLabel: {
+    ...responsiveFontSize(18, 18),
+    fontWeight: 600,
+  },
 };
