@@ -7,6 +7,7 @@ export * from "./components/Icon";
 export * from "./components/inputs/IconButton";
 export * from "./components/inputs/LargeButton";
 export * from "./components/inputs/TextField";
+export * from "./components/navigation/Link";
 export * from "./components/TabBarPanel";
 export * from "./components/YouTubeVideoEmbed";
 export * from "./theme";
