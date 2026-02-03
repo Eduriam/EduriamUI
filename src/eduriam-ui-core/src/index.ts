@@ -10,6 +10,7 @@ export * from "./components/inputs/LargeRadioButton";
 export * from "./components/inputs/LargeRadioButtonGroup";
 export * from "./components/inputs/TextField";
 export * from "./components/navigation/Link";
+export * from "./components/navigation/Tabs";
 export * from "./components/TabBarPanel";
 export * from "./components/YouTubeVideoEmbed";
 export * from "./theme";
