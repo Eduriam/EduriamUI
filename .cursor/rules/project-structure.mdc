@@ -24,4 +24,6 @@ Define tokens in the `theme/` directory.
 
 ## Storybook
 
-Story file is co-located with components. The story title should correspond with the story path (e.g. `core/inputs/LargeButton`)
+Story file is co-located with components. The story title should correspond with the story path (e.g. `core/inputs/LargeButton`).
+
+When defining Stories, use Storybook "control" feature with all the options when there are limited options available. For example for button size you should define control with options "small", "medium" and "large". Do this instead of defining stories for every permutation of the props.
