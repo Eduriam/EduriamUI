@@ -72,7 +72,7 @@ const renderButton = (button?: BasicNavbarButton) => {
 };
 
 export const BasicNavbar: React.FC<BasicNavbarProps> = ({
-  header = "Page Header",
+  header,
   leftButton,
   rightButton,
   sx,
