@@ -4,8 +4,10 @@ import type { Theme } from "@mui/material/styles";
 export type LargeButtonColor = "primary" | "success" | "error";
 export type LargeButtonVariant = "contained" | "outlined" | "text";
 
-export interface LargeButtonProps
-  extends Omit<ButtonProps, "color" | "variant"> {
+export interface LargeButtonProps extends Omit<
+  ButtonProps,
+  "color" | "variant"
+> {
   color?: LargeButtonColor;
   variant?: LargeButtonVariant;
 }
@@ -39,6 +41,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
       height: "48px",
       paddingLeft: "16px",
       paddingRight: "16px",
+      textTransform: "none",
       typography: "button",
       "& .MuiButton-startIcon": {
         marginRight: 0,
@@ -118,7 +121,11 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
       disabled={isDisabled}
       disableRipple
       variant={muiVariant}
-      sx={[computedSx, ...(Array.isArray(sx) ? sx : [sx])].filter(Boolean)}
+      sx={[
+        computedSx,
+        ...(Array.isArray(sx) ? sx : [sx]),
+        { textTransform: "none" },
+      ].filter(Boolean)}
       {...rest}
     />
   );
