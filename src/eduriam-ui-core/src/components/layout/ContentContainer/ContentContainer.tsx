@@ -36,8 +36,9 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
         {
           width: "100%",
           mx: "auto",
-          px: { xs: 6, md: 0 },
-          [theme.breakpoints.up("md")]: {
+          px: 6,
+          [theme.breakpoints.up("sm")]: {
+            px: 0,
             maxWidth: desktopMaxWidth,
           },
         },
