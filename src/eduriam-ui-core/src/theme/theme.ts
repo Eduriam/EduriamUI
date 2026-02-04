@@ -9,4 +9,5 @@ export const theme = createTheme({
   palette: corePalette,
   shape: { borderRadius: 16 },
   components: componentOverrides,
+  spacing: 4,
 });

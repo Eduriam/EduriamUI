@@ -10,6 +10,7 @@ export * from "./components/inputs/LargeButton";
 export * from "./components/inputs/LargeRadioButton";
 export * from "./components/inputs/LargeRadioButtonGroup";
 export * from "./components/inputs/TextField";
+export * from "./components/layout/ContentContainer";
 export * from "./components/navigation/BasicNavbar";
 export * from "./components/navigation/Link";
 export * from "./components/navigation/ProgressNavbar";
