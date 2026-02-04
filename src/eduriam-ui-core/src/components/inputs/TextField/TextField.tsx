@@ -49,7 +49,6 @@ export const TextField: React.FC<TextFieldProps> = ({
           boxSizing: "border-box",
           display: "flex",
           minHeight: multiline ? "160px" : "56px",
-          padding: "16px",
           width: "100%",
         })}
       >
@@ -67,7 +66,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                 : theme.palette.text.primary,
               flex: 1,
               lineHeight: "100%",
-              padding: 0,
+              padding: 4,
               "& .MuiInputBase-input": {
                 fontSize: theme.typography.body1.fontSize,
                 fontWeight: theme.typography.body1.fontWeight,
