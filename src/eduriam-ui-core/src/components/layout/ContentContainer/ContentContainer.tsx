@@ -3,21 +3,30 @@ import { ReactNode } from "react";
 import Container, { ContainerProps } from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
 
-const DESKTOP_MAX_WIDTH = 960;
+const DESKTOP_MAX_WIDTHS = {
+  small: 400,
+  medium: 600,
+  large: 800,
+} as const;
+
+type ContentContainerWidth = keyof typeof DESKTOP_MAX_WIDTHS;
 
 export interface ContentContainerProps extends Omit<
   ContainerProps,
   "maxWidth"
 > {
   children?: ReactNode;
+  width?: ContentContainerWidth;
 }
 
 export const ContentContainer: React.FC<ContentContainerProps> = ({
   children,
+  width = "medium",
   sx,
   ...rest
 }) => {
   const theme = useTheme();
+  const desktopMaxWidth = DESKTOP_MAX_WIDTHS[width];
 
   return (
     <Container
@@ -29,7 +38,7 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
           mx: "auto",
           px: { xs: 6, md: 0 },
           [theme.breakpoints.up("md")]: {
-            maxWidth: DESKTOP_MAX_WIDTH,
+            maxWidth: desktopMaxWidth,
           },
         },
         ...(Array.isArray(sx) ? sx : [sx]),
