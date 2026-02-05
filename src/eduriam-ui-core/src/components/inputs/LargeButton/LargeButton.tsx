@@ -38,7 +38,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
     const baseStyles = {
       borderRadius: "16px",
       columnGap: "8px",
-      height: "48px",
+      minHeight: theme.spacing(12),
       paddingLeft: "16px",
       paddingRight: "16px",
       textTransform: "none",
@@ -52,6 +52,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
       "&.Mui-disabled": {
         opacity: 1,
       },
+      transform: "translateY(0)",
     } as const;
 
     if (variant === "contained") {
@@ -77,6 +78,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
             : mainColor,
           borderBottomColor: isDisabled ? "transparent" : darkColor,
           borderBottomWidth: "1px",
+          transform: "translateY(2px)",
         },
       };
     }
@@ -102,6 +104,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
           backgroundColor: outlinedBackground,
           borderColor: outlinedBorderColor,
           borderBottomWidth: "1px",
+          transform: "translateY(2px)",
         },
       };
     }
