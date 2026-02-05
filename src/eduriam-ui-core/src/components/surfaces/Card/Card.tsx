@@ -103,6 +103,14 @@ export const Card: React.FC<CardProps> = ({
         const basePaddingY = theme.spacing(paddingScaleY);
         const basePaddingX = theme.spacing(paddingScaleX);
 
+        // Ensure the visual padding (from the outer edge including border)
+        // matches the requested padding by subtracting the border width.
+        const borderTopWidth = 2;
+        const borderRightWidth = 2;
+        const borderLeftWidth = 2;
+        const borderBottomWidth =
+          variant === "default" ? 2 : baseBottomBorderWidth;
+
         return {
           width: "100%",
           boxSizing: "border-box",
@@ -110,10 +118,10 @@ export const Card: React.FC<CardProps> = ({
           borderRadius: theme.shape.borderRadius,
           backgroundColor: "background.default",
           borderColor,
-          paddingTop: basePaddingY,
-          paddingRight: basePaddingX,
-          paddingLeft: basePaddingX,
-          paddingBottom: basePaddingY,
+          paddingTop: `calc(${basePaddingY} - ${borderTopWidth}px)`,
+          paddingRight: `calc(${basePaddingX} - ${borderRightWidth}px)`,
+          paddingLeft: `calc(${basePaddingX} - ${borderLeftWidth}px)`,
+          paddingBottom: `calc(${basePaddingY} - ${borderBottomWidth}px)`,
           boxShadow: "none",
           transform: "translateY(0)",
           "&:hover": {
