@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import Container, { ContainerProps } from "@mui/material/Container";
+import Container from "@mui/material/Container";
 import Stack, { StackProps } from "@mui/material/Stack";
 import useTheme from "@mui/material/styles/useTheme";
 
@@ -12,10 +12,7 @@ const DESKTOP_MAX_WIDTHS = {
 
 type ContentContainerWidth = keyof typeof DESKTOP_MAX_WIDTHS;
 
-export interface ContentContainerProps extends Omit<
-  ContainerProps,
-  "maxWidth"
-> {
+export interface ContentContainerProps {
   children?: ReactNode;
   width?: ContentContainerWidth;
   justifyContent?: "flex-start" | "center" | "space-between";
@@ -27,8 +24,6 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
   width = "medium",
   justifyContent,
   spacing,
-  sx,
-  ...rest
 }) => {
   const theme = useTheme();
   const desktopMaxWidth = DESKTOP_MAX_WIDTHS[width];
@@ -37,24 +32,20 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
     <Container
       maxWidth={false}
       disableGutters
-      sx={[
-        {
-          width: "100%",
-          mx: "auto",
-          display: "flex",
-          flexDirection: "column",
-          px: 6,
-          py: 10,
-          [theme.breakpoints.up("sm")]: {
-            px: 0,
-            py: 15,
-            maxWidth: desktopMaxWidth,
-          },
-          flexGrow: 1,
+      sx={{
+        width: "100%",
+        mx: "auto",
+        display: "flex",
+        flexDirection: "column",
+        px: 6,
+        py: 10,
+        [theme.breakpoints.up("sm")]: {
+          px: 0,
+          py: 15,
+          maxWidth: desktopMaxWidth,
         },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
+        flexGrow: 1,
+      }}
     >
       <Stack
         width="100%"

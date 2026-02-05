@@ -1,34 +1,39 @@
-import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
+import type { MouseEventHandler } from "react";
+
+import { Link as MuiLink } from "@mui/material";
 
 export type LinkColor = "textPrimary" | "textSecondary";
+export type LinkVariant = "body1" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export interface LinkProps extends Omit<
-  MuiLinkProps,
-  "color" | "children" | "underline"
-> {
+export interface LinkProps {
   color?: LinkColor;
   text?: string;
+  href?: string;
+  target?: "_blank";
+  variant?: LinkVariant;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export const Link: React.FC<LinkProps> = ({
   color = "textPrimary",
   text = "Link",
-  sx,
-  ...rest
+  href,
+  target,
+  variant = "body1",
+  onClick,
 }) => {
   const typographyColor =
     color === "textSecondary" ? "text.secondary" : "text.primary";
 
   return (
     <MuiLink
+      href={href}
+      target={target}
+      onClick={onClick}
       color={typographyColor}
-      variant="body1"
+      variant={variant}
       underline="always"
-      sx={[
-        { textDecoration: "underline" },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
+      sx={{ textDecoration: "underline" }}
     >
       {text}
     </MuiLink>

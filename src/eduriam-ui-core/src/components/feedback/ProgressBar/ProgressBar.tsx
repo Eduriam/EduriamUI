@@ -1,13 +1,8 @@
-import LinearProgress, {
-  LinearProgressProps,
-} from "@mui/material/LinearProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export type ProgressBarSize = "small" | "medium" | "large";
 
-export interface ProgressBarProps extends Omit<
-  LinearProgressProps,
-  "variant" | "value"
-> {
+export interface ProgressBarProps {
   size?: ProgressBarSize;
   value?: number;
 }
@@ -22,10 +17,8 @@ const SIZE_CONFIG: Record<ProgressBarSize, { height: number; radius: number }> =
 const clampValue = (value: number) => Math.min(100, Math.max(0, value));
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
-  size = "small",
+  size = "medium",
   value = 40,
-  sx,
-  ...rest
 }) => {
   const config = SIZE_CONFIG[size];
   const clampedValue = clampValue(value);
@@ -35,21 +28,17 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     <LinearProgress
       variant="determinate"
       value={clampedValue}
-      sx={[
-        {
-          backgroundColor: "background.paper",
+      sx={{
+        backgroundColor: "background.paper",
+        borderRadius,
+        height: config.height,
+        position: "relative",
+        width: "100%",
+        "& .MuiLinearProgress-bar": {
+          backgroundColor: "primary.main",
           borderRadius,
-          height: config.height,
-          position: "relative",
-          width: "100%",
-          "& .MuiLinearProgress-bar": {
-            backgroundColor: "primary.main",
-            borderRadius,
-          },
         },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
+      }}
     />
   );
 };
