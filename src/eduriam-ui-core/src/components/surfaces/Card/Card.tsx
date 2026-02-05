@@ -13,14 +13,6 @@ import type { Theme } from "@mui/material/styles";
 export type CardVariant = "default" | "clickable" | "selected";
 
 /**
- * Padding presets for the `Card` content area.
- *
- * - `"small"` – more compact padding.
- * - `"medium"` – default padding.
- */
-export type CardPadding = "small" | "medium";
-
-/**
  * Props for the `Card` component.
  *
  * Eduriam-styled surface container for grouping related content.
@@ -34,11 +26,18 @@ export interface CardProps {
   variant?: CardVariant;
 
   /**
-   * Inner padding preset.
+   * Vertical padding preset/scale for the content area.
    *
    * @default "medium"
    */
-  padding?: CardPadding;
+  paddingY?: "small" | "medium" | "large" | number;
+
+  /**
+   * Horizontal padding preset/scale for the content area.
+   *
+   * @default "medium"
+   */
+  paddingX?: "small" | "medium" | "large" | number;
 
   /**
    * Content rendered inside the card.
@@ -59,7 +58,8 @@ export interface CardProps {
  */
 export const Card: React.FC<CardProps> = ({
   variant = "default",
-  padding = "medium",
+  paddingY = "large",
+  paddingX = "large",
   children,
   onClick,
 }) => {
@@ -68,7 +68,22 @@ export const Card: React.FC<CardProps> = ({
 
   const borderColor = isSelected ? "primary.main" : "divider";
   const baseBottomBorderWidth = variant === "default" ? 2 : 4;
-  const paddingScale = padding === "medium" ? 5 : 4;
+  const resolvePaddingScale = (
+    value: "small" | "medium" | "large" | number,
+  ) => {
+    if (typeof value === "number") return value;
+    switch (value) {
+      case "small":
+        return 3;
+      case "large":
+        return 5;
+      case "medium":
+      default:
+        return 4;
+    }
+  };
+  const paddingScaleY = resolvePaddingScale(paddingY);
+  const paddingScaleX = resolvePaddingScale(paddingX);
   const borderWidths =
     variant === "default"
       ? { borderWidth: 2 }
@@ -85,7 +100,8 @@ export const Card: React.FC<CardProps> = ({
       elevation={0}
       onClick={onClick}
       sx={(theme: Theme) => {
-        const basePadding = theme.spacing(paddingScale);
+        const basePaddingY = theme.spacing(paddingScaleY);
+        const basePaddingX = theme.spacing(paddingScaleX);
 
         return {
           width: "100%",
@@ -94,10 +110,10 @@ export const Card: React.FC<CardProps> = ({
           borderRadius: theme.shape.borderRadius,
           backgroundColor: "background.default",
           borderColor,
-          paddingTop: basePadding,
-          paddingRight: basePadding,
-          paddingLeft: basePadding,
-          paddingBottom: basePadding,
+          paddingTop: basePaddingY,
+          paddingRight: basePaddingX,
+          paddingLeft: basePaddingX,
+          paddingBottom: basePaddingY,
           boxShadow: "none",
           transform: "translateY(0)",
           "&:hover": {
