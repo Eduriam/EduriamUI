@@ -8,8 +8,17 @@ import { dirname, join } from "path";
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
+
+const illustrationsPath = join(
+  process.cwd(),
+  "src",
+  "eduriam-ui-core",
+  "public",
+);
+
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  staticDirs: [{ from: illustrationsPath, to: "/" }],
   addons: [
     getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("@storybook/addon-docs"),
