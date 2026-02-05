@@ -3,7 +3,17 @@ import type { MouseEventHandler } from "react";
 import { Link as MuiLink } from "@mui/material";
 
 export type LinkColor = "textPrimary" | "textSecondary";
-export type LinkVariant = "body1" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type LinkVariant =
+  | "body1"
+  | "body2"
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "subtitle1"
+  | "subtitle2";
 
 export interface LinkProps {
   color?: LinkColor;
