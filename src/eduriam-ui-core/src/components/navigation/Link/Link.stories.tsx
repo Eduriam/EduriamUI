@@ -8,7 +8,18 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["body1", "h1", "h2", "h3", "h4", "h5", "h6"],
+      options: [
+        "body1",
+        "body2",
+        "subtitle1",
+        "subtitle2",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+      ],
     },
   },
 };

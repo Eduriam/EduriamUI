@@ -10,15 +10,50 @@ const DESKTOP_MAX_WIDTHS = {
   large: 800,
 } as const;
 
+/**
+ * Width presets for `ContentContainer` on desktop breakpoints.
+ *
+ * - `"small"` – narrow layouts such as dialogs or focused forms.
+ * - `"medium"` – default page content width.
+ * - `"large"` – wider content like dashboards.
+ */
 type ContentContainerWidth = keyof typeof DESKTOP_MAX_WIDTHS;
 
+/**
+ * Props for the `ContentContainer` component.
+ *
+ * Centers page content with consistent horizontal padding and max width.
+ */
 export interface ContentContainerProps {
+  /**
+   * Child content to render inside the container.
+   */
   children?: ReactNode;
+
+  /**
+   * Maximum content width preset applied on desktop breakpoints.
+   *
+   * @default "medium"
+   */
   width?: ContentContainerWidth;
+
+  /**
+   * Vertical alignment of children within the stack.
+   */
   justifyContent?: "flex-start" | "center" | "space-between";
+
+  /**
+   * Vertical spacing between stacked children.
+   */
   spacing?: StackProps["spacing"];
 }
 
+/**
+ * Centered page content wrapper with responsive padding and max width.
+ *
+ * Use `ContentContainer` for top-level screen content so pages feel
+ * consistent and responsive without manual layout code.
+ */
 export const ContentContainer: React.FC<ContentContainerProps> = ({
   children,
   width = "medium",

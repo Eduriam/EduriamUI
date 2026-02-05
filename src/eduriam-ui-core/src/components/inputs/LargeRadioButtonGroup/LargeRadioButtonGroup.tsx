@@ -4,22 +4,78 @@ import Box from "@mui/material/Box";
 
 import { LargeRadioButton } from "../LargeRadioButton";
 
+/**
+ * Expansion behavior for options in `LargeRadioButtonGroup`.
+ *
+ * - `"expandSelected"` – only the selected option shows its `subText`.
+ * - `"expandAll"` – all options show `subText` when provided.
+ */
 export type LargeRadioButtonGroupExpandMode = "expandSelected" | "expandAll";
 
+/**
+ * Single option within a `LargeRadioButtonGroup`.
+ */
 export interface LargeRadioButtonOption {
+  /**
+   * Stable identifier for the option, used as the `value`.
+   */
   id: string;
+
+  /**
+   * Primary label text.
+   */
   text: string;
+
+  /**
+   * Optional secondary description text.
+   */
   subText?: string;
 }
 
+/**
+ * Props for the `LargeRadioButtonGroup` component.
+ *
+ * Manages selection state and renders a vertical list of large radio options.
+ */
 export interface LargeRadioButtonGroupProps {
+  /**
+   * List of options to render. Must have unique ids.
+   */
   options: LargeRadioButtonOption[];
+
+  /**
+   * How to expand option descriptions.
+   *
+   * @default "expandAll"
+   */
   expandMode?: LargeRadioButtonGroupExpandMode;
+
+  /**
+   * Id of the option that should be selected initially.
+   *
+   * If not provided, the first option is selected.
+   */
   defaultSelectedId?: string;
+
+  /**
+   * Whether options should stretch to full width.
+   *
+   * @default false
+   */
   fullWidth?: boolean;
+
+  /**
+   * Called whenever the selected option changes.
+   */
   onChange?: (selectedId: string) => void;
 }
 
+/**
+ * Controlled group of large, accessible radio options.
+ *
+ * Use this when you need a prominent choice between a small number of
+ * options (for example “Easy / Medium / Hard”).
+ */
 export const LargeRadioButtonGroup = ({
   options,
   expandMode = "expandAll",

@@ -2,17 +2,69 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Theme } from "@mui/material/styles";
 
+/**
+ * Props for the `LargeRadioButton` component.
+ *
+ * Visual building block for a large, card-like radio choice.
+ */
 export interface LargeRadioButtonProps {
+  /**
+   * Whether this option is currently selected.
+   *
+   * @default true
+   */
   selected?: boolean;
+
+  /**
+   * Whether to expand and show the `subText` below the main label.
+   *
+   * @default false
+   */
   expanded?: boolean;
+
+  /**
+   * Primary label text for the option.
+   *
+   * @default "Button"
+   */
   text?: string;
+
+  /**
+   * Secondary description shown when `expanded` is true.
+   *
+   * @default "Sub Text"
+   */
   subText?: string;
+
+  /**
+   * Whether the option should take the full available width.
+   *
+   * @default false
+   */
   fullWidth?: boolean;
+
+  /**
+   * Click handler to select this option.
+   */
   onClick?: () => void;
+
+  /**
+   * Optional ARIA role, typically `"radio"` when used in a radiogroup.
+   */
   role?: string;
+
+  /**
+   * ARIA checked state, used when `role="radio"`.
+   */
   "aria-checked"?: boolean;
 }
 
+/**
+ * Large, card-style radio option used inside `LargeRadioButtonGroup`.
+ *
+ * Prefer using `LargeRadioButtonGroup` for full behavior and accessibility
+ * instead of using this component directly.
+ */
 export const LargeRadioButton: React.FC<LargeRadioButtonProps> = ({
   selected = true,
   expanded = false,

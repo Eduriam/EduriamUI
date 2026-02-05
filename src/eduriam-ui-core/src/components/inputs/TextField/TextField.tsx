@@ -3,12 +3,41 @@ import InputBase, { InputBaseProps } from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 
+/**
+ * Props for the `TextField` component.
+ *
+ * Opinionated wrapper around MUI `InputBase` that applies Eduriam's layout,
+ * borders and typography for text inputs and textareas.
+ */
 export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
+  /**
+   * Whether to show a label above the input.
+   *
+   * When true, the label is rendered using the `fieldLabel` typography variant.
+   *
+   * @default false
+   */
   displayLabel?: boolean;
+
+  /**
+   * Label text shown when `displayLabel` is true.
+   *
+   * @default "Label"
+   */
   label?: string;
+
+  /**
+   * Additional styling for the outer container box.
+   */
   containerSx?: SxProps<Theme>;
 }
 
+/**
+ * Text input component with consistent sizing and border treatment.
+ *
+ * Supports both single-line and multiline usage. Use this instead of raw
+ * MUI `TextField` when you want Eduriam's visual style.
+ */
 export const TextField: React.FC<TextFieldProps> = ({
   displayLabel = false,
   label = "Label",

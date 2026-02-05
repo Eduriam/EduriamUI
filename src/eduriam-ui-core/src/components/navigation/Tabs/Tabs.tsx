@@ -1,17 +1,53 @@
 import { Tabs as MuiTabs, Tab } from "@mui/material";
 
+/**
+ * Single tab configuration for the `Tabs` component.
+ */
 export interface TabsItem {
+  /**
+   * Label text shown on the tab.
+   */
   label: string;
+
+  /**
+   * Value emitted when the tab is selected.
+   */
   value: string | number;
+
+  /**
+   * Whether this tab is disabled.
+   */
   disabled?: boolean;
 }
 
+/**
+ * Props for the `Tabs` component.
+ *
+ * Controlled full-width tab bar built on top of MUI `Tabs`.
+ */
 export interface TabsProps {
+  /**
+   * List of tabs to render.
+   */
   tabs: TabsItem[];
+
+  /**
+   * Currently selected tab value.
+   */
   value: string | number;
+
+  /**
+   * Called with the new value when a different tab is selected.
+   */
   onChange: (value: string | number) => void;
 }
 
+/**
+ * Full-width tab bar with a prominent indicator.
+ *
+ * Use this for switching between a small number of top-level views within
+ * the same page (for example “Overview / Details / History”).
+ */
 export const Tabs: React.FC<TabsProps> = ({ tabs, value, onChange }) => {
   return (
     <MuiTabs
