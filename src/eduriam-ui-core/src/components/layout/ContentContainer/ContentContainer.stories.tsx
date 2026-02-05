@@ -14,6 +14,15 @@ const meta: Meta<typeof ContentContainer> = {
       control: "radio",
       options: ["small", "medium", "large"],
     },
+    justifyContent: {
+      control: "radio",
+      options: ["flex-start", "center", "space-between"],
+    },
+    spacing: {
+      control: "number",
+      min: 0,
+      step: 0.5,
+    },
   },
 };
 
@@ -23,20 +32,26 @@ type Story = StoryObj<typeof ContentContainer>;
 export const Default: Story = {
   args: {
     width: "medium",
+    justifyContent: "flex-start",
+    spacing: 2,
+    sx: { minHeight: 320 },
   },
   render: (args) => (
     <ContentContainer {...args}>
-      <Box
-        sx={{
-          backgroundColor: "grey.100",
-          borderRadius: 2,
-          p: 2,
-          textAlign: "center",
-          width: "100%",
-        }}
-      >
-        Content goes here
-      </Box>
+      {["First", "Second", "Third"].map((label) => (
+        <Box
+          key={label}
+          sx={{
+            backgroundColor: "grey.100",
+            borderRadius: 2,
+            p: 2,
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          {label} item
+        </Box>
+      ))}
     </ContentContainer>
   ),
 };
