@@ -1,9 +1,34 @@
 import LinearProgress from "@mui/material/LinearProgress";
 
+/**
+ * Visual sizes for the `ProgressBar`.
+ *
+ * - `"small"` – thin, subtle line.
+ * - `"medium"` – default size.
+ * - `"large"` – taller bar for emphasis.
+ */
 export type ProgressBarSize = "small" | "medium" | "large";
 
+/**
+ * Props for the `ProgressBar` component.
+ *
+ * Displays determinate progress with Eduriam styling.
+ */
 export interface ProgressBarProps {
+  /**
+   * Size of the bar, affecting height and border radius.
+   *
+   * @default "medium"
+   */
   size?: ProgressBarSize;
+
+  /**
+   * Completion percentage from 0 to 100.
+   *
+   * Values outside the range are clamped.
+   *
+   * @default 40
+   */
   value?: number;
 }
 
@@ -16,6 +41,11 @@ const SIZE_CONFIG: Record<ProgressBarSize, { height: number; radius: number }> =
 
 const clampValue = (value: number) => Math.min(100, Math.max(0, value));
 
+/**
+ * Determinate progress bar styled with the Eduriam theme.
+ *
+ * Use this for linear progress indicators tied to a known percentage.
+ */
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   size = "medium",
   value = 40,

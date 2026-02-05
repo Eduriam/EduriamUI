@@ -3,21 +3,86 @@ import type { ReactNode } from "react";
 import Button from "@mui/material/Button";
 import type { Theme } from "@mui/material/styles";
 
+/**
+ * Color palette choices for `LargeButton`.
+ *
+ * Maps directly to `theme.palette[color]`.
+ */
 export type LargeButtonColor = "primary" | "success" | "error";
+
+/**
+ * Visual variants for `LargeButton`, mirroring MUI button variants.
+ */
 export type LargeButtonVariant = "contained" | "outlined" | "text";
 
+/**
+ * Props for the `LargeButton` component.
+ *
+ * Primary call-to-action button with opinionated styling, built on top of
+ * MUI `Button`.
+ */
 export interface LargeButtonProps {
+  /**
+   * Color slot from the theme palette to use.
+   *
+   * @default "primary"
+   */
   color?: LargeButtonColor;
+
+  /**
+   * Button style variant.
+   *
+   * @default "contained"
+   */
   variant?: LargeButtonVariant;
+
+  /**
+   * Whether the button is disabled.
+   *
+   * @default false
+   */
   disabled?: boolean;
+
+  /**
+   * Whether the button should take the full available width.
+   *
+   * @default false
+   */
   fullWidth?: boolean;
+
+  /**
+   * Optional icon shown before the label.
+   */
   startIcon?: ReactNode;
+
+  /**
+   * Optional icon shown after the label.
+   */
   endIcon?: ReactNode;
+
+  /**
+   * Button label or custom content.
+   */
   children?: ReactNode;
+
+  /**
+   * Native button type.
+   *
+   * @default "button"
+   */
   type?: "button" | "submit" | "reset";
+
+  /**
+   * Called when the button is clicked.
+   */
   onClick?: () => void;
 }
 
+/**
+ * Large primary action button with extra height and strong visual weight.
+ *
+ * Use `LargeButton` for main actions on a screen instead of raw MUI `Button`.
+ */
 export const LargeButton: React.FC<LargeButtonProps> = ({
   color = "primary",
   variant = "contained",

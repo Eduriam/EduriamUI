@@ -3,16 +3,60 @@ import type { MouseEventHandler, ReactNode } from "react";
 import Paper from "@mui/material/Paper";
 import type { Theme } from "@mui/material/styles";
 
+/**
+ * Visual variants for the `Card` component.
+ *
+ * - `"default"` – neutral card with standard border.
+ * - `"clickable"` – interactive card that responds to hover/active.
+ * - `"selected"` – highlighted card used for the chosen option.
+ */
 export type CardVariant = "default" | "clickable" | "selected";
+
+/**
+ * Padding presets for the `Card` content area.
+ *
+ * - `"small"` – more compact padding.
+ * - `"medium"` – default padding.
+ */
 export type CardPadding = "small" | "medium";
 
+/**
+ * Props for the `Card` component.
+ *
+ * Eduriam-styled surface container for grouping related content.
+ */
 export interface CardProps {
+  /**
+   * Visual style and behavior of the card.
+   *
+   * @default "default"
+   */
   variant?: CardVariant;
+
+  /**
+   * Inner padding preset.
+   *
+   * @default "medium"
+   */
   padding?: CardPadding;
+
+  /**
+   * Content rendered inside the card.
+   */
   children?: ReactNode;
+
+  /**
+   * Called when the card is clicked (only meaningful for clickable variants).
+   */
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
+/**
+ * Card surface component for grouping related content.
+ *
+ * Use `Card` for panels, options, and sections that should stand out from
+ * the background but still feel lightweight.
+ */
 export const Card: React.FC<CardProps> = ({
   variant = "default",
   padding = "medium",

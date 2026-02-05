@@ -6,18 +6,56 @@ import CardContent from "@mui/material/CardContent";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
+/**
+ * Configuration for a single tab in `TabBarPanel`.
+ */
 interface TabItem {
+  /**
+   * Label text shown on the tab.
+   */
   name: string;
+
+  /**
+   * Value for the tab, used as the active `value`.
+   */
   id: string | number;
 }
 
+/**
+ * Props for the `TabBarPanel` component.
+ *
+ * Renders a scrollable tab bar above a content area using MUI Lab `TabContext`.
+ */
 export interface TabBarPanelProps {
+  /**
+   * Called when the active tab changes with the new value.
+   */
   onChange: (newValue: string | number) => void;
+
+  /**
+   * List of tabs to render in the bar.
+   */
   tabs: Array<TabItem>;
+
+  /**
+   * Content to render inside each `TabPanel`.
+   *
+   * The same `panelContent` is rendered for every tab; use the active
+   * value outside this component to decide what to show.
+   */
   panelContent: ReactNode;
+
+  /**
+   * Currently selected tab value.
+   */
   value: string | number;
 }
 
+/**
+ * Scrollable tab bar with a card container and shared panel content.
+ *
+ * Use this when you want a compact tab strip above a shared content area.
+ */
 export const TabBarPanel: React.FC<TabBarPanelProps> = ({
   onChange,
   tabs,

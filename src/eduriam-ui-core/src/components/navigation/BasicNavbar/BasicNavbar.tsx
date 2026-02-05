@@ -6,23 +6,67 @@ import Typography from "@mui/material/Typography";
 
 import { Icon } from "../../Icon";
 
+/**
+ * Icon button config for `BasicNavbar`.
+ */
 export type BasicNavbarIconButton = {
+  /**
+   * Material icon name to display.
+   */
   icon: string;
+
+  /**
+   * Click handler for the button.
+   */
   onClick: () => void;
+
+  /**
+   * Optional test id written to `data-test`.
+   */
   dataTest?: string;
 };
 
+/**
+ * Text button config for `BasicNavbar`.
+ */
 export type BasicNavbarTextButton = {
+  /**
+   * Uppercase label text for the button.
+   */
   text: string;
+
+  /**
+   * Click handler for the button.
+   */
   onClick: () => void;
+
+  /**
+   * Optional test id written to `data-test`.
+   */
   dataTest?: string;
 };
 
 export type BasicNavbarButton = BasicNavbarIconButton | BasicNavbarTextButton;
 
+/**
+ * Props for the `BasicNavbar` component.
+ *
+ * Simple top navigation bar with optional left/right buttons and a centered header.
+ */
 export interface BasicNavbarProps {
+  /**
+   * Optional centered header text shown in the bar.
+   */
   header?: string;
+
+  /**
+   * Optional left-aligned button (icon or text).
+   */
   leftButton?: BasicNavbarButton;
+
+  /**
+   * Optional right-aligned button (icon or text).
+   */
   rightButton?: BasicNavbarButton;
 }
 
@@ -71,6 +115,11 @@ const renderButton = (button?: BasicNavbarButton) => {
   );
 };
 
+/**
+ * Basic top app bar with an optional centered title and side actions.
+ *
+ * Use this for simple pages that need a header with back/close actions.
+ */
 export const BasicNavbar: React.FC<BasicNavbarProps> = ({
   header,
   leftButton,
