@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import Container, { ContainerProps } from "@mui/material/Container";
+import Stack, { StackProps } from "@mui/material/Stack";
 import useTheme from "@mui/material/styles/useTheme";
 
 const DESKTOP_MAX_WIDTHS = {
@@ -17,11 +18,15 @@ export interface ContentContainerProps extends Omit<
 > {
   children?: ReactNode;
   width?: ContentContainerWidth;
+  justifyContent?: "flex-start" | "center" | "space-between";
+  spacing?: StackProps["spacing"];
 }
 
 export const ContentContainer: React.FC<ContentContainerProps> = ({
   children,
   width = "medium",
+  justifyContent,
+  spacing,
   sx,
   ...rest
 }) => {
@@ -36,6 +41,8 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
         {
           width: "100%",
           mx: "auto",
+          display: "flex",
+          flexDirection: "column",
           px: 6,
           py: 10,
           [theme.breakpoints.up("sm")]: {
@@ -43,12 +50,21 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
             py: 15,
             maxWidth: desktopMaxWidth,
           },
+          flexGrow: 1,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ].filter(Boolean)}
       {...rest}
     >
-      {children}
+      <Stack
+        width="100%"
+        flexGrow={1}
+        direction="column"
+        justifyContent={justifyContent}
+        spacing={spacing}
+      >
+        {children}
+      </Stack>
     </Container>
   );
 };
