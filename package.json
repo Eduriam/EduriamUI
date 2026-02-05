@@ -11,7 +11,7 @@
     "build": "yarn workspace @eduriam/ui-core build && yarn workspace @eduriam/ui-x build",
     "clean": "yarn workspace @eduriam/ui-core clean && yarn workspace @eduriam/ui-x clean",
     "typecheck": "yarn workspace @eduriam/ui-core typecheck && yarn workspace @eduriam/ui-x typecheck && tsc -p tsconfig.api-parity.json",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "storybook:build": "storybook build",
     "build-storybook": "storybook build",
     "prepare": "husky install"
