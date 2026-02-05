@@ -83,6 +83,7 @@ export const coreTypography: TypographyOptions = {
     ...responsiveFontSize(16, 16),
     lineHeight: LINE_HEIGHT_RATIO,
     fontWeight: 700,
+    textTransform: "none",
   },
   caption: {
     ...responsiveFontSize(12, 12),

@@ -113,7 +113,8 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
     const baseStyles = {
       borderRadius: "16px",
       columnGap: "8px",
-      minHeight: theme.spacing(12),
+      paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
       paddingLeft: "16px",
       paddingRight: "16px",
       textTransform: "none",
