@@ -7,7 +7,7 @@ import { coreTypography } from "./typography";
 export const theme = createTheme({
   typography: coreTypography,
   palette: corePalette,
-  shape: { borderRadius: 16 },
+  shape: { borderRadius: 4 },
   components: componentOverrides,
   spacing: 4,
 });
