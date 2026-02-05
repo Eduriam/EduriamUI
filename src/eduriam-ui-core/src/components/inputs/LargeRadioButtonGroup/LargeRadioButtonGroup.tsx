@@ -76,7 +76,6 @@ export const LargeRadioButtonGroup = ({
           aria-checked={option.selected}
           selected={option.selected}
           subText={option.subText}
-          sx={{ cursor: "pointer" }}
           text={option.text}
           onClick={() => handleSelect(option.id)}
         />

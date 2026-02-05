@@ -1,14 +1,16 @@
-import ButtonBase, { ButtonBaseProps } from "@mui/material/ButtonBase";
+import ButtonBase from "@mui/material/ButtonBase";
 
 import { Icon } from "../../Icon";
 
 export type IconButtonSize = "small" | "medium" | "large";
 export type IconButtonVariant = "contained" | "outlined" | "text";
 
-export interface IconButtonProps extends Omit<ButtonBaseProps, "children"> {
+export interface IconButtonProps {
   size?: IconButtonSize;
   variant?: IconButtonVariant;
   icon?: string;
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
 const SIZE_CONFIG: Record<
@@ -24,12 +26,15 @@ export const IconButton: React.FC<IconButtonProps> = ({
   size = "medium",
   variant = "contained",
   icon = "play_arrow",
-  ...rest
+  disabled,
+  onClick,
 }) => {
   const config = SIZE_CONFIG[size];
 
   return (
     <ButtonBase
+      disabled={disabled}
+      onClick={onClick}
       sx={(theme) => ({
         alignItems: "center",
         backgroundColor:
@@ -52,7 +57,6 @@ export const IconButton: React.FC<IconButtonProps> = ({
         justifyContent: "center",
         width: config.button,
       })}
-      {...rest}
     >
       <Icon name={icon} sx={{ fontSize: config.icon }} />
     </ButtonBase>

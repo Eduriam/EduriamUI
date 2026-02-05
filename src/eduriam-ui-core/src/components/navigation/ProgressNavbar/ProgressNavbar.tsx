@@ -1,4 +1,4 @@
-import AppBar, { AppBarProps } from "@mui/material/AppBar";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +12,7 @@ export type ProgressNavbarIconButton = {
   dataTest?: string;
 };
 
-export interface ProgressNavbarProps extends Omit<AppBarProps, "children"> {
+export interface ProgressNavbarProps {
   leftButton?: ProgressNavbarIconButton;
   progressValue?: number;
   progressSize?: ProgressBarSize;
@@ -22,23 +22,16 @@ export const ProgressNavbar: React.FC<ProgressNavbarProps> = ({
   leftButton,
   progressValue = 40,
   progressSize = "large",
-  sx,
-  ...rest
 }) => {
   return (
     <AppBar
       position="static"
       elevation={0}
-      sx={[
-        {
-          backgroundColor:
-            rest.color === "transparent" ? "transparent" : "background.default",
-          boxShadow: "none",
-          color: "text.primary",
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
+      sx={{
+        backgroundColor: "background.default",
+        boxShadow: "none",
+        color: "text.primary",
+      }}
     >
       <Toolbar
         sx={{
@@ -69,11 +62,7 @@ export const ProgressNavbar: React.FC<ProgressNavbarProps> = ({
             </ButtonBase>
           )}
         </Box>
-        <ProgressBar
-          size={progressSize}
-          value={progressValue}
-          sx={{ flex: 1, width: "100%" }}
-        />
+        <ProgressBar size={progressSize} value={progressValue} />
       </Toolbar>
     </AppBar>
   );

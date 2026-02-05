@@ -1,4 +1,4 @@
-import AppBar, { AppBarProps } from "@mui/material/AppBar";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,7 +20,7 @@ export type BasicNavbarTextButton = {
 
 export type BasicNavbarButton = BasicNavbarIconButton | BasicNavbarTextButton;
 
-export interface BasicNavbarProps extends Omit<AppBarProps, "children"> {
+export interface BasicNavbarProps {
   header?: string;
   leftButton?: BasicNavbarButton;
   rightButton?: BasicNavbarButton;
@@ -75,23 +75,16 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
   header,
   leftButton,
   rightButton,
-  sx,
-  ...rest
 }) => {
   return (
     <AppBar
       position="static"
       elevation={0}
-      sx={[
-        {
-          backgroundColor:
-            rest.color === "transparent" ? "transparent" : "background.default",
-          boxShadow: "none",
-          color: "text.primary",
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
+      sx={{
+        backgroundColor: "background.default",
+        boxShadow: "none",
+        color: "text.primary",
+      }}
     >
       <Toolbar
         sx={{

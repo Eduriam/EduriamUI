@@ -1,23 +1,33 @@
-import Button, { ButtonProps } from "@mui/material/Button";
+import type { ReactNode } from "react";
+
+import Button from "@mui/material/Button";
 import type { Theme } from "@mui/material/styles";
 
 export type LargeButtonColor = "primary" | "success" | "error";
 export type LargeButtonVariant = "contained" | "outlined" | "text";
 
-export interface LargeButtonProps extends Omit<
-  ButtonProps,
-  "color" | "variant"
-> {
+export interface LargeButtonProps {
   color?: LargeButtonColor;
   variant?: LargeButtonVariant;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  children?: ReactNode;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
 }
 
 export const LargeButton: React.FC<LargeButtonProps> = ({
   color = "primary",
   variant = "contained",
   disabled,
-  sx,
-  ...rest
+  fullWidth,
+  startIcon,
+  endIcon,
+  children,
+  type = "button",
+  onClick,
 }) => {
   const isDisabled = Boolean(disabled);
   const muiVariant =
@@ -124,13 +134,15 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
       disabled={isDisabled}
       disableRipple
       variant={muiVariant}
-      sx={[
-        computedSx,
-        ...(Array.isArray(sx) ? sx : [sx]),
-        { textTransform: "none" },
-      ].filter(Boolean)}
-      {...rest}
-    />
+      type={type}
+      fullWidth={fullWidth}
+      startIcon={startIcon}
+      endIcon={endIcon}
+      onClick={onClick}
+      sx={computedSx}
+    >
+      {children}
+    </Button>
   );
 };
 

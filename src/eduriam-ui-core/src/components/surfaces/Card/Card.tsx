@@ -1,23 +1,23 @@
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
-import type { PaperProps } from "@mui/material/Paper";
 import Paper from "@mui/material/Paper";
 import type { Theme } from "@mui/material/styles";
 
 export type CardVariant = "default" | "clickable" | "selected";
 export type CardPadding = "small" | "medium";
 
-export interface CardProps extends Omit<PaperProps, "variant" | "padding"> {
+export interface CardProps {
   variant?: CardVariant;
   padding?: CardPadding;
   children?: ReactNode;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export const Card: React.FC<CardProps> = ({
   variant = "default",
   padding = "medium",
-  sx,
-  ...rest
+  children,
+  onClick,
 }) => {
   const isClickable = variant === "clickable";
   const isSelected = variant === "selected";
@@ -39,46 +39,45 @@ export const Card: React.FC<CardProps> = ({
     <Paper
       square={false}
       elevation={0}
-      sx={[
-        (theme: Theme) => {
-          const basePadding = theme.spacing(paddingScale);
+      onClick={onClick}
+      sx={(theme: Theme) => {
+        const basePadding = theme.spacing(paddingScale);
 
-          return {
-            width: "100%",
-            boxSizing: "border-box",
-            borderStyle: "solid",
-            borderRadius: theme.shape.borderRadius,
-            backgroundColor: "background.default",
-            borderColor,
-            paddingTop: basePadding,
-            paddingRight: basePadding,
-            paddingLeft: basePadding,
-            paddingBottom: basePadding,
+        return {
+          width: "100%",
+          boxSizing: "border-box",
+          borderStyle: "solid",
+          borderRadius: theme.shape.borderRadius,
+          backgroundColor: "background.default",
+          borderColor,
+          paddingTop: basePadding,
+          paddingRight: basePadding,
+          paddingLeft: basePadding,
+          paddingBottom: basePadding,
+          boxShadow: "none",
+          transform: "translateY(0)",
+          "&:hover": {
             boxShadow: "none",
-            transform: "translateY(0)",
-            "&:hover": {
-              boxShadow: "none",
-              ...(isClickable || isSelected
-                ? { borderBottomWidth: baseBottomBorderWidth }
-                : {}),
-            },
-            "&:active": {
-              boxShadow: "none",
-              ...(isClickable || isSelected
-                ? {
-                    borderBottomWidth: 2,
-                    transform: "translateY(2px)",
-                  }
-                : {}),
-            },
-            ...((isClickable || isSelected) && { cursor: "pointer" }),
-            ...borderWidths,
-          };
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ].filter(Boolean)}
-      {...rest}
-    />
+            ...(isClickable || isSelected
+              ? { borderBottomWidth: baseBottomBorderWidth }
+              : {}),
+          },
+          "&:active": {
+            boxShadow: "none",
+            ...(isClickable || isSelected
+              ? {
+                  borderBottomWidth: 2,
+                  transform: "translateY(2px)",
+                }
+              : {}),
+          },
+          ...((isClickable || isSelected) && { cursor: "pointer" }),
+          ...borderWidths,
+        };
+      }}
+    >
+      {children}
+    </Paper>
   );
 };
 
