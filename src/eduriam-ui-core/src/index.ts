@@ -18,7 +18,7 @@ export * from "./components/navigation/Link";
 export * from "./components/navigation/ProgressNavbar";
 export * from "./components/navigation/Tabs";
 export * from "./components/surfaces/Card";
-export * from "./components/surfaces/Drawer";
+export * from "./components/navigation/Drawer";
 export * from "./components/TabBarPanel";
 export * from "./components/YouTubeVideoEmbed";
 export * from "./theme";

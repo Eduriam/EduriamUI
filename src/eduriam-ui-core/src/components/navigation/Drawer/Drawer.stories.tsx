@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Drawer } from "./Drawer";
 
 const meta: Meta<typeof Drawer> = {
-  title: "core/surfaces/Drawer",
+  title: "core/navigation/Drawer",
   component: Drawer,
 };
 
