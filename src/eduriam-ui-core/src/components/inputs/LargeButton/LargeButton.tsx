@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import type { Theme } from "@mui/material/styles";
 
@@ -204,20 +205,22 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
   };
 
   return (
-    <Button
-      data-test={dataTest}
-      disabled={isDisabled}
-      disableRipple
-      variant={muiVariant}
-      type={type}
-      fullWidth={fullWidth}
-      startIcon={startIcon}
-      endIcon={endIcon}
-      onClick={onClick}
-      sx={computedSx}
-    >
-      {children}
-    </Button>
+    <Box height={48}>
+      <Button
+        data-test={dataTest}
+        disabled={isDisabled}
+        disableRipple
+        variant={muiVariant}
+        type={type}
+        fullWidth={fullWidth}
+        startIcon={startIcon}
+        endIcon={endIcon}
+        onClick={onClick}
+        sx={computedSx}
+      >
+        {children}
+      </Button>
+    </Box>
   );
 };
 

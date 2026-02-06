@@ -6,11 +6,19 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { Drawer } from "./Drawer";
+import { Drawer, type DrawerProps } from "./Drawer";
+
+type DrawerStoryProps = Pick<DrawerProps, "backgroundColor">;
 
 const meta: Meta<typeof Drawer> = {
   title: "core/navigation/Drawer",
   component: Drawer,
+  argTypes: {
+    backgroundColor: {
+      control: { type: "radio" },
+      options: ["default", "success", "error"],
+    },
+  },
 };
 
 export default meta;
@@ -29,7 +37,7 @@ const DemoContent = () => (
   </Stack>
 );
 
-const Template: React.FC = () => {
+const Template: React.FC<DrawerStoryProps> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -37,7 +45,7 @@ const Template: React.FC = () => {
       <Button variant="contained" onClick={() => setOpen(true)}>
         Open drawer
       </Button>
-      <Drawer open={open} onClose={() => setOpen(false)}>
+      <Drawer open={open} onClose={() => setOpen(false)} {...args}>
         <DemoContent />
       </Drawer>
     </>
@@ -45,5 +53,8 @@ const Template: React.FC = () => {
 };
 
 export const Default: Story = {
-  render: () => <Template />,
+  args: {
+    backgroundColor: "default",
+  },
+  render: (args) => <Template {...(args as DrawerStoryProps)} />,
 };

@@ -4,7 +4,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { Icon } from "../../Icon";
+import { Icon } from "../../data-display/Icon";
 
 /**
  * Icon button config for `BasicNavbar`.

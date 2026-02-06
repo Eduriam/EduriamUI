@@ -1,6 +1,8 @@
+import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
+import type { Theme } from "@mui/material/styles";
 
-import { Icon } from "../../Icon";
+import { Icon } from "../../data-display/Icon";
 
 /**
  * Allowed visual sizes for `IconButton`.
@@ -10,11 +12,16 @@ export type IconButtonSize = "small" | "medium" | "large";
 /**
  * Visual variants for `IconButton`.
  *
- * - `"contained"` – filled primary background.
- * - `"outlined"` – neutral background with a border.
+ * - `"contained"` – filled background with contrasting icon.
+ * - `"outlined"` – neutral background with border.
  * - `"text"` – no background or border.
  */
 export type IconButtonVariant = "contained" | "outlined" | "text";
+
+/**
+ * Color slot for `IconButton`, mapped to theme palette.
+ */
+export type IconButtonColor = "primary" | "success" | "error" | "textPrimary";
 
 /**
  * Props for the `IconButton` component.
@@ -22,6 +29,13 @@ export type IconButtonVariant = "contained" | "outlined" | "text";
  * Renders a square icon-only button with consistent sizing and styling.
  */
 export interface IconButtonProps {
+  /**
+   * Color from the theme palette.
+   *
+   * @default "primary"
+   */
+  color?: IconButtonColor;
+
   /**
    * Size of the button and icon.
    *
@@ -65,12 +79,108 @@ export interface IconButtonProps {
 
 const SIZE_CONFIG: Record<
   IconButtonSize,
-  { button: number; icon: number; radius: number }
+  { button: number; icon: number; radius: number; outlineWidth: number }
 > = {
-  small: { button: 32, icon: 24, radius: 8 },
-  medium: { button: 40, icon: 24, radius: 12 },
-  large: { button: 48, icon: 32, radius: 12 },
+  small: { button: 32, icon: 24, radius: 8, outlineWidth: 2 },
+  medium: { button: 40, icon: 24, radius: 12, outlineWidth: 2 },
+  large: { button: 48, icon: 32, radius: 12, outlineWidth: 3 },
 };
+
+function getMainColor(
+  theme: Theme,
+  color: Exclude<IconButtonColor, "textPrimary">,
+): string {
+  switch (color) {
+    case "primary":
+      return theme.palette.primary.main;
+    case "success":
+      return theme.palette.success.main;
+    case "error":
+      return theme.palette.error.main;
+    default:
+      return theme.palette.primary.main;
+  }
+}
+
+function getIconButtonStyles(
+  theme: Theme,
+  color: IconButtonColor,
+  variant: IconButtonVariant,
+  size: IconButtonSize,
+  disabled: boolean,
+) {
+  const config = SIZE_CONFIG[size];
+  const isTextPrimary = color === "textPrimary";
+
+  const iconColor = isTextPrimary
+    ? theme.palette.text.primary
+    : getMainColor(theme, color);
+  const filledIconColor = theme.palette.common.white;
+  const disabledColor = theme.palette.text.disabled;
+
+  const baseStyles = {
+    borderRadius: `${config.radius}px`,
+    height: config.button,
+    width: config.button,
+    transform: "translateY(0)",
+  } as const;
+
+  if (disabled) {
+    return {
+      ...baseStyles,
+      backgroundColor:
+        variant === "contained"
+          ? theme.palette.action.disabledBackground
+          : "transparent",
+      border:
+        variant === "outlined" ? `1px solid ${theme.palette.divider}` : "none",
+      color: disabledColor,
+    };
+  }
+
+  if (variant === "contained") {
+    if (isTextPrimary) {
+      return {
+        ...baseStyles,
+        backgroundColor: theme.palette.action.disabledBackground,
+        border: "none",
+        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
+        color: theme.palette.text.primary,
+      };
+    }
+    return {
+      ...baseStyles,
+      backgroundColor: iconColor,
+      border: "none",
+      color: filledIconColor,
+    };
+  }
+
+  if (variant === "outlined") {
+    const borderColor = isTextPrimary ? theme.palette.divider : iconColor;
+    const outlineWidth = config.outlineWidth;
+    const translateYAmount = outlineWidth - 1; // 2→1 = 1px, 3→1 = 2px
+    return {
+      ...baseStyles,
+      backgroundColor: theme.palette.background.default,
+      border: `1px solid ${borderColor}`,
+      borderBottomWidth: `${outlineWidth}px`,
+      color: iconColor,
+      "&:active": {
+        borderBottomWidth: "1px",
+        transform: `translateY(${translateYAmount + 1}px)`,
+        height: config.button - 1,
+      },
+    };
+  }
+
+  return {
+    ...baseStyles,
+    backgroundColor: "transparent",
+    border: "none",
+    color: iconColor,
+  };
+}
 
 /**
  * Icon-only button used for compact actions like play, back, or close.
@@ -79,45 +189,40 @@ const SIZE_CONFIG: Record<
  * keep size, shape, and colors consistent.
  */
 export const IconButton: React.FC<IconButtonProps> = ({
+  color = "primary",
   size = "medium",
   variant = "contained",
   icon = "play_arrow",
-  disabled,
+  disabled = false,
   onClick,
   "data-test": dataTest,
 }) => {
   const config = SIZE_CONFIG[size];
 
   return (
-    <ButtonBase
-      disabled={disabled}
-      onClick={onClick}
-      data-test={dataTest}
-      sx={(theme) => ({
-        alignItems: "center",
-        backgroundColor:
-          variant === "contained"
-            ? theme.palette.primary.main
-            : variant === "outlined"
-              ? theme.palette.background.default
-              : "transparent",
-        border:
-          variant === "outlined"
-            ? `1px solid ${theme.palette.divider}`
-            : "none",
-        borderRadius: `${config.radius}px`,
-        color:
-          variant === "contained"
-            ? theme.palette.common.white
-            : theme.palette.primary.main,
-        display: "inline-flex",
-        height: config.button,
-        justifyContent: "center",
-        width: config.button,
-      })}
+    <Box
+      sx={{
+        height: config.button + 2,
+      }}
     >
-      <Icon name={icon} sx={{ fontSize: config.icon }} />
-    </ButtonBase>
+      <ButtonBase
+        disabled={disabled}
+        disableRipple
+        onClick={onClick}
+        data-test={dataTest}
+        sx={(theme) => ({
+          ...getIconButtonStyles(
+            theme,
+            color,
+            variant,
+            size,
+            Boolean(disabled),
+          ),
+        })}
+      >
+        <Icon name={icon} sx={{ fontSize: config.icon }} />
+      </ButtonBase>
+    </Box>
   );
 };
 

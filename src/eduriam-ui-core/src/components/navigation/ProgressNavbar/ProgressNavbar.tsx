@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 
-import { Icon } from "../../Icon";
+import { Icon } from "../../data-display/Icon";
 import { ProgressBar, ProgressBarSize } from "../../feedback/ProgressBar";
 
 /**
