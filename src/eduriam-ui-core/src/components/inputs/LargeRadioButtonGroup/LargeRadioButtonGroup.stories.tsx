@@ -17,13 +17,9 @@ const options = [
 ];
 
 export const ExpandAll: Story = {
-  args: { options, expandMode: "expandAll", defaultSelectedId: "option-1" },
+  args: { options, expandMode: "expandAll" },
 };
 
 export const ExpandSelected: Story = {
-  args: {
-    options,
-    expandMode: "expandSelected",
-    defaultSelectedId: "option-2",
-  },
+  args: { options, expandMode: "expandSelected" },
 };
