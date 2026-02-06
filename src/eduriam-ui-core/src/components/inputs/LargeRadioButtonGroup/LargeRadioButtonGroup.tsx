@@ -58,13 +58,6 @@ export interface LargeRadioButtonGroupProps {
   expandMode?: LargeRadioButtonGroupExpandMode;
 
   /**
-   * Id of the option that should be selected initially.
-   *
-   * If not provided, the first option is selected.
-   */
-  defaultSelectedId?: string;
-
-  /**
    * Whether options should stretch to full width.
    *
    * @default false
@@ -93,15 +86,11 @@ export interface LargeRadioButtonGroupProps {
 export const LargeRadioButtonGroup = ({
   options,
   expandMode = "expandAll",
-  defaultSelectedId,
   fullWidth = false,
   onChange,
   "data-test": dataTest,
 }: LargeRadioButtonGroupProps) => {
-  const firstOptionId = options[0]?.id;
-  const [selectedId, setSelectedId] = useState<string | undefined>(
-    defaultSelectedId ?? firstOptionId,
-  );
+  const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (!options.length) {
@@ -111,9 +100,9 @@ export const LargeRadioButtonGroup = ({
 
     const isValid = options.some((option) => option.id === selectedId);
     if (!isValid) {
-      setSelectedId(firstOptionId);
+      setSelectedId(undefined);
     }
-  }, [options, selectedId, firstOptionId]);
+  }, [options, selectedId]);
 
   const optionMap = useMemo(
     () =>
