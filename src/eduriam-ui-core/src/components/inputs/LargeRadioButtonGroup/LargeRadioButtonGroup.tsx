@@ -30,6 +30,13 @@ export interface LargeRadioButtonOption {
    * Optional secondary description text.
    */
   subText?: string;
+
+  /**
+   * Optional data attribute used to identify this option in E2E tests.
+   *
+   * Applied to the underlying `LargeRadioButton` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -142,6 +149,7 @@ export const LargeRadioButtonGroup = ({
           selected={option.selected}
           subText={option.subText}
           text={option.text}
+          data-test={option["data-test"]}
           onClick={() => handleSelect(option.id)}
         />
       ))}
