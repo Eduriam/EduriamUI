@@ -57,6 +57,13 @@ export interface LargeRadioButtonProps {
    * ARIA checked state, used when `role="radio"`.
    */
   "aria-checked"?: boolean;
+
+  /**
+   * Optional data attribute used to identify this radio option in E2E tests.
+   *
+   * Applied to the outer MUI `Box` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -74,6 +81,7 @@ export const LargeRadioButton: React.FC<LargeRadioButtonProps> = ({
   onClick,
   role,
   "aria-checked": ariaChecked,
+  "data-test": dataTest,
 }) => {
   const isExpanded = Boolean(expanded);
 
@@ -82,6 +90,7 @@ export const LargeRadioButton: React.FC<LargeRadioButtonProps> = ({
       role={role}
       aria-checked={ariaChecked}
       onClick={onClick}
+      data-test={dataTest}
       sx={(theme: Theme) => ({
         alignItems: isExpanded ? "flex-start" : "center",
         border: `1.5px solid ${

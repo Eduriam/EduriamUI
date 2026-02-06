@@ -76,6 +76,13 @@ export interface LargeButtonProps {
    * Called when the button is clicked.
    */
   onClick?: () => void;
+
+  /**
+   * Optional data attribute used to identify this button in E2E tests.
+   *
+   * Passed directly to the underlying MUI `Button` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -93,6 +100,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
   children,
   type = "button",
   onClick,
+  "data-test": dataTest,
 }) => {
   const isDisabled = Boolean(disabled);
   const muiVariant =
@@ -197,6 +205,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
 
   return (
     <Button
+      data-test={dataTest}
       disabled={isDisabled}
       disableRipple
       variant={muiVariant}

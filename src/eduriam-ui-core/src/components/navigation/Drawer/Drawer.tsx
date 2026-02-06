@@ -28,6 +28,13 @@ export interface DrawerProps {
    * Drawer content.
    */
   children?: ReactNode;
+
+  /**
+   * Optional data attribute used to identify this drawer in E2E tests.
+   *
+   * Passed to the drawer surface via MUI `PaperProps` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -41,6 +48,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   onClose,
   maxWidth = 480,
   children,
+  "data-test": dataTest,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -54,6 +62,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         keepMounted: true,
       }}
       PaperProps={{
+        "data-test": dataTest,
         sx: (muiTheme: Theme) => {
           const borderRadiusDesktop = muiTheme.shape.borderRadius * 2;
 

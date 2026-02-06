@@ -54,6 +54,13 @@ export interface IconButtonProps {
    * Called when the button is clicked.
    */
   onClick?: () => void;
+
+  /**
+   * Optional data attribute used to identify this icon button in E2E tests.
+   *
+   * Passed directly to the underlying MUI `ButtonBase` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 const SIZE_CONFIG: Record<
@@ -77,6 +84,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   icon = "play_arrow",
   disabled,
   onClick,
+  "data-test": dataTest,
 }) => {
   const config = SIZE_CONFIG[size];
 
@@ -84,6 +92,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
     <ButtonBase
       disabled={disabled}
       onClick={onClick}
+      data-test={dataTest}
       sx={(theme) => ({
         alignItems: "center",
         backgroundColor:

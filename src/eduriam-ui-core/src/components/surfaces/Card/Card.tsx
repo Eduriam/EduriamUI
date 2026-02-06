@@ -48,6 +48,13 @@ export interface CardProps {
    * Called when the card is clicked (only meaningful for clickable variants).
    */
   onClick?: MouseEventHandler<HTMLDivElement>;
+
+  /**
+   * Optional data attribute used to identify this card in E2E tests.
+   *
+   * Passed directly to the underlying MUI `Paper` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -62,6 +69,7 @@ export const Card: React.FC<CardProps> = ({
   paddingX = "large",
   children,
   onClick,
+  "data-test": dataTest,
 }) => {
   const isClickable = variant === "clickable";
   const isSelected = variant === "selected";
@@ -99,6 +107,7 @@ export const Card: React.FC<CardProps> = ({
       square={false}
       elevation={0}
       onClick={onClick}
+      data-test={dataTest}
       sx={(theme: Theme) => {
         const basePaddingY = theme.spacing(paddingScaleY);
         const basePaddingX = theme.spacing(paddingScaleX);

@@ -68,6 +68,13 @@ export interface LargeRadioButtonGroupProps {
    * Called whenever the selected option changes.
    */
   onChange?: (selectedId: string) => void;
+
+  /**
+   * Optional data attribute used to identify this radio group in E2E tests.
+   *
+   * Applied to the outer MUI `Box` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -82,6 +89,7 @@ export const LargeRadioButtonGroup = ({
   defaultSelectedId,
   fullWidth = false,
   onChange,
+  "data-test": dataTest,
 }: LargeRadioButtonGroupProps) => {
   const firstOptionId = options[0]?.id;
   const [selectedId, setSelectedId] = useState<string | undefined>(
@@ -121,6 +129,7 @@ export const LargeRadioButtonGroup = ({
   return (
     <Box
       role="radiogroup"
+      data-test={dataTest}
       sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
     >
       {optionMap.map((option) => (
