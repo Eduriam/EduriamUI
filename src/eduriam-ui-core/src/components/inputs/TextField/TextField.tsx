@@ -30,6 +30,13 @@ export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
    * Additional styling for the outer container box.
    */
   containerSx?: SxProps<Theme>;
+
+  /**
+   * Optional data attribute used to identify the underlying input in E2E tests.
+   *
+   * Passed to the underlying MUI `InputBase`'s input element as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -48,8 +55,10 @@ export const TextField: React.FC<TextFieldProps> = ({
   minRows,
   containerSx,
   sx,
+  "data-test": dataTest,
   ...rest
 }) => {
+  const { inputProps, ...restInputBaseProps } = rest;
   const resolvedMinRows = multiline ? (minRows ?? 4) : undefined;
 
   return (
@@ -109,7 +118,11 @@ export const TextField: React.FC<TextFieldProps> = ({
             }),
             ...(Array.isArray(sx) ? sx : [sx]),
           ].filter(Boolean)}
-          {...rest}
+          inputProps={{
+            ...(inputProps || {}),
+            "data-test": dataTest,
+          }}
+          {...restInputBaseProps}
         />
       </Box>
     </Box>

@@ -12,6 +12,13 @@ export type PageRootProps = {
    * Page content to render inside the vertical stack.
    */
   children: ReactNode;
+
+  /**
+   * Optional data attribute used to identify the page in E2E tests.
+   *
+   * Passed directly to the underlying MUI `Stack` as `data-test`.
+   */
+  "data-test"?: string;
 };
 
 /**
@@ -20,9 +27,10 @@ export type PageRootProps = {
  * Wrap your entire page JSX in `PageRoot` to ensure a minimum height of
  * `100dvh` and a consistent flex column layout.
  */
-export function PageRoot({ children }: PageRootProps) {
+export function PageRoot({ children, "data-test": dataTest }: PageRootProps) {
   return (
     <Stack
+      data-test={dataTest}
       sx={{
         minHeight: "100dvh",
         display: "flex",

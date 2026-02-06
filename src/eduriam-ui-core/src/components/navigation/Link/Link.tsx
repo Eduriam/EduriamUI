@@ -66,6 +66,13 @@ export interface LinkProps {
    * Click handler for the anchor element.
    */
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+
+  /**
+   * Optional data attribute used to identify this link in E2E tests.
+   *
+   * Passed directly to the underlying MUI `Link` as `data-test`.
+   */
+  "data-test"?: string;
 }
 
 /**
@@ -80,6 +87,7 @@ export const Link: React.FC<LinkProps> = ({
   target,
   variant = "body1",
   onClick,
+  "data-test": dataTest,
 }) => {
   const typographyColor =
     color === "textSecondary" ? "text.secondary" : "text.primary";
@@ -89,6 +97,7 @@ export const Link: React.FC<LinkProps> = ({
       href={href}
       target={target}
       onClick={onClick}
+      data-test={dataTest}
       color={typographyColor}
       variant={variant}
       underline="always"
