@@ -4,11 +4,28 @@ declare module "@mui/material/styles" {
   interface Palette {
     energy: Palette["primary"];
     coin: Palette["primary"];
+    chipGreen: Palette["primary"];
+    chipYellow: Palette["primary"];
+    chipBlue: Palette["primary"];
+    chipPink: Palette["primary"];
   }
 
   interface PaletteOptions {
     energy?: PaletteOptions["primary"];
     coin?: PaletteOptions["primary"];
+    chipGreen?: PaletteOptions["primary"];
+    chipYellow?: PaletteOptions["primary"];
+    chipBlue?: PaletteOptions["primary"];
+    chipPink?: PaletteOptions["primary"];
+  }
+}
+
+declare module "@mui/material/Chip" {
+  interface ChipPropsColorOverrides {
+    chipGreen: true;
+    chipYellow: true;
+    chipBlue: true;
+    chipPink: true;
   }
 }
 
@@ -47,6 +64,10 @@ export const corePalette: PaletteOptions = {
   action: { disabledBackground: "#F3F3F3" },
   energy: { main: "#FFD951" },
   coin: { main: "#F5CB10" },
+  chipGreen: { main: "#DBFFD0", contrastText: "#29CC57" },
+  chipYellow: { main: "#FFF5CC", contrastText: "#F9A825" },
+  chipBlue: { main: "#8BD5FB", contrastText: "#148DD4" },
+  chipPink: { main: "#F9E1E7", contrastText: "#8A5F6B" },
   common: { white: "#ffffff", black: "#000000" },
 };
 
@@ -85,5 +106,9 @@ export const corePaletteDark: PaletteOptions = {
   action: { disabledBackground: "#292834" },
   energy: { main: "#FFD951" },
   coin: { main: "#F5CB10" },
+  chipGreen: { main: "#DBFFD0", contrastText: "#29CC57" },
+  chipYellow: { main: "#FFF5CC", contrastText: "#F9A825" },
+  chipBlue: { main: "#8BD5FB", contrastText: "#148DD4" },
+  chipPink: { main: "#F9E1E7", contrastText: "#8A5F6B" },
   common: { white: "#ffffff", black: "#000000" },
 };
