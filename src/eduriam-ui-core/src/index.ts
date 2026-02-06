@@ -5,7 +5,7 @@ export * from "./components/DividerWithText";
 export * from "./components/Emoji";
 export * from "./components/feedback/ProgressBar";
 export * from "./components/FullWidthButton";
-export * from "./components/Icon";
+export * from "./components/data-display/Icon";
 export * from "./components/inputs/IconButton";
 export * from "./components/inputs/LargeButton";
 export * from "./components/inputs/LargeRadioButton";
