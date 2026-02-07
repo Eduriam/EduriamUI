@@ -4,7 +4,7 @@ import StudySession, { IStudySession } from "./StudySession";
 import { StudyBlockComponentType } from "./components/study-blocks/study-block-components/types/StudyBlockComponentTypes";
 
 const meta: Meta<typeof StudySession> = {
-  title: "ui-x/StudySession",
+  title: "x/study-session/StudySession",
   component: StudySession,
 };
 

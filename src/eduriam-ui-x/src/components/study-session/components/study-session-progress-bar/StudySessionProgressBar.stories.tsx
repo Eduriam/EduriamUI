@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import StudySessionProgressBar from "./StudySessionProgressBar";
 
 const meta: Meta<typeof StudySessionProgressBar> = {
-  title: "atoms/StudySessionProgressBar",
+  title: "x/study-session/StudySessionProgressBar",
   component: StudySessionProgressBar,
 };
 
