@@ -1,14 +1,14 @@
 import Typography, { TypographyProps } from "@mui/material/Typography";
 
 /**
- * Logical heading levels supported by the `Header` component.
+ * Logical heading variants supported by the `Header` component.
  *
  * - `"page"` – top-level page heading (`h1`).
  * - `"title"` – primary section heading (`h2`).
  * - `"section"` – subsection heading (`h5`).
  * - `"subsection"` – smaller nested heading (`h6`).
  */
-export type HeaderLevel = "page" | "title" | "section" | "subsection";
+export type HeaderVariant = "page" | "title" | "section" | "subsection";
 
 /**
  * Props for the `Header` component.
@@ -16,16 +16,13 @@ export type HeaderLevel = "page" | "title" | "section" | "subsection";
  * Wraps MUI `Typography` to render semantic heading text with the correct
  * size and weight for different heading levels.
  */
-export interface HeaderProps extends Omit<
-  TypographyProps,
-  "variant" | "color" | "children"
-> {
+export interface HeaderProps {
   /**
-   * Logical heading level used to choose the underlying typography variant.
+   * Logical heading variant used to choose the underlying typography variant.
    *
    * @default "page"
    */
-  level?: HeaderLevel;
+  variant?: HeaderVariant;
 
   /**
    * Text content to render inside the heading.
@@ -35,7 +32,7 @@ export interface HeaderProps extends Omit<
   text?: string;
 }
 
-const VARIANT_BY_LEVEL: Record<HeaderLevel, TypographyProps["variant"]> = {
+const TYPOGRAPHY_VARIANT_BY_VARIANT: Record<HeaderVariant, TypographyProps["variant"]> = {
   page: "h1",
   title: "h2",
   section: "h5",
@@ -49,15 +46,13 @@ const VARIANT_BY_LEVEL: Record<HeaderLevel, TypographyProps["variant"]> = {
  * pages use a consistent hierarchy.
  */
 export const Header: React.FC<HeaderProps> = ({
-  level = "page",
+  variant = "page",
   text = "Header",
-  ...rest
 }) => {
   return (
     <Typography
       color="text.primary"
-      variant={VARIANT_BY_LEVEL[level]}
-      {...rest}
+      variant={TYPOGRAPHY_VARIANT_BY_VARIANT[variant]}
     >
       {text}
     </Typography>
