@@ -1,15 +1,6 @@
-import { Icon } from "@eduriam/ui-core";
-
 import { useState } from "react";
 
-import {
-  IconButton,
-  LinearProgress,
-  Toolbar,
-  useMediaQuery,
-} from "@mui/material";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import { Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
@@ -140,9 +131,16 @@ const StudySession: React.FC<IStudySession> = ({
   }
 
   return (
-    <>
+    <Stack
+      data-test="study-session-page"
+      sx={{
+        minHeight: "100dvh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {!finishedSession && (
-        <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+        <>
           <StudySessionProgressBar
             value={index}
             maxValue={studySession.studyBlocks.length}
@@ -150,21 +148,17 @@ const StudySession: React.FC<IStudySession> = ({
           />
 
           {/* Study Block */}
-          <Box sx={{ flexGrow: 1, pt: desktop ? undefined : 2 }}>
-            <Container maxWidth="sm">
-              {studyBlockQueue[index] && (
-                <StudyBlock
-                  key={index}
-                  components={studyBlockQueue[index].components}
-                  onContinue={handleContinue}
-                  localizedTexts={localizedTexts}
-                />
-              )}
-            </Container>
-          </Box>
-        </Box>
+          {studyBlockQueue[index] && (
+            <StudyBlock
+              key={index}
+              components={studyBlockQueue[index].components}
+              onContinue={handleContinue}
+              localizedTexts={localizedTexts}
+            />
+          )}
+        </>
       )}
-    </>
+    </Stack>
   );
 };
 
