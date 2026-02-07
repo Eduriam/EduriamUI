@@ -132,7 +132,6 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
       sx={{
         backgroundColor: "background.default",
         boxShadow: "none",
-        color: "text.primary",
       }}
     >
       <Toolbar
@@ -142,8 +141,10 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
           height: "64px",
           justifyContent: "space-between",
           minHeight: "64px",
-          padding: "0 24px",
           position: "relative",
+          margin: "0 auto",
+          maxWidth: 1000,
+          width: "100%",
         }}
       >
         <Box>{renderButton(leftButton)}</Box>
