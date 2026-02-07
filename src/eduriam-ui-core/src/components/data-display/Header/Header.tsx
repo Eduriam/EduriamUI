@@ -10,6 +10,9 @@ import Typography, { TypographyProps } from "@mui/material/Typography";
  */
 export type HeaderVariant = "page" | "title" | "section" | "subsection";
 
+/** Alignment options for the `Header` component. */
+export type HeaderAlign = "left" | "center" | "right";
+
 /**
  * Props for the `Header` component.
  *
@@ -30,6 +33,13 @@ export interface HeaderProps {
    * @default "Header"
    */
   text?: string;
+
+  /**
+   * Text alignment of the header.
+   *
+   * @default "left"
+   */
+  align?: HeaderAlign;
 }
 
 const TYPOGRAPHY_VARIANT_BY_VARIANT: Record<HeaderVariant, TypographyProps["variant"]> = {
@@ -48,11 +58,13 @@ const TYPOGRAPHY_VARIANT_BY_VARIANT: Record<HeaderVariant, TypographyProps["vari
 export const Header: React.FC<HeaderProps> = ({
   variant = "page",
   text = "Header",
+  align = "left",
 }) => {
   return (
     <Typography
       color="text.primary"
       variant={TYPOGRAPHY_VARIANT_BY_VARIANT[variant]}
+      sx={{ textAlign: align }}
     >
       {text}
     </Typography>
