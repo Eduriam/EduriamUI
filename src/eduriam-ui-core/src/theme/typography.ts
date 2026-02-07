@@ -6,15 +6,21 @@ import type { TypographyOptions } from "@mui/material/styles/createTypography";
 declare module "@mui/material/styles" {
   interface TypographyVariants {
     fieldLabel: CSSProperties;
+    code: CSSProperties;
+    codeButton: CSSProperties;
   }
   interface TypographyVariantsOptions {
     fieldLabel?: CSSProperties;
+    code?: CSSProperties;
+    codeButton?: CSSProperties;
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     fieldLabel: true;
+    code: true;
+    codeButton: true;
   }
 }
 
@@ -99,5 +105,18 @@ export const coreTypography: TypographyOptions = {
     ...responsiveFontSize(18, 18),
     lineHeight: LINE_HEIGHT_RATIO,
     fontWeight: 600,
+  },
+  code: {
+    fontFamily: ['"JetBrains Mono"', "monospace"].join(", "),
+    ...responsiveFontSize(16, 16),
+    lineHeight: LINE_HEIGHT_RATIO,
+    fontWeight: 400,
+  },
+  codeButton: {
+    fontFamily: ['"JetBrains Mono"', "monospace"].join(", "),
+    ...responsiveFontSize(18, 18),
+    lineHeight: LINE_HEIGHT_RATIO,
+    fontWeight: 400,
+    textTransform: "none",
   },
 };

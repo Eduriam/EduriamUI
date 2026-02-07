@@ -7,9 +7,10 @@ import type { Theme } from "@mui/material/styles";
 /**
  * Color palette choices for `LargeButton`.
  *
- * Maps directly to `theme.palette[color]`.
+ * Maps to `theme.palette[color]` except "textPrimary" which uses
+ * `theme.palette.text.primary`.
  */
-export type LargeButtonColor = "primary" | "success" | "error";
+export type LargeButtonColor = "primary" | "success" | "error" | "textPrimary";
 
 /**
  * Visual variants for `LargeButton`, mirroring MUI button variants.
@@ -111,9 +112,14 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
         ? "outlined"
         : "text";
   const computedSx = (theme: Theme) => {
-    const palette = theme.palette[color];
-    const mainColor = palette.main;
-    const darkColor = palette.dark ?? palette.main;
+    const mainColor =
+      color === "textPrimary"
+        ? theme.palette.text.primary
+        : theme.palette[color].main;
+    const darkColor =
+      color === "textPrimary"
+        ? theme.palette.text.primary
+        : theme.palette[color].dark ?? theme.palette[color].main;
     const filledTextColor = isDisabled
       ? theme.palette.text.disabled
       : theme.palette.common.white;
@@ -170,9 +176,13 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
 
     if (variant === "outlined") {
       const outlinedBorderColor =
-        color === "primary" ? theme.palette.divider : mainColor;
+        color === "primary" || color === "textPrimary"
+          ? theme.palette.divider
+          : mainColor;
       const outlinedBackground =
-        color === "primary" ? theme.palette.background.default : "transparent";
+        color === "primary" || color === "textPrimary"
+          ? theme.palette.background.default
+          : "transparent";
 
       return {
         ...baseStyles,
