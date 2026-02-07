@@ -31,8 +31,7 @@ export interface LargeRadioButtonProps {
 
   /**
    * Secondary description shown when `expanded` is true.
-   *
-   * @default "Sub Text"
+   * Omitted when not provided.
    */
   subText?: string;
 
@@ -76,7 +75,7 @@ export const LargeRadioButton: React.FC<LargeRadioButtonProps> = ({
   selected = true,
   expanded = false,
   text = "Button",
-  subText = "Sub Text",
+  subText,
   fullWidth = false,
   onClick,
   role,
@@ -111,7 +110,7 @@ export const LargeRadioButton: React.FC<LargeRadioButtonProps> = ({
       <Typography color="text.primary" variant="body1">
         {text}
       </Typography>
-      {isExpanded && (
+      {isExpanded && subText && (
         <Typography color="text.secondary" variant="body2">
           {subText}
         </Typography>

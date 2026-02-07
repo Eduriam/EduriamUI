@@ -1,8 +1,8 @@
-import { FullWidthButton } from "@eduriam/ui-core";
+import { ContentContainer, LargeButton } from "@eduriam/ui-core";
 
 import React, { useState } from "react";
 
-import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 
 import { AnswerState } from "../../types/AnswerState";
 import { StudyBlockComponent } from "./study-block-components/StudyBlockComponent";
@@ -75,8 +75,8 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
   }
 
   return (
-    <>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+    <ContentContainer justifyContent="space-between">
+      <Stack spacing={6}>
         {components.map((component, index) => (
           <StudyBlockComponent
             key={index}
@@ -86,18 +86,15 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
             }
           />
         ))}
-
-        <Box sx={{ pt: 4 }} display="flex" justifyContent="center">
-          <FullWidthButton
-            onClick={handleClick}
-            disabled={studyBlockState === "NOT_READY"}
-          >
-            {studyBlockState === "SUBMITTED"
-              ? localizedTexts.continueButton
-              : localizedTexts.checkButton}
-          </FullWidthButton>
-        </Box>
-      </Box>
-    </>
+      </Stack>
+      <LargeButton
+        onClick={handleClick}
+        disabled={studyBlockState === "NOT_READY"}
+      >
+        {studyBlockState === "SUBMITTED"
+          ? localizedTexts.continueButton
+          : localizedTexts.checkButton}
+      </LargeButton>
+    </ContentContainer>
   );
 };
