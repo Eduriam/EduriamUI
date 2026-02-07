@@ -5,6 +5,7 @@ export * from "./components/data-display/Illustration";
 export * from "./components/data-display/Paragraph";
 export * from "./components/DividerWithText";
 export * from "./components/Emoji";
+export * from "./components/feedback/ExplanationDrawer";
 export * from "./components/feedback/ProgressBar";
 export * from "./components/FullWidthButton";
 export * from "./components/data-display/Icon";
