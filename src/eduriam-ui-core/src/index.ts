@@ -1,4 +1,5 @@
 export * from "./components/data-display/Chip";
+export * from "./components/data-display/Divider";
 export * from "./components/data-display/Header";
 export * from "./components/data-display/Illustration";
 export * from "./components/data-display/Paragraph";
