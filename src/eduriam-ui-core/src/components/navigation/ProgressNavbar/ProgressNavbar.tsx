@@ -70,6 +70,9 @@ export const ProgressNavbar: React.FC<ProgressNavbarProps> = ({
       sx={{
         backgroundColor: "background.default",
         boxShadow: "none",
+        position: "sticky",
+        top: 0,
+        zIndex: 10,
       }}
     >
       <Toolbar
