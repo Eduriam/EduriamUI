@@ -10,9 +10,9 @@ const meta: Meta<typeof Header> = {
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-export const Page: Story = { args: { text: "Header", level: "page" } };
-export const Title: Story = { args: { text: "Header", level: "title" } };
-export const Section: Story = { args: { text: "Header", level: "section" } };
+export const Page: Story = { args: { text: "Header", variant: "page" } };
+export const Title: Story = { args: { text: "Header", variant: "title" } };
+export const Section: Story = { args: { text: "Header", variant: "section" } };
 export const Subsection: Story = {
-  args: { text: "Header", level: "subsection" },
+  args: { text: "Header", variant: "subsection" },
 };

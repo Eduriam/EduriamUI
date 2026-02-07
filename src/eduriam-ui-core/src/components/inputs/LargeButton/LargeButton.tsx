@@ -47,7 +47,7 @@ export interface LargeButtonProps {
   /**
    * Whether the button should take the full available width.
    *
-   * @default false
+   * @default true
    */
   fullWidth?: boolean;
 
@@ -95,7 +95,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
   color = "primary",
   variant = "contained",
   disabled,
-  fullWidth,
+  fullWidth = true,
   startIcon,
   endIcon,
   children,
