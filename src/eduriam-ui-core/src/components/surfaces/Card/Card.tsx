@@ -1,5 +1,7 @@
 import type { MouseEventHandler, ReactNode } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import type { Theme } from "@mui/material/styles";
 
@@ -73,6 +75,17 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const isClickable = variant === "clickable";
   const isSelected = variant === "selected";
+  const hasPressEffect = isClickable || isSelected;
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const paperRef = useRef<HTMLDivElement>(null);
+  const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    if (!hasPressEffect || !paperRef.current) return;
+    const el = paperRef.current;
+    setMinHeight(el.getBoundingClientRect().height);
+  }, [hasPressEffect, children]);
 
   const borderColor = isSelected ? "primary.main" : "divider";
   const baseBottomBorderWidth = variant === "default" ? 2 : 4;
@@ -102,8 +115,9 @@ export const Card: React.FC<CardProps> = ({
           borderBottomWidth: baseBottomBorderWidth,
         };
 
-  return (
+  const paper = (
     <Paper
+      ref={paperRef}
       square={false}
       elevation={0}
       onClick={onClick}
@@ -156,6 +170,16 @@ export const Card: React.FC<CardProps> = ({
       {children}
     </Paper>
   );
+
+  if (hasPressEffect) {
+    return (
+      <Box ref={wrapperRef} sx={{ minHeight: minHeight ?? undefined }}>
+        {paper}
+      </Box>
+    );
+  }
+
+  return paper;
 };
 
 export default Card;
