@@ -31,3 +31,41 @@ export const Default: Story = {
     return <Example />;
   },
 };
+
+export const ScrollableLongLabels: Story = {
+  render: () => {
+    const Example = () => {
+      const [value, setValue] = useState("overview");
+      return (
+        <Tabs
+          value={value}
+          onChange={(newValue) => setValue(newValue as string)}
+          tabs={[
+            {
+              label: "Overview & Summary",
+              value: "overview",
+            },
+            {
+              label: "Detailed Configuration Settings",
+              value: "config",
+            },
+            {
+              label: "Analytics & Reports",
+              value: "analytics",
+            },
+            {
+              label: "User Management & Permissions",
+              value: "users",
+            },
+            {
+              label: "Billing & Subscription Plans",
+              value: "billing",
+            },
+          ]}
+        />
+      );
+    };
+
+    return <Example />;
+  },
+};

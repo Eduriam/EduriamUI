@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-core",
-  "version": "0.6.26",
+  "version": "0.6.27",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
