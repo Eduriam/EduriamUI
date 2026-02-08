@@ -16,6 +16,10 @@ export type { IStudyBlockComponent } from "./components/study-session/components
 // Study Session Progress Bar
 export { default as StudySessionProgressBar } from "./components/study-session/components/study-session-progress-bar/StudySessionProgressBar";
 
+// Study Session Shared Components
+export { CodeBlank } from "./components/study-session/components/shared/CodeBlank";
+export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
+
 // Types and Models
 export type { ID } from "./models/ID";
 export type { AnswerState } from "./components/study-session/types/AnswerState";

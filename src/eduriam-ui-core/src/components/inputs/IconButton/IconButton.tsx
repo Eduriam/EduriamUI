@@ -21,7 +21,12 @@ export type IconButtonVariant = "contained" | "outlined" | "text";
 /**
  * Color slot for `IconButton`, mapped to theme palette.
  */
-export type IconButtonColor = "primary" | "success" | "error" | "textPrimary";
+export type IconButtonColor =
+  | "primary"
+  | "success"
+  | "error"
+  | "textPrimary"
+  | "textDisabled";
 
 /**
  * Props for the `IconButton` component.
@@ -86,10 +91,7 @@ const SIZE_CONFIG: Record<
   large: { button: 48, icon: 32, radius: 12, outlineWidth: 3 },
 };
 
-function getMainColor(
-  theme: Theme,
-  color: Exclude<IconButtonColor, "textPrimary">,
-): string {
+function getMainColor(theme: Theme, color: IconButtonColor): string {
   switch (color) {
     case "primary":
       return theme.palette.primary.main;
@@ -97,6 +99,10 @@ function getMainColor(
       return theme.palette.success.main;
     case "error":
       return theme.palette.error.main;
+    case "textDisabled":
+      return theme.palette.text.disabled;
+    case "textPrimary":
+      return theme.palette.text.primary;
     default:
       return theme.palette.primary.main;
   }
@@ -110,11 +116,8 @@ function getIconButtonStyles(
   disabled: boolean,
 ) {
   const config = SIZE_CONFIG[size];
-  const isTextPrimary = color === "textPrimary";
 
-  const iconColor = isTextPrimary
-    ? theme.palette.text.primary
-    : getMainColor(theme, color);
+  const iconColor = getMainColor(theme, color);
   const filledIconColor = theme.palette.common.white;
   const disabledColor = theme.palette.text.disabled;
 
@@ -139,13 +142,16 @@ function getIconButtonStyles(
   }
 
   if (variant === "contained") {
-    if (isTextPrimary) {
+    if (color === "textPrimary" || color === "textDisabled") {
       return {
         ...baseStyles,
         backgroundColor: theme.palette.action.disabledBackground,
         border: "none",
         boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
-        color: theme.palette.text.primary,
+        color:
+          color === "textPrimary"
+            ? theme.palette.text.primary
+            : theme.palette.text.disabled,
       };
     }
     return {
@@ -157,13 +163,12 @@ function getIconButtonStyles(
   }
 
   if (variant === "outlined") {
-    const borderColor = isTextPrimary ? theme.palette.divider : iconColor;
     const outlineWidth = config.outlineWidth;
     const translateYAmount = outlineWidth - 1; // 2→1 = 1px, 3→1 = 2px
     return {
       ...baseStyles,
       backgroundColor: theme.palette.background.default,
-      border: `1px solid ${borderColor}`,
+      border: `1px solid ${theme.palette.divider}`,
       borderBottomWidth: `${outlineWidth}px`,
       color: iconColor,
       "&:active": {

@@ -10,9 +10,13 @@ const meta: Meta<typeof Card> = {
   title: "core/surfaces/Card",
   component: Card,
   argTypes: {
-    padding: {
+    paddingY: {
       control: { type: "radio" },
-      options: ["medium", "small"],
+      options: ["small", "medium", "large"],
+    },
+    paddingX: {
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
     },
   },
 };
@@ -22,7 +26,8 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   args: {
-    padding: "medium",
+    paddingY: "medium",
+    paddingX: "medium",
     children: <Typography variant="body2">Default</Typography>,
   },
 };

@@ -10,7 +10,7 @@ const meta: Meta<typeof IconButton> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "success", "error", "textPrimary"],
+      options: ["primary", "success", "error", "textPrimary", "textDisabled"],
     },
     size: { control: "inline-radio", options: ["small", "medium", "large"] },
     variant: {
@@ -36,7 +36,7 @@ export const Playground: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, alignItems: "center" }}>
-      {(["primary", "success", "error", "textPrimary"] as const).map((color) => (
+      {(["primary", "success", "error", "textPrimary", "textDisabled"] as const).map((color) => (
         <Box key={color} sx={{ display: "flex", gap: 1, alignItems: "center" }}>
           <IconButton color={color} variant="contained" icon="play_arrow" />
           <IconButton color={color} variant="outlined" icon="play_arrow" />

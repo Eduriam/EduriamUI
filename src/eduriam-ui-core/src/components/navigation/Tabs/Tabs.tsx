@@ -53,7 +53,9 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, value, onChange }) => {
     <MuiTabs
       value={value}
       onChange={(_, newValue) => onChange(newValue)}
-      variant="fullWidth"
+      variant="scrollable"
+      scrollButtons="auto"
+      allowScrollButtonsMobile={false}
       TabIndicatorProps={{
         children: <span className="MuiTabs-indicatorSpan" />,
       }}
@@ -82,13 +84,14 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, value, onChange }) => {
           disabled={tab.disabled}
           sx={{
             minHeight: 48,
-            minWidth: 0,
-            flex: 1,
-            padding: 0,
+            minWidth: "auto",
+            paddingY: 0,
+            paddingX: 2,
             textTransform: "none",
             fontSize: 16,
             fontWeight: 700,
             color: "text.secondary",
+            whiteSpace: "nowrap",
             "&.Mui-selected": {
               color: "text.primary",
             },
