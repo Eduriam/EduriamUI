@@ -130,7 +130,7 @@ export const Drawer: React.FC<DrawerProps> = ({
 
           const resolvedBackgroundColor = (() => {
             if (!backgroundColor || backgroundColor === "default") {
-              return muiTheme.palette.background.paper;
+              return muiTheme.palette.background.default;
             }
 
             if (backgroundColor === "success") {
@@ -142,7 +142,7 @@ export const Drawer: React.FC<DrawerProps> = ({
             }
 
             // Fallback to the default surface if an unsupported value somehow slips through.
-            return muiTheme.palette.background.paper;
+            return muiTheme.palette.background.default;
           })();
 
           return {
