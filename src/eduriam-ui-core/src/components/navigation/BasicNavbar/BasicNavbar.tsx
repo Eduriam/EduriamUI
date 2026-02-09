@@ -4,7 +4,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { Icon } from "../../data-display/Icon";
+import { Icon, type IconName } from "../../data-display/Icon";
 
 /**
  * Icon button config for `BasicNavbar`.
@@ -13,7 +13,7 @@ export type BasicNavbarIconButton = {
   /**
    * Material icon name to display.
    */
-  icon: string;
+  icon: IconName;
 
   /**
    * Click handler for the button.

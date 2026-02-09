@@ -481,7 +481,7 @@ __metadata:
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
-    "@eduriam/ui-core": ^0.6.27
+    "@eduriam/ui-core": ^0.6.28
     "@emotion/react": ^11
     "@emotion/styled": ^11
     "@mui/icons-material": ^5

@@ -21,7 +21,7 @@ export interface IconConfigEntry {
  *
  * Add entries here to standardize which icon + variant is used for a given name.
  */
-export const ICON_CONFIG: Record<string, IconConfigEntry> = {
+export const ICON_CONFIG = {
   home: { glyph: "home", variant: "filled" },
   chevronLeft: { glyph: "arrow_back_ios", variant: "outlined" },
   chevronRight: { glyph: "arrow_forward_ios", variant: "outlined" },
@@ -65,7 +65,7 @@ export const ICON_CONFIG: Record<string, IconConfigEntry> = {
   certificate: { glyph: "workspace_premium", variant: "outlined" },
   share: { glyph: "share", variant: "filled" },
   addReaction: { glyph: "add_reaction", variant: "outlined" },
-} as const;
+} as const satisfies Record<string, IconConfigEntry>;
 
-/** Valid icon names from the config. Use for type safety and Storybook controls. */
-export const ICON_NAMES = Object.keys(ICON_CONFIG) as string[];
+/** Array of valid icon names. Use for Storybook controls. */
+export const ICON_NAMES = Object.keys(ICON_CONFIG) as (keyof typeof ICON_CONFIG)[];

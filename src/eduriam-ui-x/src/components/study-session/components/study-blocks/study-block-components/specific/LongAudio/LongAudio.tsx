@@ -91,19 +91,19 @@ export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({
       >
         <Box>
           <IconButton onClick={handleReplay} size="medium">
-            <Icon name="replay_10" color="primary" />
+            <Icon name="play" color="primary" />
           </IconButton>
         </Box>
         <IconButton onClick={handleClick} size="large" aria-label="Play audio">
           {state === "STOPPED" || state === "PAUSED" ? (
-            <Icon name="play_circle_outline" color="primary" fontSize="large" />
+            <Icon name="play" color="primary" fontSize="large" />
           ) : (
-            <Icon name="pause" color="primary" fontSize="large" />
+            <Icon name="play" color="primary" fontSize="large" />
           )}
         </IconButton>
         <Box>
           <IconButton onClick={handleForward} size="medium">
-            <Icon name="forward_10" color="primary" />
+            <Icon name="play" color="primary" />
           </IconButton>
         </Box>
       </Box>

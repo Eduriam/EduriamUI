@@ -76,15 +76,15 @@ export const Timer: React.FC<ITimerStudyBlockComponent> = ({ component }) => {
           <Box>
             {state === "STOPPED" ? (
               <IconButton onClick={resetTimer} size="large">
-                <Icon name="replay" />
+                <Icon name="play" />
               </IconButton>
             ) : state === "RUNNING" ? (
               <IconButton onClick={() => setState("PAUSED")} size="large">
-                <Icon name="pause" />
+                <Icon name="play" />
               </IconButton>
             ) : (
               <IconButton onClick={() => setState("RUNNING")} size="large">
-                <Icon name="play_arrow" />
+                <Icon name="play" />
               </IconButton>
             )}
           </Box>

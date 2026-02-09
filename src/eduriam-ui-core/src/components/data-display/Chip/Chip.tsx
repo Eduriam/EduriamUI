@@ -3,7 +3,7 @@ import MuiChip, { ChipProps as MuiChipProps } from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 
-import { Icon } from "../Icon";
+import { Icon, type IconName } from "../Icon";
 
 /**
  * Chip color variants aligned with the Eduriam Figma design system.
@@ -45,7 +45,7 @@ export interface ChipProps extends Omit<
   /**
    * Trailing icon (always on the right). Any icon name from `iconConfig` (e.g. `"arrowRight"`, `"check"`).
    */
-  icon?: string;
+  icon?: IconName;
 }
 
 /**
