@@ -10,6 +10,9 @@ const DESKTOP_MAX_WIDTHS = {
   large: 800,
 } as const;
 
+export const MOBILE_PADDING_X = 6;
+export const DESKTOP_PADDING_X = 0;
+
 /**
  * Width presets for `ContentContainer` on desktop breakpoints.
  *
@@ -87,10 +90,8 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
   const theme = useTheme();
   const desktopMaxWidth = DESKTOP_MAX_WIDTHS[width];
 
-  const ptMobile =
-    paddingTop === "none" ? 0 : paddingTop === "small" ? 5 : 10;
-  const ptSmUp =
-    paddingTop === "none" ? 0 : paddingTop === "small" ? 10 : 15;
+  const ptMobile = paddingTop === "none" ? 0 : paddingTop === "small" ? 5 : 10;
+  const ptSmUp = paddingTop === "none" ? 0 : paddingTop === "small" ? 10 : 15;
 
   const pbMobile =
     paddingBottom === "none" ? 0 : paddingBottom === "small" ? 5 : 10;
@@ -106,11 +107,11 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
         mx: "auto",
         display: "flex",
         flexDirection: "column",
-        px: 6,
+        px: MOBILE_PADDING_X,
         pt: ptMobile,
         pb: pbMobile,
         [theme.breakpoints.up("sm")]: {
-          px: 0,
+          px: DESKTOP_PADDING_X,
           pt: ptSmUp,
           pb: pbSmUp,
           maxWidth: desktopMaxWidth,
