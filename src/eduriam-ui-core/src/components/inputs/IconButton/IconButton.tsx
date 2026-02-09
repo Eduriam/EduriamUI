@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import type { Theme } from "@mui/material/styles";
 
-import { Icon } from "../../data-display/Icon";
+import { Icon, type IconName } from "../../data-display/Icon";
 
 /**
  * Allowed visual sizes for `IconButton`.
@@ -58,9 +58,9 @@ export interface IconButtonProps {
   /**
    * Material icon name to render inside the button.
    *
-   * @default "play_arrow"
+   * @default "play"
    */
-  icon?: string;
+  icon?: IconName;
 
   /**
    * Whether the button is disabled.
@@ -197,7 +197,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   color = "primary",
   size = "medium",
   variant = "contained",
-  icon = "play_arrow",
+  icon = "play",
   disabled = false,
   onClick,
   "data-test": dataTest,

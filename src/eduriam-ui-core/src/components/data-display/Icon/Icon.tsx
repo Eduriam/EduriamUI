@@ -5,6 +5,9 @@ import { useTheme } from "@mui/material/styles";
 
 import { ICON_CONFIG } from "./iconConfig";
 
+/** Valid icon names from the config. Use for type safety and Storybook controls. */
+export type IconName = keyof typeof ICON_CONFIG;
+
 /**
  * Semantic color names mapped to palette colors.
  */
@@ -39,7 +42,7 @@ export interface IconPropsExtended {
   /**
    * Icon name. Must be a key in `iconConfig` (e.g. `"report"`, `"home"`, `"close"`).
    */
-  name: string;
+  name: IconName;
 
   /**
    * Semantic color from the theme palette.
@@ -50,7 +53,7 @@ export interface IconPropsExtended {
 /**
  * Resolves an icon name to glyph and variant via iconConfig.
  */
-function resolveIcon(name: string): { glyph: string; outlined: boolean } {
+function resolveIcon(name: IconName): { glyph: string; outlined: boolean } {
   const entry = ICON_CONFIG[name];
   if (entry) {
     return {

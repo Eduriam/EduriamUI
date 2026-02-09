@@ -113,13 +113,13 @@ const MatchAudioOption: React.FC<IMatchAudioOptionProps> = ({
           >
             {state === "STOPPED" || state === "PAUSED" ? (
               <Icon
-                name="play_arrow"
+                name="play"
                 color={disabled ? undefined : "primary"}
                 fontSize="large"
               />
             ) : (
               <Icon
-                name="pause"
+                name="play"
                 color={disabled ? undefined : "primary"}
                 fontSize="large"
               />

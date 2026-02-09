@@ -46,6 +46,28 @@ export interface ContentContainerProps {
    * Vertical spacing between stacked children.
    */
   spacing?: StackProps["spacing"];
+
+  /**
+   * Top padding preset for the container.
+   *
+   * - `"none"` – no vertical padding.
+   * - `"small"` – 5 on mobile, 10 on `sm` and above.
+   * - `"medium"` – 10 on mobile, 15 on `sm` and above.
+   *
+   * @default "medium"
+   */
+  paddingTop?: "none" | "small" | "medium";
+
+  /**
+   * Bottom padding preset for the container.
+   *
+   * - `"none"` – no vertical padding.
+   * - `"small"` – 5 on mobile, 10 on `sm` and above.
+   * - `"medium"` – 10 on mobile, 15 on `sm` and above.
+   *
+   * @default "medium"
+   */
+  paddingBottom?: "none" | "small" | "medium";
 }
 
 /**
@@ -59,9 +81,21 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
   width = "medium",
   justifyContent,
   spacing,
+  paddingTop = "medium",
+  paddingBottom = "medium",
 }) => {
   const theme = useTheme();
   const desktopMaxWidth = DESKTOP_MAX_WIDTHS[width];
+
+  const ptMobile =
+    paddingTop === "none" ? 0 : paddingTop === "small" ? 5 : 10;
+  const ptSmUp =
+    paddingTop === "none" ? 0 : paddingTop === "small" ? 10 : 15;
+
+  const pbMobile =
+    paddingBottom === "none" ? 0 : paddingBottom === "small" ? 5 : 10;
+  const pbSmUp =
+    paddingBottom === "none" ? 0 : paddingBottom === "small" ? 10 : 15;
 
   return (
     <Container
@@ -73,10 +107,12 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
         display: "flex",
         flexDirection: "column",
         px: 6,
-        py: 10,
+        pt: ptMobile,
+        pb: pbMobile,
         [theme.breakpoints.up("sm")]: {
           px: 0,
-          py: 15,
+          pt: ptSmUp,
+          pb: pbSmUp,
           maxWidth: desktopMaxWidth,
         },
         flexGrow: 1,

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 
-import { Icon } from "../../data-display/Icon";
+import { Icon, type IconName } from "../../data-display/Icon";
 import { ProgressBar, ProgressBarSize } from "../../feedback/ProgressBar";
 
 /**
@@ -13,7 +13,7 @@ export type ProgressNavbarIconButton = {
   /**
    * Material icon name to display as the left action.
    */
-  icon: string;
+  icon: IconName;
 
   /**
    * Click handler for the icon button.
