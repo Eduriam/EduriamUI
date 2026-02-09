@@ -5,7 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { Icon, type IconName } from "../../data-display/Icon";
+import { type IconName } from "../../data-display/Icon";
+import { IconButton } from "../../inputs/IconButton";
 import {
   DESKTOP_PADDING_X,
   MOBILE_PADDING_X,
@@ -86,21 +87,13 @@ const renderButton = (button?: BasicNavbarButton) => {
 
   if (isIconButton(button)) {
     return (
-      <ButtonBase
-        data-test={button.dataTest}
+      <IconButton
+        icon={button.icon}
+        variant="text"
+        color="textPrimary"
         onClick={button.onClick}
-        sx={{
-          alignItems: "center",
-          borderRadius: "12px",
-          color: "text.primary",
-          display: "inline-flex",
-          height: "24px",
-          justifyContent: "center",
-          width: "24px",
-        }}
-      >
-        <Icon name={button.icon} sx={{ fontSize: 24 }} />
-      </ButtonBase>
+        data-test={button.dataTest}
+      />
     );
   }
 
