@@ -3,8 +3,13 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
 
 import { Icon, type IconName } from "../../data-display/Icon";
+import {
+  DESKTOP_PADDING_X,
+  MOBILE_PADDING_X,
+} from "../../layout/ContentContainer";
 
 /**
  * Icon button config for `BasicNavbar`.
@@ -125,6 +130,8 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
   leftButton,
   rightButton,
 }) => {
+  const theme = useTheme();
+
   return (
     <AppBar
       position="static"
@@ -145,6 +152,10 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
           margin: "0 auto",
           maxWidth: 1000,
           width: "100%",
+          px: MOBILE_PADDING_X,
+          [theme.breakpoints.up("sm")]: {
+            px: DESKTOP_PADDING_X,
+          },
         }}
       >
         <Box>{renderButton(leftButton)}</Box>
