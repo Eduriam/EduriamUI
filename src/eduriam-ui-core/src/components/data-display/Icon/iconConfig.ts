@@ -65,7 +65,11 @@ export const ICON_CONFIG = {
   certificate: { glyph: "workspace_premium", variant: "outlined" },
   share: { glyph: "share", variant: "filled" },
   addReaction: { glyph: "add_reaction", variant: "outlined" },
+  studyPlan: { glyph: "list_alt", variant: "outlined" },
+  dragIndicator: { glyph: "drag_indicator", variant: "outlined" },
 } as const satisfies Record<string, IconConfigEntry>;
 
 /** Array of valid icon names. Use for Storybook controls. */
-export const ICON_NAMES = Object.keys(ICON_CONFIG) as (keyof typeof ICON_CONFIG)[];
+export const ICON_NAMES = Object.keys(
+  ICON_CONFIG,
+) as (keyof typeof ICON_CONFIG)[];
