@@ -153,18 +153,7 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
       >
         <Box>{renderButton(leftButton)}</Box>
         {header && (
-          <Typography
-            color="text.primary"
-            sx={{
-              fontSize: 22,
-              fontWeight: 500,
-              left: "50%",
-              lineHeight: "28px",
-              position: "absolute",
-              textAlign: "center",
-              transform: "translateX(-50%)",
-            }}
-          >
+          <Typography color="text.primary" variant="h6">
             {header}
           </Typography>
         )}
