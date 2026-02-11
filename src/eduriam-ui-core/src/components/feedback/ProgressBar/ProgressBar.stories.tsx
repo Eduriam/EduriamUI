@@ -21,3 +21,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: { size: "large", value: 40 },
 };
+
+export const CustomColor: Story = {
+  args: { size: "medium", value: 60, color: "#e8d90e" },
+};
