@@ -30,6 +30,17 @@ export interface ProgressBarProps {
    * @default 40
    */
   value?: number;
+
+  /**
+   * Color used for the inner progress bar.
+   *
+   * Accepts any value suitable for the MUI `LinearProgress` bar
+   * `backgroundColor`, such as theme palette keys (`"primary.main"`)
+   * or raw color values (`"#1976d2"`).
+   *
+   * @default "primary.main"
+   */
+  color?: string;
 }
 
 const SIZE_CONFIG: Record<ProgressBarSize, { height: number; radius: number }> =
@@ -49,6 +60,7 @@ const clampValue = (value: number) => Math.min(100, Math.max(0, value));
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   size = "medium",
   value = 40,
+  color = "primary.main",
 }) => {
   const config = SIZE_CONFIG[size];
   const clampedValue = clampValue(value);
@@ -65,7 +77,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         position: "relative",
         width: "100%",
         "& .MuiLinearProgress-bar": {
-          backgroundColor: "primary.main",
+          backgroundColor: color,
           borderRadius,
         },
       }}
