@@ -32,42 +32,35 @@ const defaultArgs: ExplanationDrawerProps = {
   onThumbsDown: () => {},
 };
 
+const ExplanationDrawerWithButton: React.FC<ExplanationDrawerProps> = (props) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Open explanation
+      </Button>
+      <ExplanationDrawer
+        {...props}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
+    </>
+  );
+};
+
 export const Default: Story = {
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <>
-        <Button variant="contained" onClick={() => setOpen(true)}>
-          Open explanation
-        </Button>
-        <ExplanationDrawer
-          {...args}
-          open={open}
-          onClose={() => setOpen(false)}
-        />
-      </>
-    );
-  },
+  render: (args) => <ExplanationDrawerWithButton {...args} />,
   args: defaultArgs,
 };
 
 export const WithoutFeedback: Story = {
-  render: (args) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <>
-        <Button variant="contained" onClick={() => setOpen(true)}>
-          Open explanation
-        </Button>
-        <ExplanationDrawer
-          {...args}
-          open={open}
-          onClose={() => setOpen(false)}
-          onThumbsUp={undefined}
-          onThumbsDown={undefined}
-        />
-      </>
-    );
-  },
+  render: (args) => (
+    <ExplanationDrawerWithButton
+      {...args}
+      onThumbsUp={undefined}
+      onThumbsDown={undefined}
+    />
+  ),
   args: defaultArgs,
 };
