@@ -1,7 +1,8 @@
+import { LargeRadioButtonGroup } from "@eduriam/ui-core";
+
 import React, { useEffect, useMemo, useState } from "react";
 
-import { LargeRadioButtonGroup } from "@eduriam/ui-core";
-import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../types/AnswerState";
@@ -27,16 +28,17 @@ export const MultipleChoiceExercise: React.FC<
   }, [state, onAnswerStateChange]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-      <Typography variant="h5">{component.question}</Typography>
-      <LargeRadioButtonGroup
-        options={component.options}
-        fullWidth={false}
-        onChange={(id) => setSelectedId(id)}
-      />
-    </Box>
+    <Stack direction="column" gap={3} alignItems="center">
+      <Stack>
+        <Typography variant="h5">{component.question}</Typography>
+        <LargeRadioButtonGroup
+          options={component.options}
+          fullWidth={false}
+          onChange={(id) => setSelectedId(id)}
+        />
+      </Stack>
+    </Stack>
   );
 };
 
 export default MultipleChoiceExercise;
-

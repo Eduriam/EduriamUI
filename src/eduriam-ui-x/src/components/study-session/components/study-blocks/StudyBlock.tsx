@@ -1,4 +1,4 @@
-import { ContentContainer, LargeButton } from "@eduriam/ui-core";
+import { LargeButton } from "@eduriam/ui-core";
 
 import React, { useState } from "react";
 
@@ -84,7 +84,7 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
   }
 
   return (
-    <ContentContainer justifyContent="space-between">
+    <Stack sx={{ flexGrow: 1 }} justifyContent="space-between">
       <Stack spacing={6}>
         {components.map((component, index) => (
           <StudyBlockComponent
@@ -104,6 +104,6 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
           ? localizedTexts.continueButton
           : localizedTexts.checkButton}
       </LargeButton>
-    </ContentContainer>
+    </Stack>
   );
 };

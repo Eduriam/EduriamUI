@@ -1,14 +1,16 @@
+import { ContentContainer } from "@eduriam/ui-core";
+
 import { useState } from "react";
 
 import { Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
-import { StudyBlock } from "./components/study-blocks/StudyBlock";
-import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
 import StudySessionDrawer, {
   StudySessionDrawerVariant,
 } from "./components/StudySessionDrawer/StudySessionDrawer";
+import { StudyBlock } from "./components/study-blocks/StudyBlock";
+import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
 import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
@@ -167,21 +169,25 @@ const StudySession: React.FC<IStudySession> = ({
             />
           )}
 
-          {/* Study Block */}
-          {studyBlockQueue[index] && (
-            <StudyBlock
-              key={index}
-              components={studyBlockQueue[index].components}
-              onContinue={handleContinue}
-              onCheck={(result) =>
-                (() => {
-                  setCheckedResult(result);
-                  setDrawerVariant(result === "RIGHT" ? "correct" : "incorrect");
-                })()
-              }
-              localizedTexts={localizedTexts}
-            />
-          )}
+          <ContentContainer paddingTop="small" width="medium">
+            {/* Study Block */}
+            {studyBlockQueue[index] && (
+              <StudyBlock
+                key={index}
+                components={studyBlockQueue[index].components}
+                onContinue={handleContinue}
+                onCheck={(result) =>
+                  (() => {
+                    setCheckedResult(result);
+                    setDrawerVariant(
+                      result === "RIGHT" ? "correct" : "incorrect",
+                    );
+                  })()
+                }
+                localizedTexts={localizedTexts}
+              />
+            )}
+          </ContentContainer>
         </>
       )}
     </Stack>
