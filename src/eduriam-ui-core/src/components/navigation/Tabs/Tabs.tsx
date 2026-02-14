@@ -1,4 +1,5 @@
 import { Tabs as MuiTabs, Tab } from "@mui/material";
+import type { TabsProps as MuiTabsProps } from "@mui/material/Tabs";
 
 /**
  * Single tab configuration for the `Tabs` component.
@@ -32,6 +33,13 @@ export interface TabsProps {
   tabs: TabsItem[];
 
   /**
+   * MUI Tabs variant.
+   *
+   * Defaults to `"scrollable"`.
+   */
+  variant?: MuiTabsProps["variant"];
+
+  /**
    * Currently selected tab value.
    */
   value: string | number;
@@ -48,14 +56,19 @@ export interface TabsProps {
  * Use this for switching between a small number of top-level views within
  * the same page (for example “Overview / Details / History”).
  */
-export const Tabs: React.FC<TabsProps> = ({ tabs, value, onChange }) => {
+export const Tabs: React.FC<TabsProps> = ({
+  tabs,
+  value,
+  onChange,
+  variant = "scrollable",
+}) => {
   return (
     <MuiTabs
       value={value}
       onChange={(_, newValue) => onChange(newValue)}
-      variant="scrollable"
-      scrollButtons="auto"
-      allowScrollButtonsMobile={false}
+      variant={variant}
+      scrollButtons={variant === "scrollable" ? "auto" : undefined}
+      allowScrollButtonsMobile={variant === "scrollable" ? false : undefined}
       TabIndicatorProps={{
         children: <span className="MuiTabs-indicatorSpan" />,
       }}

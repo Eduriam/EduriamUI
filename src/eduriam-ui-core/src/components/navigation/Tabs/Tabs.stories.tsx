@@ -69,3 +69,25 @@ export const ScrollableLongLabels: Story = {
     return <Example />;
   },
 };
+
+export const FullWidth: Story = {
+  render: () => {
+    const Example = () => {
+      const [value, setValue] = useState("tab-1");
+      return (
+        <Tabs
+          variant="fullWidth"
+          value={value}
+          onChange={(newValue) => setValue(newValue as string)}
+          tabs={[
+            { label: "Overview", value: "tab-1" },
+            { label: "Details", value: "tab-2" },
+            { label: "History", value: "tab-3" },
+          ]}
+        />
+      );
+    };
+
+    return <Example />;
+  },
+};
