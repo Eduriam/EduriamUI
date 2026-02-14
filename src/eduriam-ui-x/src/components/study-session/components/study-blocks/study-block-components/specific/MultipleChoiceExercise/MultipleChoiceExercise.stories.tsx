@@ -45,3 +45,24 @@ export const Base: Story = {
     });
   },
 };
+
+export const WithAssignmentTitle: Story = {
+  args: {
+    onAnswerStateChange: fn(),
+    component: {
+      id: "mc-2",
+      type: StudyBlockComponentType.MULTIPLE_CHOICE,
+      question: "Question Lorem Ipsum Dolor sit amet.",
+      options: [
+        { id: "0", text: "Option 1" },
+        { id: "1", text: "Option 2" },
+        { id: "2", text: "Option 3" },
+        { id: "3", text: "Option 4" },
+      ],
+      correctOptionId: "1",
+    },
+    localization: {
+      assignmentTitle: "Select correct answer",
+    },
+  },
+};

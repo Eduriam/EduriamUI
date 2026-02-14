@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AnswerState } from "../../../types/AnswerState";
+import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 import BuildWord from "./specific/BuildWord/BuildWord";
 import { CheckList } from "./specific/CheckList/CheckList";
 import FillInSentence from "./specific/FillInSentence/FillInSentence";
@@ -21,11 +22,13 @@ import { StudyBlockComponentType } from "./types/StudyBlockComponentTypes";
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
   onAnswerStateChange?: (answer: AnswerState) => void;
+  localization: StudySessionLocalization;
 }
 
 export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
+  localization,
 }) => {
   switch (component.type) {
     case StudyBlockComponentType.HEADER:
@@ -44,6 +47,7 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
         <MultipleChoiceExercise
           component={component}
           onAnswerStateChange={onAnswerStateChange}
+          localization={localization.multipleChoiceExercise}
         />
       );
     case StudyBlockComponentType.SHORT_AUDIO:

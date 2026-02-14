@@ -3,6 +3,8 @@ import { Drawer, IconButton, LargeButton } from "@eduriam/ui-core";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
+
 export type StudySessionDrawerVariant = "correct" | "incorrect";
 
 export interface StudySessionDrawerProps {
@@ -37,6 +39,12 @@ export interface StudySessionDrawerProps {
    * Passed to the underlying `Drawer` as `data-test`.
    */
   "data-test"?: string;
+
+  /**
+   * Localization strings for the study session (passed from StudySession).
+   * Can be extended with drawer-specific keys when needed.
+   */
+  localization: StudySessionLocalization;
 }
 
 /**
@@ -49,12 +57,18 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   onReportClick,
   onContinueClick,
   "data-test": dataTest,
+  localization,
 }) => {
   const hasExplanation = Boolean(onExplanationClick);
 
   const isCorrect = variant === "correct";
   const primaryColor = isCorrect ? "success" : "error";
-  const title = isCorrect ? "Correct!" : "Incorrect";
+  const { studySessionDrawer } = localization;
+  const title = isCorrect
+    ? studySessionDrawer.titleCorrect
+    : studySessionDrawer.titleIncorrect;
+  const continueButtonLabel = studySessionDrawer.continueButton;
+  const whyButtonLabel = studySessionDrawer.whyButton;
 
   return (
     <Drawer
@@ -112,7 +126,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               onClick={onExplanationClick}
               data-test="study-session-drawer-why"
             >
-              Why?
+              {whyButtonLabel}
             </LargeButton>
 
             <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -123,7 +137,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 onClick={onContinueClick}
                 data-test="study-session-drawer-continue"
               >
-                Continue
+                {continueButtonLabel}
               </LargeButton>
             </Box>
           </Box>
@@ -136,7 +150,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               onClick={onContinueClick}
               data-test="study-session-drawer-continue"
             >
-              Continue
+              {continueButtonLabel}
             </LargeButton>
           </Box>
         )}

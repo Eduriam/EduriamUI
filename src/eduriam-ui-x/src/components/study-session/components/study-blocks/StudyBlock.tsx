@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Stack } from "@mui/material";
 
 import { AnswerState } from "../../types/AnswerState";
+import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
 import { StudyBlockComponent } from "./study-block-components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./study-block-components/types/StudyBlockComponentDTO";
 
@@ -17,20 +18,14 @@ export interface IStudyBlock {
    * Receives the evaluation result for the current block.
    */
   onCheck?: (answer: AnswerState) => void;
-  localizedTexts?: {
-    continueButton: string;
-    checkButton: string;
-  };
+  localization: StudySessionLocalization;
 }
 
 export const StudyBlock: React.FC<IStudyBlock> = ({
   components,
   onContinue,
   onCheck,
-  localizedTexts = {
-    continueButton: "Continue",
-    checkButton: "Check",
-  },
+  localization,
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
   const [studyBlockState, setStudyBlockState] = useState<
@@ -93,6 +88,7 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
             onAnswerStateChange={(answerState) =>
               handleAnswerStateChange(answerState, index)
             }
+            localization={localization}
           />
         ))}
       </Stack>
@@ -101,8 +97,8 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
         disabled={studyBlockState === "NOT_READY"}
       >
         {studyBlockState === "SUBMITTED"
-          ? localizedTexts.continueButton
-          : localizedTexts.checkButton}
+          ? localization.studyBlock.continueButton
+          : localization.studyBlock.checkButton}
       </LargeButton>
     </Stack>
   );

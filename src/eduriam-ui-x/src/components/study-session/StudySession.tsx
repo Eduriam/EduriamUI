@@ -12,8 +12,10 @@ import StudySessionDrawer, {
 import { StudyBlock } from "./components/study-blocks/StudyBlock";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
 import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
+import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
+import type { StudySessionLocalization } from "./types/StudySessionLocalization";
 
 export interface StudyStats {
   correctAnswerCount: number;
@@ -32,21 +34,17 @@ export interface IStudySession {
     atomProgressRatings: AtomProgressRating[],
   ) => void;
   onExit: () => void;
-  localizedTexts?: {
-    continueButton: string;
-    checkButton: string;
-  };
+  localization?: StudySessionLocalization;
 }
 
 const StudySession: React.FC<IStudySession> = ({
   studySession,
   onFinish,
   onExit,
-  localizedTexts = {
-    continueButton: "Continue",
-    checkButton: "Check",
-  },
+  localization: localizationProp,
 }) => {
+  const localization =
+    localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const [finishedSession, setFinishedSession] = useState(false);
@@ -166,6 +164,7 @@ const StudySession: React.FC<IStudySession> = ({
                 if (!checkedResult) return;
                 handleContinue(checkedResult);
               }}
+              localization={localization}
             />
           )}
 
@@ -184,7 +183,7 @@ const StudySession: React.FC<IStudySession> = ({
                     );
                   })()
                 }
-                localizedTexts={localizedTexts}
+                localization={localization}
               />
             )}
           </ContentContainer>
