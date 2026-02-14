@@ -215,7 +215,13 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
   };
 
   return (
-    <Box height={48}>
+    <Box
+      sx={{
+        height: 48,
+        width: fullWidth ? "100%" : "fit-content",
+        alignSelf: fullWidth ? "stretch" : "flex-start",
+      }}
+    >
       <Button
         data-test={dataTest}
         disabled={isDisabled}
