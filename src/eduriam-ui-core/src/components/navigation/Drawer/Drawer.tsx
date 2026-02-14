@@ -5,6 +5,8 @@ import type { Theme } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+import { ContentContainer } from "../../layout/ContentContainer";
+
 /**
  * Supported background color tokens for the `Drawer` surface.
  *
@@ -38,11 +40,31 @@ export interface DrawerProps {
   onClose: () => void;
 
   /**
-   * Maximum width of the drawer surface on desktop.
+   * Maximum width of the drawer surface when presented as a desktop dialog.
    *
    * @default 480
    */
-  maxWidth?: number | string;
+  maxDialogWidth?: number | string;
+
+  /**
+   * Maximum width preset for the **drawer content**.
+   *
+   * Forwarded to `ContentContainer` as its `width` prop.
+   *
+   * @default "medium"
+   */
+  maxContentWidth?: "small" | "medium" | "large";
+
+  /**
+   * Disable the "dialog-like" desktop presentation.
+   *
+   * By default, on larger screens the drawer surface is lifted/centered and
+   * given fully rounded corners to behave like a dialog. When this is `true`,
+   * the drawer keeps the standard bottom-sheet style even on desktop.
+   *
+   * @default false
+   */
+  disableDesktopDialog?: boolean;
 
   /**
    * Vertical padding preset/scale for the drawer content.
@@ -89,7 +111,9 @@ export interface DrawerProps {
 export const Drawer: React.FC<DrawerProps> = ({
   open,
   onClose,
-  maxWidth = 480,
+  maxDialogWidth = 480,
+  maxContentWidth = "medium",
+  disableDesktopDialog = false,
   paddingY = "medium",
   paddingX = "medium",
   backgroundColor,
@@ -111,6 +135,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         "data-test": dataTest,
         sx: (muiTheme: Theme) => {
           const borderRadiusDesktop = muiTheme.shape.borderRadius * 2;
+          const shouldUseDialogStyle = !disableDesktopDialog && !isMobile;
           const resolvePaddingScale = (
             value: "small" | "medium" | "large",
           ): number => {
@@ -148,27 +173,37 @@ export const Drawer: React.FC<DrawerProps> = ({
           return {
             boxSizing: "border-box",
             width: "100%",
-            maxWidth,
-            marginX: "auto",
+            maxWidth: shouldUseDialogStyle ? maxDialogWidth : "100%",
+            marginX: shouldUseDialogStyle ? "auto" : 0,
             paddingY: muiTheme.spacing(paddingScaleY),
-            paddingX: muiTheme.spacing(paddingScaleX),
+            paddingX: isMobile ? 0 : muiTheme.spacing(paddingScaleX),
             maxHeight: { xs: "90vh", md: "80vh" },
             display: "flex",
             flexDirection: "column",
-            borderRadius: isMobile
-              ? "24px 24px 0 0"
-              : `${borderRadiusDesktop}px`,
+            borderRadius: shouldUseDialogStyle
+              ? `${borderRadiusDesktop}px`
+              : "24px 24px 0 0",
             backgroundColor: resolvedBackgroundColor,
-            // Desktop positioning – lift the drawer up so it looks like a dialog
-            [muiTheme.breakpoints.up("md")]: {
-              bottom: "auto",
-              top: "10vh",
-            },
+            ...(!disableDesktopDialog
+              ? {
+                  // Desktop positioning – lift the drawer up so it looks like a dialog
+                  [muiTheme.breakpoints.up("md")]: {
+                    bottom: "auto",
+                    top: "10vh",
+                  },
+                }
+              : {}),
           };
         },
       }}
     >
-      {children}
+      <ContentContainer
+        width={maxContentWidth}
+        paddingTop="none"
+        paddingBottom="none"
+      >
+        {children}
+      </ContentContainer>
     </MuiDrawer>
   );
 };

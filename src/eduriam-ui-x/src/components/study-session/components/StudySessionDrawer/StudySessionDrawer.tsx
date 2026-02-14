@@ -27,6 +27,11 @@ export interface StudySessionDrawerProps {
   onReportClick: () => void;
 
   /**
+   * Called when the continue button is clicked.
+   */
+  onContinueClick: () => void;
+
+  /**
    * Optional data attribute used to identify this drawer in E2E tests.
    *
    * Passed to the underlying `Drawer` as `data-test`.
@@ -42,6 +47,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   variant,
   onExplanationClick,
   onReportClick,
+  onContinueClick,
   "data-test": dataTest,
 }) => {
   const hasExplanation = Boolean(onExplanationClick);
@@ -54,9 +60,11 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
     <Drawer
       open
       onClose={() => undefined}
-      maxWidth={520}
+      maxDialogWidth={520}
       data-test={dataTest ?? "study-session-drawer"}
       backgroundColor={isCorrect ? "success" : "error"}
+      disableDesktopDialog={true}
+      maxContentWidth="medium"
     >
       <Box
         sx={(theme) => ({
@@ -98,6 +106,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
             }}
           >
             <LargeButton
+              fullWidth={false}
               variant="outlined"
               color={primaryColor}
               onClick={onExplanationClick}
@@ -106,12 +115,12 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               Why?
             </LargeButton>
 
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
               <LargeButton
                 fullWidth
                 variant="contained"
                 color={primaryColor}
-                onClick={() => undefined}
+                onClick={onContinueClick}
                 data-test="study-session-drawer-continue"
               >
                 Continue
@@ -124,7 +133,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               fullWidth
               variant="contained"
               color={primaryColor}
-              onClick={() => undefined}
+              onClick={onContinueClick}
               data-test="study-session-drawer-continue"
             >
               Continue

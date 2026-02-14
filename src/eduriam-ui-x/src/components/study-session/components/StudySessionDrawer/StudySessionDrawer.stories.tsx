@@ -14,6 +14,7 @@ export const WithoutExplanation: Story = {
   args: {
     variant: "correct",
     onReportClick: () => {},
+    onContinueClick: () => {},
   },
 };
 
@@ -22,6 +23,7 @@ export const WithExplanation: Story = {
     variant: "incorrect",
     onExplanationClick: () => {},
     onReportClick: () => {},
+    onContinueClick: () => {},
   },
 };
 

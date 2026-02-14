@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.37",
+  "version": "0.2.38",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -21,7 +21,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.34",
+    "@eduriam/ui-core": "^0.6.35",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
@@ -33,6 +33,7 @@
     "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {
+    "@eduriam/ui-core": "workspace:*",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.15.20",
