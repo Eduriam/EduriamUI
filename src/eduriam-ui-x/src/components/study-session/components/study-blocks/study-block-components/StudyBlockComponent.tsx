@@ -8,6 +8,7 @@ import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
 import { LongAudio } from "./specific/LongAudio/LongAudio";
 import MatchingAnswer from "./specific/MatchingAnswer/MatchingAnswer";
+import MultipleChoiceExercise from "./specific/MultipleChoiceExercise/MultipleChoiceExercise";
 import { Paragraph } from "./specific/Paragraph/Paragraph";
 import { PronunciationAnswer } from "./specific/PronunciationAnswer/PronunciationAnswer";
 import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
@@ -34,6 +35,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
     case StudyBlockComponentType.TEXT_ANSWER:
       return (
         <TextAnswer
+          component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.MULTIPLE_CHOICE:
+      return (
+        <MultipleChoiceExercise
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />

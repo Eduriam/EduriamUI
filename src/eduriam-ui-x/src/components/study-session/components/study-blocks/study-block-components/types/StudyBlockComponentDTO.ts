@@ -26,6 +26,18 @@ export interface TextAnswerComponent extends BaseStudyBlockComponent {
   characterButtons?: string[];
 }
 
+export interface MultipleChoiceExerciseOptionDTO {
+  id: string;
+  text: string;
+}
+
+export interface MultipleChoiceExerciseComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.MULTIPLE_CHOICE;
+  question: string;
+  options: Array<MultipleChoiceExerciseOptionDTO>;
+  correctOptionId: string;
+}
+
 export interface ShortAudioComponent extends BaseStudyBlockComponent {
   type: StudyBlockComponentType.SHORT_AUDIO;
   audioUrl: string;
@@ -93,6 +105,7 @@ export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
   | TextAnswerComponent
+  | MultipleChoiceExerciseComponent
   | ShortAudioComponent
   | LongAudioComponent
   | ImageComponent
