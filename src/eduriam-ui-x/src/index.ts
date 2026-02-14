@@ -1,55 +1,55 @@
 // Main Study Session Component
 export { default as StudySession } from "./components/study-session/StudySession";
 export type {
-  StudyStats,
   AtomProgressRating,
   IStudySession,
+  StudyStats,
 } from "./components/study-session/StudySession";
 
 // Study Block Components
-export { StudyBlock } from "./components/study-session/components/study-blocks/StudyBlock";
-export type { IStudyBlock } from "./components/study-session/components/study-blocks/StudyBlock";
+export { ExerciseStudyBlock as StudyBlock } from "./components/study-session/components/study-blocks/exercise/ExerciseStudyBlock";
+export type { IExerciseStudyBlock as IStudyBlock } from "./components/study-session/components/study-blocks/exercise/ExerciseStudyBlock";
 
-export { StudyBlockComponent } from "./components/study-session/components/study-blocks/study-block-components/StudyBlockComponent";
-export type { IStudyBlockComponent } from "./components/study-session/components/study-blocks/study-block-components/StudyBlockComponent";
+export { StudyBlockComponent } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponent";
+export type { IStudyBlockComponent } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponent";
 
 // Study Session Progress Bar
-export { default as StudySessionProgressBar } from "./components/study-session/components/study-session-progress-bar/StudySessionProgressBar";
+export { default as StudySessionProgressBar } from "./components/study-session/components/StudySessionProgressBar/StudySessionProgressBar";
 
 // Study Session Shared Components
 export { CodeBlank } from "./components/study-session/components/shared/CodeBlank";
 export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
 
 // Types and Models
-export type { ID } from "./models/ID";
+export type { StudyBlockComponentDTO } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
+export { StudyBlockComponentType } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentTypes";
+export type { StudyBlockDTO } from "./components/study-session/components/study-blocks/StudyBlockDTO";
 export type { AnswerState } from "./components/study-session/types/AnswerState";
 export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";
-export type { StudyBlockDTO } from "./components/study-session/components/study-blocks/types/StudyBlockDTO";
-export type { StudyBlockComponentDTO } from "./components/study-session/components/study-blocks/study-block-components/types/StudyBlockComponentDTO";
-export { StudyBlockComponentType } from "./components/study-session/components/study-blocks/study-block-components/types/StudyBlockComponentTypes";
+export type { ID } from "./models/ID";
 
 // Specific Component Types
 export type {
-  HeaderComponent,
-  ParagraphComponent,
-  TextAnswerComponent,
-  ShortAudioComponent,
-  LongAudioComponent,
-  ImageComponent,
-  TimerComponent,
-  CheckListComponent,
-  PronunciationAnswerComponent,
-  TableFillComponent,
-  FillInSentenceComponent,
   BuildWordComponent,
+  CheckListComponent,
+  FillInSentenceComponent,
+  HeaderComponent,
+  ImageComponent,
+  LongAudioComponent,
   MatchingAnswerComponent,
-} from "./components/study-session/components/study-blocks/study-block-components/types/StudyBlockComponentDTO";
+  ParagraphComponent,
+  PronunciationAnswerComponent,
+  ShortAudioComponent,
+  TableFillComponent,
+  TextAnswerComponent,
+  TimerComponent,
+} from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
 
 // Matching Answer Types
+export { MatchOptionType } from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
 export type {
-  MatchOptionDTO,
-  TextMatchOptionDTO,
   AudioMatchOptionDTO,
   ImageMatchOptionDTO,
-} from "./components/study-session/components/study-blocks/study-block-components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
-export { MatchOptionType } from "./components/study-session/components/study-blocks/study-block-components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
+  MatchOptionDTO,
+  TextMatchOptionDTO,
+} from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";

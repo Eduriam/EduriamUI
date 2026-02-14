@@ -6,13 +6,13 @@ import { Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
+import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
 import StudySessionDrawer, {
   StudySessionDrawerVariant,
 } from "./components/StudySessionDrawer/StudySessionDrawer";
-import { StudyBlock } from "./components/study-blocks/StudyBlock";
-import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
-import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
-import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
+import StudySessionProgressBar from "./components/StudySessionProgressBar/StudySessionProgressBar";
+import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/StudyBlockDTO";
+import { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
 import type { StudySessionLocalization } from "./types/StudySessionLocalization";
@@ -43,8 +43,7 @@ const StudySession: React.FC<IStudySession> = ({
   onExit,
   localization: localizationProp,
 }) => {
-  const localization =
-    localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
+  const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const [finishedSession, setFinishedSession] = useState(false);
@@ -170,22 +169,23 @@ const StudySession: React.FC<IStudySession> = ({
 
           <ContentContainer paddingTop="small" width="medium">
             {/* Study Block */}
-            {studyBlockQueue[index] && (
-              <StudyBlock
-                key={index}
-                components={studyBlockQueue[index].components}
-                onContinue={handleContinue}
-                onCheck={(result) =>
-                  (() => {
-                    setCheckedResult(result);
-                    setDrawerVariant(
-                      result === "RIGHT" ? "correct" : "incorrect",
-                    );
-                  })()
-                }
-                localization={localization}
-              />
-            )}
+            {studyBlockQueue[index] &&
+              studyBlockQueue[index].type === "exercise" && (
+                <ExerciseStudyBlock
+                  key={index}
+                  components={studyBlockQueue[index].components}
+                  onContinue={handleContinue}
+                  onCheck={(result) =>
+                    (() => {
+                      setCheckedResult(result);
+                      setDrawerVariant(
+                        result === "RIGHT" ? "correct" : "incorrect",
+                      );
+                    })()
+                  }
+                  localization={localization}
+                />
+              )}
           </ContentContainer>
         </>
       )}

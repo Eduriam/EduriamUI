@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import StudySession, { IStudySession } from "./StudySession";
-import { StudyBlockComponentType } from "./components/study-blocks/study-block-components/types/StudyBlockComponentTypes";
+import { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
 
 const meta: Meta<typeof StudySession> = {
   title: "x/study-session/StudySession",
