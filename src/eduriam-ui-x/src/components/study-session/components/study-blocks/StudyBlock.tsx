@@ -35,19 +35,19 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
     componentIndex: number,
   ) {
     setAnswerStates((prev) => {
+      // Guard against infinite update loops when a component re-emits
+      // the same answer state on re-render (common when callback identity changes).
+      if (prev[componentIndex] === newAnswerState) return prev;
+
+      const ready = isReadyToSubmit(prev, componentIndex, newAnswerState);
+      setStudyBlockState((prevPhase) => {
+        if (prevPhase === "SUBMITTED") return prevPhase;
+        return ready ? "READY" : "NOT_READY";
+      });
+
       const copy = [...prev];
       copy[componentIndex] = newAnswerState;
       return copy;
-    });
-
-    setStudyBlockState((prevPhase) => {
-      if (prevPhase === "SUBMITTED") return prevPhase;
-      const ready = isReadyToSubmit(
-        answerStates,
-        componentIndex,
-        newAnswerState,
-      );
-      return ready ? "READY" : "NOT_READY";
     });
   }
 

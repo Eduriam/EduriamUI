@@ -48,3 +48,32 @@ export const Base: Story = {
     onExit: () => {},
   } as IStudySession,
 };
+
+export const Exercise: Story = {
+  args: {
+    studySession: {
+      studyBlocks: [
+        {
+          type: "exercise",
+          atomId: "atom-mc-1",
+          components: [
+            {
+              id: "mc-1",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "Question",
+              options: [
+                { id: "0", text: "Option 1" },
+                { id: "1", text: "Option 2 (correct)" },
+                { id: "2", text: "Option 3" },
+                { id: "3", text: "Option 4" },
+              ],
+              correctOptionId: "1",
+            },
+          ],
+        },
+      ],
+    },
+    onFinish: () => {},
+    onExit: () => {},
+  } as IStudySession,
+};
