@@ -11,6 +11,12 @@ import { StudyBlockComponentDTO } from "./study-block-components/types/StudyBloc
 export interface IStudyBlock {
   components: StudyBlockComponentDTO[];
   onContinue: (answer: AnswerState) => void;
+  /**
+   * Called when the user presses the "Check" button.
+   *
+   * Receives the evaluation result for the current block.
+   */
+  onCheck?: (answer: AnswerState) => void;
   localizedTexts?: {
     continueButton: string;
     checkButton: string;
@@ -20,6 +26,7 @@ export interface IStudyBlock {
 export const StudyBlock: React.FC<IStudyBlock> = ({
   components,
   onContinue,
+  onCheck,
   localizedTexts = {
     continueButton: "Continue",
     checkButton: "Check",
@@ -59,6 +66,8 @@ export const StudyBlock: React.FC<IStudyBlock> = ({
     }
 
     if (studyBlockState === "READY") {
+      const isAllRight = answerStates.every((state) => state === "RIGHT");
+      onCheck?.(isAllRight ? "RIGHT" : "WRONG");
       setStudyBlockState("SUBMITTED");
     }
   }

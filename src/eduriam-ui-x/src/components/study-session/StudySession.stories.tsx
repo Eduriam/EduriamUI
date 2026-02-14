@@ -77,3 +77,68 @@ export const Exercise: Story = {
     onExit: () => {},
   } as IStudySession,
 };
+
+export const ExerciseMultipleChoice3InARow: Story = {
+  args: {
+    studySession: {
+      studyBlocks: [
+        {
+          type: "exercise",
+          atomId: "atom-mc-fruit",
+          components: [
+            {
+              id: "mc-fruit-1",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "Which fruit is the best?",
+              options: [
+                { id: "apple", text: "Apple" },
+                { id: "banana", text: "Banana" },
+                { id: "mango", text: "Mango (correct)" },
+                { id: "strawberry", text: "Strawberry" },
+              ],
+              correctOptionId: "mango",
+            },
+          ],
+        },
+        {
+          type: "exercise",
+          atomId: "atom-mc-animal",
+          components: [
+            {
+              id: "mc-animal-1",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "Which animal can fly?",
+              options: [
+                { id: "cat", text: "Cat" },
+                { id: "eagle", text: "Eagle (correct)" },
+                { id: "elephant", text: "Elephant" },
+                { id: "dolphin", text: "Dolphin" },
+              ],
+              correctOptionId: "eagle",
+            },
+          ],
+        },
+        {
+          type: "exercise",
+          atomId: "atom-mc-planet",
+          components: [
+            {
+              id: "mc-planet-1",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "Which planet is known as the Red Planet?",
+              options: [
+                { id: "venus", text: "Venus" },
+                { id: "mars", text: "Mars (correct)" },
+                { id: "jupiter", text: "Jupiter" },
+                { id: "neptune", text: "Neptune" },
+              ],
+              correctOptionId: "mars",
+            },
+          ],
+        },
+      ],
+    },
+    onFinish: () => {},
+    onExit: () => {},
+  } as IStudySession,
+};

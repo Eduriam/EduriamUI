@@ -6,6 +6,9 @@ import useTheme from "@mui/material/styles/useTheme";
 import { ID } from "../../models/ID";
 import { StudyBlock } from "./components/study-blocks/StudyBlock";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
+import StudySessionDrawer, {
+  StudySessionDrawerVariant,
+} from "./components/StudySessionDrawer/StudySessionDrawer";
 import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
@@ -46,6 +49,9 @@ const StudySession: React.FC<IStudySession> = ({
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const [finishedSession, setFinishedSession] = useState(false);
   const [index, setIndex] = useState(0);
+  const [drawerVariant, setDrawerVariant] =
+    useState<StudySessionDrawerVariant | null>(null);
+  const [checkedResult, setCheckedResult] = useState<AnswerState | null>(null);
   interface AtomStats {
     right: number;
     wrong: number;
@@ -62,6 +68,9 @@ const StudySession: React.FC<IStudySession> = ({
   }
 
   function handleContinue(result: AnswerState) {
+    setDrawerVariant(null);
+    setCheckedResult(null);
+
     const currentBlock = studyBlockQueue[index];
     const atomId = currentBlock.atomId;
 
@@ -147,12 +156,29 @@ const StudySession: React.FC<IStudySession> = ({
             onExit={onExit}
           />
 
+          {drawerVariant && (
+            <StudySessionDrawer
+              variant={drawerVariant}
+              onReportClick={() => {}}
+              onContinueClick={() => {
+                if (!checkedResult) return;
+                handleContinue(checkedResult);
+              }}
+            />
+          )}
+
           {/* Study Block */}
           {studyBlockQueue[index] && (
             <StudyBlock
               key={index}
               components={studyBlockQueue[index].components}
               onContinue={handleContinue}
+              onCheck={(result) =>
+                (() => {
+                  setCheckedResult(result);
+                  setDrawerVariant(result === "RIGHT" ? "correct" : "incorrect");
+                })()
+              }
               localizedTexts={localizedTexts}
             />
           )}
