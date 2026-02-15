@@ -97,6 +97,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             lines={activeTab.lines}
             filledBlanks={filledBlanks}
             onBlankClick={onBlankClick}
+            language={activeTab.language}
           />
         );
 
@@ -106,6 +107,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             lines={activeTab.lines}
             filledBlanks={filledBlanks}
             onBlankChange={onBlankChange}
+            language={activeTab.language}
           />
         );
 
@@ -115,6 +117,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             value={codeValues[activeTab.id] ?? activeTab.defaultValue ?? ""}
             onChange={(val) => onCodeValueChange?.(activeTab.id, val)}
             defaultValue={activeTab.defaultValue}
+            language={activeTab.language}
           />
         );
 
@@ -131,7 +134,12 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         return <CodeEditorTable rows={activeTab.rows} />;
 
       case "terminal":
-        return <CodeEditorTerminal lines={activeTab.lines} />;
+        return (
+          <CodeEditorTerminal
+            lines={activeTab.lines}
+            language={activeTab.language}
+          />
+        );
 
       default:
         return null;

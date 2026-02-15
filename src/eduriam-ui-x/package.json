@@ -20,6 +20,10 @@
     "clean": "rm -rf dist tsconfig.tsbuildinfo || rmdir /s /q dist && del /q tsconfig.tsbuildinfo 2>nul",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "prism-react-renderer": "^2.4.0",
+    "prismjs": "^1.29.0"
+  },
   "peerDependencies": {
     "@eduriam/ui-core": "^0.6.35",
     "@emotion/react": "^11",

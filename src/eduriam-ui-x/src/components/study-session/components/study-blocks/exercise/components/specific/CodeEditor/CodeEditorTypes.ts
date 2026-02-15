@@ -45,6 +45,8 @@ export interface FillInBlankWithOptionsTab extends BaseTab {
   correctAnswers: Record<string, string>;
   /** Option button values shown below the editor when this tab is active. */
   options: string[];
+  /** Optional Prism language for syntax highlighting (e.g. "javascript", "html"). */
+  language?: string;
 }
 
 /**
@@ -57,6 +59,8 @@ export interface FillInBlankWithoutOptionsTab extends BaseTab {
   lines: CodeLine[];
   /** Map from blankId to the correct value. */
   correctAnswers: Record<string, string>;
+  /** Optional Prism language for syntax highlighting (e.g. "javascript", "html"). */
+  language?: string;
 }
 
 /**
@@ -73,6 +77,8 @@ export interface FillInCodeTab extends BaseTab {
    * as soon as the user types anything.
    */
   correctAnswer?: string;
+  /** Optional Prism language for syntax highlighting (e.g. "javascript", "python"). */
+  language?: string;
 }
 
 /**
@@ -106,6 +112,8 @@ export interface TerminalTab extends BaseTab {
   type: "terminal";
   /** Lines of terminal output. */
   lines: string[];
+  /** Optional Prism language for syntax highlighting (e.g. "bash", "shell"). */
+  language?: string;
 }
 
 /**

@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import CodeBlank from "../../../../../../shared/CodeBlank/CodeBlank";
 import type { CodeLine } from "../CodeEditorTypes";
+import { SyntaxHighlightedCode } from "./SyntaxHighlightedCode";
 
 export interface CodeEditorFillInBlankWithOptionsProps {
   /** Code lines with text and blank segments. */
@@ -16,6 +17,9 @@ export interface CodeEditorFillInBlankWithOptionsProps {
 
   /** Called when the user clicks a filled blank to remove the value. */
   onBlankClick?: (blankId: string) => void;
+
+  /** Optional Prism language for syntax highlighting (e.g. "javascript", "html"). */
+  language?: string;
 }
 
 /**
@@ -27,6 +31,7 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
   lines,
   filledBlanks,
   onBlankClick,
+  language,
 }) => {
   return (
     <Box
@@ -41,6 +46,16 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
         <Box key={lineIdx} sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", minHeight: 21.1 }}>
           {line.map((segment, segIdx) => {
             if (segment.type === "text") {
+              if (language) {
+                return (
+                  <SyntaxHighlightedCode
+                    key={segIdx}
+                    code={segment.value}
+                    language={language}
+                    sx={{ whiteSpace: "pre" }}
+                  />
+                );
+              }
               return (
                 <Typography
                   key={segIdx}

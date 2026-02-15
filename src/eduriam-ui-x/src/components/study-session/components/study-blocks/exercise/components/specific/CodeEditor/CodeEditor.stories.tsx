@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-import type { CodeEditorTab } from "./CodeEditorTypes";
 import { CodeEditor, type CodeEditorProps } from "./CodeEditor";
+import type { CodeEditorTab } from "./CodeEditorTypes";
 
 const meta = {
   title: "x/study-session/study-blocks/exercise-components/CodeEditor",
@@ -31,6 +31,7 @@ const fillInBlankTab: CodeEditorTab = {
   id: "editor",
   label: "index.html",
   type: "fillInBlankWithOptions",
+  language: "markup",
   lines: [
     [{ type: "text", value: "<h1>This is the title</h1>" }],
     [{ type: "text", value: "<p>" }],
@@ -58,6 +59,7 @@ const terminalTab: CodeEditorTab = {
   id: "terminal",
   label: "terminal",
   type: "terminal",
+  language: "bash",
   lines: ["USER ~", "$ Hello World!"],
 };
 
@@ -77,6 +79,7 @@ const fillInCodeTab: CodeEditorTab = {
   id: "code-editor",
   label: "index.html",
   type: "fillInCode",
+  language: "markup",
   defaultValue: `<h1>This is the title</h1>
 <p>
   Roses are red, <br>
