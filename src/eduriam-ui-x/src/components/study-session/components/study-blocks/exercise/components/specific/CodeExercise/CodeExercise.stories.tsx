@@ -279,6 +279,7 @@ const typingFillTab: CodeEditorTab = {
     ],
   ],
   correctAnswers: { kw: "def", ret: "return" },
+  keyboardSet: "python",
 };
 
 const typingTerminalTab: CodeEditorTab = {

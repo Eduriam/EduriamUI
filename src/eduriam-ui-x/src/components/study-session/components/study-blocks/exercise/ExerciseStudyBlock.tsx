@@ -90,6 +90,8 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
             }
             localization={localization}
             passiveTabsUnlocked={studyBlockState === "SUBMITTED"}
+            checkDisabled={studyBlockState === "NOT_READY"}
+            onCheckPress={handleClick}
           />
         ))}
       </Stack>

@@ -155,6 +155,9 @@ export const ComplexExercise: Story = {
             {
               id: "code-ex-1",
               type: StudyBlockComponentType.CODE_EXERCISE,
+              assignmentTitle: "Build a styled page",
+              assignmentDescription:
+                "Complete the HTML and CSS so the page shows the poem with a navy heading and 18px paragraph. Add the script to make the heading red, then check the browser tab.",
               tabs: [
                 {
                   id: "index.html",
@@ -215,6 +218,20 @@ export const ComplexExercise: Story = {
                   ],
                   correctAnswers: { h1color: "navy", psize: "18px" },
                   options: ["navy", "red", "18px", "14px"],
+                },
+                {
+                  id: "script.js",
+                  label: "script.js",
+                  type: "fillInBlankWithoutOptions",
+                  lines: [
+                    [
+                      { type: "text", value: "document.querySelector('h1').style.color = " },
+                      { type: "blank", blankId: "color" },
+                      { type: "text", value: ";" },
+                    ],
+                  ],
+                  correctAnswers: { color: '"red"' },
+                  keyboardSet: "javascript",
                 },
                 {
                   id: "browser",

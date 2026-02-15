@@ -61,6 +61,11 @@ export interface FillInBlankWithoutOptionsTab extends BaseTab {
   correctAnswers: Record<string, string>;
   /** Optional Prism language for syntax highlighting (e.g. "javascript", "html"). */
   language?: string;
+  /**
+   * When set, a KeyboardExtension bar is shown with the characters from
+   * the matching keyboard set (e.g. `"html"`, `"css"`, `"javascript"`).
+   */
+  keyboardSet?: string;
 }
 
 /**
@@ -79,6 +84,11 @@ export interface FillInCodeTab extends BaseTab {
   correctAnswer?: string;
   /** Optional Prism language for syntax highlighting (e.g. "javascript", "python"). */
   language?: string;
+  /**
+   * When set, a KeyboardExtension bar is shown with the characters from
+   * the matching keyboard set (e.g. `"html"`, `"css"`, `"javascript"`).
+   */
+  keyboardSet?: string;
 }
 
 /**

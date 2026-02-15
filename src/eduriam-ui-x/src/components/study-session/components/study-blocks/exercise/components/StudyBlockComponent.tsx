@@ -29,6 +29,13 @@ export interface IStudyBlockComponent {
    * unlocked. Becomes `true` after the user clicks "Check".
    */
   passiveTabsUnlocked?: boolean;
+  /**
+   * When `true`, check-like buttons (e.g. the KeyboardExtension check)
+   * should be disabled. Matches the main Check button's disabled state.
+   */
+  checkDisabled?: boolean;
+  /** Called when the user triggers a check (e.g. via the keyboard check button). */
+  onCheckPress?: () => void;
 }
 
 export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
@@ -36,6 +43,8 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
   onAnswerStateChange,
   localization,
   passiveTabsUnlocked,
+  checkDisabled,
+  onCheckPress,
 }) => {
   switch (component.type) {
     case StudyBlockComponentType.HEADER:
@@ -114,6 +123,8 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           assignmentTitle={component.assignmentTitle}
           assignmentDescription={component.assignmentDescription}
           passiveTabsUnlocked={passiveTabsUnlocked}
+          checkDisabled={checkDisabled}
+          onCheckPress={onCheckPress}
           onAnswerStateChange={onAnswerStateChange}
         />
       );

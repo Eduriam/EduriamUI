@@ -101,6 +101,7 @@ export const CodeEditorFillInBlankWithoutOptions: React.FC<
                 }}
                 inputProps={{
                   "aria-label": `blank ${segment.blankId}`,
+                  "data-blank-id": segment.blankId,
                   size: Math.max(
                     4,
                     (filledBlanks[segment.blankId] ?? "").length + 1,

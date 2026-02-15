@@ -1,3 +1,5 @@
+import { KeyboardExtension } from "@eduriam/ui-core";
+
 import React, {
   useCallback,
   useEffect,
@@ -19,6 +21,7 @@ import type {
 } from "../CodeEditor/CodeEditorTypes";
 import { PASSIVE_TAB_TYPES } from "../CodeEditor/CodeEditorTypes";
 import { CodeOptions } from "../CodeOptions/CodeOptions";
+import { getKeyboardSetCharacters } from "../KeyboardExtension/keyboardSets";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -49,6 +52,18 @@ export interface CodeExerciseProps {
   passiveTabsUnlocked?: boolean;
 
   /**
+   * When `true`, the keyboard extension's check button is disabled.
+   * Should match the exercise block's main Check button state.
+   */
+  checkDisabled?: boolean;
+
+  /**
+   * Called when the user presses the keyboard extension's check button.
+   * Triggers the same action as the main Check button.
+   */
+  onCheckPress?: () => void;
+
+  /**
    * Callback emitting the current answer state every time the user
    * interacts with the exercise.
    */
@@ -58,6 +73,15 @@ export interface CodeExerciseProps {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/** Returns the `keyboardSet` value for tabs that support it, or `undefined`. */
+function getTabKeyboardSet(tab: CodeEditorTab | undefined): string | undefined {
+  if (!tab) return undefined;
+  if (tab.type === "fillInBlankWithoutOptions" || tab.type === "fillInCode") {
+    return tab.keyboardSet;
+  }
+  return undefined;
+}
 
 /** Returns an ordered list of blank ids from a fillInBlank tab. */
 function getBlankIds(tab: FillInBlankTab): string[] {
@@ -134,6 +158,8 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
   assignmentTitle,
   assignmentDescription,
   passiveTabsUnlocked = false,
+  checkDisabled,
+  onCheckPress,
   onAnswerStateChange,
 }) => {
   // ---- Derived: interactive tabs ----
@@ -182,6 +208,23 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
     activeTab?.type === "fillInBlankWithOptions"
       ? (activeTab as FillInBlankWithOptionsTab)
       : null;
+
+  // ---- Keyboard extension ----
+
+  /**
+   * Ref to the last focused input or textarea inside the code editor.
+   * Used by the keyboard extension to insert characters at the cursor.
+   */
+  const lastFocusedInputRef = useRef<
+    HTMLInputElement | HTMLTextAreaElement | null
+  >(null);
+
+  /** Characters to display in the keyboard extension (if any). */
+  const keyboardCharacters = useMemo(() => {
+    const setKey = getTabKeyboardSet(activeTab);
+    if (!setKey) return null;
+    return getKeyboardSetCharacters(setKey) ?? null;
+  }, [activeTab]);
 
   // ---- Compute selected option indices for the active fillInBlankWithOptions tab ----
   const selectedIndices = useMemo(() => {
@@ -272,12 +315,58 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
     emitState(filledBlanks, newCodes);
   }
 
+  /**
+   * Capture focus events on any input/textarea inside the editor so we
+   * know where to insert characters from the keyboard extension.
+   */
+  function handleFocusCapture(e: React.FocusEvent) {
+    const target = e.target;
+    if (
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement
+    ) {
+      lastFocusedInputRef.current = target;
+    }
+  }
+
+  /**
+   * Insert a character from the keyboard extension at the cursor position
+   * of the last focused input / textarea.
+   */
+  function handleCharacterPress(char: string) {
+    const el = lastFocusedInputRef.current;
+    if (!el) return;
+
+    const start = el.selectionStart ?? el.value.length;
+    const end = el.selectionEnd ?? el.value.length;
+    const newValue = el.value.slice(0, start) + char + el.value.slice(end);
+    const newCursorPos = start + char.length;
+
+    // Route the updated value through the appropriate handler.
+    if (el instanceof HTMLInputElement) {
+      const blankId = el.getAttribute("data-blank-id");
+      if (blankId) {
+        handleBlankChange(blankId, newValue);
+      }
+    } else if (
+      el instanceof HTMLTextAreaElement &&
+      activeTab?.type === "fillInCode"
+    ) {
+      handleCodeValueChange(activeTab.id, newValue);
+    }
+
+    // Restore the cursor position after React re-renders.
+    requestAnimationFrame(() => {
+      el.setSelectionRange(newCursorPos, newCursorPos);
+    });
+  }
+
   // ---- Render ----
 
   const hasHeading = Boolean(assignmentTitle || assignmentDescription);
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} onFocusCapture={handleFocusCapture}>
       {hasHeading ? (
         assignmentTitle ? (
           <>
@@ -305,6 +394,15 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
         codeValues={codeValues}
         onCodeValueChange={handleCodeValueChange}
       />
+      {keyboardCharacters && (
+        <KeyboardExtension
+          characters={[...keyboardCharacters]}
+          variant="standard"
+          onCharacterPress={handleCharacterPress}
+          onCheckPress={onCheckPress}
+          checkDisabled={checkDisabled}
+        />
+      )}
       {activeFillInBlankWithOptionsTab && (
         <CodeOptions
           options={activeFillInBlankWithOptionsTab.options}
