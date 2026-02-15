@@ -142,3 +142,95 @@ export const ExerciseMultipleChoice3InARow: Story = {
     onExit: () => {},
   } as IStudySession,
 };
+
+/** HTML + CSS fill-in-blank exercise with browser preview (single exercise). */
+export const ComplexExercise: Story = {
+  args: {
+    studySession: {
+      studyBlocks: [
+        {
+          type: "exercise",
+          atomId: "atom-complex-1",
+          components: [
+            {
+              id: "code-ex-1",
+              type: StudyBlockComponentType.CODE_EXERCISE,
+              tabs: [
+                {
+                  id: "index.html",
+                  label: "index.html",
+                  type: "fillInBlankWithOptions",
+                  lines: [
+                    [{ type: "text", value: "<!DOCTYPE html>" }],
+                    [{ type: "text", value: "<html><body>" }],
+                    [
+                      { type: "text", value: "  " },
+                      { type: "blank", blankId: "h1Open" },
+                      { type: "blank", blankId: "title" },
+                      { type: "blank", blankId: "h1Close" },
+                    ],
+                    [
+                      { type: "text", value: "  " },
+                      { type: "blank", blankId: "pOpen" },
+                      { type: "text", value: "Roses are red," },
+                      { type: "blank", blankId: "br" },
+                      { type: "text", value: "Violets are blue." },
+                      { type: "blank", blankId: "pClose" },
+                    ],
+                    [{ type: "text", value: "</body></html>" }],
+                  ],
+                  correctAnswers: {
+                    h1Open: "<h1>",
+                    title: "Hello",
+                    h1Close: "</h1>",
+                    pOpen: "<p>",
+                    br: "<br>",
+                    pClose: "</p>",
+                  },
+                  options: [
+                    "<h1>",
+                    "</h1>",
+                    "Hello",
+                    "Hi",
+                    "<p>",
+                    "</p>",
+                    "<br>",
+                  ],
+                },
+                {
+                  id: "style.css",
+                  label: "style.css",
+                  type: "fillInBlankWithOptions",
+                  lines: [
+                    [
+                      { type: "text", value: "h1 { color: " },
+                      { type: "blank", blankId: "h1color" },
+                      { type: "text", value: "; }" },
+                    ],
+                    [
+                      { type: "text", value: "p  { font-size: " },
+                      { type: "blank", blankId: "psize" },
+                      { type: "text", value: "; }" },
+                    ],
+                  ],
+                  correctAnswers: { h1color: "navy", psize: "18px" },
+                  options: ["navy", "red", "18px", "14px"],
+                },
+                {
+                  id: "browser",
+                  label: "browser",
+                  type: "browser",
+                  html: "<h1>Hello</h1><p>Roses are red,<br>Violets are blue.</p>",
+                  inlineCss:
+                    "h1 { color: navy; } p { font-size: 18px; }",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    onFinish: () => {},
+    onExit: () => {},
+  } as IStudySession,
+};

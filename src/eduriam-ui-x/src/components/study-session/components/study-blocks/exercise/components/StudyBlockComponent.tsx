@@ -6,6 +6,7 @@ import { StudyBlockComponentDTO } from "./StudyBlockComponentDTO";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 import BuildWord from "./specific/BuildWord/BuildWord";
 import CheckList from "./specific/CheckList/CheckList";
+import { CodeExercise } from "./specific/CodeExercise/CodeExercise";
 import FillInSentence from "./specific/FillInSentence/FillInSentence";
 import { Header } from "./specific/Header/Header";
 import Image from "./specific/Image/Image";
@@ -23,12 +24,18 @@ export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
   onAnswerStateChange?: (answer: AnswerState) => void;
   localization: StudySessionLocalization;
+  /**
+   * Whether passive code-editor tabs (browser / table / terminal) are
+   * unlocked. Becomes `true` after the user clicks "Check".
+   */
+  passiveTabsUnlocked?: boolean;
 }
 
 export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
   localization,
+  passiveTabsUnlocked,
 }) => {
   switch (component.type) {
     case StudyBlockComponentType.HEADER:
@@ -97,6 +104,16 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
       return (
         <FillInSentence
           component={component}
+          onAnswerStateChange={onAnswerStateChange}
+        />
+      );
+    case StudyBlockComponentType.CODE_EXERCISE:
+      return (
+        <CodeExercise
+          tabs={component.tabs}
+          assignmentTitle={component.assignmentTitle}
+          assignmentDescription={component.assignmentDescription}
+          passiveTabsUnlocked={passiveTabsUnlocked}
           onAnswerStateChange={onAnswerStateChange}
         />
       );

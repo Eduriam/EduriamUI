@@ -51,5 +51,9 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.9",
     "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@types/dompurify": "^3.2.0",
+    "dompurify": "^3.3.1"
   }
 }

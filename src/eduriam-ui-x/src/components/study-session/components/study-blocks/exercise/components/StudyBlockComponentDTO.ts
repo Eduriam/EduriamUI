@@ -1,5 +1,6 @@
 import { ID } from "../../../../../../models/ID";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
+import type { CodeEditorTab } from "./specific/CodeEditor/CodeEditorTypes";
 import { MatchOptionDTO } from "./specific/MatchingAnswer/matching-options/MatchOptionDTO";
 
 interface BaseStudyBlockComponent {
@@ -102,6 +103,16 @@ export interface MatchingAnswerComponent extends BaseStudyBlockComponent {
   options2: Array<MatchOptionDTO>;
 }
 
+export interface CodeExerciseComponent extends BaseStudyBlockComponent {
+  type: StudyBlockComponentType.CODE_EXERCISE;
+  /** Tab definitions for the code editor. */
+  tabs: CodeEditorTab[];
+  /** Optional assignment title (bold heading above the editor). */
+  assignmentTitle?: string;
+  /** Optional assignment description / question. */
+  assignmentDescription?: string;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -116,4 +127,5 @@ export type StudyBlockComponentDTO =
   | TableFillComponent
   | FillInSentenceComponent
   | BuildWordComponent
-  | MatchingAnswerComponent;
+  | MatchingAnswerComponent
+  | CodeExerciseComponent;

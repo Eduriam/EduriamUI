@@ -32,6 +32,7 @@ export type { ID } from "./models/ID";
 export type {
   BuildWordComponent,
   CheckListComponent,
+  CodeExerciseComponent,
   FillInSentenceComponent,
   HeaderComponent,
   ImageComponent,
@@ -44,6 +45,29 @@ export type {
   TextAnswerComponent,
   TimerComponent,
 } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
+
+// Code Editor Types
+export type {
+  BrowserTab,
+  CodeEditorTab,
+  CodeEditorTabType,
+  CodeLine,
+  CodeSegment,
+  FillInBlankTab,
+  FillInBlankWithOptionsTab,
+  FillInBlankWithoutOptionsTab,
+  FillInCodeTab,
+  TableTab,
+  TerminalTab,
+} from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditorTypes";
+
+// Code Editor Components
+export { CodeEditor } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditor";
+export type { CodeEditorProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditor";
+export { CodeOptions } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
+export type { CodeOptionsProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
+export { CodeExercise } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeExercise/CodeExercise";
+export type { CodeExerciseProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeExercise/CodeExercise";
 
 // Matching Answer Types
 export { MatchOptionType } from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";

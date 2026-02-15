@@ -2,7 +2,7 @@ import { LargeButton } from "@eduriam/ui-core";
 
 import React, { useState } from "react";
 
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
@@ -89,17 +89,20 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
               handleAnswerStateChange(answerState, index)
             }
             localization={localization}
+            passiveTabsUnlocked={studyBlockState === "SUBMITTED"}
           />
         ))}
       </Stack>
-      <LargeButton
-        onClick={handleClick}
-        disabled={studyBlockState === "NOT_READY"}
-      >
-        {studyBlockState === "SUBMITTED"
-          ? localization.studyBlock.continueButton
-          : localization.studyBlock.checkButton}
-      </LargeButton>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <LargeButton
+          onClick={handleClick}
+          disabled={studyBlockState === "NOT_READY"}
+        >
+          {studyBlockState === "SUBMITTED"
+            ? localization.studyBlock.continueButton
+            : localization.studyBlock.checkButton}
+        </LargeButton>
+      </Box>
     </Stack>
   );
 };
