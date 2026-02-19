@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.43",
+  "version": "0.2.44",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -21,11 +21,12 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.3",
     "prism-react-renderer": "^2.4.0",
     "prismjs": "^1.29.0"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.40",
+    "@eduriam/ui-core": "^0.6.41",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",

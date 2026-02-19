@@ -14,4 +14,12 @@ export const STUDY_SESSION_LOCALIZATION_DEFAULT: StudySessionLocalization = {
   multipleChoiceExercise: {
     assignmentTitle: "Select correct answer",
   },
+  studySessionStats: {
+    title: "Lesson completed!",
+    xpGained: "XP gained",
+    minStudied: "min studied",
+    correct: "correct",
+    newConcepts: "new concepts",
+    continueButton: "Continue",
+  },
 };

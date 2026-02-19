@@ -476,6 +476,7 @@ __metadata:
     "@mui/lab": "npm:^5.0.0-alpha.94"
     "@mui/material": "npm:^5.15.20"
     "@types/dompurify": "npm:^3.2.0"
+    canvas-confetti: "npm:^1.9.3"
     dompurify: "npm:^3.3.1"
     prism-react-renderer: "npm:^2.4.0"
     prismjs: "npm:^1.29.0"
@@ -486,7 +487,7 @@ __metadata:
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
-    "@eduriam/ui-core": ^0.6.40
+    "@eduriam/ui-core": ^0.6.41
     "@emotion/react": ^11
     "@emotion/styled": ^11
     "@mui/icons-material": ^5
@@ -3015,6 +3016,13 @@ __metadata:
   version: 1.0.30001767
   resolution: "caniuse-lite@npm:1.0.30001767"
   checksum: 10c0/37067c6d2b26623f81494a1f206adbff2b80baed3318ba430684e428bd7d81be889f39db8ef081501d1db5f7dd5d15972892f173eb59c9f3bb780e0b38e6610a
+  languageName: node
+  linkType: hard
+
+"canvas-confetti@npm:^1.9.3":
+  version: 1.9.4
+  resolution: "canvas-confetti@npm:1.9.4"
+  checksum: 10c0/08f11b5fa20b365922108828d7488f9b3eac2afdf39bc478339268c1250b5215df82682d7074520a3f0f72f4728f9703bbc937dcfe793f196b44e6e8ac0b1f7b
   languageName: node
   linkType: hard
 

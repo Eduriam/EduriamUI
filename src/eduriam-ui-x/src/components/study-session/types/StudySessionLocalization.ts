@@ -12,4 +12,12 @@ export interface StudySessionLocalization {
   multipleChoiceExercise: {
     assignmentTitle: string;
   };
+  studySessionStats: {
+    title: string;
+    xpGained: string;
+    minStudied: string;
+    correct: string;
+    newConcepts: string;
+    continueButton: string;
+  };
 }

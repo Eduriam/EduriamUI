@@ -1,21 +1,23 @@
 import { ContentContainer } from "@eduriam/ui-core";
 import { keyframes } from "@emotion/react";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Box, Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
-import { StudySessionAudioProvider } from "./context/StudySessionAudioContext";
 import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
 import StudySessionDrawer, {
   StudySessionDrawerVariant,
 } from "./components/StudySessionDrawer/StudySessionDrawer";
 import { StudySessionNavigationButton } from "./components/StudySessionNavigationButton";
 import StudySessionProgressBar from "./components/StudySessionProgressBar/StudySessionProgressBar";
+import { StudySessionStats } from "./components/StudySessionStats/StudySessionStats";
+import { XP_PER_EXERCISE } from "./components/StudySessionStats/studySessionStatsConfig";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/StudyBlockDTO";
 import { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
+import { StudySessionAudioProvider } from "./context/StudySessionAudioContext";
 import {
   type TransitionDirection,
   useStudySessionTransition,
@@ -91,6 +93,24 @@ const StudySession: React.FC<IStudySession> = ({
 
   const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
     new Map(),
+  );
+
+  const startedAtRef = useRef(Date.now());
+  const [finishedStatsSnapshot, setFinishedStatsSnapshot] = useState<{
+    totalXp: number;
+    timeStudiedMs: number;
+    correctRate: number;
+    conceptCount: number;
+  } | null>(null);
+
+  const exerciseBlockCount = useMemo(
+    () => studySession.studyBlocks.filter((b) => b.type === "exercise").length,
+    [studySession.studyBlocks],
+  );
+
+  const conceptCount = useMemo(
+    () => new Set(studySession.studyBlocks.map((b) => b.atomId)).size,
+    [studySession.studyBlocks],
   );
 
   const {
@@ -205,11 +225,30 @@ const StudySession: React.FC<IStudySession> = ({
       }, "forward");
     } else {
       setFinishedSession(true);
-      const studyStats = evaluateStats(atomStatsMap);
+
+      const updatedMap = new Map(atomStatsMap);
+      const prevStats = updatedMap.get(atomId) ?? { right: 0, wrong: 0 };
+      updatedMap.set(atomId, {
+        right: prevStats.right + (result === "RIGHT" ? 1 : 0),
+        wrong: prevStats.wrong + (result === "WRONG" ? 1 : 0),
+      });
+
+      const studyStats = evaluateStats(updatedMap);
       const atomProgressRatings = computeAtomRatings(
         studySession.studyBlocks,
-        atomStatsMap,
+        updatedMap,
       );
+
+      const total =
+        studyStats.correctAnswerCount + studyStats.incorrectAnswerCount;
+      setFinishedStatsSnapshot({
+        totalXp: exerciseBlockCount * XP_PER_EXERCISE,
+        timeStudiedMs: Date.now() - startedAtRef.current,
+        correctRate:
+          total > 0 ? (studyStats.correctAnswerCount / total) * 100 : 0,
+        conceptCount,
+      });
+
       onFinish(studyStats, atomProgressRatings);
     }
   }
@@ -263,16 +302,24 @@ const StudySession: React.FC<IStudySession> = ({
 
   return (
     <StudySessionAudioProvider>
-    <Stack
-      data-test="study-session-page"
-      sx={{
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {!finishedSession && (
-        <>
+      {finishedSession && finishedStatsSnapshot ? (
+        <StudySessionStats
+          totalXp={finishedStatsSnapshot.totalXp}
+          timeStudiedMs={finishedStatsSnapshot.timeStudiedMs}
+          correctRate={finishedStatsSnapshot.correctRate}
+          conceptCount={finishedStatsSnapshot.conceptCount}
+          onContinue={onExit}
+          localization={localization}
+        />
+      ) : (
+        <Stack
+          data-test="study-session-page"
+          sx={{
+            minHeight: "100dvh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <StudySessionProgressBar
             currentIndex={index}
             furthestCompletedIndex={furthestCompletedIndex}
@@ -350,9 +397,8 @@ const StudySession: React.FC<IStudySession> = ({
               data-test="study-session-nav-next"
             />
           )}
-        </>
+        </Stack>
       )}
-    </Stack>
     </StudySessionAudioProvider>
   );
 };
