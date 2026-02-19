@@ -37,6 +37,14 @@ export interface StudySessionDrawerProps {
   onContinueClick: () => void;
 
   /**
+   * Whether to play the success/error sound when the drawer opens.
+   *
+   * Defaults to `true` for first-time completion. Can be disabled when
+   * revisiting an already-completed exercise so the sound is not replayed.
+   */
+  playSound?: boolean;
+
+  /**
    * Optional data attribute used to identify this drawer in E2E tests.
    *
    * Passed to the underlying `Drawer` as `data-test`.
@@ -59,6 +67,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   onExplanationClick,
   onReportClick,
   onContinueClick,
+  playSound = true,
   "data-test": dataTest,
   localization,
 }) => {
@@ -67,6 +76,8 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   const isCorrect = variant === "correct";
 
   useEffect(() => {
+    if (!playSound) return;
+
     const sound = isCorrect ? "success" : "error";
     new AudioPlayer().play(sound).catch((err: unknown) => {
       console.warn("[StudySessionDrawer] Sound playback failed:", {
@@ -76,7 +87,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
         message: err instanceof Error ? err.message : undefined,
       });
     });
-  }, [isCorrect]);
+  }, [isCorrect, playSound]);
 
   const primaryColor = isCorrect ? "success" : "error";
   const { studySessionDrawer } = localization;
@@ -159,7 +170,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
             </Box>
           </Box>
         ) : (
-          <Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <LargeButton
               fullWidth
               variant="contained"

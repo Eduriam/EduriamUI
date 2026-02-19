@@ -18,6 +18,7 @@ export type { IStudyBlockComponent } from "./components/study-session/components
 
 // Study Session Progress Bar
 export { default as StudySessionProgressBar } from "./components/study-session/components/StudySessionProgressBar/StudySessionProgressBar";
+export type { IStudySessionProgressBar } from "./components/study-session/components/StudySessionProgressBar/StudySessionProgressBar";
 
 // Study Session Shared Components
 export { CodeBlank } from "./components/study-session/components/shared/CodeBlank";

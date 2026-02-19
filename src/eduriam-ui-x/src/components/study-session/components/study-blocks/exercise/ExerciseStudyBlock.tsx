@@ -11,7 +11,6 @@ import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
 
 export interface IExerciseStudyBlock {
   components: StudyBlockComponentDTO[];
-  onContinue: (answer: AnswerState) => void;
   /**
    * Called when the user presses the "Check" button.
    *
@@ -23,7 +22,6 @@ export interface IExerciseStudyBlock {
 
 export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   components,
-  onContinue,
   onCheck,
   localization,
 }) => {
@@ -54,12 +52,6 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   }
 
   function handleClick() {
-    if (studyBlockState === "SUBMITTED") {
-      const isAllRight = answerStates.every((state) => state === "RIGHT");
-      onContinue(isAllRight ? "RIGHT" : "WRONG");
-      return;
-    }
-
     if (studyBlockState === "READY") {
       const isAllRight = answerStates.every((state) => state === "RIGHT");
       onCheck?.(isAllRight ? "RIGHT" : "WRONG");
@@ -79,7 +71,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   }
 
   return (
-    <Stack sx={{ flexGrow: 1 }} justifyContent="space-between">
+    <>
       <Stack spacing={6}>
         {components.map((component, index) => (
           <StudyBlockComponent
@@ -98,13 +90,11 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <LargeButton
           onClick={handleClick}
-          disabled={studyBlockState === "NOT_READY"}
+          disabled={studyBlockState !== "READY"}
         >
-          {studyBlockState === "SUBMITTED"
-            ? localization.studyBlock.continueButton
-            : localization.studyBlock.checkButton}
+          {localization.studyBlock.checkButton}
         </LargeButton>
       </Box>
-    </Stack>
+    </>
   );
 };
