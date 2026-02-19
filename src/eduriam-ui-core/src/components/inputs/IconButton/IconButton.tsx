@@ -26,6 +26,7 @@ export type IconButtonColor =
   | "success"
   | "error"
   | "textPrimary"
+  | "textSecondary"
   | "textDisabled";
 
 /**
@@ -103,6 +104,8 @@ function getMainColor(theme: Theme, color: IconButtonColor): string {
       return theme.palette.text.disabled;
     case "textPrimary":
       return theme.palette.text.primary;
+    case "textSecondary":
+      return theme.palette.text.secondary;
     default:
       return theme.palette.primary.main;
   }
@@ -142,16 +145,17 @@ function getIconButtonStyles(
   }
 
   if (variant === "contained") {
-    if (color === "textPrimary" || color === "textDisabled") {
+    if (
+      color === "textPrimary" ||
+      color === "textSecondary" ||
+      color === "textDisabled"
+    ) {
       return {
         ...baseStyles,
         backgroundColor: theme.palette.action.disabledBackground,
         border: "none",
         boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
-        color:
-          color === "textPrimary"
-            ? theme.palette.text.primary
-            : theme.palette.text.disabled,
+        color: getMainColor(theme, color),
       };
     }
     return {

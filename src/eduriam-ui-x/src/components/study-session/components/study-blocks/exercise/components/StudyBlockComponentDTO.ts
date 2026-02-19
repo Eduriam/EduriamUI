@@ -6,7 +6,8 @@ import { MatchOptionDTO } from "./specific/MatchingAnswer/matching-options/Match
 interface BaseStudyBlockComponent {
   type: StudyBlockComponentType;
   id: ID;
-  audio?: {};
+  /** Optional audio attached to this component, played sequentially by the study block. */
+  audio?: { url: string };
 }
 
 export interface HeaderComponent extends BaseStudyBlockComponent {

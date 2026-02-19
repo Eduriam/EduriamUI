@@ -7,6 +7,7 @@ import { Box, Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
+import { StudySessionAudioProvider } from "./context/StudySessionAudioContext";
 import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
 import StudySessionDrawer, {
   StudySessionDrawerVariant,
@@ -261,6 +262,7 @@ const StudySession: React.FC<IStudySession> = ({
   const isRevisiting = index <= furthestCompletedIndex;
 
   return (
+    <StudySessionAudioProvider>
     <Stack
       data-test="study-session-page"
       sx={{
@@ -308,6 +310,7 @@ const StudySession: React.FC<IStudySession> = ({
                       );
                     }}
                     localization={localization}
+                    isRevisiting={isRevisiting}
                   />
                 )}
             </ContentContainer>
@@ -350,6 +353,7 @@ const StudySession: React.FC<IStudySession> = ({
         </>
       )}
     </Stack>
+    </StudySessionAudioProvider>
   );
 };
 

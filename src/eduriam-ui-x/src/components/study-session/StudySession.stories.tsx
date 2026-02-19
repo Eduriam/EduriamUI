@@ -143,6 +143,70 @@ export const ExerciseMultipleChoice3InARow: Story = {
   } as IStudySession,
 };
 
+/** Exercise with sequential paragraph audio that plays on load. */
+export const ExerciseWithAudio: Story = {
+  args: {
+    studySession: {
+      studyBlocks: [
+        {
+          type: "exercise",
+          atomId: "atom-audio-1",
+          components: [
+            {
+              id: "para-audio-1",
+              type: StudyBlockComponentType.PARAGRAPH,
+              text: "This is the first explanation paragraph.",
+              audio: { url: "https://mocks.eduriam.com/first-paragraph.mp3" },
+            },
+            {
+              id: "para-audio-2",
+              type: StudyBlockComponentType.PARAGRAPH,
+              text: "This is the second explanation paragraph.",
+              audio: { url: "https://mocks.eduriam.com/second-paragraph.mp3" },
+            },
+            {
+              id: "mc-audio-1",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "What did you hear?",
+              options: [
+                { id: "first-second", text: "First and second paragraph." },
+                { id: "third", text: "Third paragraph." },
+              ],
+              correctOptionId: "first-second",
+            },
+          ],
+        },
+        {
+          type: "exercise",
+          atomId: "atom-audio-2",
+          components: [
+            {
+              id: "para-audio-3",
+              type: StudyBlockComponentType.PARAGRAPH,
+              text: "This exercise also has audio.",
+              audio: {
+                url: "https://mocks.eduriam.com/exercise-also-audio.mp3",
+              },
+            },
+            {
+              id: "mc-audio-2",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "Pick the correct answer.",
+              options: [
+                { id: "a", text: "Answer A (correct)" },
+                { id: "b", text: "Answer B" },
+              ],
+              correctOptionId: "a",
+            },
+          ],
+        },
+      ],
+    },
+    onFinish: () => {},
+    onExit: () => {},
+  } as IStudySession,
+};
+
 /** HTML + CSS fill-in-blank exercise with browser preview (single exercise). */
 export const ComplexExercise: Story = {
   args: {
@@ -225,7 +289,10 @@ export const ComplexExercise: Story = {
                   type: "fillInBlankWithoutOptions",
                   lines: [
                     [
-                      { type: "text", value: "document.querySelector('h1').style.color = " },
+                      {
+                        type: "text",
+                        value: "document.querySelector('h1').style.color = ",
+                      },
                       { type: "blank", blankId: "color" },
                       { type: "text", value: ";" },
                     ],
@@ -238,8 +305,7 @@ export const ComplexExercise: Story = {
                   label: "browser",
                   type: "browser",
                   html: "<h1>Hello</h1><p>Roses are red,<br>Violets are blue.</p>",
-                  inlineCss:
-                    "h1 { color: navy; } p { font-size: 18px; }",
+                  inlineCss: "h1 { color: navy; } p { font-size: 18px; }",
                 },
               ],
             },

@@ -1,9 +1,11 @@
-import { LargeButton } from "@eduriam/ui-core";
+import { IconButton, LargeButton } from "@eduriam/ui-core";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import { Box, Stack } from "@mui/material";
 
+import { useStudySessionAudio } from "../../../context/StudySessionAudioContext";
+import { useStudyBlockAudio } from "../../../hooks/useStudyBlockAudio";
 import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
@@ -18,17 +20,31 @@ export interface IExerciseStudyBlock {
    */
   onCheck?: (answer: AnswerState) => void;
   localization: StudySessionLocalization;
+  /**
+   * When `true` the block has already been completed and audio should
+   * not replay.
+   */
+  isRevisiting?: boolean;
 }
 
 export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   components,
   onCheck,
   localization,
+  isRevisiting = false,
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
   const [studyBlockState, setStudyBlockState] = useState<
     "NOT_READY" | "READY" | "SUBMITTED"
   >("NOT_READY");
+
+  const { isMuted, toggleMute } = useStudySessionAudio();
+
+  const audioUrls = useMemo(
+    () => components.map((c) => c.audio?.url),
+    [components],
+  );
+  useStudyBlockAudio(audioUrls, !isRevisiting);
 
   function handleAnswerStateChange(
     newAnswerState: AnswerState,
@@ -88,12 +104,31 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
         ))}
       </Stack>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <LargeButton
-          onClick={handleClick}
-          disabled={studyBlockState !== "READY"}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "100%",
+            maxWidth: 400,
+          }}
         >
-          {localization.studyBlock.checkButton}
-        </LargeButton>
+          <IconButton
+            icon={isMuted ? "audioOff" : "audioOn"}
+            variant="text"
+            color="textSecondary"
+            size="small"
+            onClick={toggleMute}
+            data-test="study-block-mute-toggle"
+          />
+          <LargeButton
+            onClick={handleClick}
+            disabled={studyBlockState !== "READY"}
+            fullWidth={true}
+          >
+            {localization.studyBlock.checkButton}
+          </LargeButton>
+        </Box>
       </Box>
     </>
   );
