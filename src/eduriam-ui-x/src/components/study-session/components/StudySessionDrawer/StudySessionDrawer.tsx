@@ -1,7 +1,10 @@
 import { Drawer, IconButton, LargeButton } from "@eduriam/ui-core";
 
 import Box from "@mui/material/Box";
+import { useEffect } from "react";
 import Typography from "@mui/material/Typography";
+
+import { AudioPlayer } from "../../../../audio";
 
 import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
 
@@ -62,6 +65,21 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   const hasExplanation = Boolean(onExplanationClick);
 
   const isCorrect = variant === "correct";
+
+  useEffect(() => {
+    const sound = isCorrect ? "success" : "error";
+    new AudioPlayer()
+      .play(sound)
+      .catch((err: unknown) => {
+        console.warn("[StudySessionDrawer] Sound playback failed:", {
+          sound,
+          error: err,
+          name: err instanceof Error ? err.name : undefined,
+          message: err instanceof Error ? err.message : undefined,
+        });
+      });
+  }, [isCorrect]);
+
   const primaryColor = isCorrect ? "success" : "error";
   const { studySessionDrawer } = localization;
   const title = isCorrect

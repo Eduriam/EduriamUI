@@ -1,3 +1,6 @@
+// Audio
+export { AudioPlayer, type AudioPlayerSound } from "./audio";
+
 // Main Study Session Component
 export { default as StudySession } from "./components/study-session/StudySession";
 export type {
