@@ -10,6 +10,7 @@ import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
+import { isAnswerComponent } from "./components/AnswerComponentConfig";
 
 export interface IExerciseStudyBlock {
   components: StudyBlockComponentDTO[];
@@ -69,7 +70,14 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
 
   function handleClick() {
     if (studyBlockState === "READY") {
-      const isAllRight = answerStates.every((state) => state === "RIGHT");
+      const answerableIndexes = components
+        .map((component, index) => ({ component, index }))
+        .filter(({ component }) => isAnswerComponent(component))
+        .map(({ index }) => index);
+
+      const isAllRight =
+        answerableIndexes.length > 0 &&
+        answerableIndexes.every((index) => answerStates[index] === "RIGHT");
       onCheck?.(isAllRight ? "RIGHT" : "WRONG");
       setStudyBlockState("SUBMITTED");
     }
@@ -83,7 +91,17 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
     const temp = [...currentStates];
     temp[changedIndex] = changedState;
 
-    return temp.length > 0 && temp.every((s) => s !== "NONE");
+    const answerableIndexes = components
+      .map((component, index) => ({ component, index }))
+      .filter(({ component }) => isAnswerComponent(component))
+      .map(({ index }) => index);
+
+    return (
+      answerableIndexes.length > 0 &&
+      answerableIndexes.every(
+        (index) => temp[index] !== undefined && temp[index] !== "NONE",
+      )
+    );
   }
 
   return (
