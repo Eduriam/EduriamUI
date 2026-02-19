@@ -108,15 +108,25 @@ const StudySessionProgressBar: React.FC<IStudySessionProgressBar> = ({
             sx={{
               position: "relative",
               width: "100%",
+              // Delay lower progress bar animation so that it doesn't overlap with the upper progress bar
+              "& .study-session-progress-furthest .MuiLinearProgress-bar": {
+                transition: "transform 300ms linear 300ms",
+              },
+              "& .study-session-progress-current .MuiLinearProgress-bar": {
+                transition: "transform 300ms linear",
+              },
             }}
           >
-            <ProgressBar
-              size="large"
-              value={furthestValue}
-              color="primary.light"
-            />
+            <Box className="study-session-progress-furthest">
+              <ProgressBar
+                size="large"
+                value={furthestValue}
+                color="primary.light"
+              />
+            </Box>
 
             <Box
+              className="study-session-progress-current"
               sx={{
                 position: "absolute",
                 inset: 0,
