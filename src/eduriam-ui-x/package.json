@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.40",
+  "version": "0.2.41",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -25,7 +25,7 @@
     "prismjs": "^1.29.0"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.37",
+    "@eduriam/ui-core": "^0.6.38",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",

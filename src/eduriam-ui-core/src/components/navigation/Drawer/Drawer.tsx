@@ -90,6 +90,14 @@ export interface DrawerProps {
   backgroundColor?: DrawerBackgroundColor;
 
   /**
+   * If `true`, the backdrop (dimmed overlay) is not rendered.
+   * Forwarded to the underlying MUI Drawer's Modal via `ModalProps.hideBackdrop`.
+   *
+   * @default false
+   */
+  hideBackdrop?: boolean;
+
+  /**
    * Drawer content.
    */
   children?: ReactNode;
@@ -117,6 +125,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   paddingY = "medium",
   paddingX = "medium",
   backgroundColor,
+  hideBackdrop = false,
   children,
   "data-test": dataTest,
 }) => {
@@ -130,6 +139,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       onClose={onClose}
       ModalProps={{
         keepMounted: true,
+        hideBackdrop,
       }}
       PaperProps={{
         "data-test": dataTest,

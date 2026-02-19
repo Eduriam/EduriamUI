@@ -1,11 +1,11 @@
 import { Drawer, IconButton, LargeButton } from "@eduriam/ui-core";
 
-import Box from "@mui/material/Box";
 import { useEffect } from "react";
+
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { AudioPlayer } from "../../../../audio";
-
 import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
 
 export type StudySessionDrawerVariant = "correct" | "incorrect";
@@ -68,16 +68,14 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
 
   useEffect(() => {
     const sound = isCorrect ? "success" : "error";
-    new AudioPlayer()
-      .play(sound)
-      .catch((err: unknown) => {
-        console.warn("[StudySessionDrawer] Sound playback failed:", {
-          sound,
-          error: err,
-          name: err instanceof Error ? err.name : undefined,
-          message: err instanceof Error ? err.message : undefined,
-        });
+    new AudioPlayer().play(sound).catch((err: unknown) => {
+      console.warn("[StudySessionDrawer] Sound playback failed:", {
+        sound,
+        error: err,
+        name: err instanceof Error ? err.name : undefined,
+        message: err instanceof Error ? err.message : undefined,
       });
+    });
   }, [isCorrect]);
 
   const primaryColor = isCorrect ? "success" : "error";
@@ -97,6 +95,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
       backgroundColor={isCorrect ? "success" : "error"}
       disableDesktopDialog={true}
       maxContentWidth="medium"
+      hideBackdrop={true}
     >
       <Box
         sx={(theme) => ({
