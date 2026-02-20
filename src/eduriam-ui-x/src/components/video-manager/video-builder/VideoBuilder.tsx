@@ -1,8 +1,7 @@
-import { AbsoluteFill, Audio, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence } from "remotion";
 
 import React from "react";
 
-import type { VideoDefinition } from "../types/VideoDefinition";
 import type { VideoComponent } from "../video-components/VideoComponent";
 import type { IBackgroundColor } from "../video-components/components/BackgroundColor/BackgroundColor";
 import { BackgroundColor } from "../video-components/components/BackgroundColor/BackgroundColor";
@@ -13,19 +12,30 @@ import {
   IBackgroundVideo,
 } from "../video-components/components/BackgroundVideo/BackgroundVideo";
 import { VideoComponentFactory } from "../video-components/factory/VideoComponentFactory";
+import type { Scene } from "../video-scenes/Scene";
+import type { Slide } from "../video-slides/Slide";
+import { CustomSlideClass, OneHeaderSlideClass } from "../video-slides/Slide";
+import type { Video } from "../video/Video";
+import type { VideoDefinition } from "../video/VideoDefinition";
 
-interface CompositionProps {
-  components: VideoComponent[];
-  audioUrl?: string | null;
-  componentStartMs?: number[];
+function materializeSlide(slide: Slide): VideoComponent[] {
+  switch (slide.type) {
+    case "CUSTOM":
+      return new CustomSlideClass(slide).toComponents();
+    case "ONE_HEADER":
+      return new OneHeaderSlideClass(slide).toComponents();
+    default:
+      return [];
+  }
 }
 
-const Composition: React.FC<CompositionProps> = ({
-  components,
-  audioUrl,
-  componentStartMs = [],
-}) => {
-  const { fps } = useVideoConfig();
+interface SceneRendererProps {
+  scene: Scene;
+  fps: number;
+}
+
+const SceneRenderer: React.FC<SceneRendererProps> = ({ scene, fps }) => {
+  const components = scene.slides.flatMap(materializeSlide);
 
   const bg = components.find((c) => c.type === "BACKGROUND_COLOR") as
     | IBackgroundColor
@@ -52,7 +62,7 @@ const Composition: React.FC<CompositionProps> = ({
 
   return (
     <AbsoluteFill>
-      {audioUrl ? <Audio src={audioUrl} /> : null}
+      {scene.audio ? <Audio src={scene.audio.url} /> : null}
 
       {bg ? (
         <BackgroundColor comp={bg} />
@@ -65,7 +75,7 @@ const Composition: React.FC<CompositionProps> = ({
       )}
 
       {others.map((c, idx) => {
-        const startMs = componentStartMs[idx] ?? 0;
+        const startMs = c.startTime ?? 0;
         const startFrame = Math.max(0, Math.round((startMs / 1000) * fps));
         const key = (c as { id?: string }).id ?? `comp-${idx}`;
         return (
@@ -78,50 +88,64 @@ const Composition: React.FC<CompositionProps> = ({
   );
 };
 
-export interface VideoBuilderResult {
-  Component: React.FC;
-  durationInFrames: number;
+interface CompositionProps {
+  scenes: Scene[];
   fps: number;
-  compositionWidth: number;
-  compositionHeight: number;
 }
+
+const Composition: React.FC<CompositionProps> = ({ scenes, fps }) => {
+  let currentFrame = 0;
+
+  return (
+    <AbsoluteFill>
+      {scenes.map((scene, idx) => {
+        const sceneDurationFrames = Math.round((scene.duration / 1000) * fps);
+        const sceneStartFrame = currentFrame;
+        currentFrame += sceneDurationFrames;
+
+        return (
+          <Sequence
+            key={scene.id ?? `scene-${idx}`}
+            from={sceneStartFrame}
+            durationInFrames={sceneDurationFrames}
+          >
+            <SceneRenderer scene={scene} fps={fps} />
+          </Sequence>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
 
 /**
  * Static builder for Remotion video compositions.
- * Use {@link VideoBuilder.buildVideo} to create a composition from a {@link VideoDefinition}.
+ * Use {@link VideoBuilder.buildVideo} to create a {@link Video} from a {@link VideoDefinition}.
  */
 export class VideoBuilder {
   /**
-   * Builds a Remotion composition from a `VideoDefinition`.
+   * Builds a Remotion composition from a {@link VideoDefinition}.
    *
-   * Returns the composition React component together with the metadata
-   * required by the Remotion Player (duration, fps, dimensions).
+   * Iterates through scenes, materializes their slides into components,
+   * calculates the total duration from individual scene durations,
+   * and returns a {@link Video} ready for the Remotion Player.
    */
-  static buildVideo(definition: VideoDefinition): VideoBuilderResult {
-    const {
-      durationInFrames,
-      fps,
-      compositionWidth,
-      compositionHeight,
-      components = [],
-      audioUrl,
-      componentStartMs,
-    } = definition;
+  static buildVideo(definition: VideoDefinition): Video {
+    const { scenes, fps, videoWidth, videoHeight } = definition;
 
-    const Component: React.FC = () => (
-      <Composition
-        components={components}
-        audioUrl={audioUrl}
-        componentStartMs={componentStartMs}
-      />
+    const durationInFrames = scenes.reduce((total, scene) => {
+      return total + Math.round((scene.duration / 1000) * fps);
+    }, 0);
+
+    const videoComponent: React.FC = () => (
+      <Composition scenes={scenes} fps={fps} />
     );
 
     return {
-      Component,
-      durationInFrames,
       fps,
-      compositionWidth,
-      compositionHeight,
+      videoWidth,
+      videoHeight,
+      durationInFrames,
+      videoComponent,
     };
   }
 }

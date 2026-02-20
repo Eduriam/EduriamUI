@@ -4,7 +4,6 @@ export type { IVideoPlayer as IRemotionVideoPlayer } from "./video-player/VideoP
 
 // VideoBuilder
 export { VideoBuilder } from "./video-builder/VideoBuilder";
-export type { VideoBuilderResult } from "./video-builder/VideoBuilder";
 
 // Types – shared
 export type {
@@ -16,8 +15,7 @@ export type {
 export type { Alignment } from "./video-components/components/Paragraph/Paragraph";
 
 // Types – scene
-export type { Scene as Scene } from "./types/scene";
-export type { VideoDefinition } from "./types/VideoDefinition";
+export type { Scene } from "./video-scenes/Scene";
 export type {
   CustomSlide,
   OneHeaderSlide,
@@ -25,6 +23,7 @@ export type {
   SlideComponent,
   SlideType,
 } from "./video-slides/Slide";
+export type { Video, VideoDefinition } from "./video/VideoDefinition";
 
 // Types – SceneComponent (and ComponentType)
 export type {
@@ -107,10 +106,7 @@ export {
   Table,
   Table as VideoTable,
 } from "./video-components/components/Table/Table";
-export {
-  Video,
-  Video as VideoVideo,
-} from "./video-components/components/Video/Video";
+export { Video as VideoVideo } from "./video-components/components/Video/Video";
 
 export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";

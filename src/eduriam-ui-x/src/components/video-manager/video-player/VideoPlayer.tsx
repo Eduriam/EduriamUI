@@ -2,8 +2,8 @@ import { Player } from "@remotion/player";
 
 import React, { useMemo } from "react";
 
-import type { VideoDefinition } from "../types/VideoDefinition";
 import { VideoBuilder } from "../video-builder/VideoBuilder";
+import type { VideoDefinition } from "../video/VideoDefinition";
 
 export interface IVideoPlayer {
   /** The video definition that describes what to render. */
@@ -11,37 +11,30 @@ export interface IVideoPlayer {
 }
 
 /**
- * Renders a Remotion `<Player>` driven by a `VideoDefinition`.
+ * Renders a Remotion `<Player>` driven by a {@link VideoDefinition}.
  *
  * Uses {@link VideoBuilder.buildVideo} internally to construct the composition component and
  * metadata, then passes them to the Remotion Player for in-browser playback.
  */
 export const VideoPlayer: React.FC<IVideoPlayer> = ({ videoDefinition }) => {
-  const {
-    Component,
-    durationInFrames,
-    fps,
-    compositionWidth,
-    compositionHeight,
-  } = useMemo(
-    () => VideoBuilder.buildVideo(videoDefinition),
-    [videoDefinition],
-  );
+  const { videoComponent, durationInFrames, fps, videoWidth, videoHeight } =
+    useMemo(() => VideoBuilder.buildVideo(videoDefinition), [videoDefinition]);
 
-  if (!durationInFrames || !fps || !compositionWidth || !compositionHeight) {
+  if (!durationInFrames || !fps || !videoWidth || !videoHeight) {
     throw new Error(
-      "RemotionVideoPlayer: definition is missing required fields (durationInFrames, fps, compositionWidth, compositionHeight).",
+      "RemotionVideoPlayer: definition is missing required fields (durationInFrames, fps, videoWidth, videoHeight).",
     );
   }
 
   return (
     <Player
-      component={Component}
+      component={videoComponent}
       durationInFrames={durationInFrames}
       fps={fps}
-      compositionWidth={compositionWidth}
-      compositionHeight={compositionHeight}
+      compositionWidth={videoWidth}
+      compositionHeight={videoHeight}
       style={{ width: "100%" }}
+      controls={true}
     />
   );
 };
