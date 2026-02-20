@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.37",
+  "version": "0.2.45",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -20,24 +20,35 @@
     "clean": "rm -rf dist tsconfig.tsbuildinfo || rmdir /s /q dist && del /q tsconfig.tsbuildinfo 2>nul",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "@remotion/player": "^4.0.353",
+    "canvas-confetti": "^1.9.3",
+    "prism-react-renderer": "^2.4.0",
+    "prismjs": "^1.29.0",
+    "remotion": "^4.0.353"
+  },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.34",
+    "@eduriam/ui-core": "^0.6.42",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
     "@mui/lab": "^5",
     "@mui/material": "^5",
+    "dompurify": "^3",
     "react": "^18",
     "react-dom": "^18",
     "react-speech-recognition": "^3.10.0",
     "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {
+    "@eduriam/ui-core": "workspace:*",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/lab": "^5.0.0-alpha.94",
     "@mui/material": "^5.15.20",
+    "@types/dompurify": "^3.2.0",
+    "dompurify": "^3.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-speech-recognition": "^3.10.0",

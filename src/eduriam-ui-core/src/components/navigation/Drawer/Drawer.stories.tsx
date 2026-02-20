@@ -8,7 +8,10 @@ import Typography from "@mui/material/Typography";
 
 import { Drawer, type DrawerProps } from "./Drawer";
 
-type DrawerStoryProps = Pick<DrawerProps, "backgroundColor">;
+type DrawerStoryProps = Pick<
+  DrawerProps,
+  "backgroundColor" | "disableDesktopDialog" | "maxDialogWidth" | "maxContentWidth"
+>;
 
 const meta: Meta<typeof Drawer> = {
   title: "core/navigation/Drawer",
@@ -17,6 +20,16 @@ const meta: Meta<typeof Drawer> = {
     backgroundColor: {
       control: { type: "radio" },
       options: ["default", "success", "error"],
+    },
+    disableDesktopDialog: {
+      control: { type: "boolean" },
+    },
+    maxDialogWidth: {
+      control: { type: "number" },
+    },
+    maxContentWidth: {
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
     },
   },
 };
@@ -29,7 +42,8 @@ const DemoContent = () => (
     <Typography variant="h6">Drawer title</Typography>
     <Typography variant="body2">
       This is some example content inside the drawer. On mobile, it slides up
-      from the bottom. On desktop, it is centered and behaves like a dialog.
+      from the bottom. On desktop, it can either behave like a dialog or stay
+      as a bottom sheet depending on `disableDesktopDialog`.
     </Typography>
     <Typography variant="body2">
       Add any form fields, text or actions you need here.

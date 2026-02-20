@@ -53,13 +53,14 @@ export interface ContentContainerProps {
   /**
    * Top padding preset for the container.
    *
-   * - `"none"` – no vertical padding.
+   * - `"none"` – no vertical padding. Use only if the content needs to be right under the appbar or the screen edge (e.g when putting tabs under the appbar).
    * - `"small"` – 5 on mobile, 10 on `sm` and above.
-   * - `"medium"` – 10 on mobile, 15 on `sm` and above.
+   * - `"medium"` – 10 on mobile, 15 on `sm` and above. Use for normal pages.
+   * - `"large"` – 35 on mobile and on `sm` and above. Use for pages that should appear in the middle of the screen.
    *
    * @default "medium"
    */
-  paddingTop?: "none" | "small" | "medium";
+  paddingTop?: "none" | "small" | "medium" | "large";
 
   /**
    * Bottom padding preset for the container.
@@ -90,8 +91,22 @@ export const ContentContainer: React.FC<ContentContainerProps> = ({
   const theme = useTheme();
   const desktopMaxWidth = DESKTOP_MAX_WIDTHS[width];
 
-  const ptMobile = paddingTop === "none" ? 0 : paddingTop === "small" ? 5 : 10;
-  const ptSmUp = paddingTop === "none" ? 0 : paddingTop === "small" ? 10 : 15;
+  const ptMobile =
+    paddingTop === "none"
+      ? 0
+      : paddingTop === "small"
+        ? 5
+        : paddingTop === "medium"
+          ? 10
+          : 35;
+  const ptSmUp =
+    paddingTop === "none"
+      ? 0
+      : paddingTop === "small"
+        ? 10
+        : paddingTop === "medium"
+          ? 15
+          : 35;
 
   const pbMobile =
     paddingBottom === "none" ? 0 : paddingBottom === "small" ? 5 : 10;

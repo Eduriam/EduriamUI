@@ -1,7 +1,12 @@
 import { Drawer, IconButton, LargeButton } from "@eduriam/ui-core";
 
+import { useEffect } from "react";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+
+import { AudioPlayer } from "../../../../audio";
+import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
 
 export type StudySessionDrawerVariant = "correct" | "incorrect";
 
@@ -27,11 +32,30 @@ export interface StudySessionDrawerProps {
   onReportClick: () => void;
 
   /**
+   * Called when the continue button is clicked.
+   */
+  onContinueClick: () => void;
+
+  /**
+   * Whether to play the success/error sound when the drawer opens.
+   *
+   * Defaults to `true` for first-time completion. Can be disabled when
+   * revisiting an already-completed exercise so the sound is not replayed.
+   */
+  playSound?: boolean;
+
+  /**
    * Optional data attribute used to identify this drawer in E2E tests.
    *
    * Passed to the underlying `Drawer` as `data-test`.
    */
   "data-test"?: string;
+
+  /**
+   * Localization strings for the study session (passed from StudySession).
+   * Can be extended with drawer-specific keys when needed.
+   */
+  localization: StudySessionLocalization;
 }
 
 /**
@@ -42,21 +66,47 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   variant,
   onExplanationClick,
   onReportClick,
+  onContinueClick,
+  playSound = true,
   "data-test": dataTest,
+  localization,
 }) => {
   const hasExplanation = Boolean(onExplanationClick);
 
   const isCorrect = variant === "correct";
+
+  useEffect(() => {
+    if (!playSound) return;
+
+    const sound = isCorrect ? "success" : "error";
+    new AudioPlayer().play(sound).catch((err: unknown) => {
+      console.warn("[StudySessionDrawer] Sound playback failed:", {
+        sound,
+        error: err,
+        name: err instanceof Error ? err.name : undefined,
+        message: err instanceof Error ? err.message : undefined,
+      });
+    });
+  }, [isCorrect, playSound]);
+
   const primaryColor = isCorrect ? "success" : "error";
-  const title = isCorrect ? "Correct!" : "Incorrect";
+  const { studySessionDrawer } = localization;
+  const title = isCorrect
+    ? studySessionDrawer.titleCorrect
+    : studySessionDrawer.titleIncorrect;
+  const continueButtonLabel = studySessionDrawer.continueButton;
+  const whyButtonLabel = studySessionDrawer.whyButton;
 
   return (
     <Drawer
       open
       onClose={() => undefined}
-      maxWidth={520}
+      maxDialogWidth={520}
       data-test={dataTest ?? "study-session-drawer"}
       backgroundColor={isCorrect ? "success" : "error"}
+      disableDesktopDialog={true}
+      maxContentWidth="medium"
+      hideBackdrop={true}
     >
       <Box
         sx={(theme) => ({
@@ -98,36 +148,37 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
             }}
           >
             <LargeButton
+              fullWidth={false}
               variant="outlined"
               color={primaryColor}
               onClick={onExplanationClick}
               data-test="study-session-drawer-why"
             >
-              Why?
+              {whyButtonLabel}
             </LargeButton>
 
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
               <LargeButton
                 fullWidth
                 variant="contained"
                 color={primaryColor}
-                onClick={() => undefined}
+                onClick={onContinueClick}
                 data-test="study-session-drawer-continue"
               >
-                Continue
+                {continueButtonLabel}
               </LargeButton>
             </Box>
           </Box>
         ) : (
-          <Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <LargeButton
               fullWidth
               variant="contained"
               color={primaryColor}
-              onClick={() => undefined}
+              onClick={onContinueClick}
               data-test="study-session-drawer-continue"
             >
-              Continue
+              {continueButtonLabel}
             </LargeButton>
           </Box>
         )}

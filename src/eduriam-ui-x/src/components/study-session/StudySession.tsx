@@ -1,14 +1,45 @@
-import { useState } from "react";
+import { ContentContainer } from "@eduriam/ui-core";
+import { keyframes } from "@emotion/react";
 
-import { Stack, useMediaQuery } from "@mui/material";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { Box, Stack, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
-import { StudyBlock } from "./components/study-blocks/StudyBlock";
-import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/types/StudyBlockDTO";
-import StudySessionProgressBar from "./components/study-session-progress-bar/StudySessionProgressBar";
+import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";
+import StudySessionDrawer, {
+  StudySessionDrawerVariant,
+} from "./components/StudySessionDrawer/StudySessionDrawer";
+import { StudySessionNavigationButton } from "./components/StudySessionNavigationButton";
+import StudySessionProgressBar from "./components/StudySessionProgressBar/StudySessionProgressBar";
+import { StudySessionStats } from "./components/StudySessionStats/StudySessionStats";
+import { XP_PER_EXERCISE } from "./components/StudySessionStats/studySessionStatsConfig";
+import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/StudyBlockDTO";
+import { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
+import { StudySessionAudioProvider } from "./context/StudySessionAudioContext";
+import {
+  type TransitionDirection,
+  useStudySessionTransition,
+} from "./hooks/useStudySessionTransition";
+import { useSwipeNavigation } from "./hooks/useSwipeNavigation";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
+import type { StudySessionLocalization } from "./types/StudySessionLocalization";
+
+const slideForward = keyframes({
+  "0%": { transform: "translate3d(0, 0, 0)" },
+  "49.99%": { transform: "translate3d(-100%, 0, 0)" },
+  "50%": { transform: "translate3d(100%, 0, 0)" },
+  "100%": { transform: "translate3d(0, 0, 0)" },
+});
+
+const slideBack = keyframes({
+  "0%": { transform: "translate3d(0, 0, 0)" },
+  "49.99%": { transform: "translate3d(100%, 0, 0)" },
+  "50%": { transform: "translate3d(-100%, 0, 0)" },
+  "100%": { transform: "translate3d(0, 0, 0)" },
+});
 
 export interface StudyStats {
   correctAnswerCount: number;
@@ -27,41 +58,149 @@ export interface IStudySession {
     atomProgressRatings: AtomProgressRating[],
   ) => void;
   onExit: () => void;
-  localizedTexts?: {
-    continueButton: string;
-    checkButton: string;
-  };
+  localization?: StudySessionLocalization;
+}
+
+interface AtomStats {
+  right: number;
+  wrong: number;
 }
 
 const StudySession: React.FC<IStudySession> = ({
   studySession,
   onFinish,
   onExit,
-  localizedTexts = {
-    continueButton: "Continue",
-    checkButton: "Check",
-  },
+  localization: localizationProp,
 }) => {
+  const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
+
   const [finishedSession, setFinishedSession] = useState(false);
   const [index, setIndex] = useState(0);
-  interface AtomStats {
-    right: number;
-    wrong: number;
-  }
-  const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
-    new Map(),
-  );
+  const [drawerVariant, setDrawerVariant] =
+    useState<StudySessionDrawerVariant | null>(null);
+  const [checkedResult, setCheckedResult] = useState<AnswerState | null>(null);
   const [studyBlockQueue, setStudyBlockQueue] = useState(
     studySession.studyBlocks,
   );
+
+  const [furthestCompletedIndex, setFurthestCompletedIndex] = useState(-1);
+  const [completedResults, setCompletedResults] = useState<
+    Map<number, StudySessionDrawerVariant>
+  >(new Map());
+  const [playDrawerSound, setPlayDrawerSound] = useState(false);
+
+  const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
+    new Map(),
+  );
+
+  const startedAtRef = useRef(Date.now());
+  const [finishedStatsSnapshot, setFinishedStatsSnapshot] = useState<{
+    totalXp: number;
+    timeStudiedMs: number;
+    correctRate: number;
+    conceptCount: number;
+  } | null>(null);
+
+  const exerciseBlockCount = useMemo(
+    () => studySession.studyBlocks.filter((b) => b.type === "exercise").length,
+    [studySession.studyBlocks],
+  );
+
+  const conceptCount = useMemo(
+    () => new Set(studySession.studyBlocks.map((b) => b.atomId)).size,
+    [studySession.studyBlocks],
+  );
+
+  const {
+    triggerTransition,
+    isTransitioning,
+    direction,
+    transitionDurationMs,
+  } = useStudySessionTransition();
+
+  const drawerTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => () => clearTimeout(drawerTimeoutRef.current), []);
+
+  // ---------------------------------------------------------------------------
+  // Navigation helpers
+  // ---------------------------------------------------------------------------
+
+  const canGoBack = index > 0 && !isTransitioning;
+  const canGoForward =
+    index <= furthestCompletedIndex &&
+    index + 1 < studyBlockQueue.length &&
+    !isTransitioning;
+
+  const navigateTo = useCallback(
+    (targetIndex: number, dir: TransitionDirection) => {
+      clearTimeout(drawerTimeoutRef.current);
+      setDrawerVariant(null);
+      setCheckedResult(null);
+
+      triggerTransition(() => {
+        setIndex(targetIndex);
+      }, dir);
+
+      const storedResult = completedResults.get(targetIndex);
+      if (storedResult) {
+        drawerTimeoutRef.current = setTimeout(() => {
+          setPlayDrawerSound(false);
+          setDrawerVariant(storedResult);
+          setCheckedResult(storedResult === "correct" ? "RIGHT" : "WRONG");
+        }, transitionDurationMs);
+      }
+    },
+    [triggerTransition, completedResults, transitionDurationMs],
+  );
+
+  const handleGoBack = useCallback(() => {
+    if (index > 0 && !isTransitioning) {
+      navigateTo(index - 1, "back");
+    }
+  }, [index, isTransitioning, navigateTo]);
+
+  const handleGoForward = useCallback(() => {
+    if (
+      index <= furthestCompletedIndex &&
+      index + 1 < studyBlockQueue.length &&
+      !isTransitioning
+    ) {
+      navigateTo(index + 1, "forward");
+    }
+  }, [
+    index,
+    furthestCompletedIndex,
+    studyBlockQueue.length,
+    isTransitioning,
+    navigateTo,
+  ]);
+
+  useSwipeNavigation({
+    onSwipeLeft: handleGoForward,
+    onSwipeRight: handleGoBack,
+    enabled: !desktop && !finishedSession,
+  });
+
+  // ---------------------------------------------------------------------------
+  // Exercise completion
+  // ---------------------------------------------------------------------------
 
   function rescheduleStudyBlock(studyBlock: StudyBlockModel) {
     setStudyBlockQueue((prev) => [...prev, studyBlock]);
   }
 
   function handleContinue(result: AnswerState) {
+    clearTimeout(drawerTimeoutRef.current);
+    setDrawerVariant(null);
+    setCheckedResult(null);
+
+    const variant: StudySessionDrawerVariant =
+      result === "RIGHT" ? "correct" : "incorrect";
+    setCompletedResults((prev) => new Map(prev).set(index, variant));
+    setFurthestCompletedIndex((prev) => Math.max(prev, index));
+
     const currentBlock = studyBlockQueue[index];
     const atomId = currentBlock.atomId;
 
@@ -81,17 +220,42 @@ const StudySession: React.FC<IStudySession> = ({
     }
 
     if (index < studyBlockQueue.length - 1) {
-      setIndex(index + 1);
+      triggerTransition(() => {
+        setIndex(index + 1);
+      }, "forward");
     } else {
       setFinishedSession(true);
-      const studyStats = evaluateStats(atomStatsMap);
+
+      const updatedMap = new Map(atomStatsMap);
+      const prevStats = updatedMap.get(atomId) ?? { right: 0, wrong: 0 };
+      updatedMap.set(atomId, {
+        right: prevStats.right + (result === "RIGHT" ? 1 : 0),
+        wrong: prevStats.wrong + (result === "WRONG" ? 1 : 0),
+      });
+
+      const studyStats = evaluateStats(updatedMap);
       const atomProgressRatings = computeAtomRatings(
         studySession.studyBlocks,
-        atomStatsMap,
+        updatedMap,
       );
+
+      const total =
+        studyStats.correctAnswerCount + studyStats.incorrectAnswerCount;
+      setFinishedStatsSnapshot({
+        totalXp: exerciseBlockCount * XP_PER_EXERCISE,
+        timeStudiedMs: Date.now() - startedAtRef.current,
+        correctRate:
+          total > 0 ? (studyStats.correctAnswerCount / total) * 100 : 0,
+        conceptCount,
+      });
+
       onFinish(studyStats, atomProgressRatings);
     }
   }
+
+  // ---------------------------------------------------------------------------
+  // Stats helpers
+  // ---------------------------------------------------------------------------
 
   function evaluateStats(statsMap: Map<ID, AtomStats>) {
     let correctAnswerCount = 0;
@@ -130,35 +294,112 @@ const StudySession: React.FC<IStudySession> = ({
     return ratings;
   }
 
+  // ---------------------------------------------------------------------------
+  // Render
+  // ---------------------------------------------------------------------------
+
+  const isRevisiting = index <= furthestCompletedIndex;
+
   return (
-    <Stack
-      data-test="study-session-page"
-      sx={{
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {!finishedSession && (
-        <>
+    <StudySessionAudioProvider>
+      {finishedSession && finishedStatsSnapshot ? (
+        <StudySessionStats
+          totalXp={finishedStatsSnapshot.totalXp}
+          timeStudiedMs={finishedStatsSnapshot.timeStudiedMs}
+          correctRate={finishedStatsSnapshot.correctRate}
+          conceptCount={finishedStatsSnapshot.conceptCount}
+          onContinue={onExit}
+          localization={localization}
+        />
+      ) : (
+        <Stack
+          data-test="study-session-page"
+          sx={{
+            minHeight: "100dvh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <StudySessionProgressBar
-            value={index}
-            maxValue={studySession.studyBlocks.length}
+            currentIndex={index}
+            furthestCompletedIndex={furthestCompletedIndex}
+            total={studyBlockQueue.length}
             onExit={onExit}
           />
 
-          {/* Study Block */}
-          {studyBlockQueue[index] && (
-            <StudyBlock
-              key={index}
-              components={studyBlockQueue[index].components}
-              onContinue={handleContinue}
-              localizedTexts={localizedTexts}
+          <Box
+            sx={{
+              animation: isTransitioning
+                ? `${direction === "forward" ? slideForward : slideBack} ${transitionDurationMs}ms ease-out both`
+                : "none",
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
+              minHeight: 0,
+              width: "100%",
+            }}
+          >
+            <ContentContainer
+              paddingTop="small"
+              width="medium"
+              justifyContent="space-between"
+            >
+              {studyBlockQueue[index] &&
+                studyBlockQueue[index].type === "exercise" && (
+                  <ExerciseStudyBlock
+                    key={index}
+                    components={studyBlockQueue[index].components}
+                    onCheck={(result) => {
+                      setCheckedResult(result);
+                      setPlayDrawerSound(true);
+                      setDrawerVariant(
+                        result === "RIGHT" ? "correct" : "incorrect",
+                      );
+                    }}
+                    localization={localization}
+                    isRevisiting={isRevisiting}
+                  />
+                )}
+            </ContentContainer>
+          </Box>
+
+          {drawerVariant && (
+            <StudySessionDrawer
+              variant={drawerVariant}
+              onReportClick={() => {}}
+              onContinueClick={() => {
+                if (isRevisiting) {
+                  const nextIndex = index + 1;
+                  if (nextIndex < studyBlockQueue.length) {
+                    navigateTo(nextIndex, "forward");
+                  }
+                } else {
+                  if (!checkedResult) return;
+                  handleContinue(checkedResult);
+                }
+              }}
+              playSound={playDrawerSound}
+              localization={localization}
             />
           )}
-        </>
+
+          {desktop && canGoBack && (
+            <StudySessionNavigationButton
+              direction="prev"
+              onClick={handleGoBack}
+              data-test="study-session-nav-prev"
+            />
+          )}
+          {desktop && canGoForward && (
+            <StudySessionNavigationButton
+              direction="next"
+              onClick={handleGoForward}
+              data-test="study-session-nav-next"
+            />
+          )}
+        </Stack>
       )}
-    </Stack>
+    </StudySessionAudioProvider>
   );
 };
 

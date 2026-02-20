@@ -67,6 +67,9 @@ export const ICON_CONFIG = {
   addReaction: { glyph: "add_reaction", variant: "outlined" },
   studyPlan: { glyph: "list_alt", variant: "outlined" },
   dragIndicator: { glyph: "drag_indicator", variant: "outlined" },
+  restore: { glyph: "restore", variant: "outlined" },
+  audioOn: { glyph: "volume_up", variant: "outlined" },
+  audioOff: { glyph: "volume_off", variant: "outlined" },
 } as const satisfies Record<string, IconConfigEntry>;
 
 /** Array of valid icon names. Use for Storybook controls. */

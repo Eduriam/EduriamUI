@@ -10,6 +10,14 @@ import LinearProgress from "@mui/material/LinearProgress";
 export type ProgressBarSize = "small" | "medium" | "large";
 
 /**
+ * Background color variants for the `ProgressBar` track.
+ *
+ * - `"paper"` – uses the theme `"background.paper"` color.
+ * - `"transparent"` – fully transparent background.
+ */
+export type ProgressBarBackgroundColor = "paper" | "transparent";
+
+/**
  * Props for the `ProgressBar` component.
  *
  * Displays determinate progress with Eduriam styling.
@@ -41,6 +49,16 @@ export interface ProgressBarProps {
    * @default "primary.main"
    */
   color?: string;
+
+  /**
+   * Background color for the progress track.
+   *
+   * - `"paper"` maps to the theme's `"background.paper"` color.
+   * - `"transparent"` renders the track without a background fill.
+   *
+   * @default "paper"
+   */
+  backgroundColor?: ProgressBarBackgroundColor;
 }
 
 const SIZE_CONFIG: Record<ProgressBarSize, { height: number; radius: number }> =
@@ -61,6 +79,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   size = "medium",
   value = 40,
   color = "primary.main",
+  backgroundColor = "paper",
 }) => {
   const config = SIZE_CONFIG[size];
   const clampedValue = clampValue(value);
@@ -71,7 +90,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       variant="determinate"
       value={clampedValue}
       sx={{
-        backgroundColor: "background.paper",
+        backgroundColor:
+          backgroundColor === "paper" ? "background.paper" : "transparent",
         borderRadius,
         height: config.height,
         position: "relative",

@@ -1,4 +1,4 @@
-import { LargeButton } from "@eduriam/ui-core";
+import { LargeButton, theme } from "@eduriam/ui-core";
 
 import type { ReactNode } from "react";
 
@@ -65,12 +65,12 @@ export const CodeOptionButton: React.FC<CodeOptionButtonProps> = ({
       <Box
         height={LARGE_BUTTON_HEIGHT}
         sx={{
+          border: `1px solid ${theme.palette.divider}`,
           borderRadius: LARGE_BUTTON_BORDER_RADIUS,
           paddingTop: (theme) => theme.spacing(3),
           paddingBottom: (theme) => theme.spacing(3),
           paddingLeft: "16px",
           paddingRight: "16px",
-          width: "100%",
           backgroundColor: "background.paper",
           display: "flex",
           alignItems: "center",
@@ -93,6 +93,7 @@ export const CodeOptionButton: React.FC<CodeOptionButtonProps> = ({
       color="textPrimary"
       onClick={onClick}
       data-test={dataTest}
+      fullWidth={false}
     >
       <Typography
         variant={"codeButton" as TypographyProps["variant"]}
