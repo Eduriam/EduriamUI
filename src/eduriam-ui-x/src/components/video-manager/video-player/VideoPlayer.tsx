@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 
 import { VideoBuilder } from "../video-builder/VideoBuilder";
 import type { VideoDefinition } from "../video/VideoDefinition";
+import styles from "./VideoPlayer.module.css";
 
 export interface IVideoPlayer {
   /** The video definition that describes what to render. */
@@ -35,6 +36,9 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({ videoDefinition }) => {
       compositionHeight={videoHeight}
       style={{ width: "100%" }}
       controls={true}
+      allowFullscreen={false}
+      className={styles.hideTime}
+      acknowledgeRemotionLicense={true}
     />
   );
 };

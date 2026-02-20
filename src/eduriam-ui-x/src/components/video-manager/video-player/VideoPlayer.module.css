@@ -1,0 +1,4 @@
+/* Hide Remotion Player's default time display (e.g. "0:04 / 0:04") */
+.hideTime :global(div[style*="font-size: 14px"][style*="ellipsis"]) {
+  display: none;
+}
