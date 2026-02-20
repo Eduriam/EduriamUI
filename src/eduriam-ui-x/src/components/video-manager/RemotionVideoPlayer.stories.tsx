@@ -10,10 +10,11 @@ const sampleDefinition: VideoDefinition = {
   compositionHeight: 1080,
   title: "Sample Explanation",
   components: [
-    { type: "BACKGROUND_COLOR", color: "#0ea5e9" },
+    { id: "bg1", type: "BACKGROUND_COLOR", startTime: 0, color: "#0ea5e9" },
     {
       id: "h1",
       type: "HEADER",
+      startTime: 0,
       text: "Welcome to Eduriam",
       position: "CENTER",
     },
@@ -28,20 +29,23 @@ const multiComponentDefinition: VideoDefinition = {
   compositionHeight: 1080,
   title: "Multi-component scene",
   components: [
-    { type: "BACKGROUND_COLOR", color: "#1e293b" },
+    { id: "bg1", type: "BACKGROUND_COLOR", startTime: 0, color: "#1e293b" },
     {
       id: "ph1",
       type: "PAGE_HEADER",
+      startTime: 0,
       text: "Key Concepts",
     },
     {
       id: "ps1",
       type: "PAGE_SUBHEADER",
+      startTime: 1000,
       text: "Understanding the fundamentals",
     },
     {
       id: "l1",
       type: "LIST",
+      startTime: 3000,
       position: "CENTER",
       title: "Topics",
       ordered: true,

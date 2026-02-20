@@ -1,55 +1,21 @@
-import React from "react";
 import { AbsoluteFill, Audio, Sequence, useVideoConfig } from "remotion";
-import type { SceneComponent } from "./components/SceneComponent";
-import type { VideoDefinition } from "./types/VideoDefinition";
-import type { IBackgroundColor } from "./components/BackgroundColor/BackgroundColor";
-import type { IBackgroundImage } from "./components/BackgroundImage/BackgroundImage";
-import type { IBackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
-import type { IHeader } from "./components/Header/Header";
-import type { IPageHeader } from "./components/PageHeader/PageHeader";
-import type { IPageSubheader } from "./components/PageSubheader/PageSubheader";
-import type { IParagraph } from "./components/Paragraph/Paragraph";
-import type { IList } from "./components/List/List";
-import type { ITable } from "./components/Table/Table";
-import type { IImage } from "./components/Image/Image";
-import type { IVideo } from "./components/Video/Video";
-import { BackgroundColor } from "./components/BackgroundColor/BackgroundColor";
-import { BackgroundImage } from "./components/BackgroundImage/BackgroundImage";
-import { BackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
-import { Header } from "./components/Header/Header";
-import { PageHeader } from "./components/PageHeader/PageHeader";
-import { PageSubheader } from "./components/PageSubheader/PageSubheader";
-import { Paragraph } from "./components/Paragraph/Paragraph";
-import { List } from "./components/List/List";
-import { Table } from "./components/Table/Table";
-import { Image } from "./components/Image/Image";
-import { Video } from "./components/Video/Video";
 
-function renderComponent(comp: SceneComponent): React.ReactNode {
-  switch (comp.type) {
-    case "HEADER":
-      return <Header comp={comp as IHeader} />;
-    case "PAGE_HEADER":
-      return <PageHeader comp={comp as IPageHeader} />;
-    case "PAGE_SUBHEADER":
-      return <PageSubheader comp={comp as IPageSubheader} />;
-    case "PARAGRAPH":
-      return <Paragraph comp={comp as IParagraph} />;
-    case "LIST":
-      return <List comp={comp as IList} />;
-    case "TABLE":
-      return <Table comp={comp as ITable} />;
-    case "IMAGE":
-      return <Image comp={comp as IImage} />;
-    case "VIDEO":
-      return <Video comp={comp as IVideo} />;
-    default:
-      return null;
-  }
-}
+import React from "react";
+
+import type { VideoDefinition } from "./types/VideoDefinition";
+import type { VideoComponent } from "./video-components/VideoComponent";
+import type { IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
+import { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
+import type { IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
+import { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
+import {
+  BackgroundVideo,
+  IBackgroundVideo,
+} from "./video-components/components/BackgroundVideo/BackgroundVideo";
+import { VideoComponentFactory } from "./video-components/factory/VideoComponentFactory";
 
 interface CompositionProps {
-  components: SceneComponent[];
+  components: VideoComponent[];
   audioUrl?: string | null;
   componentStartMs?: number[];
 }
@@ -104,7 +70,7 @@ const Composition: React.FC<CompositionProps> = ({
         const key = (c as { id?: string }).id ?? `comp-${idx}`;
         return (
           <Sequence key={key} from={startFrame}>
-            {renderComponent(c)}
+            {VideoComponentFactory.renderComponent(c)}
           </Sequence>
         );
       })}
@@ -150,6 +116,12 @@ export class VideoBuilder {
       />
     );
 
-    return { Component, durationInFrames, fps, compositionWidth, compositionHeight };
+    return {
+      Component,
+      durationInFrames,
+      fps,
+      compositionWidth,
+      compositionHeight,
+    };
   }
 }

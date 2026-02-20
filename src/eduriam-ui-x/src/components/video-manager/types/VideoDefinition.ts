@@ -1,4 +1,4 @@
-import type { SceneComponent } from "../components/SceneComponent";
+import type { VideoComponent } from "../video-components/VideoComponent";
 
 /**
  * Input for RemotionVideoPlayer / VideoBuilder.buildVideo.
@@ -9,7 +9,7 @@ export type VideoDefinition = {
   compositionWidth: number;
   compositionHeight: number;
   title?: string;
-  components?: SceneComponent[];
+  components?: VideoComponent[];
   audioUrl?: string | null;
   audioDurationMs?: number;
   componentStartMs?: number[];

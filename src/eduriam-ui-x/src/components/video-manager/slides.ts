@@ -1,16 +1,16 @@
 import type { ID } from "../../models/ID";
+import type { ComponentPosition } from "./types/shared";
 import type {
   ComponentType,
-  SceneComponent,
-} from "./components/SceneComponent";
-import type { ComponentPosition } from "./types/shared";
+  VideoComponent,
+} from "./video-components/VideoComponent";
 
 export type SlideType = "CUSTOM" | "ONE_HEADER";
 
 export type CustomSlide = {
   id: string;
   type: "CUSTOM";
-  components: SceneComponent[];
+  components: VideoComponent[];
 };
 
 export type OneHeaderSlide = {
@@ -31,7 +31,7 @@ export type SlideComponent = {
 };
 
 export interface SlideClass {
-  toComponents(): SceneComponent[];
+  toComponents(): VideoComponent[];
 }
 
 export class CustomSlideClass implements SlideClass {
@@ -39,7 +39,7 @@ export class CustomSlideClass implements SlideClass {
   constructor(slide: CustomSlide) {
     this.slide = slide;
   }
-  toComponents(): SceneComponent[] {
+  toComponents(): VideoComponent[] {
     return this.slide.components ?? [];
   }
 }
@@ -49,12 +49,13 @@ export class OneHeaderSlideClass implements SlideClass {
   constructor(slide: OneHeaderSlide) {
     this.slide = slide;
   }
-  toComponents(): SceneComponent[] {
+  toComponents(): VideoComponent[] {
     const position: ComponentPosition = this.slide.args.position ?? "CENTER";
     return [
       {
         id: `${this.slide.id}-header`,
         type: "HEADER",
+        startTime: 0,
         text: this.slide.args.text,
         position,
       },
