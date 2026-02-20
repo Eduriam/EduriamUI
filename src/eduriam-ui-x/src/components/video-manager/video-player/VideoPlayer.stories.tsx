@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import type { VideoDefinition } from "../types/VideoDefinition";
-import { RemotionVideoPlayer } from "./RemotionVideoPlayer";
+import { VideoPlayer } from "./VideoPlayer";
 
 const sampleDefinition: VideoDefinition = {
   durationInFrames: 300,
@@ -59,13 +59,13 @@ const multiComponentDefinition: VideoDefinition = {
   componentStartMs: [0, 1000, 3000],
 };
 
-const meta: Meta<typeof RemotionVideoPlayer> = {
+const meta: Meta<typeof VideoPlayer> = {
   title: "x/video-manager/RemotionVideoPlayer",
-  component: RemotionVideoPlayer,
+  component: VideoPlayer,
 };
 
 export default meta;
-type Story = StoryObj<typeof RemotionVideoPlayer>;
+type Story = StoryObj<typeof VideoPlayer>;
 
 export const Default: Story = {
   args: {

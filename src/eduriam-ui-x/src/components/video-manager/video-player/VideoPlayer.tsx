@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 import type { VideoDefinition } from "../types/VideoDefinition";
 import { VideoBuilder } from "../video-builder/VideoBuilder";
 
-export interface IRemotionVideoPlayer {
+export interface IVideoPlayer {
   /** The video definition that describes what to render. */
   videoDefinition: VideoDefinition;
 }
@@ -16,9 +16,7 @@ export interface IRemotionVideoPlayer {
  * Uses {@link VideoBuilder.buildVideo} internally to construct the composition component and
  * metadata, then passes them to the Remotion Player for in-browser playback.
  */
-export const RemotionVideoPlayer: React.FC<IRemotionVideoPlayer> = ({
-  videoDefinition,
-}) => {
+export const VideoPlayer: React.FC<IVideoPlayer> = ({ videoDefinition }) => {
   const {
     Component,
     durationInFrames,
@@ -48,4 +46,4 @@ export const RemotionVideoPlayer: React.FC<IRemotionVideoPlayer> = ({
   );
 };
 
-export default RemotionVideoPlayer;
+export default VideoPlayer;

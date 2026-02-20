@@ -1,6 +1,6 @@
 // RemotionVideoPlayer
-export { RemotionVideoPlayer } from "./video-player/RemotionVideoPlayer";
-export type { IRemotionVideoPlayer } from "./video-player/RemotionVideoPlayer";
+export { VideoPlayer as RemotionVideoPlayer } from "./video-player/VideoPlayer";
+export type { IVideoPlayer as IRemotionVideoPlayer } from "./video-player/VideoPlayer";
 
 // VideoBuilder
 export { VideoBuilder } from "./video-builder/VideoBuilder";
