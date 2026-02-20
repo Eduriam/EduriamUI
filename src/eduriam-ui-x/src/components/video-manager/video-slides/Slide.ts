@@ -1,9 +1,9 @@
-import type { ID } from "../../models/ID";
-import type { ComponentPosition } from "./types/shared";
+import type { ID } from "../../../models/ID";
+import type { ComponentPosition } from "../types/shared";
 import type {
   ComponentType,
   VideoComponent,
-} from "./video-components/VideoComponent";
+} from "../video-components/VideoComponent";
 
 export type SlideType = "CUSTOM" | "ONE_HEADER";
 

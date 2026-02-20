@@ -2,17 +2,17 @@ import { AbsoluteFill, Audio, Sequence, useVideoConfig } from "remotion";
 
 import React from "react";
 
-import type { VideoDefinition } from "./types/VideoDefinition";
-import type { VideoComponent } from "./video-components/VideoComponent";
-import type { IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
-import { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
-import type { IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
-import { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
+import type { VideoDefinition } from "../types/VideoDefinition";
+import type { VideoComponent } from "../video-components/VideoComponent";
+import type { IBackgroundColor } from "../video-components/components/BackgroundColor/BackgroundColor";
+import { BackgroundColor } from "../video-components/components/BackgroundColor/BackgroundColor";
+import type { IBackgroundImage } from "../video-components/components/BackgroundImage/BackgroundImage";
+import { BackgroundImage } from "../video-components/components/BackgroundImage/BackgroundImage";
 import {
   BackgroundVideo,
   IBackgroundVideo,
-} from "./video-components/components/BackgroundVideo/BackgroundVideo";
-import { VideoComponentFactory } from "./video-components/factory/VideoComponentFactory";
+} from "../video-components/components/BackgroundVideo/BackgroundVideo";
+import { VideoComponentFactory } from "../video-components/factory/VideoComponentFactory";
 
 interface CompositionProps {
   components: VideoComponent[];

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import type { VideoDefinition } from "../types/VideoDefinition";
 import { RemotionVideoPlayer } from "./RemotionVideoPlayer";
-import type { VideoDefinition } from "./types/VideoDefinition";
 
 const sampleDefinition: VideoDefinition = {
   durationInFrames: 300,

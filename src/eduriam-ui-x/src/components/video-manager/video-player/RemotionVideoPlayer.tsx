@@ -2,8 +2,8 @@ import { Player } from "@remotion/player";
 
 import React, { useMemo } from "react";
 
-import { VideoBuilder } from "./VideoBuilder";
-import type { VideoDefinition } from "./types/VideoDefinition";
+import type { VideoDefinition } from "../types/VideoDefinition";
+import { VideoBuilder } from "../video-builder/VideoBuilder";
 
 export interface IRemotionVideoPlayer {
   /** The video definition that describes what to render. */

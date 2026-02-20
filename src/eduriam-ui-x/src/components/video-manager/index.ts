@@ -1,10 +1,10 @@
 // RemotionVideoPlayer
-export { RemotionVideoPlayer } from "./RemotionVideoPlayer";
-export type { IRemotionVideoPlayer } from "./RemotionVideoPlayer";
+export { RemotionVideoPlayer } from "./video-player/RemotionVideoPlayer";
+export type { IRemotionVideoPlayer } from "./video-player/RemotionVideoPlayer";
 
 // VideoBuilder
-export { VideoBuilder } from "./VideoBuilder";
-export type { VideoBuilderResult } from "./VideoBuilder";
+export { VideoBuilder } from "./video-builder/VideoBuilder";
+export type { VideoBuilderResult } from "./video-builder/VideoBuilder";
 
 // Types – shared
 export type {
@@ -16,15 +16,15 @@ export type {
 export type { Alignment } from "./video-components/components/Paragraph/Paragraph";
 
 // Types – scene
+export type { Scene as Scene } from "./types/scene";
+export type { VideoDefinition } from "./types/VideoDefinition";
 export type {
   CustomSlide,
   OneHeaderSlide,
   Slide,
   SlideComponent,
   SlideType,
-} from "./slides";
-export type { Scene } from "./types/scene";
-export type { VideoDefinition } from "./types/VideoDefinition";
+} from "./video-slides/Slide";
 
 // Types – SceneComponent (and ComponentType)
 export type {
@@ -54,7 +54,6 @@ export type {
 export type { IVideo as VideoComponent } from "./video-components/components/Video/Video";
 
 // VM-prefixed type aliases for package public API
-export type { SlideComponent as VMSlideComponent } from "./slides";
 export type { IBackgroundColor as VMBackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
@@ -66,10 +65,11 @@ export type { IPageSubheader as VMPageSubheaderComponent } from "./video-compone
 export type { IParagraph as VMParagraphComponent } from "./video-components/components/Paragraph/Paragraph";
 export type { ITable as VMTableComponent } from "./video-components/components/Table/Table";
 export type { IVideo as VMVideoComponent } from "./video-components/components/Video/Video";
+export type { SlideComponent as VMSlideComponent } from "./video-slides/Slide";
 
 // Slide materialization
-export { CustomSlideClass, OneHeaderSlideClass } from "./slides";
-export type { SlideClass } from "./slides";
+export { CustomSlideClass, OneHeaderSlideClass } from "./video-slides/Slide";
+export type { SlideClass } from "./video-slides/Slide";
 
 // Utils
 export { positionToStyle } from "./utils/positionToStyle";
