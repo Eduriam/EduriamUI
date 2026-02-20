@@ -105,6 +105,50 @@ const multiSceneDefinition: VideoDefinition = {
   ],
 };
 
+const templateSlideDefinition: VideoDefinition = {
+  fps: 30,
+  videoWidth: 1920,
+  videoHeight: 1080,
+  scenes: [
+    {
+      id: "scene-1",
+      duration: 5000,
+      slides: [
+        {
+          id: "oh-1",
+          type: "ONE_HEADER",
+          text: "Welcome to Eduriam",
+        },
+      ],
+    },
+    {
+      id: "scene-2",
+      duration: 10000,
+      slides: [
+        {
+          id: "slide-1",
+          type: "RAW",
+          components: [
+            {
+              id: "bg1",
+              type: "BACKGROUND_COLOR",
+              startTime: 0,
+              color: "#0ea5e9",
+            },
+            {
+              id: "h1",
+              type: "HEADER",
+              startTime: 0,
+              text: "Second Scene",
+              position: "CENTER",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const meta: Meta<typeof VideoPlayer> = {
   title: "x/video-manager/RemotionVideoPlayer",
   component: VideoPlayer,
@@ -122,5 +166,11 @@ export const Default: Story = {
 export const MultiScene: Story = {
   args: {
     videoDefinition: multiSceneDefinition,
+  },
+};
+
+export const WithTemplateSlide: Story = {
+  args: {
+    videoDefinition: templateSlideDefinition,
   },
 };

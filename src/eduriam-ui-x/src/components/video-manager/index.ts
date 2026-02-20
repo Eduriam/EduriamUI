@@ -14,11 +14,17 @@ export type {
 } from "./types/shared";
 export type { Alignment } from "./video-components/components/Paragraph/Paragraph";
 
-// Types – scene
+// Types – scene & video
 export type { Scene } from "./video-scenes/Scene";
-export type { SlideType } from "./video-slides/Slide";
 export type { Video } from "./video/Video";
 export type { VideoDefinition } from "./video/VideoDefinition";
+
+// Types – slides
+export type { BaseSlide } from "./video-slides/BaseSlide";
+export type { IRawSlide } from "./video-slides/raw-slide/RawSlide";
+export type { Slide, SlideType } from "./video-slides/Slide";
+export type { SlideTemplates } from "./video-slides/slide-templates/SlideTemplate";
+export type { IOneHeaderSlide } from "./video-slides/slide-templates/specific/OneHeaderSlide";
 
 // Types – SceneComponent (and ComponentType)
 export type {
@@ -60,15 +66,10 @@ export type { IParagraph as VMParagraphComponent } from "./video-components/comp
 export type { ITable as VMTableComponent } from "./video-components/components/Table/Table";
 export type { IVideo as VMVideoComponent } from "./video-components/components/Video/Video";
 
-// Slide materialization
-export {
-  OneHeaderSlide as OneHeaderSlideClass,
-  RawSlide as RawSlideClass,
-} from "./video-slides/Slide";
-export type {
-  SlideClass,
-  SlideTemplate as SlideTemplateClass,
-} from "./video-slides/Slide";
+// Slides – renderers & factory
+export { SlideFactory } from "./video-slides/factory/SlideFactory";
+export { RawSlide } from "./video-slides/raw-slide/RawSlide";
+export { OneHeaderSlide } from "./video-slides/slide-templates/specific/OneHeaderSlide";
 
 // Utils
 export { positionToStyle } from "./utils/positionToStyle";

@@ -1,7 +1,8 @@
-import { RawSlide } from "./raw-slide/RawSlide";
-import { SlideTemplates } from "./slide-templates/SlideTemplate";
+import type { IRawSlide } from "./raw-slide/RawSlide";
+import type { SlideTemplates } from "./slide-templates/SlideTemplate";
 
-/** Any slide: either raw or a template. */
-export type Slide = RawSlide | SlideTemplates;
+/** Discriminant for slide kinds. Define explicitly to avoid circular dependency with BaseSlide. */
+export type SlideType = Slide["type"];
 
-export type SlideType = "RAW" | "ONE_HEADER";
+/** Any slide: either a raw slide or a template. */
+export type Slide = IRawSlide | SlideTemplates;
