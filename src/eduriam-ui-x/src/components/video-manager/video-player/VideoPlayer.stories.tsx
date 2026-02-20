@@ -14,7 +14,7 @@ const sampleDefinition: VideoDefinition = {
       slides: [
         {
           id: "slide-1",
-          type: "CUSTOM",
+          type: "RAW",
           components: [
             {
               id: "bg1",
@@ -47,7 +47,7 @@ const multiSceneDefinition: VideoDefinition = {
       slides: [
         {
           id: "slide-1",
-          type: "CUSTOM",
+          type: "RAW",
           components: [
             {
               id: "bg1",
@@ -77,7 +77,7 @@ const multiSceneDefinition: VideoDefinition = {
       slides: [
         {
           id: "slide-2",
-          type: "CUSTOM",
+          type: "RAW",
           components: [
             {
               id: "bg2",

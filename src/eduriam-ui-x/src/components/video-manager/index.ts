@@ -16,14 +16,9 @@ export type { Alignment } from "./video-components/components/Paragraph/Paragrap
 
 // Types – scene
 export type { Scene } from "./video-scenes/Scene";
-export type {
-  CustomSlide,
-  OneHeaderSlide,
-  Slide,
-  SlideComponent,
-  SlideType,
-} from "./video-slides/Slide";
-export type { Video, VideoDefinition } from "./video/VideoDefinition";
+export type { SlideType } from "./video-slides/Slide";
+export type { Video } from "./video/Video";
+export type { VideoDefinition } from "./video/VideoDefinition";
 
 // Types – SceneComponent (and ComponentType)
 export type {
@@ -64,11 +59,16 @@ export type { IPageSubheader as VMPageSubheaderComponent } from "./video-compone
 export type { IParagraph as VMParagraphComponent } from "./video-components/components/Paragraph/Paragraph";
 export type { ITable as VMTableComponent } from "./video-components/components/Table/Table";
 export type { IVideo as VMVideoComponent } from "./video-components/components/Video/Video";
-export type { SlideComponent as VMSlideComponent } from "./video-slides/Slide";
 
 // Slide materialization
-export { CustomSlideClass, OneHeaderSlideClass } from "./video-slides/Slide";
-export type { SlideClass } from "./video-slides/Slide";
+export {
+  OneHeaderSlide as OneHeaderSlideClass,
+  RawSlide as RawSlideClass,
+} from "./video-slides/Slide";
+export type {
+  SlideClass,
+  SlideTemplate as SlideTemplateClass,
+} from "./video-slides/Slide";
 
 // Utils
 export { positionToStyle } from "./utils/positionToStyle";

@@ -14,16 +14,17 @@ import {
 import { VideoComponentFactory } from "../video-components/factory/VideoComponentFactory";
 import type { Scene } from "../video-scenes/Scene";
 import type { Slide } from "../video-slides/Slide";
-import { CustomSlideClass, OneHeaderSlideClass } from "../video-slides/Slide";
+import { RawSlide } from "../video-slides/raw-slide/RawSlide";
+import { OneHeaderSlide } from "../video-slides/slide-templates/specific/OneHeaderSlide";
 import type { Video } from "../video/Video";
 import type { VideoDefinition } from "../video/VideoDefinition";
 
 function materializeSlide(slide: Slide): VideoComponent[] {
   switch (slide.type) {
-    case "CUSTOM":
-      return new CustomSlideClass(slide).toComponents();
+    case "RAW":
+      return new RawSlide(slide.id, slide.components).getComponents();
     case "ONE_HEADER":
-      return new OneHeaderSlideClass(slide).toComponents();
+      return new OneHeaderSlide(slide).toComponents();
     default:
       return [];
   }
