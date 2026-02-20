@@ -10,7 +10,7 @@ import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
-import { isAnswerComponent } from "./components/AnswerComponentConfig";
+import { isAnswerComponent } from "./components/answerComponentConfig";
 
 export interface IExerciseStudyBlock {
   components: StudyBlockComponentDTO[];

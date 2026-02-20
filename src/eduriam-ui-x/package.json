@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.45",
+  "version": "0.2.46",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -28,7 +28,7 @@
     "remotion": "^4.0.353"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.42",
+    "@eduriam/ui-core": "^0.6.43",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
