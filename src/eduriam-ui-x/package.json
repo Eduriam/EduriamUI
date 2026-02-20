@@ -21,9 +21,11 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@remotion/player": "^4.0.353",
     "canvas-confetti": "^1.9.3",
     "prism-react-renderer": "^2.4.0",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "remotion": "^4.0.353"
   },
   "peerDependencies": {
     "@eduriam/ui-core": "^0.6.41",

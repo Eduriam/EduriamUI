@@ -1,3 +1,6 @@
+// Video Manager
+export * from "./components/video-manager";
+
 // Audio
 export { AudioPlayer, type AudioPlayerSound } from "./audio";
 
@@ -68,10 +71,10 @@ export type {
 // Code Editor Components
 export { CodeEditor } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditor";
 export type { CodeEditorProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditor";
-export { CodeOptions } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
-export type { CodeOptionsProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
 export { CodeExercise } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeExercise/CodeExercise";
 export type { CodeExerciseProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeExercise/CodeExercise";
+export { CodeOptions } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
+export type { CodeOptionsProps } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeOptions/CodeOptions";
 
 // Matching Answer Types
 export { MatchOptionType } from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";

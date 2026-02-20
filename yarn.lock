@@ -475,6 +475,7 @@ __metadata:
     "@mui/icons-material": "npm:^5.15.20"
     "@mui/lab": "npm:^5.0.0-alpha.94"
     "@mui/material": "npm:^5.15.20"
+    "@remotion/player": "npm:^4.0.353"
     "@types/dompurify": "npm:^3.2.0"
     canvas-confetti: "npm:^1.9.3"
     dompurify: "npm:^3.3.1"
@@ -484,6 +485,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-speech-recognition: "npm:^3.10.0"
     regenerator-runtime: "npm:^0.13.11"
+    remotion: "npm:^4.0.353"
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
@@ -1701,6 +1703,18 @@ __metadata:
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
   checksum: 10c0/4681e682abc006d25eb380d0cf3efc7557043f53b6aea7a5057d0d1e7df849a00e281cd8ea79c902a35a414d7919621fc2ba293ecec05f413598e0b23d5a1e63
+  languageName: node
+  linkType: hard
+
+"@remotion/player@npm:^4.0.353":
+  version: 4.0.425
+  resolution: "@remotion/player@npm:4.0.425"
+  dependencies:
+    remotion: "npm:4.0.425"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/29527d53a9235b9723770b8a43a391ecf4301e806983b2197c3f5f4ef3fc5e54e52084123a4f8b9141acb36869c57ae186b7cf335be9cbc14ad84507796244ee
   languageName: node
   linkType: hard
 
@@ -6332,6 +6346,16 @@ __metadata:
     gopd: "npm:^1.2.0"
     set-function-name: "npm:^2.0.2"
   checksum: 10c0/83b88e6115b4af1c537f8dabf5c3744032cb875d63bc05c288b1b8c0ef37cbe55353f95d8ca817e8843806e3e150b118bc624e4279b24b4776b4198232735a77
+  languageName: node
+  linkType: hard
+
+"remotion@npm:4.0.425, remotion@npm:^4.0.353":
+  version: 4.0.425
+  resolution: "remotion@npm:4.0.425"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/1406a9f2e584ecdbf398d670a936b0fabea1a730580f26b39e07c3f2353ab4c13ce553b21723d84aa975f6cfd7c98920839416226406e2292574e8503a0c9281
   languageName: node
   linkType: hard
 
