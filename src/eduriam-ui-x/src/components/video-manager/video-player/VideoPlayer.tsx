@@ -1,6 +1,12 @@
 import { Player, type PlayerRef } from "@remotion/player";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Box } from "@mui/material";
 
@@ -143,7 +149,10 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
     if (playbackState !== "playing") return;
     setHovered(true);
     clearTimeout(hoverTimerRef.current);
-    hoverTimerRef.current = setTimeout(() => setHovered(false), HOVER_HIDE_DELAY_MS);
+    hoverTimerRef.current = setTimeout(
+      () => setHovered(false),
+      HOVER_HIDE_DELAY_MS,
+    );
   }, [playbackState]);
 
   useEffect(() => () => clearTimeout(hoverTimerRef.current), []);
@@ -173,6 +182,7 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
         position: "relative",
         cursor: "pointer",
         width: "100%",
+        ...styleProp,
       }}
     >
       <Player
