@@ -11,21 +11,25 @@ import React, {
 import { Box } from "@mui/material";
 
 import { VideoBuilder } from "../video-builder/VideoBuilder";
+import { Caption } from "../video-scenes/Scene";
 import type { VideoDefinition } from "../video/VideoDefinition";
 import styles from "./VideoPlayer.module.css";
+import { Captions } from "./components/Captions/Captions";
 import {
   VideoOverlayControls,
   type VideoPlaybackState,
-} from "./components/VideoOverlayControls";
+} from "./components/VideoOverlayControls/VideoOverlayControls";
 
 export type { PlayerRef } from "@remotion/player";
-export type { VideoPlaybackState } from "./components/VideoOverlayControls";
+export type { VideoPlaybackState } from "./components/VideoOverlayControls/VideoOverlayControls";
 
 const HOVER_HIDE_DELAY_MS = 2500;
 
 export interface IVideoPlayer {
   /** The video definition that describes what to render. */
   videoDefinition: VideoDefinition;
+  /** Optional captions in Remotion Caption format. */
+  captions?: Caption[];
   /** Whether to start playing immediately. @default false */
   autoPlay?: boolean;
   /** Optional style for the player container (e.g. height: "100%" to fill parent). */
@@ -40,6 +44,7 @@ export interface IVideoPlayer {
  */
 export const VideoPlayer: React.FC<IVideoPlayer> = ({
   videoDefinition,
+  captions,
   autoPlay = false,
   style: styleProp,
   onEnded,
@@ -49,6 +54,7 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
   const { videoComponent, durationInFrames, fps, videoWidth, videoHeight } =
     useMemo(() => VideoBuilder.buildVideo(videoDefinition), [videoDefinition]);
 
+  const [currentFrame, setCurrentFrame] = useState(0);
   const [playbackState, setPlaybackState] = useState<VideoPlaybackState>(
     autoPlay ? "playing" : "paused",
   );
@@ -64,6 +70,7 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
 
     const onFrame = () => {
       const frame = player.getCurrentFrame();
+      setCurrentFrame(frame);
       setProgress(durationInFrames > 0 ? (frame / durationInFrames) * 100 : 0);
     };
 
@@ -211,6 +218,14 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
         onMuteToggle={handleMuteToggle}
         onSeek={handleSeek}
       />
+
+      {Array.isArray(captions) && captions.length > 0 && (
+        <Captions
+          captions={captions}
+          currentTimeMs={(currentFrame / fps) * 1000}
+          visible={isMuted}
+        />
+      )}
     </Box>
   );
 };

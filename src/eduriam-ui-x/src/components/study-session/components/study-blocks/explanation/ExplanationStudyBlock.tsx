@@ -11,7 +11,7 @@ import React, {
 import { Box, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
-import type { Scene, VideoDefinition } from "../../../../video-manager";
+import type { Caption, Scene, VideoDefinition } from "../../../../video-manager";
 import { DEFAULT_VIDEO_FPS } from "../../../../video-manager";
 import { VideoPlayer } from "../../../../video-manager/video-player/VideoPlayer";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
@@ -89,6 +89,29 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
     };
   }, [scenes, containerWidth, availableHeight, desktop]);
 
+  const captions = useMemo<Caption[]>(() => {
+    const result: Caption[] = [];
+    let offsetMs = 0;
+
+    for (const scene of scenes) {
+      const sceneCaptions = scene.audio?.captions ?? [];
+      for (const caption of sceneCaptions) {
+        result.push({
+          ...caption,
+          startMs: caption.startMs + offsetMs,
+          endMs: caption.endMs + offsetMs,
+          timestampMs:
+            caption.timestampMs === null
+              ? null
+              : caption.timestampMs + offsetMs,
+        });
+      }
+      offsetMs += scene.duration;
+    }
+
+    return result;
+  }, [scenes]);
+
   const handleEnded = useCallback(() => {
     setHasFinished(true);
     onComplete();
@@ -111,6 +134,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
         {videoDefinition && (
           <VideoPlayer
             videoDefinition={videoDefinition}
+            captions={captions}
             autoPlay
             onEnded={handleEnded}
             style={

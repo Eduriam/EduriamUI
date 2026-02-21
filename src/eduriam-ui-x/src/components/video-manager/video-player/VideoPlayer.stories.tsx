@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import type { Caption } from "../video-scenes/Scene";
 import type { VideoDefinition } from "../video/VideoDefinition";
 import { VideoPlayer } from "./VideoPlayer";
 
@@ -172,5 +173,86 @@ export const MultiScene: Story = {
 export const WithTemplateSlide: Story = {
   args: {
     videoDefinition: templateSlideDefinition,
+  },
+};
+
+const sampleCaptions: Caption[] = [
+  {
+    text: " Hello",
+    startMs: 0,
+    endMs: 400,
+    timestampMs: 200,
+    confidence: null,
+  },
+  {
+    text: " and",
+    startMs: 400,
+    endMs: 600,
+    timestampMs: 500,
+    confidence: null,
+  },
+  {
+    text: " welcome",
+    startMs: 600,
+    endMs: 1000,
+    timestampMs: 800,
+    confidence: null,
+  },
+  {
+    text: " to",
+    startMs: 1000,
+    endMs: 1100,
+    timestampMs: 1050,
+    confidence: null,
+  },
+  {
+    text: " this",
+    startMs: 1100,
+    endMs: 1300,
+    timestampMs: 1200,
+    confidence: null,
+  },
+  {
+    text: " video.",
+    startMs: 1300,
+    endMs: 1800,
+    timestampMs: 1550,
+    confidence: null,
+  },
+  {
+    text: " Mute",
+    startMs: 2000,
+    endMs: 2400,
+    timestampMs: 2200,
+    confidence: null,
+  },
+  {
+    text: " to",
+    startMs: 2400,
+    endMs: 2600,
+    timestampMs: 2500,
+    confidence: null,
+  },
+  {
+    text: " see",
+    startMs: 2600,
+    endMs: 2900,
+    timestampMs: 2750,
+    confidence: null,
+  },
+  {
+    text: " captions.",
+    startMs: 2900,
+    endMs: 3600,
+    timestampMs: 3250,
+    confidence: null,
+  },
+];
+
+/** When audio is muted, captions are displayed. Turn sound off to see them. */
+export const WithCaptions: Story = {
+  args: {
+    videoDefinition: sampleDefinition,
+    captions: sampleCaptions,
   },
 };

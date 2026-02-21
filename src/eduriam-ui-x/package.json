@@ -21,6 +21,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@remotion/captions": "^4.0.353",
     "@remotion/player": "^4.0.353",
     "canvas-confetti": "^1.9.3",
     "prism-react-renderer": "^2.4.0",

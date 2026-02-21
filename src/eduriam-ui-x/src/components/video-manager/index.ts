@@ -1,6 +1,7 @@
 // RemotionVideoPlayer
 export { VideoPlayer as RemotionVideoPlayer } from "./video-player/VideoPlayer";
 export type { IVideoPlayer as IRemotionVideoPlayer } from "./video-player/VideoPlayer";
+export type { Caption } from "./video-scenes/Scene";
 export { DEFAULT_VIDEO_FPS } from "./video-player/videoPlayerConfig";
 
 // VideoBuilder
