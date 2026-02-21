@@ -8,9 +8,9 @@ import { useStudySessionAudio } from "../../../context/StudySessionAudioContext"
 import { useStudyBlockAudio } from "../../../hooks/useStudyBlockAudio";
 import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
+import { isAnswerComponent } from "./components/AnswerComponentConfig";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
-import { isAnswerComponent } from "./components/answerComponentConfig";
 
 export interface IExerciseStudyBlock {
   components: StudyBlockComponentDTO[];

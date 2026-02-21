@@ -17,6 +17,7 @@ import { StudySessionStats } from "./components/StudySessionStats/StudySessionSt
 import { XP_PER_EXERCISE } from "./components/StudySessionStats/studySessionStatsConfig";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/StudyBlockDTO";
 import { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
+import { ExplanationStudyBlock } from "./components/study-blocks/explanation/ExplanationStudyBlock";
 import { StudySessionAudioProvider } from "./context/StudySessionAudioContext";
 import {
   type TransitionDirection,
@@ -254,6 +255,40 @@ const StudySession: React.FC<IStudySession> = ({
   }
 
   // ---------------------------------------------------------------------------
+  // Explanation completion
+  // ---------------------------------------------------------------------------
+
+  function handleExplanationComplete() {
+    setFurthestCompletedIndex((prev) => Math.max(prev, index));
+
+    if (index < studyBlockQueue.length - 1) {
+      triggerTransition(() => {
+        setIndex(index + 1);
+      }, "forward");
+    } else {
+      setFinishedSession(true);
+
+      const studyStats = evaluateStats(atomStatsMap);
+      const atomProgressRatings = computeAtomRatings(
+        studySession.studyBlocks,
+        atomStatsMap,
+      );
+
+      const total =
+        studyStats.correctAnswerCount + studyStats.incorrectAnswerCount;
+      setFinishedStatsSnapshot({
+        totalXp: exerciseBlockCount * XP_PER_EXERCISE,
+        timeStudiedMs: Date.now() - startedAtRef.current,
+        correctRate:
+          total > 0 ? (studyStats.correctAnswerCount / total) * 100 : 0,
+        conceptCount,
+      });
+
+      onFinish(studyStats, atomProgressRatings);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
   // Stats helpers
   // ---------------------------------------------------------------------------
 
@@ -358,6 +393,14 @@ const StudySession: React.FC<IStudySession> = ({
                     }}
                     localization={localization}
                     isRevisiting={isRevisiting}
+                  />
+                )}
+              {studyBlockQueue[index] &&
+                studyBlockQueue[index].type === "explanation" && (
+                  <ExplanationStudyBlock
+                    key={index}
+                    scenes={studyBlockQueue[index].scenes}
+                    onComplete={handleExplanationComplete}
                   />
                 )}
             </ContentContainer>
