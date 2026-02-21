@@ -150,7 +150,7 @@ const templateSlideDefinition: VideoDefinition = {
 };
 
 const meta: Meta<typeof VideoPlayer> = {
-  title: "x/video-manager/RemotionVideoPlayer",
+  title: "x/video-manager/video-player/VideoPlayer",
   component: VideoPlayer,
 };
 

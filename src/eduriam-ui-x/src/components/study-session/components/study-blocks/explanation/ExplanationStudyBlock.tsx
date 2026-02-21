@@ -1,3 +1,5 @@
+import { LargeButton } from "@eduriam/ui-core";
+
 import React, {
   useCallback,
   useEffect,
@@ -12,20 +14,16 @@ import useTheme from "@mui/material/styles/useTheme";
 import type { Scene, VideoDefinition } from "../../../../video-manager";
 import { DEFAULT_VIDEO_FPS } from "../../../../video-manager";
 import { VideoPlayer } from "../../../../video-manager/video-player/VideoPlayer";
+import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 
 export interface IExplanationStudyBlock {
   scenes: Scene[];
-  /** Called when the video finishes playing. */
   onComplete: () => void;
+  localization: StudySessionLocalization;
 }
 
 const VIDEO_ASPECT_RATIO = 16 / 9;
 
-/**
- * Measures the available height from the element's top edge to the bottom of
- * the viewport. Re-measures on resize / scroll so the value stays accurate
- * even when surrounding layout changes (e.g. appbar, progress bar).
- */
 function useAvailableHeight(ref: React.RefObject<HTMLElement | null>) {
   const [height, setHeight] = useState<number>(0);
 
@@ -49,6 +47,7 @@ function useAvailableHeight(ref: React.RefObject<HTMLElement | null>) {
 export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   scenes,
   onComplete,
+  localization,
 }) => {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -57,6 +56,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   const availableHeight = useAvailableHeight(containerRef);
 
   const [containerWidth, setContainerWidth] = useState(0);
+  const [hasFinished, setHasFinished] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -90,34 +90,52 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   }, [scenes, containerWidth, availableHeight, desktop]);
 
   const handleEnded = useCallback(() => {
-    onComplete();
-  }, [onComplete]);
+    setHasFinished(true);
+  }, []);
 
   return (
-    <Box
-      ref={containerRef}
-      sx={{
-        width: "100%",
-        ...(desktop
-          ? { aspectRatio: `${VIDEO_ASPECT_RATIO}` }
-          : {
-              height: availableHeight > 0 ? availableHeight : undefined,
-            }),
-      }}
-    >
-      {videoDefinition && (
-        <VideoPlayer
-          videoDefinition={videoDefinition}
-          onEnded={handleEnded}
-          autoPlay
-          controls
-          style={
-            desktop
-              ? undefined
-              : { width: "100%", height: "100%" }
-          }
-        />
-      )}
-    </Box>
+    <>
+      <Box
+        ref={containerRef}
+        sx={{
+          width: "100%",
+          position: "relative",
+          ...(desktop
+            ? { aspectRatio: `${VIDEO_ASPECT_RATIO}` }
+            : {
+                height: availableHeight > 0 ? availableHeight : undefined,
+              }),
+        }}
+      >
+        {videoDefinition && (
+          <VideoPlayer
+            videoDefinition={videoDefinition}
+            autoPlay
+            onEnded={handleEnded}
+            style={
+              desktop
+                ? undefined
+                : { width: "100%", height: "100%" }
+            }
+          />
+        )}
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          pt: 2.5,
+        }}
+      >
+        <LargeButton
+          onClick={onComplete}
+          disabled={!hasFinished}
+          fullWidth
+        >
+          {localization.studyBlock.continueButton}
+        </LargeButton>
+      </Box>
+    </>
   );
 };

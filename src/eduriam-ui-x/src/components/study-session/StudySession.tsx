@@ -401,6 +401,7 @@ const StudySession: React.FC<IStudySession> = ({
                     key={index}
                     scenes={studyBlockQueue[index].scenes}
                     onComplete={handleExplanationComplete}
+                    localization={localization}
                   />
                 )}
             </ContentContainer>

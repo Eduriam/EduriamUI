@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "storybook/test";
 
 import type { Scene } from "../../../../video-manager";
+import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "../../../StudySessionLocalizationDefault";
 import { ExplanationStudyBlock } from "./ExplanationStudyBlock";
 
 const sampleScenes: Scene[] = [
@@ -68,6 +69,7 @@ const meta: Meta<typeof ExplanationStudyBlock> = {
   component: ExplanationStudyBlock,
   args: {
     onComplete: fn(),
+    localization: STUDY_SESSION_LOCALIZATION_DEFAULT,
   },
   decorators: [
     (Story) => (
