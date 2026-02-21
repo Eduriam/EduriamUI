@@ -39,6 +39,11 @@ export type {
 export type { IBackgroundColor as BackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as BackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as BackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type {
+  CodeExplainerAnnotation,
+  CodeExplainerStep,
+  ICodeExplainer as CodeExplainerComponent,
+} from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IHeader as HeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
 export type {
@@ -59,6 +64,7 @@ export type { IVideo as VideoComponent } from "./video-components/components/Vid
 export type { IBackgroundColor as VMBackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IHeader as VMHeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as VMImageComponent } from "./video-components/components/Image/Image";
 export type { IList as VMListComponent } from "./video-components/components/List/List";
@@ -81,6 +87,10 @@ export { resolveSize } from "./utils/resolveSize";
 export { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export { BackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export {
+  CodeExplainer,
+  CodeExplainer as VideoCodeExplainer,
+} from "./video-components/components/CodeExplainer/CodeExplainer";
 export {
   Header,
   Header as VideoHeader,
@@ -114,6 +124,7 @@ export { Video as VideoVideo } from "./video-components/components/Video/Video";
 export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IHeaderProps as IHeader } from "./video-components/components/Header/Header";
 export type { IImageProps as IImage } from "./video-components/components/Image/Image";
 export type { IListProps as IList } from "./video-components/components/List/List";

@@ -150,6 +150,81 @@ const templateSlideDefinition: VideoDefinition = {
   ],
 };
 
+const codeExplainerDefinition: VideoDefinition = {
+  fps: 30,
+  videoWidth: 1920,
+  videoHeight: 1080,
+  scenes: [
+    {
+      id: "scene-code-1",
+      duration: 10000,
+      slides: [
+        {
+          id: "slide-code-1",
+          type: "RAW",
+          components: [
+            {
+              id: "bg-code-1",
+              type: "BACKGROUND_COLOR",
+              startTime: 0,
+              color: "#020617",
+            },
+            {
+              id: "ce-1",
+              type: "CODE_EXPLAINER",
+              startTime: 0,
+              position: "CENTER",
+              size: 1000,
+              colorMode: "DARK",
+              stepDurationMs: 2600,
+              transitionDurationMs: 550,
+              steps: [
+                {
+                  id: "step-1",
+                  title: "Base object",
+                  language: "ts",
+                  code: `const user = {
+  name: "Ada",
+  age: 26,
+};
+
+console.log(user);
+//           ^?`,
+                },
+                {
+                  id: "step-2",
+                  title: "Type error",
+                  language: "ts",
+                  code: `const user = {
+  name: "Ada",
+  age: 26,
+};
+
+// @errors: 2339
+console.log(user.location);`,
+                },
+                {
+                  id: "step-3",
+                  title: "Resolved",
+                  language: "ts",
+                  code: `const user = {
+  name: "Ada",
+  age: 26,
+  location: "London",
+};
+
+console.log(user.location);
+//           ^?`,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const meta: Meta<typeof VideoPlayer> = {
   title: "x/video-manager/video-player/VideoPlayer",
   component: VideoPlayer,
@@ -173,6 +248,12 @@ export const MultiScene: Story = {
 export const WithTemplateSlide: Story = {
   args: {
     videoDefinition: templateSlideDefinition,
+  },
+};
+
+export const WithCodeExplainer: Story = {
+  args: {
+    videoDefinition: codeExplainerDefinition,
   },
 };
 
