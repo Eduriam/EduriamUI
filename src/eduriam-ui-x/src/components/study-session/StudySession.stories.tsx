@@ -207,6 +207,245 @@ export const ExerciseWithAudio: Story = {
   } as IStudySession,
 };
 
+/** Sample lesson: SELECT * FROM — basics of selecting all rows from a table in SQL. */
+export const ExampleLessonSQL: Story = {
+  args: {
+    studySession: {
+      studyBlocks: [
+        // 1. What is SELECT?
+        {
+          type: "explanation",
+          atomId: "sql-select-all",
+          scenes: [
+            {
+              id: "scene-select-intro",
+              duration: 12000,
+              audio: {
+                url: "https://mocks.eduriam.com/scene-select-intro.mp3",
+              },
+              slides: [
+                {
+                  id: "slide-select-intro",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "ph1",
+                      type: "PAGE_HEADER",
+                      startTime: 0,
+                      text: "What is SELECT?",
+                    },
+                    {
+                      id: "ps1",
+                      type: "PAGE_SUBHEADER",
+                      startTime: 1200,
+                      text: "The command to read data from a database",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // 2. The asterisk *
+        {
+          type: "explanation",
+          atomId: "sql-select-all",
+          scenes: [
+            {
+              id: "scene-asterisk",
+              duration: 12000,
+              audio: {
+                url: "https://mocks.eduriam.com/scene-asterisk.mp3",
+              },
+              slides: [
+                {
+                  id: "slide-asterisk",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "ph2",
+                      type: "PAGE_HEADER",
+                      startTime: 0,
+                      text: "The asterisk *",
+                    },
+                    {
+                      id: "ps2",
+                      type: "PAGE_SUBHEADER",
+                      startTime: 1000,
+                      text: "Means: all columns",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // 3. Exercise: what does SELECT do?
+        {
+          type: "exercise",
+          atomId: "sql-select-all",
+          components: [
+            {
+              id: "mc-select",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "What does the SELECT statement do?",
+              options: [
+                { id: "read", text: "Read or retrieve data from the database" },
+                { id: "insert", text: "Insert new rows into a table" },
+                { id: "delete", text: "Delete data from the database" },
+              ],
+              correctOptionId: "read",
+            },
+          ],
+        },
+        // 4. What is FROM?
+        {
+          type: "explanation",
+          atomId: "sql-select-all",
+          scenes: [
+            {
+              id: "scene-from",
+              duration: 16000,
+              audio: {
+                url: "https://mocks.eduriam.com/scene-from.mp3",
+              },
+              slides: [
+                {
+                  id: "slide-from",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "ph3",
+                      type: "PAGE_HEADER",
+                      startTime: 0,
+                      text: "The FROM clause",
+                    },
+                    {
+                      id: "ps3",
+                      type: "PAGE_SUBHEADER",
+                      startTime: 1000,
+                      text: "Specifies which table to read from",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // 5. Exercise: what does * mean?
+        {
+          type: "exercise",
+          atomId: "sql-select-all",
+          components: [
+            {
+              id: "mc-asterisk",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "In SELECT *, what does the asterisk mean?",
+              options: [
+                { id: "all-cols", text: "All columns from the table" },
+                { id: "multiply", text: "Multiplication" },
+                { id: "first-col", text: "Only the first column" },
+              ],
+              correctOptionId: "all-cols",
+            },
+          ],
+        },
+        // 6. Putting it together: SELECT * FROM table_name
+        {
+          type: "explanation",
+          atomId: "sql-select-all",
+          scenes: [
+            {
+              id: "scene-putting-together",
+              duration: 20000,
+              audio: {
+                url: "https://mocks.eduriam.com/scene-putting-together.mp3",
+              },
+              slides: [
+                {
+                  id: "slide-putting-together",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "ph4",
+                      type: "PAGE_HEADER",
+                      startTime: 0,
+                      text: "SELECT * FROM table_name",
+                    },
+                    {
+                      id: "ps4",
+                      type: "PAGE_SUBHEADER",
+                      startTime: 1500,
+                      text: "All columns, all rows, from one table",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // 7. Exercise: what does FROM do?
+        {
+          type: "exercise",
+          atomId: "sql-select-all",
+          components: [
+            {
+              id: "mc-from",
+              type: StudyBlockComponentType.MULTIPLE_CHOICE,
+              question: "What does the FROM clause do?",
+              options: [
+                {
+                  id: "specify-table",
+                  text: "Specifies which table to get the data from",
+                },
+                { id: "filter-rows", text: "Filters which rows to return" },
+                { id: "order-results", text: "Orders the result set" },
+              ],
+              correctOptionId: "specify-table",
+            },
+          ],
+        },
+        // 8. Recap explanation
+        {
+          type: "explanation",
+          atomId: "sql-select-all",
+          scenes: [
+            {
+              id: "scene-recap",
+              duration: 17000,
+              audio: {
+                url: "https://mocks.eduriam.com/scene-recap.mp3",
+              },
+              slides: [
+                {
+                  id: "slide-recap",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "ph5",
+                      type: "PAGE_HEADER",
+                      startTime: 0,
+                      text: "Recap: SELECT * FROM",
+                    },
+                    {
+                      id: "ps5",
+                      type: "PAGE_SUBHEADER",
+                      startTime: 800,
+                      text: "SELECT = read, * = all columns, FROM = which table",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    onFinish: () => {},
+    onExit: () => {},
+  } as IStudySession,
+};
+
 /** HTML + CSS fill-in-blank exercise with browser preview (single exercise). */
 export const ComplexExercise: Story = {
   args: {
