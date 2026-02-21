@@ -91,7 +91,8 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
 
   const handleEnded = useCallback(() => {
     setHasFinished(true);
-  }, []);
+    onComplete();
+  }, [onComplete]);
 
   return (
     <>
