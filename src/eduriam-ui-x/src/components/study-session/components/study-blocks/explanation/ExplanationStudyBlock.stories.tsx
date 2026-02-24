@@ -86,6 +86,91 @@ const sampleScenes: Scene[] = [
   },
 ];
 
+const databaseTableOnlyScenes: Scene[] = [
+  {
+    id: "db-scene-1",
+    duration: 7000,
+    audio: {
+      url: "https://mocks.eduriam.com/first-paragraph.mp3",
+      captions: [
+        {
+          text: " Database",
+          startMs: 0,
+          endMs: 520,
+          timestampMs: 260,
+          confidence: null,
+        },
+        {
+          text: " table",
+          startMs: 520,
+          endMs: 980,
+          timestampMs: 750,
+          confidence: null,
+        },
+        {
+          text: " only",
+          startMs: 980,
+          endMs: 1450,
+          timestampMs: 1215,
+          confidence: null,
+        },
+        {
+          text: " scene.",
+          startMs: 1450,
+          endMs: 2050,
+          timestampMs: 1750,
+          confidence: null,
+        },
+      ],
+    },
+    slides: [
+      {
+        id: "db-slide-1",
+        type: "RAW",
+        components: [
+          {
+            id: "db-table-1",
+            type: "DATABASE_TABLE",
+            startTime: 0,
+            position: "CENTER",
+            tableName: "query_result",
+            columns: [
+              { key: "id", label: "id" },
+              { key: "email", label: "email" },
+              { key: "country", label: "country" },
+              { key: "active", label: "active" },
+              { key: "last_login", label: "last_login" },
+            ],
+            rows: [
+              {
+                id: 101,
+                email: "hana.rivera@eduriam.dev",
+                country: "US",
+                active: true,
+                last_login: "2026-02-18 08:11:45",
+              },
+              {
+                id: 102,
+                email: "lin.park@eduriam.dev",
+                country: "KR",
+                active: false,
+                last_login: null,
+              },
+              {
+                id: 103,
+                email: "marco.vega@eduriam.dev",
+                country: "ES",
+                active: true,
+                last_login: "2026-02-20 22:41:09",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
 const meta: Meta<typeof ExplanationStudyBlock> = {
   title: "x/study-session/study-blocks/ExplanationStudyBlock",
   component: ExplanationStudyBlock,
@@ -108,5 +193,11 @@ type Story = StoryObj<typeof ExplanationStudyBlock>;
 export const Default: Story = {
   args: {
     scenes: sampleScenes,
+  },
+};
+
+export const DatabaseTableOnly: Story = {
+  args: {
+    scenes: databaseTableOnlyScenes,
   },
 };
