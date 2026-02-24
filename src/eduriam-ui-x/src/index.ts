@@ -30,14 +30,36 @@ export type { CodeBlankProps } from "./components/study-session/components/share
 // Types and Models
 export type { StudyBlockComponentDTO } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
 export { StudyBlockComponentType } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentTypes";
+export type { ExerciseStudyBlockDTO } from "./components/study-session/components/study-blocks/exercise/ExerciseStudyBlockDTO";
+export type { ExplanationStudyBlockDTO } from "./components/study-session/components/study-blocks/explanation/ExplanationStudyBlockDTO";
+export type { BaseStudyBlock } from "./components/study-session/components/study-blocks/StudyBlock";
 export type { StudyBlockDTO } from "./components/study-session/components/study-blocks/StudyBlockDTO";
 export type { AnswerState } from "./components/study-session/types/AnswerState";
-export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";
 export type { StudySessionDataTest } from "./components/study-session/types/StudySessionDataTest";
+export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";
+export type {
+  Caption,
+  Scene,
+} from "./components/video-manager/video-scenes/Scene";
+export type { BaseSlide } from "./components/video-manager/video-slides/BaseSlide";
+export type {
+  IRawSlide,
+  IRawSlideProps,
+} from "./components/video-manager/video-slides/raw-slide/RawSlide";
+export type {
+  Slide,
+  SlideType,
+} from "./components/video-manager/video-slides/Slide";
+export type { SlideTemplates } from "./components/video-manager/video-slides/slide-templates/SlideTemplate";
+export type {
+  IOneHeaderSlide,
+  IOneHeaderSlideProps,
+} from "./components/video-manager/video-slides/slide-templates/specific/OneHeaderSlide";
 export type { ID } from "./models/ID";
 
 // Specific Component Types
 export type {
+  BaseStudyBlockComponent,
   BuildWordComponent,
   CheckListComponent,
   CodeExerciseComponent,
@@ -46,6 +68,8 @@ export type {
   ImageComponent,
   LongAudioComponent,
   MatchingAnswerComponent,
+  MultipleChoiceExerciseComponent,
+  MultipleChoiceExerciseOptionDTO,
   ParagraphComponent,
   PronunciationAnswerComponent,
   ShortAudioComponent,
@@ -55,7 +79,9 @@ export type {
 } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
 
 // Code Editor Types
+export { PASSIVE_TAB_TYPES } from "./components/study-session/components/study-blocks/exercise/components/specific/CodeEditor/CodeEditorTypes";
 export type {
+  BaseTab,
   BrowserTab,
   CodeEditorTab,
   CodeEditorTabType,
@@ -82,6 +108,7 @@ export { MatchOptionType } from "./components/study-session/components/study-blo
 export type {
   AudioMatchOptionDTO,
   ImageMatchOptionDTO,
+  MatchOption,
   MatchOptionDTO,
   TextMatchOptionDTO,
 } from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";

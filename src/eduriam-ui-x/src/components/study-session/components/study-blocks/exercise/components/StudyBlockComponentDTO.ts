@@ -3,7 +3,7 @@ import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 import type { CodeEditorTab } from "./specific/CodeEditor/CodeEditorTypes";
 import { MatchOptionDTO } from "./specific/MatchingAnswer/matching-options/MatchOptionDTO";
 
-interface BaseStudyBlockComponent {
+export interface BaseStudyBlockComponent {
   type: StudyBlockComponentType;
   id: ID;
   /** Optional audio attached to this component, played sequentially by the study block. */

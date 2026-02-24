@@ -1,4 +1,4 @@
-interface MatchOption {
+export interface MatchOption {
   type: MatchOptionType;
   matchIndex?: number;
 }
