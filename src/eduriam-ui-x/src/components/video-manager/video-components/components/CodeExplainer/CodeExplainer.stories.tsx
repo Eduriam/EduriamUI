@@ -68,7 +68,6 @@ export const JavaScriptWalkthrough: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      size: 900,
       colorMode: "DARK",
       stepDurationMs: 2400,
       transitionDurationMs: 500,
@@ -107,6 +106,131 @@ console.log(user.location);`,
 
 console.log(user.location);
 //           ^?`,
+        },
+      ],
+    },
+  },
+};
+
+export const FewLinesLargeFont: Story = {
+  render: JavaScriptWalkthrough.render,
+  args: {
+    comp: {
+      id: "code-explainer-few-lines",
+      type: "CODE_EXPLAINER",
+      startTime: 0,
+      position: "CENTER",
+      colorMode: "DARK",
+      stepDurationMs: 2800,
+      transitionDurationMs: 500,
+      showLineNumbers: true,
+      steps: [
+        {
+          id: "few-1",
+          language: "ts",
+          code: `const isReady = true;
+
+if (isReady) {
+  console.log("Start");
+}`,
+        },
+        {
+          id: "few-2",
+          language: "ts",
+          code: `const isReady = true;
+
+if (isReady) {
+  console.log("Start");
+}
+//           ^?`,
+        },
+      ],
+    },
+  },
+};
+
+export const ManyLinesSmallerFont: Story = {
+  render: JavaScriptWalkthrough.render,
+  args: {
+    comp: {
+      id: "code-explainer-many-lines",
+      type: "CODE_EXPLAINER",
+      startTime: 0,
+      position: "CENTER",
+      colorMode: "DARK",
+      stepDurationMs: 3000,
+      transitionDurationMs: 550,
+      showLineNumbers: true,
+      steps: [
+        {
+          id: "many-1",
+          language: "ts",
+          code: `type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "editor" | "student";
+};
+
+const users: User[] = [
+  { id: "u1", name: "Ada", email: "ada@site.dev", role: "admin" },
+  { id: "u2", name: "Lin", email: "lin@site.dev", role: "student" },
+  { id: "u3", name: "Maya", email: "maya@site.dev", role: "editor" },
+];
+
+const admins = users.filter((u) => u.role === "admin");
+console.log(admins);`,
+        },
+        {
+          id: "many-2",
+          language: "ts",
+          code: `type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "editor" | "student";
+};
+
+const users: User[] = [
+  { id: "u1", name: "Ada", email: "ada@site.dev", role: "admin" },
+  { id: "u2", name: "Lin", email: "lin@site.dev", role: "student" },
+  { id: "u3", name: "Maya", email: "maya@site.dev", role: "editor" },
+];
+
+// @errors: 2339
+const admins = users.filter((u) => u.permissions.includes("manage_users"));
+console.log(admins);`,
+        },
+      ],
+    },
+  },
+};
+
+export const LongLineWrapsToFit: Story = {
+  render: JavaScriptWalkthrough.render,
+  args: {
+    comp: {
+      id: "code-explainer-wrap",
+      type: "CODE_EXPLAINER",
+      startTime: 0,
+      position: "CENTER",
+      colorMode: "DARK",
+      stepDurationMs: 3200,
+      transitionDurationMs: 550,
+      showLineNumbers: true,
+      steps: [
+        {
+          id: "wrap-1",
+          language: "ts",
+          code: `const requestUrl = "https://api.example.dev/v1/very/long/path/that/keeps/going/and/going/and/contains/query?include=profile,settings,permissions,subscriptions,activityLog,notifications&locale=en-US&fallback=true";
+console.log(requestUrl);`,
+        },
+        {
+          id: "wrap-2",
+          language: "ts",
+          code: `const requestUrl = "https://api.example.dev/v1/very/long/path/that/keeps/going/and/going/and/contains/query?include=profile,settings,permissions,subscriptions,activityLog,notifications&locale=en-US&fallback=true";
+//           ^?
+console.log(requestUrl);`,
         },
       ],
     },

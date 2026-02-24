@@ -4,11 +4,11 @@ import Box from "@mui/material/Box";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import { positionToStyle } from "../../../utils/positionToStyle";
-import { resolveSize } from "../../../utils/resolveSize";
 import { CODE_THEME } from "./constants";
 import { CodeStepLayer } from "./components/CodeStepLayer/CodeStepLayer";
 import { CodeTransitionLayer } from "./components/CodeTransitionLayer/CodeTransitionLayer";
 import type { ICodeExplainerProps } from "./types";
+import { computeResponsiveCodeLayout } from "./util/layout";
 import { getStepDurations, getStepState } from "./util/timing";
 import { processStepsWithTwoslash } from "./util/twoslash";
 
@@ -22,7 +22,11 @@ export type {
 
 export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const {
+    fps,
+    width: compositionWidth,
+    height: compositionHeight,
+  } = useVideoConfig();
 
   if (!Array.isArray(comp.steps) || comp.steps.length === 0) {
     throw new Error("CODE_EXPLAINER component requires at least one step.");
@@ -30,6 +34,7 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
 
   const colorMode = comp.colorMode ?? "DARK";
   const theme = CODE_THEME[colorMode];
+  const showLineNumbers = comp.showLineNumbers !== false;
   const defaultStepDurationMs = comp.stepDurationMs ?? 2500;
   const transitionDurationMs = comp.transitionDurationMs ?? 550;
   const processedSteps = useMemo(
@@ -77,26 +82,35 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
-  const width = resolveSize(comp.size);
+  const { fontSize, panelWidth, shouldWrap, codeAreaMinHeight } = useMemo(
+    () =>
+      computeResponsiveCodeLayout({
+        steps: processedSteps,
+        compositionWidth,
+        compositionHeight,
+        showLineNumbers,
+      }),
+    [processedSteps, compositionWidth, compositionHeight, showLineNumbers],
+  );
 
   return (
     <Box style={positionToStyle(comp.position)}>
       <Box
         sx={{
-          width,
-          maxWidth: "92vw",
+          width: panelWidth,
+          maxWidth: "94vw",
           borderRadius: 3,
           border: `1px solid ${theme.panelBorder}`,
           backgroundColor: theme.panel,
           p: 3,
           boxShadow: "0 24px 48px rgba(0, 0, 0, 0.28)",
-          overflow: "hidden",
+          overflow: "visible",
         }}
       >
         <Box
           sx={{
             position: "relative",
-            minHeight: 520,
+            minHeight: codeAreaMinHeight,
           }}
         >
           {previousStep && isTransitioning ? (
@@ -104,18 +118,20 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
               oldStep={previousStep}
               newStep={currentStep}
               colorMode={colorMode}
-              showLineNumbers={comp.showLineNumbers !== false}
+              showLineNumbers={showLineNumbers}
               transitionProgress={transitionProgress}
               annotationOpacity={annotationOpacity}
+              fontSize={fontSize}
+              wrap={shouldWrap}
             />
           ) : (
             <CodeStepLayer
               step={currentStep}
               colorMode={colorMode}
-              showLineNumbers={comp.showLineNumbers !== false}
-              opacity={1}
-              translateY={0}
+              showLineNumbers={showLineNumbers}
               annotationOpacity={annotationOpacity}
+              fontSize={fontSize}
+              wrap={shouldWrap}
             />
           )}
         </Box>

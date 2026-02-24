@@ -5,11 +5,15 @@ import { interpolateColors } from "remotion";
 
 import {
   CODE_FONT_FAMILY,
-  CODE_FONT_SIZE,
+  CODE_LINE_HEIGHT,
   CODE_THEME,
   LINE_NUMBER_GUTTER_CH,
 } from "../../constants";
-import type { CodeExplainerColorMode, CodeExplainerStep } from "../../types";
+import type {
+  CodeExplainerAnnotation,
+  CodeExplainerColorMode,
+  CodeExplainerStep,
+} from "../../types";
 import { buildLineAnnotations } from "../../util/annotations";
 import { getTokenColor, getTokenColors } from "../../util/syntax";
 import {
@@ -25,6 +29,8 @@ export interface CodeTransitionLayerProps {
   showLineNumbers: boolean;
   transitionProgress: number;
   annotationOpacity: number;
+  fontSize: number;
+  wrap: boolean;
 }
 
 export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
@@ -34,6 +40,8 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
   showLineNumbers,
   transitionProgress,
   annotationOpacity,
+  fontSize,
+  wrap,
 }) => {
   const theme = CODE_THEME[colorMode];
   const tokenColors = useMemo(() => getTokenColors(colorMode), [colorMode]);
@@ -61,6 +69,43 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
     () => buildLineAnnotations(newStep),
     [newStep],
   );
+  const annotationOverlays = useMemo(() => {
+    const overlays: Array<{
+      key: string;
+      topEm: number;
+      annotation: CodeExplainerAnnotation;
+      variant: "callout" | "error";
+    }> = [];
+
+    for (let index = 0; index < lines.length; index += 1) {
+      const lineNumber = index + 1;
+      const annotations = annotationsByLine.get(lineNumber);
+      if (!annotations) continue;
+
+      let stackOrder = 0;
+      for (let calloutIndex = 0; calloutIndex < annotations.callouts.length; calloutIndex += 1) {
+        overlays.push({
+          key: `callout-${lineNumber}-${calloutIndex}`,
+          topEm: (index + 1) * CODE_LINE_HEIGHT + stackOrder * 1.1,
+          annotation: annotations.callouts[calloutIndex],
+          variant: "callout",
+        });
+        stackOrder += 1;
+      }
+
+      for (let errorIndex = 0; errorIndex < annotations.errors.length; errorIndex += 1) {
+        overlays.push({
+          key: `error-${lineNumber}-${errorIndex}`,
+          topEm: (index + 1) * CODE_LINE_HEIGHT + stackOrder * 1.1,
+          annotation: annotations.errors[errorIndex],
+          variant: "error",
+        });
+        stackOrder += 1;
+      }
+    }
+
+    return overlays;
+  }, [annotationsByLine, lines.length]);
 
   const inverseProgress = 1 - transitionProgress;
   const showAnnotations = annotationOpacity > 0.01;
@@ -74,10 +119,11 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
           m: 0,
           position: "relative",
           fontFamily: CODE_FONT_FAMILY,
-          fontSize: CODE_FONT_SIZE,
-          lineHeight: 1.5,
+          fontSize,
+          lineHeight: CODE_LINE_HEIGHT,
           color: theme.foreground,
-          whiteSpace: "pre",
+          whiteSpace: wrap ? "pre-wrap" : "pre",
+          overflowWrap: wrap ? "anywhere" : "normal",
         }}
       >
         {lines.map((line, index) => {
@@ -104,6 +150,7 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
                 sx={{
                   display: "flex",
                   alignItems: "flex-start",
+                  minWidth: 0,
                   borderRadius: 1,
                   backgroundColor: hasError
                     ? theme.errorLineBg
@@ -125,7 +172,7 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
                   </Box>
                 ) : null}
 
-                <Box component="span" sx={{ flex: 1 }}>
+                <Box component="span" sx={{ flex: 1, minWidth: 0 }}>
                   {tokens.length > 0 ? (
                     tokens.map((token, tokenIndex) => {
                       const oldToken = transitions.oldByNewGlobalIndex.get(
@@ -148,7 +195,9 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
                         ? (oldToken.start - token.start) * inverseProgress
                         : 0;
                       const translateYEm = oldToken
-                        ? (oldToken.lineIndex - token.lineIndex) * 1.5 * inverseProgress
+                        ? (oldToken.lineIndex - token.lineIndex) *
+                          CODE_LINE_HEIGHT *
+                          inverseProgress
                         : 0.25 * inverseProgress;
 
                       return (
@@ -156,14 +205,18 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
                           key={`${lineNumber}-${tokenIndex}`}
                           component="span"
                           sx={{
-                            display: "inline-block",
+                            display: wrap ? "inline" : "inline-block",
                             color: interpolateColors(
                               transitionProgress,
                               [0, 1],
                               [oldColor, newColor],
                             ),
                             opacity: oldToken ? 1 : transitionProgress,
-                            transform: `translate(${translateXCh}ch, ${translateYEm}em)`,
+                            transform: wrap
+                              ? "none"
+                              : `translate(${translateXCh}ch, ${translateYEm}em)`,
+                            overflowWrap: wrap ? "anywhere" : "normal",
+                            wordBreak: wrap ? "break-word" : "normal",
                             ...(hasErrorUnderline && {
                               textDecorationLine: "underline",
                               textDecorationStyle: "wavy",
@@ -181,56 +234,63 @@ export const CodeTransitionLayer: React.FC<CodeTransitionLayerProps> = ({
                 </Box>
               </Box>
 
-              {showAnnotations
-                ? annotations?.callouts.map((callout, calloutIndex) => (
-                    <AnnotationBubble
-                      key={`callout-${lineNumber}-${calloutIndex}`}
-                      annotation={callout}
-                      stepLanguage={newStep.language}
-                      colorMode={colorMode}
-                      tokenColors={tokenColors}
-                      showLineNumbers={showLineNumbers}
-                      annotationOpacity={annotationOpacity}
-                      variant="callout"
-                    />
-                  ))
-                : null}
-
-              {showAnnotations
-                ? annotations?.errors.map((error, errorIndex) => (
-                    <AnnotationBubble
-                      key={`error-${lineNumber}-${errorIndex}`}
-                      annotation={error}
-                      stepLanguage={newStep.language}
-                      colorMode={colorMode}
-                      tokenColors={tokenColors}
-                      showLineNumbers={showLineNumbers}
-                      annotationOpacity={annotationOpacity}
-                      variant="error"
-                    />
-                  ))
-                : null}
             </React.Fragment>
           );
         })}
 
-        {transitions.removedOldTokens.map((oldToken) => (
+        {showAnnotations ? (
           <Box
-            key={`removed-${oldToken.globalIndex}`}
-            component="span"
             sx={{
               position: "absolute",
-              left: `${codeStartOffsetCh + oldToken.start}ch`,
-              top: `${oldToken.lineIndex * 1.5}em`,
-              color: getTokenColor(oldToken.type, tokenColors, theme.foreground),
-              opacity: inverseProgress,
-              transform: `translateY(${-0.2 * inverseProgress}em)`,
+              inset: 0,
+              overflow: "visible",
+              zIndex: 6,
               pointerEvents: "none",
+              opacity: annotationOpacity,
             }}
           >
-            {oldToken.content}
+            {annotationOverlays.map((overlay) => (
+              <Box
+                key={overlay.key}
+                sx={{
+                  position: "absolute",
+                  left: `${codeStartOffsetCh}ch`,
+                  right: 0,
+                  top: `${overlay.topEm}em`,
+                }}
+              >
+                <AnnotationBubble
+                  annotation={overlay.annotation}
+                  stepLanguage={newStep.language}
+                  colorMode={colorMode}
+                  tokenColors={tokenColors}
+                  variant={overlay.variant}
+                  fontSize={fontSize}
+                />
+              </Box>
+            ))}
           </Box>
-        ))}
+        ) : null}
+
+        {!wrap
+          ? transitions.removedOldTokens.map((oldToken) => (
+              <Box
+                key={`removed-${oldToken.globalIndex}`}
+                component="span"
+                sx={{
+                  position: "absolute",
+                  left: `${codeStartOffsetCh + oldToken.start}ch`,
+                  top: `${oldToken.lineIndex * CODE_LINE_HEIGHT}em`,
+                  color: getTokenColor(oldToken.type, tokenColors, theme.foreground),
+                  opacity: inverseProgress,
+                  transform: `translateY(${-0.2 * inverseProgress}em)`,
+                  pointerEvents: "none",
+                }}
+              >
+                {oldToken.content}
+              </Box>
+            ))
+          : null}
       </Box>
     </Box>
   );

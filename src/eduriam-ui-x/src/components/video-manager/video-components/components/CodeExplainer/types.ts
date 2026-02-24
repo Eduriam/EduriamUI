@@ -1,4 +1,4 @@
-import type { ComponentPosition, ComponentSize } from "../../../types/shared";
+import type { ComponentPosition } from "../../../types/shared";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type CodeExplainerColorMode = "DARK" | "LIGHT";
@@ -28,7 +28,6 @@ export interface CodeExplainerStep {
 export interface ICodeExplainer extends BaseVideoComponent {
   type: "CODE_EXPLAINER";
   position: ComponentPosition;
-  size?: ComponentSize;
   steps: CodeExplainerStep[];
   /** Parse twoslash-style directives (`// ^?`, `// @errors:`) from TS/TSX steps. @default true */
   autoParseTwoslash?: boolean;
@@ -75,8 +74,6 @@ export type LineAnnotations = {
 export type CodeTheme = {
   panel: string;
   panelBorder: string;
-  progressTrack: string;
-  progressFill: string;
   lineNumber: string;
   foreground: string;
   calloutLineBg: string;

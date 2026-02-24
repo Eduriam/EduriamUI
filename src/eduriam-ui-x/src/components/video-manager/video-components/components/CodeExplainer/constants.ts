@@ -4,8 +4,6 @@ export const CODE_THEME: Record<CodeExplainerColorMode, CodeTheme> = {
   DARK: {
     panel: "#0f172a",
     panelBorder: "#1e293b",
-    progressTrack: "#1f2937",
-    progressFill: "#22d3ee",
     lineNumber: "#64748b",
     foreground: "#e2e8f0",
     calloutLineBg: "rgba(34, 211, 238, 0.12)",
@@ -16,8 +14,6 @@ export const CODE_THEME: Record<CodeExplainerColorMode, CodeTheme> = {
   LIGHT: {
     panel: "#f8fafc",
     panelBorder: "#cbd5e1",
-    progressTrack: "#e2e8f0",
-    progressFill: "#0f766e",
     lineNumber: "#64748b",
     foreground: "#0f172a",
     calloutLineBg: "rgba(13, 148, 136, 0.12)",
@@ -28,7 +24,10 @@ export const CODE_THEME: Record<CodeExplainerColorMode, CodeTheme> = {
 };
 
 export const CODE_FONT_FAMILY = '"JetBrains Mono", Consolas, "Courier New", monospace';
-export const CODE_FONT_SIZE = 28;
+export const CODE_MIN_FONT_SIZE = 14;
+export const CODE_MAX_FONT_SIZE = 30;
 export const LINE_NUMBER_GUTTER_CH = 4;
 export const ANNOTATION_ARROW_OFFSET_CH = 1.5;
+export const CODE_LINE_HEIGHT = 1.5;
+export const PANEL_HORIZONTAL_PADDING_PX = 48;
 
