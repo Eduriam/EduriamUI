@@ -6,7 +6,6 @@ export interface Caption {
   startMs: number;
   endMs: number;
   timestampMs: number | null;
-  confidence: number | null;
 }
 
 export type Scene = {
