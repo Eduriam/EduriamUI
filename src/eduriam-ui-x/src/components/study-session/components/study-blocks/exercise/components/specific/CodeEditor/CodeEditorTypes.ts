@@ -26,7 +26,7 @@ export type CodeEditorTabType =
   | "table"
   | "terminal";
 
-interface BaseTab {
+export interface BaseTab {
   /** Unique identifier for the tab. */
   id: string;
   /** Display label shown in the tab bar. */

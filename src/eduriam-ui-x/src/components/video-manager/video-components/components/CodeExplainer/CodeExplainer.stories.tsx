@@ -156,7 +156,6 @@ export const JavaScriptWalkthrough: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      colorMode: "DARK",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -206,7 +205,6 @@ export const FewLinesLargeFont: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      colorMode: "DARK",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -241,7 +239,6 @@ export const ManyLinesSmallerFont: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      colorMode: "DARK",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -296,7 +293,6 @@ export const LongLineWrapsToFit: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      colorMode: "DARK",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -325,7 +321,6 @@ export const LongCodeAutoScroll: Story = {
       type: "CODE_EXPLAINER",
       startTime: 0,
       position: "CENTER",
-      colorMode: "DARK",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
