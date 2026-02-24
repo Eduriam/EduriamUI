@@ -1,4 +1,5 @@
 import type { CodeExplainerStep, StepState } from "../types";
+import { CODE_EXPLAINER_CONFIG } from "../constants";
 
 export const getStepStartFrames = (
   steps: CodeExplainerStep[],
@@ -85,18 +86,16 @@ export const getLastStepHoldMs = (steps: CodeExplainerStep[]): number => {
 export const getTotalDurationFramesFromStepStarts = ({
   steps,
   fps,
-  transitionDurationMs,
 }: {
   steps: CodeExplainerStep[];
   fps: number;
-  transitionDurationMs?: number;
 }): number => {
   if (steps.length === 0) return 1;
 
   const sorted = sortStepsByStartTime(steps);
   const lastStartMs = sorted[sorted.length - 1]?.startTime ?? 0;
   const holdMs = getLastStepHoldMs(sorted);
-  const transitionMs = transitionDurationMs ?? 0;
+  const transitionMs = CODE_EXPLAINER_CONFIG.transitionDurationMs;
   const totalMs = Math.max(1, lastStartMs + holdMs + transitionMs);
 
   return Math.max(1, Math.round((totalMs / 1000) * fps));

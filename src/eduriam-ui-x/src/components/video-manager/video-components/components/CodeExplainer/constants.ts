@@ -31,3 +31,7 @@ export const ANNOTATION_ARROW_OFFSET_CH = 1.5;
 export const CODE_LINE_HEIGHT = 1.5;
 export const PANEL_HORIZONTAL_PADDING_PX = 48;
 
+export const CODE_EXPLAINER_CONFIG = {
+  transitionDurationMs: 550,
+} as const;
+

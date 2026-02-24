@@ -17,7 +17,6 @@ const getDurationInFrames = (comp: ICodeExplainer): number => {
   return getTotalDurationFramesFromStepStarts({
     steps: comp.steps,
     fps: STORYBOOK_FPS,
-    transitionDurationMs: comp.transitionDurationMs,
   });
 };
 
@@ -158,7 +157,6 @@ export const JavaScriptWalkthrough: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      transitionDurationMs: 500,
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -209,7 +207,6 @@ export const FewLinesLargeFont: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      transitionDurationMs: 500,
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -245,7 +242,6 @@ export const ManyLinesSmallerFont: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      transitionDurationMs: 550,
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -301,7 +297,6 @@ export const LongLineWrapsToFit: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      transitionDurationMs: 550,
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -331,7 +326,6 @@ export const LongCodeAutoScroll: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      transitionDurationMs: 550,
       showLineNumbers: true,
       steps: withStepStartTimes([
         {

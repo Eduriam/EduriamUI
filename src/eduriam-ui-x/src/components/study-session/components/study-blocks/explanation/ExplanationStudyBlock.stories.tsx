@@ -248,14 +248,12 @@ const makeCodeExplainerScenes = ({
   slideId,
   componentId,
   stepIntervalMs,
-  transitionDurationMs,
   steps,
 }: {
   sceneId: string;
   slideId: string;
   componentId: string;
   stepIntervalMs: number;
-  transitionDurationMs: number;
   steps: Array<{ id: string; language: string; code: string }>;
 }): Scene[] => [
   {
@@ -278,7 +276,6 @@ const makeCodeExplainerScenes = ({
             startTime: 0,
             position: "CENTER",
             colorMode: "DARK",
-            transitionDurationMs,
             showLineNumbers: true,
             steps: steps.map((step, index) => ({
               ...step,
@@ -382,7 +379,6 @@ const codeExplainerJavaScriptWalkthroughScenes = makeCodeExplainerScenes({
   slideId: "code-slide-js",
   componentId: "code-explainer-js",
   stepIntervalMs: 2400,
-  transitionDurationMs: 500,
   steps: [
     {
       id: "step-1",
@@ -426,7 +422,6 @@ const codeExplainerFewLinesLargeFontScenes = makeCodeExplainerScenes({
   slideId: "code-slide-few-lines",
   componentId: "code-explainer-few-lines",
   stepIntervalMs: 2800,
-  transitionDurationMs: 500,
   steps: [
     {
       id: "few-1",
@@ -455,7 +450,6 @@ const codeExplainerManyLinesSmallerFontScenes = makeCodeExplainerScenes({
   slideId: "code-slide-many-lines",
   componentId: "code-explainer-many-lines",
   stepIntervalMs: 3000,
-  transitionDurationMs: 550,
   steps: [
     {
       id: "many-1",
@@ -504,7 +498,6 @@ const codeExplainerLongLineWrapsToFitScenes = makeCodeExplainerScenes({
   slideId: "code-slide-wrap",
   componentId: "code-explainer-wrap",
   stepIntervalMs: 3200,
-  transitionDurationMs: 550,
   steps: [
     {
       id: "wrap-1",
@@ -527,7 +520,6 @@ const codeExplainerLongCodeAutoScrollScenes = makeCodeExplainerScenes({
   slideId: "code-slide-scroll",
   componentId: "code-explainer-scroll",
   stepIntervalMs: 3200,
-  transitionDurationMs: 550,
   steps: [
     {
       id: "scroll-focus-1",
