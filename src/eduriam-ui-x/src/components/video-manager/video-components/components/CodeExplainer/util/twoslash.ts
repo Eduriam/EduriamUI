@@ -8,13 +8,19 @@ type TwoslashQueryMarker = {
   caretColumn: number;
 };
 
+type ExpectedErrorDirective = {
+  markerLineOriginal: number;
+  codes: number[];
+};
+
 type TwoslashParsedSource = {
   cleanedCode: string;
   cleanedLines: string[];
   originalToCleanLine: Map<number, number>;
   queryMarkers: TwoslashQueryMarker[];
-  expectedErrorCodes: number[];
-  hasDirectives: boolean;
+  focusMarkerOriginalLines: number[];
+  expectedErrorDirectives: ExpectedErrorDirective[];
+  hasTwoslashDirectives: boolean;
 };
 
 const TWOSLASH_TS_LANGUAGES = new Set(["ts", "tsx", "typescript"]);
@@ -28,16 +34,72 @@ const parseExpectedErrorCodes = (line: string): number[] | null => {
   return (match[1].match(/\d+/g) ?? []).map((value) => Number(value));
 };
 
-const parseTwoslashSource = (code: string): TwoslashParsedSource => {
+const isFocusDirective = (line: string): boolean =>
+  /^\s*\/\/\s*@focus\b/i.test(line);
+
+const resolveFocusLineNumber = ({
+  focusMarkerOriginalLines,
+  originalToCleanLine,
+  originalLineCount,
+}: {
+  focusMarkerOriginalLines: number[];
+  originalToCleanLine: Map<number, number>;
+  originalLineCount: number;
+}): number | undefined => {
+  let resolvedLineNumber: number | undefined;
+
+  for (const markerOriginalLine of focusMarkerOriginalLines) {
+    let targetOriginalLine = markerOriginalLine + 1;
+    while (
+      targetOriginalLine < originalLineCount &&
+      !originalToCleanLine.has(targetOriginalLine)
+    ) {
+      targetOriginalLine += 1;
+    }
+
+    const targetCleanLine = originalToCleanLine.get(targetOriginalLine);
+    if (targetCleanLine !== undefined) {
+      resolvedLineNumber = targetCleanLine + 1;
+    }
+  }
+
+  return resolvedLineNumber;
+};
+
+const resolveDirectiveTargetCleanLine = ({
+  markerOriginalLine,
+  originalToCleanLine,
+  originalLineCount,
+}: {
+  markerOriginalLine: number;
+  originalToCleanLine: Map<number, number>;
+  originalLineCount: number;
+}): number | undefined => {
+  let targetOriginalLine = markerOriginalLine + 1;
+  while (
+    targetOriginalLine < originalLineCount &&
+    !originalToCleanLine.has(targetOriginalLine)
+  ) {
+    targetOriginalLine += 1;
+  }
+
+  return originalToCleanLine.get(targetOriginalLine);
+};
+
+const parseTwoslashSource = (
+  code: string,
+  parseTwoslashDirectives: boolean,
+): TwoslashParsedSource => {
   const normalized = code.replace(/\r\n/g, "\n");
   const originalLines = normalized.split("\n");
 
   const cleanedLines: string[] = [];
   const originalToCleanLine = new Map<number, number>();
   const queryMarkers: TwoslashQueryMarker[] = [];
-  const expectedErrorCodes: number[] = [];
+  const focusMarkerOriginalLines: number[] = [];
+  const expectedErrorDirectives: ExpectedErrorDirective[] = [];
 
-  let hasDirectives = false;
+  let hasTwoslashDirectives = false;
 
   for (
     let originalLineIndex = 0;
@@ -46,21 +108,31 @@ const parseTwoslashSource = (code: string): TwoslashParsedSource => {
   ) {
     const line = originalLines[originalLineIndex];
 
-    const parsedErrorCodes = parseExpectedErrorCodes(line);
-    if (parsedErrorCodes) {
-      hasDirectives = true;
-      expectedErrorCodes.push(...parsedErrorCodes);
-      continue;
+    if (parseTwoslashDirectives) {
+      const parsedErrorCodes = parseExpectedErrorCodes(line);
+      if (parsedErrorCodes) {
+        hasTwoslashDirectives = true;
+        expectedErrorDirectives.push({
+          markerLineOriginal: originalLineIndex,
+          codes: parsedErrorCodes,
+        });
+        continue;
+      }
+
+      const queryLineMatch = line.match(/^\s*\/\/(\s*)\^\?\s*$/);
+      if (queryLineMatch) {
+        hasTwoslashDirectives = true;
+        const prefix = queryLineMatch[1]?.length ?? 0;
+        queryMarkers.push({
+          markerLineOriginal: originalLineIndex,
+          caretColumn: prefix + 1,
+        });
+        continue;
+      }
     }
 
-    const queryLineMatch = line.match(/^\s*\/\/(\s*)\^\?\s*$/);
-    if (queryLineMatch) {
-      hasDirectives = true;
-      const prefix = queryLineMatch[1]?.length ?? 0;
-      queryMarkers.push({
-        markerLineOriginal: originalLineIndex,
-        caretColumn: prefix + 1,
-      });
+    if (isFocusDirective(line)) {
+      focusMarkerOriginalLines.push(originalLineIndex);
       continue;
     }
 
@@ -73,8 +145,9 @@ const parseTwoslashSource = (code: string): TwoslashParsedSource => {
     cleanedLines,
     originalToCleanLine,
     queryMarkers,
-    expectedErrorCodes,
-    hasDirectives,
+    focusMarkerOriginalLines,
+    expectedErrorDirectives,
+    hasTwoslashDirectives,
   };
 };
 
@@ -165,26 +238,39 @@ const getQuickInfoMessage = ({
   return null;
 };
 
-const generateTwoslashAnnotations = (step: CodeExplainerStep): CodeExplainerStep => {
-  if (!isTwoslashLanguage(step.language)) {
-    return step;
-  }
+const generateTwoslashAnnotations = (
+  step: CodeExplainerStep,
+  autoParseTwoslash: boolean,
+): CodeExplainerStep => {
+  const shouldParseTwoslash =
+    autoParseTwoslash && isTwoslashLanguage(step.language);
+  const parsed = parseTwoslashSource(step.code, shouldParseTwoslash);
 
-  const parsed = parseTwoslashSource(step.code);
-  if (!parsed.hasDirectives) {
-    return step;
-  }
+  const parsedFocusLineNumber = resolveFocusLineNumber({
+    focusMarkerOriginalLines: parsed.focusMarkerOriginalLines,
+    originalToCleanLine: parsed.originalToCleanLine,
+    originalLineCount: step.code.replace(/\r\n/g, "\n").split("\n").length,
+  });
+  const focusLineNumber = parsedFocusLineNumber ?? step.focusLineNumber;
 
   const fileName =
     step.language.toLowerCase() === "tsx" ? "snippet.tsx" : "snippet.ts";
 
   const initialCallouts = step.callouts ?? [];
   const initialErrors = step.errors ?? [];
+  const baseStep: CodeExplainerStep = {
+    ...step,
+    code: parsed.cleanedCode,
+    focusLineNumber,
+  };
+
+  if (!shouldParseTwoslash || !parsed.hasTwoslashDirectives) {
+    return baseStep;
+  }
 
   if (!parsed.cleanedCode.trim()) {
     return {
-      ...step,
-      code: parsed.cleanedCode,
+      ...baseStep,
       callouts: initialCallouts,
       errors: initialErrors,
     };
@@ -195,10 +281,7 @@ const generateTwoslashAnnotations = (step: CodeExplainerStep): CodeExplainerStep
     const sourceFile = languageService.getProgram()?.getSourceFile(fileName);
 
     if (!sourceFile) {
-      return {
-        ...step,
-        code: parsed.cleanedCode,
-      };
+      return baseStep;
     }
 
     const generatedCallouts: CodeExplainerAnnotation[] = [];
@@ -236,13 +319,39 @@ const generateTwoslashAnnotations = (step: CodeExplainerStep): CodeExplainerStep
     }
 
     const generatedErrors: CodeExplainerAnnotation[] = [];
-    if (parsed.expectedErrorCodes.length > 0) {
+    if (parsed.expectedErrorDirectives.length > 0) {
+      const expectedErrorTargets = parsed.expectedErrorDirectives
+        .map((directive) => {
+          const cleanLine = resolveDirectiveTargetCleanLine({
+            markerOriginalLine: directive.markerLineOriginal,
+            originalToCleanLine: parsed.originalToCleanLine,
+            originalLineCount: step.code.replace(/\r\n/g, "\n").split("\n").length,
+          });
+          if (cleanLine === undefined) return null;
+          return {
+            lineNumber: cleanLine + 1,
+            codes: directive.codes,
+          };
+        })
+        .filter(
+          (target): target is { lineNumber: number; codes: number[] } =>
+            Boolean(target),
+        );
+
       const diagnostics = [
         ...languageService.getSyntacticDiagnostics(fileName),
         ...languageService.getSemanticDiagnostics(fileName),
-      ].filter((diagnostic) =>
-        parsed.expectedErrorCodes.includes(Number(diagnostic.code)),
-      );
+      ].filter((diagnostic) => {
+        if (diagnostic.start === undefined) return false;
+        const { line } = sourceFile.getLineAndCharacterOfPosition(diagnostic.start);
+        const lineNumber = line + 1;
+        const code = Number(diagnostic.code);
+
+        return expectedErrorTargets.some(
+          (target) =>
+            target.lineNumber === lineNumber && target.codes.includes(code),
+        );
+      });
 
       const seenDiagnostics = new Set<string>();
       for (const diagnostic of diagnostics) {
@@ -269,15 +378,13 @@ const generateTwoslashAnnotations = (step: CodeExplainerStep): CodeExplainerStep
     }
 
     return {
-      ...step,
-      code: parsed.cleanedCode,
+      ...baseStep,
       callouts: dedupeAnnotations([...initialCallouts, ...generatedCallouts]),
       errors: dedupeAnnotations([...initialErrors, ...generatedErrors]),
     };
   } catch {
     return {
-      ...step,
-      code: parsed.cleanedCode,
+      ...baseStep,
       callouts: initialCallouts,
       errors: initialErrors,
     };
@@ -288,7 +395,8 @@ export const processStepsWithTwoslash = (
   steps: CodeExplainerStep[],
   autoParseTwoslash: boolean,
 ): CodeExplainerStep[] => {
-  if (!autoParseTwoslash) return steps;
-  return steps.map((step) => generateTwoslashAnnotations(step));
+  return steps.map((step) =>
+    generateTwoslashAnnotations(step, autoParseTwoslash),
+  );
 };
 

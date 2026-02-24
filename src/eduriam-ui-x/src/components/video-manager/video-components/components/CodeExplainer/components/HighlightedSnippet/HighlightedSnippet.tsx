@@ -2,7 +2,7 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 
-import { CODE_FONT_FAMILY, CODE_FONT_SIZE } from "../../constants";
+import { CODE_FONT_FAMILY, CODE_LINE_HEIGHT } from "../../constants";
 import { getLineTokens, getTokenColor } from "../../util/syntax";
 
 export interface HighlightedSnippetProps {
@@ -10,6 +10,7 @@ export interface HighlightedSnippetProps {
   language: string;
   tokenColors: Record<string, string>;
   fallbackColor: string;
+  fontSize: number;
 }
 
 export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
@@ -17,6 +18,7 @@ export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
   language,
   tokenColors,
   fallbackColor,
+  fontSize,
 }) => {
   const lines = code.replace(/\r\n/g, "\n").split("\n");
 
@@ -24,10 +26,12 @@ export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
     <Box
       component="div"
       sx={{
-        whiteSpace: "pre",
+        whiteSpace: "pre-wrap",
+        overflowWrap: "anywhere",
+        wordBreak: "break-word",
         fontFamily: CODE_FONT_FAMILY,
-        fontSize: CODE_FONT_SIZE,
-        lineHeight: 1.5,
+        fontSize,
+        lineHeight: CODE_LINE_HEIGHT,
       }}
     >
       {lines.map((line, lineIndex) => (
@@ -38,6 +42,8 @@ export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
               component="span"
               sx={{
                 color: getTokenColor(type, tokenColors, fallbackColor),
+                overflowWrap: "anywhere",
+                wordBreak: "break-word",
               }}
             >
               {content}

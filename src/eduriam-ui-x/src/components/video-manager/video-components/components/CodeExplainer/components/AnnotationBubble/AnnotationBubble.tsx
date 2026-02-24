@@ -5,9 +5,8 @@ import Box from "@mui/material/Box";
 import {
   ANNOTATION_ARROW_OFFSET_CH,
   CODE_FONT_FAMILY,
-  CODE_FONT_SIZE,
+  CODE_LINE_HEIGHT,
   CODE_THEME,
-  LINE_NUMBER_GUTTER_CH,
 } from "../../constants";
 import type {
   AnnotationVariant,
@@ -21,9 +20,8 @@ export interface AnnotationBubbleProps {
   stepLanguage: string;
   colorMode: CodeExplainerColorMode;
   tokenColors: Record<string, string>;
-  showLineNumbers: boolean;
-  annotationOpacity: number;
   variant: AnnotationVariant;
+  fontSize: number;
 }
 
 export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
@@ -31,9 +29,8 @@ export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
   stepLanguage,
   colorMode,
   tokenColors,
-  showLineNumbers,
-  annotationOpacity,
   variant,
+  fontSize,
 }) => {
   const theme = CODE_THEME[colorMode];
   const column = Math.max(1, annotation.column ?? 1);
@@ -44,28 +41,30 @@ export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
     <Box
       component="div"
       sx={{
-        opacity: annotationOpacity,
         display: "flex",
+        position: "relative",
+        zIndex: 4,
         mt: 0.5,
+        width: "100%",
+        minWidth: 0,
       }}
     >
-      {showLineNumbers ? (
-        <Box component="span" sx={{ width: `${LINE_NUMBER_GUTTER_CH}ch` }} />
-      ) : null}
-
       <Box
         component="div"
         sx={{
           position: "relative",
-          width: "fit-content",
+          flex: 1,
+          width: "auto",
           maxWidth: "100%",
-          minWidth: `${Math.max(column + 4, 18)}ch`,
+          minWidth: 0,
           backgroundColor: bubbleBackground,
           color: theme.foreground,
           borderRadius: 1,
           px: 2,
           py: 1,
           whiteSpace: "pre-wrap",
+          overflowWrap: "anywhere",
+          wordBreak: "break-word",
           ...(variant === "error" && { borderLeft: "4px solid #ef4444" }),
         }}
       >
@@ -74,7 +73,7 @@ export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
             component="span"
             sx={{
               position: "absolute",
-              left: `calc(${Math.max(0, column - 1)}ch + ${ANNOTATION_ARROW_OFFSET_CH}ch)`,
+              left: `min(calc(${Math.max(0, column - 1)}ch + ${ANNOTATION_ARROW_OFFSET_CH}ch), calc(100% - 1rem))`,
               top: "-2px",
               width: "1rem",
               height: "1rem",
@@ -90,14 +89,18 @@ export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
             language={annotation.language ?? stepLanguage}
             tokenColors={tokenColors}
             fallbackColor={theme.foreground}
+            fontSize={fontSize}
           />
         ) : (
           <Box
             component="div"
             sx={{
               fontFamily: CODE_FONT_FAMILY,
-              fontSize: CODE_FONT_SIZE,
-              lineHeight: 1.5,
+              fontSize,
+              lineHeight: CODE_LINE_HEIGHT,
+              whiteSpace: "pre-wrap",
+              overflowWrap: "anywhere",
+              wordBreak: "break-word",
             }}
           >
             {annotation.message}

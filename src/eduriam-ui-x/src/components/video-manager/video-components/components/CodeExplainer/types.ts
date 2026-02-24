@@ -1,4 +1,4 @@
-import type { ComponentPosition, ComponentSize } from "../../../types/shared";
+import type { ComponentPosition } from "../../../types/shared";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type CodeExplainerColorMode = "DARK" | "LIGHT";
@@ -20,8 +20,9 @@ export interface CodeExplainerStep {
   id?: string;
   code: string;
   language: string;
-  title?: string;
-  durationMs?: number;
+  startTime: number;
+  /** Optional 1-based line number to auto-scroll to. */
+  focusLineNumber?: number;
   callouts?: CodeExplainerAnnotation[];
   errors?: CodeExplainerAnnotation[];
 }
@@ -29,14 +30,11 @@ export interface CodeExplainerStep {
 export interface ICodeExplainer extends BaseVideoComponent {
   type: "CODE_EXPLAINER";
   position: ComponentPosition;
-  size?: ComponentSize;
   steps: CodeExplainerStep[];
   /** Parse twoslash-style directives (`// ^?`, `// @errors:`) from TS/TSX steps. @default true */
   autoParseTwoslash?: boolean;
-  stepDurationMs?: number;
   transitionDurationMs?: number;
   colorMode?: CodeExplainerColorMode;
-  showProgressBar?: boolean;
   showLineNumbers?: boolean;
 }
 
@@ -77,8 +75,6 @@ export type LineAnnotations = {
 export type CodeTheme = {
   panel: string;
   panelBorder: string;
-  progressTrack: string;
-  progressFill: string;
   lineNumber: string;
   foreground: string;
   calloutLineBg: string;
@@ -94,7 +90,6 @@ export type StepState = {
   startFrame: number;
   duration: number;
   frameInStep: number;
-  stepProgress: number;
   totalDurationInFrames: number;
 };
 

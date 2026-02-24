@@ -174,14 +174,12 @@ const codeExplainerDefinition: VideoDefinition = {
               type: "CODE_EXPLAINER",
               startTime: 0,
               position: "CENTER",
-              size: 1000,
               colorMode: "DARK",
-              stepDurationMs: 2600,
               transitionDurationMs: 550,
               steps: [
                 {
                   id: "step-1",
-                  title: "Base object",
+                  startTime: 0,
                   language: "ts",
                   code: `const user = {
   name: "Ada",
@@ -193,7 +191,7 @@ console.log(user);
                 },
                 {
                   id: "step-2",
-                  title: "Type error",
+                  startTime: 2600,
                   language: "ts",
                   code: `const user = {
   name: "Ada",
@@ -205,7 +203,7 @@ console.log(user.location);`,
                 },
                 {
                   id: "step-3",
-                  title: "Resolved",
+                  startTime: 5200,
                   language: "ts",
                   code: `const user = {
   name: "Ada",
