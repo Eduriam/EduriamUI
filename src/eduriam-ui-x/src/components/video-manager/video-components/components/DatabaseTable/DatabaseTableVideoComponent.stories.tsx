@@ -1,11 +1,11 @@
 import { theme } from "@eduriam/ui-core";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { DatabaseTable } from "./DatabaseTable";
+import { DatabaseTableVideoComponent } from "./DatabaseTableVideoComponent";
 
-const meta: Meta<typeof DatabaseTable> = {
+const meta: Meta<typeof DatabaseTableVideoComponent> = {
   title: "x/video-manager/video-components/DatabaseTable",
-  component: DatabaseTable,
+  component: DatabaseTableVideoComponent,
   decorators: [
     (Story) => (
       <div
@@ -24,7 +24,7 @@ const meta: Meta<typeof DatabaseTable> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof DatabaseTable>;
+type Story = StoryObj<typeof DatabaseTableVideoComponent>;
 
 export const QueryResult: Story = {
   args: {

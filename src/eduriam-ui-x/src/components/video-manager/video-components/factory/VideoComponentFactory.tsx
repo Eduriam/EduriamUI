@@ -5,7 +5,7 @@ import BackgroundColor from "../components/BackgroundColor/BackgroundColor";
 import BackgroundImage from "../components/BackgroundImage/BackgroundImage";
 import { BackgroundVideo } from "../components/BackgroundVideo/BackgroundVideo";
 import { CodeExplainer } from "../components/CodeExplainer/CodeExplainer";
-import { DatabaseTable } from "../components/DatabaseTable/DatabaseTable";
+import { DatabaseTableVideoComponent } from "../components/DatabaseTable/DatabaseTableVideoComponent";
 import { Header } from "../components/Header/Header";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
@@ -31,7 +31,7 @@ export class VideoComponentFactory {
       case "TABLE":
         return <Table comp={comp} />;
       case "DATABASE_TABLE":
-        return <DatabaseTable comp={comp} />;
+        return <DatabaseTableVideoComponent comp={comp} />;
       case "IMAGE":
         return <Image comp={comp} />;
       case "VIDEO":

@@ -3,7 +3,7 @@ import type { IBackgroundColor } from "./components/BackgroundColor/BackgroundCo
 import { IBackgroundImage } from "./components/BackgroundImage/BackgroundImage";
 import type { IBackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
 import type { ICodeExplainer } from "./components/CodeExplainer/CodeExplainer";
-import type { IDatabaseTable } from "./components/DatabaseTable/DatabaseTable";
+import type { IDatabaseTableVideoComponent } from "./components/DatabaseTable/DatabaseTableVideoComponent";
 import type { IHeader } from "./components/Header/Header";
 import type { IImage } from "./components/Image/Image";
 import type { IList } from "./components/List/List";
@@ -30,7 +30,7 @@ export type VideoComponent =
   | IParagraph
   | IList
   | ITable
-  | IDatabaseTable
+  | IDatabaseTableVideoComponent
   | IImage
   | IVideo
   | IBackgroundImage
