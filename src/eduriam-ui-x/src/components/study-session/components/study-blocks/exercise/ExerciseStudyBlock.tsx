@@ -7,10 +7,11 @@ import { Box, Stack } from "@mui/material";
 import { useStudySessionAudio } from "../../../context/StudySessionAudioContext";
 import { useStudyBlockAudio } from "../../../hooks/useStudyBlockAudio";
 import { AnswerState } from "../../../types/AnswerState";
+import type { StudySessionDataTest } from "../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
+import { isAnswerComponent } from "./components/AnswerComponentConfig";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
-import { isAnswerComponent } from "./components/answerComponentConfig";
 
 export interface IExerciseStudyBlock {
   components: StudyBlockComponentDTO[];
@@ -26,6 +27,7 @@ export interface IExerciseStudyBlock {
    * not replay.
    */
   isRevisiting?: boolean;
+  dataTest?: StudySessionDataTest;
 }
 
 export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
@@ -33,6 +35,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   onCheck,
   localization,
   isRevisiting = false,
+  dataTest,
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
   const [studyBlockState, setStudyBlockState] = useState<
@@ -118,6 +121,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
             passiveTabsUnlocked={studyBlockState === "SUBMITTED"}
             checkDisabled={studyBlockState === "NOT_READY"}
             onCheckPress={handleClick}
+            dataTest={dataTest}
           />
         ))}
       </Stack>
@@ -143,6 +147,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
             onClick={handleClick}
             disabled={studyBlockState !== "READY"}
             fullWidth={true}
+            data-test={dataTest?.checkAnswerButton}
           >
             {localization.studyBlock.checkButton}
           </LargeButton>

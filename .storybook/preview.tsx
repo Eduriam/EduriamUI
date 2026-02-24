@@ -22,7 +22,9 @@ const preview: Preview = {
     (Story) => (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Story />
+        <div style={{ minHeight: "100dvh" }}>
+          <Story />
+        </div>
       </ThemeProvider>
     ),
   ],

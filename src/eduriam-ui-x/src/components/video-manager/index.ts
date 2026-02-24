@@ -1,6 +1,8 @@
 // RemotionVideoPlayer
 export { VideoPlayer as RemotionVideoPlayer } from "./video-player/VideoPlayer";
 export type { IVideoPlayer as IRemotionVideoPlayer } from "./video-player/VideoPlayer";
+export type { Caption } from "./video-scenes/Scene";
+export { DEFAULT_VIDEO_FPS } from "./video-player/videoPlayerConfig";
 
 // VideoBuilder
 export { VideoBuilder } from "./video-builder/VideoBuilder";
@@ -37,6 +39,11 @@ export type {
 export type { IBackgroundColor as BackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as BackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as BackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type {
+  CodeExplainerAnnotation,
+  CodeExplainerStep,
+  ICodeExplainer as CodeExplainerComponent,
+} from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IHeader as HeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
 export type {
@@ -46,6 +53,12 @@ export type {
 export type { IPageHeader as PageHeaderComponent } from "./video-components/components/PageHeader/PageHeader";
 export type { IPageSubheader as PageSubheaderComponent } from "./video-components/components/PageSubheader/PageSubheader";
 export type { IParagraph as ParagraphComponent } from "./video-components/components/Paragraph/Paragraph";
+export type {
+  DatabaseColumn,
+  IDatabaseTableVideoComponent as DatabaseTableComponent,
+  DatabaseRow,
+  DatabaseValue,
+} from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export type {
   TableCell,
   ITable as TableComponent,
@@ -57,6 +70,8 @@ export type { IVideo as VideoComponent } from "./video-components/components/Vid
 export type { IBackgroundColor as VMBackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
+export type { IDatabaseTableVideoComponent as VMDatabaseTableComponent } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export type { IHeader as VMHeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as VMImageComponent } from "./video-components/components/Image/Image";
 export type { IList as VMListComponent } from "./video-components/components/List/List";
@@ -79,6 +94,15 @@ export { resolveSize } from "./utils/resolveSize";
 export { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export { BackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export {
+  CodeExplainer,
+  CodeExplainer as VideoCodeExplainer,
+} from "./video-components/components/CodeExplainer/CodeExplainer";
+export {
+  DatabaseTableVideoComponent,
+  DatabaseTableVideoComponent as DatabaseTable,
+  DatabaseTableVideoComponent as VideoDatabaseTable,
+} from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export {
   Header,
   Header as VideoHeader,
@@ -112,6 +136,8 @@ export { Video as VideoVideo } from "./video-components/components/Video/Video";
 export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
+export type { IDatabaseTableVideoComponentProps as IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export type { IHeaderProps as IHeader } from "./video-components/components/Header/Header";
 export type { IImageProps as IImage } from "./video-components/components/Image/Image";
 export type { IListProps as IList } from "./video-components/components/List/List";

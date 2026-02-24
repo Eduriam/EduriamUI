@@ -475,6 +475,7 @@ __metadata:
     "@mui/icons-material": "npm:^5.15.20"
     "@mui/lab": "npm:^5.0.0-alpha.94"
     "@mui/material": "npm:^5.15.20"
+    "@remotion/captions": "npm:^4.0.353"
     "@remotion/player": "npm:^4.0.353"
     "@types/dompurify": "npm:^3.2.0"
     canvas-confetti: "npm:^1.9.3"
@@ -489,7 +490,7 @@ __metadata:
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.6.2"
   peerDependencies:
-    "@eduriam/ui-core": ^0.6.43
+    "@eduriam/ui-core": ^0.6.44
     "@emotion/react": ^11
     "@emotion/styled": ^11
     "@mui/icons-material": ^5
@@ -1703,6 +1704,13 @@ __metadata:
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
   checksum: 10c0/4681e682abc006d25eb380d0cf3efc7557043f53b6aea7a5057d0d1e7df849a00e281cd8ea79c902a35a414d7919621fc2ba293ecec05f413598e0b23d5a1e63
+  languageName: node
+  linkType: hard
+
+"@remotion/captions@npm:^4.0.353":
+  version: 4.0.427
+  resolution: "@remotion/captions@npm:4.0.427"
+  checksum: 10c0/b64d6ae0d3be06dc21e680f36fe62e173a6bbaf712276db5c2e42d013ad75f4a54db4474aec013be4d2fb17864f6ec68ec3f364c791ce7943d6a026f2ed6cc71
   languageName: node
   linkType: hard
 

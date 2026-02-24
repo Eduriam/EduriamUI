@@ -70,6 +70,8 @@ export const ICON_CONFIG = {
   restore: { glyph: "restore", variant: "outlined" },
   audioOn: { glyph: "volume_up", variant: "outlined" },
   audioOff: { glyph: "volume_off", variant: "outlined" },
+  pause: { glyph: "pause", variant: "filled" },
+  replay: { glyph: "replay", variant: "filled" },
 } as const satisfies Record<string, IconConfigEntry>;
 
 /** Array of valid icon names. Use for Storybook controls. */

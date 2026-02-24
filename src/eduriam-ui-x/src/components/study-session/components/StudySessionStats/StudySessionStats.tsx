@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
+import type { StudySessionDataTest } from "../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
 import { StatsCard } from "./StatsCard";
 import Confetti from "./components/Confetti";
@@ -32,6 +33,7 @@ export interface StudySessionStatsProps {
 
   /** Localization strings for the stats screen. */
   localization: StudySessionLocalization;
+  dataTest?: StudySessionDataTest;
 }
 
 function formatTime(ms: number): string {
@@ -55,13 +57,14 @@ export const StudySessionStats: React.FC<StudySessionStatsProps> = ({
   conceptCount,
   onContinue,
   localization,
+  dataTest,
 }) => {
   const loc = localization.studySessionStats;
 
   return (
     <>
       <Stack
-        data-test="study-session-stats"
+        data-test={dataTest?.studyStatsSection ?? "study-session-stats"}
         sx={{
           minHeight: "100dvh",
           display: "flex",

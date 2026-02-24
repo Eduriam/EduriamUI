@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.46",
+  "version": "0.2.47",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -21,6 +21,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@remotion/captions": "^4.0.353",
     "@remotion/player": "^4.0.353",
     "canvas-confetti": "^1.9.3",
     "prism-react-renderer": "^2.4.0",
@@ -28,7 +29,7 @@
     "remotion": "^4.0.353"
   },
   "peerDependencies": {
-    "@eduriam/ui-core": "^0.6.43",
+    "@eduriam/ui-core": "^0.6.44",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5",

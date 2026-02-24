@@ -36,6 +36,17 @@ export const WithExplanation: Story = {
   },
 };
 
+export const WithSkipExercise: Story = {
+  args: {
+    variant: "incorrect",
+    allowSkipExercise: true,
+    onExplanationClick: () => {},
+    onReportClick: () => {},
+    onContinueClick: () => {},
+    onSkipExerciseClick: () => {},
+  },
+};
+
 function DrawerWithOpenButton(
   args: React.ComponentProps<typeof StudySessionDrawer>
 ) {
