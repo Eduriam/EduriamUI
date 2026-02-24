@@ -1,14 +1,16 @@
+import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+
 import React, { useMemo } from "react";
 
 import Box from "@mui/material/Box";
-import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import { positionToStyle } from "../../../utils/positionToStyle";
-import { CODE_THEME } from "./constants";
 import { CodeStepLayer } from "./components/CodeStepLayer/CodeStepLayer";
 import { CodeTransitionLayer } from "./components/CodeTransitionLayer/CodeTransitionLayer";
+import { CODE_THEME } from "./constants";
 import type { ICodeExplainerProps } from "./types";
 import { computeResponsiveCodeLayout } from "./util/layout";
+import { computeStepScrollOffsets } from "./util/scroll";
 import { getStepDurations, getStepState } from "./util/timing";
 import { processStepsWithTwoslash } from "./util/twoslash";
 
@@ -38,7 +40,8 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   const defaultStepDurationMs = comp.stepDurationMs ?? 2500;
   const transitionDurationMs = comp.transitionDurationMs ?? 550;
   const processedSteps = useMemo(
-    () => processStepsWithTwoslash(comp.steps, comp.autoParseTwoslash !== false),
+    () =>
+      processStepsWithTwoslash(comp.steps, comp.autoParseTwoslash !== false),
     [comp.steps, comp.autoParseTwoslash],
   );
   const transitionDurationFrames = Math.max(
@@ -75,13 +78,6 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
       )
     : 1;
 
-  const annotationOpacity = interpolate(
-    stepState.frameInStep,
-    [Math.max(0, transitionDurationFrames - 8), transitionDurationFrames + 8],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-  );
-
   const { fontSize, panelWidth, shouldWrap, codeAreaMinHeight } = useMemo(
     () =>
       computeResponsiveCodeLayout({
@@ -92,6 +88,74 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
       }),
     [processedSteps, compositionWidth, compositionHeight, showLineNumbers],
   );
+  const stepScrollOffsets = useMemo(
+    () =>
+      computeStepScrollOffsets({
+        steps: processedSteps,
+        fontSize,
+        panelWidth,
+        viewportHeight: codeAreaMinHeight,
+        showLineNumbers,
+        wrap: shouldWrap,
+      }),
+    [
+      processedSteps,
+      fontSize,
+      panelWidth,
+      codeAreaMinHeight,
+      showLineNumbers,
+      shouldWrap,
+    ],
+  );
+  const currentScrollOffsetPx = stepScrollOffsets[stepState.index] ?? 0;
+  const previousScrollOffsetPx =
+    stepState.index > 0 ? (stepScrollOffsets[stepState.index - 1] ?? 0) : 0;
+  const scrollDurationFrames = Math.max(
+    transitionDurationFrames + 8,
+    Math.round(fps * 0.8),
+  );
+  const scrollProgress = previousStep
+    ? interpolate(stepState.frameInStep, [0, scrollDurationFrames], [0, 1], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+        easing: Easing.inOut(Easing.cubic),
+      })
+    : 1;
+  const smoothScrollOffsetPx = previousStep
+    ? interpolate(
+        scrollProgress,
+        [0, 1],
+        [previousScrollOffsetPx, currentScrollOffsetPx],
+        {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        },
+      )
+    : currentScrollOffsetPx;
+  const annotationDelayFrames = Math.max(3, Math.round(fps * 0.1));
+  const annotationFadeFrames = Math.max(6, Math.round(fps * 0.2));
+  const annotationStartFrame = previousStep
+    ? Math.min(
+        stepState.duration - 1,
+        scrollDurationFrames + annotationDelayFrames,
+      )
+    : 0;
+  const annotationEndFrame = Math.min(
+    stepState.duration,
+    annotationStartFrame + annotationFadeFrames,
+  );
+  const annotationOpacity = previousStep
+    ? annotationEndFrame <= annotationStartFrame
+      ? stepState.frameInStep >= annotationStartFrame
+        ? 1
+        : 0
+      : interpolate(
+          stepState.frameInStep,
+          [annotationStartFrame, annotationEndFrame],
+          [0, 1],
+          { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+        )
+    : 1;
 
   return (
     <Box style={positionToStyle(comp.position)}>
@@ -110,7 +174,8 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
         <Box
           sx={{
             position: "relative",
-            minHeight: codeAreaMinHeight,
+            height: codeAreaMinHeight,
+            overflow: "hidden",
           }}
         >
           {previousStep && isTransitioning ? (
@@ -123,6 +188,9 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
               annotationOpacity={annotationOpacity}
               fontSize={fontSize}
               wrap={shouldWrap}
+              scrollOffsetPx={smoothScrollOffsetPx}
+              panelWidth={panelWidth}
+              viewportHeightPx={codeAreaMinHeight}
             />
           ) : (
             <CodeStepLayer
@@ -132,10 +200,12 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
               annotationOpacity={annotationOpacity}
               fontSize={fontSize}
               wrap={shouldWrap}
+              scrollOffsetPx={smoothScrollOffsetPx}
+              panelWidth={panelWidth}
+              viewportHeightPx={codeAreaMinHeight}
             />
           )}
         </Box>
-
       </Box>
     </Box>
   );

@@ -14,7 +14,17 @@ import type {
   CodeExplainerStep,
 } from "../../types";
 import { buildLineAnnotations } from "../../util/annotations";
-import { getLineTokens, getTokenColor, getTokenColors } from "../../util/syntax";
+import {
+  createCodeTextMeasurer,
+  getCodeInnerWidthPx,
+  getStepVisualLineStartOffsetsPx,
+  getWrappedVisualLinesForText,
+} from "../../util/scroll";
+import {
+  getLineTokens,
+  getTokenColor,
+  getTokenColors,
+} from "../../util/syntax";
 import { AnnotationBubble } from "../AnnotationBubble/AnnotationBubble";
 
 export interface CodeStepLayerProps {
@@ -24,6 +34,9 @@ export interface CodeStepLayerProps {
   annotationOpacity: number;
   fontSize: number;
   wrap: boolean;
+  scrollOffsetPx: number;
+  panelWidth: number;
+  viewportHeightPx: number;
 }
 
 export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
@@ -33,18 +46,51 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
   annotationOpacity,
   fontSize,
   wrap,
+  scrollOffsetPx,
+  panelWidth,
+  viewportHeightPx,
 }) => {
   const theme = CODE_THEME[colorMode];
   const tokenColors = useMemo(() => getTokenColors(colorMode), [colorMode]);
 
   const annotationsByLine = useMemo(() => buildLineAnnotations(step), [step]);
-  const lines = useMemo(() => step.code.replace(/\r\n/g, "\n").split("\n"), [step]);
+  const lines = useMemo(
+    () => step.code.replace(/\r\n/g, "\n").split("\n"),
+    [step],
+  );
+  const lineStartOffsetsPx = useMemo(
+    () =>
+      getStepVisualLineStartOffsetsPx({
+        step,
+        fontSize,
+        panelWidth,
+        showLineNumbers,
+        wrap,
+      }),
+    [step, fontSize, panelWidth, showLineNumbers, wrap],
+  );
   const showAnnotations = annotationOpacity > 0.01;
   const codeStartOffsetCh = showLineNumbers ? LINE_NUMBER_GUTTER_CH : 0;
+  const lineHeightPx = fontSize * CODE_LINE_HEIGHT;
+  const measureText = useMemo(
+    () => createCodeTextMeasurer(fontSize),
+    [fontSize],
+  );
+  const innerWidthPx = useMemo(
+    () =>
+      getCodeInnerWidthPx({
+        fontSize,
+        panelWidth,
+        showLineNumbers,
+        measureText,
+      }),
+    [fontSize, panelWidth, showLineNumbers, measureText],
+  );
+  const bubbleInnerWidthPx = Math.max(1, innerWidthPx - 32);
   const annotationOverlays = useMemo(() => {
     const overlays: Array<{
       key: string;
-      topEm: number;
+      topPx: number;
       annotation: CodeExplainerAnnotation;
       variant: "callout" | "error";
     }> = [];
@@ -54,30 +100,71 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
       const annotations = annotationsByLine.get(lineNumber);
       if (!annotations) continue;
 
-      let stackOrder = 0;
-      for (let calloutIndex = 0; calloutIndex < annotations.callouts.length; calloutIndex += 1) {
-        overlays.push({
+      const lineTopPx = lineStartOffsetsPx[index] ?? index * lineHeightPx;
+      const lineBasePx = lineTopPx + lineHeightPx;
+      const annotationsForLine: Array<{
+        key: string;
+        annotation: CodeExplainerAnnotation;
+        variant: "callout" | "error";
+      }> = [
+        ...annotations.callouts.map((annotation, calloutIndex) => ({
           key: `callout-${lineNumber}-${calloutIndex}`,
-          topEm: (index + 1) * CODE_LINE_HEIGHT + stackOrder * 1.1,
-          annotation: annotations.callouts[calloutIndex],
-          variant: "callout",
-        });
-        stackOrder += 1;
-      }
-
-      for (let errorIndex = 0; errorIndex < annotations.errors.length; errorIndex += 1) {
-        overlays.push({
+          annotation,
+          variant: "callout" as const,
+        })),
+        ...annotations.errors.map((annotation, errorIndex) => ({
           key: `error-${lineNumber}-${errorIndex}`,
-          topEm: (index + 1) * CODE_LINE_HEIGHT + stackOrder * 1.1,
-          annotation: annotations.errors[errorIndex],
-          variant: "error",
+          annotation,
+          variant: "error" as const,
+        })),
+      ];
+
+      let belowStackOrder = 0;
+      let aboveStackOrder = 0;
+      for (const item of annotationsForLine) {
+        const source = item.annotation.code ?? item.annotation.message;
+        const wrappedLines = getWrappedVisualLinesForText({
+          text: source,
+          innerWidthPx: bubbleInnerWidthPx,
+          measureText,
         });
-        stackOrder += 1;
+        const bubbleHeightPx = (wrappedLines + 1.2) * lineHeightPx;
+        const belowTopPx = lineBasePx + belowStackOrder * 1.1 * lineHeightPx;
+        const aboveTopPx =
+          lineTopPx - bubbleHeightPx - aboveStackOrder * 1.1 * lineHeightPx;
+        const visibleBottomPx = scrollOffsetPx + viewportHeightPx;
+        const spaceBelowPx = visibleBottomPx - belowTopPx;
+        const spaceAbovePx = lineTopPx - scrollOffsetPx;
+        const shouldPlaceAbove =
+          spaceBelowPx < bubbleHeightPx && spaceAbovePx > spaceBelowPx;
+        const topPx = shouldPlaceAbove ? Math.max(0, aboveTopPx) : belowTopPx;
+
+        overlays.push({
+          key: item.key,
+          topPx,
+          annotation: item.annotation,
+          variant: item.variant,
+        });
+
+        if (shouldPlaceAbove) {
+          aboveStackOrder += 1;
+        } else {
+          belowStackOrder += 1;
+        }
       }
     }
 
     return overlays;
-  }, [annotationsByLine, lines.length]);
+  }, [
+    annotationsByLine,
+    bubbleInnerWidthPx,
+    lineHeightPx,
+    lineStartOffsetsPx,
+    lines.length,
+    measureText,
+    scrollOffsetPx,
+    viewportHeightPx,
+  ]);
 
   return (
     <Box
@@ -90,6 +177,7 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
         component="div"
         sx={{
           m: 0,
+          transform: `translateY(${-scrollOffsetPx}px)`,
           fontFamily: CODE_FONT_FAMILY,
           fontSize,
           lineHeight: CODE_LINE_HEIGHT,
@@ -149,37 +237,40 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
                 ) : null}
 
                 <Box component="span" sx={{ flex: 1, minWidth: 0 }}>
-                  {tokens.length > 0 ? (
-                    tokens.map(({ type, content, start, end }, tokenIndex) => {
-                      const hasErrorUnderline = errorRanges.some(
-                        (range) => start < range.end && end > range.start,
-                      );
+                  {tokens.length > 0
+                    ? tokens.map(
+                        ({ type, content, start, end }, tokenIndex) => {
+                          const hasErrorUnderline = errorRanges.some(
+                            (range) => start < range.end && end > range.start,
+                          );
 
-                      return (
-                        <Box
-                          key={`${lineNumber}-${tokenIndex}`}
-                          component="span"
-                          sx={{
-                            color: getTokenColor(type, tokenColors, theme.foreground),
-                            overflowWrap: wrap ? "anywhere" : "normal",
-                            wordBreak: wrap ? "break-word" : "normal",
-                            ...(hasErrorUnderline && {
-                              textDecorationLine: "underline",
-                              textDecorationStyle: "wavy",
-                              textDecorationColor: "#ef4444",
-                            }),
-                          }}
-                        >
-                          {content}
-                        </Box>
-                      );
-                    })
-                  ) : (
-                    "\u00A0"
-                  )}
+                          return (
+                            <Box
+                              key={`${lineNumber}-${tokenIndex}`}
+                              component="span"
+                              sx={{
+                                color: getTokenColor(
+                                  type,
+                                  tokenColors,
+                                  theme.foreground,
+                                ),
+                                overflowWrap: wrap ? "anywhere" : "normal",
+                                wordBreak: wrap ? "break-word" : "normal",
+                                ...(hasErrorUnderline && {
+                                  textDecorationLine: "underline",
+                                  textDecorationStyle: "wavy",
+                                  textDecorationColor: "#ef4444",
+                                }),
+                              }}
+                            >
+                              {content}
+                            </Box>
+                          );
+                        },
+                      )
+                    : "\u00A0"}
                 </Box>
               </Box>
-
             </React.Fragment>
           );
         })}
@@ -202,7 +293,7 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
                   position: "absolute",
                   left: `${codeStartOffsetCh}ch`,
                   right: 0,
-                  top: `${overlay.topEm}em`,
+                  top: `${overlay.topPx}px`,
                 }}
               >
                 <AnnotationBubble
@@ -223,4 +314,3 @@ export const CodeStepLayer: React.FC<CodeStepLayerProps> = ({
 };
 
 export default CodeStepLayer;
-

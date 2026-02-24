@@ -21,6 +21,8 @@ export interface CodeExplainerStep {
   code: string;
   language: string;
   durationMs?: number;
+  /** Optional 1-based line number to auto-scroll to. */
+  focusLineNumber?: number;
   callouts?: CodeExplainerAnnotation[];
   errors?: CodeExplainerAnnotation[];
 }
