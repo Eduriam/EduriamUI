@@ -11,7 +11,12 @@ import { CODE_THEME } from "./constants";
 import type { ICodeExplainerProps } from "./types";
 import { computeResponsiveCodeLayout } from "./util/layout";
 import { computeStepScrollOffsets } from "./util/scroll";
-import { getStepDurations, getStepState } from "./util/timing";
+import {
+  getStepStartFrames,
+  getStepState,
+  sortStepsByStartTime,
+  validateStepStartTimes,
+} from "./util/timing";
 import { processStepsWithTwoslash } from "./util/twoslash";
 
 export type {
@@ -37,30 +42,33 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   const colorMode = comp.colorMode ?? "DARK";
   const theme = CODE_THEME[colorMode];
   const showLineNumbers = comp.showLineNumbers !== false;
-  const defaultStepDurationMs = comp.stepDurationMs ?? 2500;
   const transitionDurationMs = comp.transitionDurationMs ?? 550;
   const processedSteps = useMemo(
     () =>
       processStepsWithTwoslash(comp.steps, comp.autoParseTwoslash !== false),
     [comp.steps, comp.autoParseTwoslash],
   );
+  const timelineSteps = useMemo(() => {
+    validateStepStartTimes(processedSteps);
+    return sortStepsByStartTime(processedSteps);
+  }, [processedSteps]);
   const transitionDurationFrames = Math.max(
     1,
     Math.round((transitionDurationMs / 1000) * fps),
   );
 
-  const stepDurations = useMemo(
-    () => getStepDurations(processedSteps, fps, defaultStepDurationMs),
-    [processedSteps, fps, defaultStepDurationMs],
+  const stepStartFrames = useMemo(
+    () => getStepStartFrames(timelineSteps, fps),
+    [timelineSteps, fps],
   );
   const stepState = useMemo(
-    () => getStepState(frame, stepDurations),
-    [frame, stepDurations],
+    () => getStepState(frame, stepStartFrames),
+    [frame, stepStartFrames],
   );
 
-  const currentStep = processedSteps[stepState.index];
+  const currentStep = timelineSteps[stepState.index];
   const previousStep =
-    stepState.index > 0 ? processedSteps[stepState.index - 1] : null;
+    stepState.index > 0 ? timelineSteps[stepState.index - 1] : null;
   const isTransitioning = Boolean(
     previousStep && stepState.frameInStep < transitionDurationFrames,
   );
@@ -81,17 +89,17 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   const { fontSize, panelWidth, shouldWrap, codeAreaMinHeight } = useMemo(
     () =>
       computeResponsiveCodeLayout({
-        steps: processedSteps,
+        steps: timelineSteps,
         compositionWidth,
         compositionHeight,
         showLineNumbers,
       }),
-    [processedSteps, compositionWidth, compositionHeight, showLineNumbers],
+    [timelineSteps, compositionWidth, compositionHeight, showLineNumbers],
   );
   const stepScrollOffsets = useMemo(
     () =>
       computeStepScrollOffsets({
-        steps: processedSteps,
+        steps: timelineSteps,
         fontSize,
         panelWidth,
         viewportHeight: codeAreaMinHeight,
@@ -99,7 +107,7 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
         wrap: shouldWrap,
       }),
     [
-      processedSteps,
+      timelineSteps,
       fontSize,
       panelWidth,
       codeAreaMinHeight,

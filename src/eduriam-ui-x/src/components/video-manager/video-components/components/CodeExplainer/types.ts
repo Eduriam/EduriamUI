@@ -20,7 +20,7 @@ export interface CodeExplainerStep {
   id?: string;
   code: string;
   language: string;
-  durationMs?: number;
+  startTime: number;
   /** Optional 1-based line number to auto-scroll to. */
   focusLineNumber?: number;
   callouts?: CodeExplainerAnnotation[];
@@ -33,7 +33,6 @@ export interface ICodeExplainer extends BaseVideoComponent {
   steps: CodeExplainerStep[];
   /** Parse twoslash-style directives (`// ^?`, `// @errors:`) from TS/TSX steps. @default true */
   autoParseTwoslash?: boolean;
-  stepDurationMs?: number;
   transitionDurationMs?: number;
   colorMode?: CodeExplainerColorMode;
   showLineNumbers?: boolean;

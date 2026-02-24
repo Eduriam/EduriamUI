@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Player } from "@remotion/player";
 
 import { CodeExplainer, type ICodeExplainer } from "./CodeExplainer";
+import { getTotalDurationFramesFromStepStarts } from "./util/timing";
 
 const STORYBOOK_FPS = 30;
 const STORYBOOK_WIDTH = 1920;
@@ -13,14 +14,21 @@ const StoryComposition = ({ comp }: { comp: ICodeExplainer }) => (
 );
 
 const getDurationInFrames = (comp: ICodeExplainer): number => {
-  const defaultStepDurationMs = comp.stepDurationMs ?? 2500;
-  const totalFrames = comp.steps.reduce((sum, step) => {
-    const ms = step.durationMs ?? defaultStepDurationMs;
-    return sum + Math.max(1, Math.round((ms / 1000) * STORYBOOK_FPS));
-  }, 0);
-
-  return Math.max(1, totalFrames);
+  return getTotalDurationFramesFromStepStarts({
+    steps: comp.steps,
+    fps: STORYBOOK_FPS,
+    transitionDurationMs: comp.transitionDurationMs,
+  });
 };
+
+const withStepStartTimes = <T extends { id: string; language: string; code: string }>(
+  steps: T[],
+  stepIntervalMs: number,
+): Array<T & { startTime: number }> =>
+  steps.map((step, index) => ({
+    ...step,
+    startTime: index * stepIntervalMs,
+  }));
 
 const addCommentAboveLine = (
   code: string,
@@ -150,10 +158,9 @@ export const JavaScriptWalkthrough: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      stepDurationMs: 2400,
       transitionDurationMs: 500,
       showLineNumbers: true,
-      steps: [
+      steps: withStepStartTimes([
         {
           id: "step-1",
           language: "ts",
@@ -188,7 +195,7 @@ console.log(user.location);`,
 console.log(user.location);
 //           ^?`,
         },
-      ],
+      ], 2400),
     },
   },
 };
@@ -202,10 +209,9 @@ export const FewLinesLargeFont: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      stepDurationMs: 2800,
       transitionDurationMs: 500,
       showLineNumbers: true,
-      steps: [
+      steps: withStepStartTimes([
         {
           id: "few-1",
           language: "ts",
@@ -225,7 +231,7 @@ if (isReady) {
 }
 //           ^?`,
         },
-      ],
+      ], 2800),
     },
   },
 };
@@ -239,10 +245,9 @@ export const ManyLinesSmallerFont: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      stepDurationMs: 3000,
       transitionDurationMs: 550,
       showLineNumbers: true,
-      steps: [
+      steps: withStepStartTimes([
         {
           id: "many-1",
           language: "ts",
@@ -282,7 +287,7 @@ const users: User[] = [
 const admins = users.filter((u) => u.permissions.includes("manage_users"));
 console.log(admins);`,
         },
-      ],
+      ], 3000),
     },
   },
 };
@@ -296,10 +301,9 @@ export const LongLineWrapsToFit: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      stepDurationMs: 3200,
       transitionDurationMs: 550,
       showLineNumbers: true,
-      steps: [
+      steps: withStepStartTimes([
         {
           id: "wrap-1",
           language: "ts",
@@ -313,7 +317,7 @@ console.log(requestUrl);`,
 //           ^?
 console.log(requestUrl);`,
         },
-      ],
+      ], 3200),
     },
   },
 };
@@ -327,10 +331,9 @@ export const LongCodeAutoScroll: Story = {
       startTime: 0,
       position: "CENTER",
       colorMode: "DARK",
-      stepDurationMs: 3200,
       transitionDurationMs: 550,
       showLineNumbers: true,
-      steps: [
+      steps: withStepStartTimes([
         {
           id: "scroll-focus-1",
           language: "ts",
@@ -346,7 +349,7 @@ export const LongCodeAutoScroll: Story = {
           language: "ts",
           code: longCodeWithError,
         },
-      ],
+      ], 3200),
     },
   },
 };
