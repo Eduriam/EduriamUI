@@ -39,14 +39,13 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
     throw new Error("CODE_EXPLAINER component requires at least one step.");
   }
 
-  const colorMode = comp.colorMode ?? "DARK";
+  const colorMode = CODE_EXPLAINER_CONFIG.colorMode;
   const theme = CODE_THEME[colorMode];
   const showLineNumbers = comp.showLineNumbers !== false;
   const transitionDurationMs = CODE_EXPLAINER_CONFIG.transitionDurationMs;
   const processedSteps = useMemo(
-    () =>
-      processStepsWithTwoslash(comp.steps, comp.autoParseTwoslash !== false),
-    [comp.steps, comp.autoParseTwoslash],
+    () => processStepsWithTwoslash(comp.steps),
+    [comp.steps],
   );
   const timelineSteps = useMemo(() => {
     validateStepStartTimes(processedSteps);

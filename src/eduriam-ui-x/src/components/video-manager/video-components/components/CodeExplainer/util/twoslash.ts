@@ -240,10 +240,8 @@ const getQuickInfoMessage = ({
 
 const generateTwoslashAnnotations = (
   step: CodeExplainerStep,
-  autoParseTwoslash: boolean,
 ): CodeExplainerStep => {
-  const shouldParseTwoslash =
-    autoParseTwoslash && isTwoslashLanguage(step.language);
+  const shouldParseTwoslash = isTwoslashLanguage(step.language);
   const parsed = parseTwoslashSource(step.code, shouldParseTwoslash);
 
   const parsedFocusLineNumber = resolveFocusLineNumber({
@@ -393,10 +391,7 @@ const generateTwoslashAnnotations = (
 
 export const processStepsWithTwoslash = (
   steps: CodeExplainerStep[],
-  autoParseTwoslash: boolean,
 ): CodeExplainerStep[] => {
-  return steps.map((step) =>
-    generateTwoslashAnnotations(step, autoParseTwoslash),
-  );
+  return steps.map((step) => generateTwoslashAnnotations(step));
 };
 

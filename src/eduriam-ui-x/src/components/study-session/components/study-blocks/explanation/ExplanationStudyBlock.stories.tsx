@@ -275,7 +275,6 @@ const makeCodeExplainerScenes = ({
             type: "CODE_EXPLAINER",
             startTime: 0,
             position: "CENTER",
-            colorMode: "DARK",
             showLineNumbers: true,
             steps: steps.map((step, index) => ({
               ...step,

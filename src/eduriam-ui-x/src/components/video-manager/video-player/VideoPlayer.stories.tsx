@@ -174,7 +174,6 @@ const codeExplainerDefinition: VideoDefinition = {
               type: "CODE_EXPLAINER",
               startTime: 0,
               position: "CENTER",
-              colorMode: "DARK",
               steps: [
                 {
                   id: "step-1",
