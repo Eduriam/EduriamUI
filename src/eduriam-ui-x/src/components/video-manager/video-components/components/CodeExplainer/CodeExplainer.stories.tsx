@@ -76,7 +76,6 @@ export const JavaScriptWalkthrough: Story = {
       steps: [
         {
           id: "step-1",
-          title: "Initial object",
           language: "ts",
           code: `const user = {
   name: "Ada",
@@ -88,7 +87,6 @@ console.log(user);
         },
         {
           id: "step-2",
-          title: "Intentional mistake",
           language: "ts",
           code: `const user = {
   name: "Ada",
@@ -100,7 +98,6 @@ console.log(user.location);`,
         },
         {
           id: "step-3",
-          title: "Fixed code",
           language: "ts",
           code: `const user = {
   name: "Ada",

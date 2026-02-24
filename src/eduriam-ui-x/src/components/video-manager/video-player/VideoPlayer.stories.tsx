@@ -181,7 +181,6 @@ const codeExplainerDefinition: VideoDefinition = {
               steps: [
                 {
                   id: "step-1",
-                  title: "Base object",
                   language: "ts",
                   code: `const user = {
   name: "Ada",
@@ -193,7 +192,6 @@ console.log(user);
                 },
                 {
                   id: "step-2",
-                  title: "Type error",
                   language: "ts",
                   code: `const user = {
   name: "Ada",
@@ -205,7 +203,6 @@ console.log(user.location);`,
                 },
                 {
                   id: "step-3",
-                  title: "Resolved",
                   language: "ts",
                   code: `const user = {
   name: "Ada",

@@ -171,6 +171,127 @@ const databaseTableOnlyScenes: Scene[] = [
   },
 ];
 
+const codeExplainerScenes: Scene[] = [
+  {
+    id: "code-scene-1",
+    duration: 9000,
+    audio: {
+      url: "https://mocks.eduriam.com/first-paragraph.mp3",
+      captions: [
+        {
+          text: " Let's",
+          startMs: 0,
+          endMs: 300,
+          timestampMs: 150,
+          confidence: null,
+        },
+        {
+          text: " inspect",
+          startMs: 300,
+          endMs: 780,
+          timestampMs: 540,
+          confidence: null,
+        },
+        {
+          text: " this",
+          startMs: 780,
+          endMs: 980,
+          timestampMs: 880,
+          confidence: null,
+        },
+        {
+          text: " code",
+          startMs: 980,
+          endMs: 1240,
+          timestampMs: 1110,
+          confidence: null,
+        },
+        {
+          text: " step",
+          startMs: 1240,
+          endMs: 1490,
+          timestampMs: 1365,
+          confidence: null,
+        },
+        {
+          text: " by",
+          startMs: 1490,
+          endMs: 1680,
+          timestampMs: 1580,
+          confidence: null,
+        },
+        {
+          text: " step.",
+          startMs: 1680,
+          endMs: 2100,
+          timestampMs: 1890,
+          confidence: null,
+        },
+      ],
+    },
+    slides: [
+      {
+        id: "code-slide-1",
+        type: "RAW",
+        components: [
+          {
+            id: "code-bg-1",
+            type: "BACKGROUND_COLOR",
+            startTime: 0,
+            color: "#020617",
+          },
+          {
+            id: "code-explainer-1",
+            type: "CODE_EXPLAINER",
+            startTime: 0,
+            position: "CENTER",
+            size: 1000,
+            colorMode: "DARK",
+            stepDurationMs: 2600,
+            transitionDurationMs: 550,
+            steps: [
+              {
+                id: "code-step-1",
+                language: "ts",
+                code: `const user = {
+  name: "Ada",
+  age: 26,
+};
+
+console.log(user);
+//           ^?`,
+              },
+              {
+                id: "code-step-2",
+                language: "ts",
+                code: `const user = {
+  name: "Ada",
+  age: 26,
+};
+
+// @errors: 2339
+console.log(user.location);`,
+              },
+              {
+                id: "code-step-3",
+                language: "ts",
+                code: `const user = {
+  name: "Ada",
+  age: 26,
+  location: "London",
+};
+
+console.log(user.location);
+//           ^?`,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
 const meta: Meta<typeof ExplanationStudyBlock> = {
   title: "x/study-session/study-blocks/ExplanationStudyBlock",
   component: ExplanationStudyBlock,
@@ -199,5 +320,11 @@ export const Default: Story = {
 export const DatabaseTableOnly: Story = {
   args: {
     scenes: databaseTableOnlyScenes,
+  },
+};
+
+export const WithCodeExplainer: Story = {
+  args: {
+    scenes: codeExplainerScenes,
   },
 };

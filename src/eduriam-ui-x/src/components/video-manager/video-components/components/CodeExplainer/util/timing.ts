@@ -30,13 +30,11 @@ export const getStepState = (
     const end = accumulated + duration;
     if (clampedFrame < end || index === durationsInFrames.length - 1) {
       const frameInStep = clampedFrame - accumulated;
-      const stepProgress = duration <= 0 ? 1 : frameInStep / duration;
       return {
         index,
         startFrame: accumulated,
         duration,
         frameInStep,
-        stepProgress: Math.max(0, Math.min(stepProgress, 1)),
         totalDurationInFrames: safeTotalDuration,
       };
     }
@@ -48,7 +46,6 @@ export const getStepState = (
     startFrame: 0,
     duration: safeTotalDuration,
     frameInStep: 0,
-    stepProgress: 0,
     totalDurationInFrames: safeTotalDuration,
   };
 };

@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import { positionToStyle } from "../../../utils/positionToStyle";
@@ -79,10 +78,6 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   );
 
   const width = resolveSize(comp.size);
-  const progressInVideo = Math.min(
-    1,
-    frame / Math.max(1, stepState.totalDurationInFrames),
-  );
 
   return (
     <Box style={positionToStyle(comp.position)}>
@@ -98,46 +93,6 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
           overflow: "hidden",
         }}
       >
-        {comp.showProgressBar !== false ? (
-          <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
-            {processedSteps.map((_, stepIndex) => {
-              const segmentProgress =
-                stepIndex < stepState.index
-                  ? 1
-                  : stepIndex === stepState.index
-                    ? stepState.stepProgress
-                    : 0;
-
-              return (
-                <Box
-                  key={`progress-${stepIndex}`}
-                  sx={{
-                    height: 6,
-                    flex: 1,
-                    borderRadius: 999,
-                    overflow: "hidden",
-                    backgroundColor: theme.progressTrack,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      height: "100%",
-                      width: `${segmentProgress * 100}%`,
-                      backgroundColor: theme.progressFill,
-                    }}
-                  />
-                </Box>
-              );
-            })}
-          </Box>
-        ) : null}
-
-        {currentStep.title ? (
-          <Typography variant="h6" sx={{ mb: 1.5, color: theme.foreground }}>
-            {currentStep.title}
-          </Typography>
-        ) : null}
-
         <Box
           sx={{
             position: "relative",
@@ -165,9 +120,6 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
           )}
         </Box>
 
-        <Box sx={{ mt: 2, color: theme.lineNumber, fontSize: 13 }}>
-          {Math.round(progressInVideo * 100)}%
-        </Box>
       </Box>
     </Box>
   );

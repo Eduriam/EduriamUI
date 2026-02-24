@@ -20,7 +20,6 @@ export interface CodeExplainerStep {
   id?: string;
   code: string;
   language: string;
-  title?: string;
   durationMs?: number;
   callouts?: CodeExplainerAnnotation[];
   errors?: CodeExplainerAnnotation[];
@@ -36,7 +35,6 @@ export interface ICodeExplainer extends BaseVideoComponent {
   stepDurationMs?: number;
   transitionDurationMs?: number;
   colorMode?: CodeExplainerColorMode;
-  showProgressBar?: boolean;
   showLineNumbers?: boolean;
 }
 
@@ -94,7 +92,6 @@ export type StepState = {
   startFrame: number;
   duration: number;
   frameInStep: number;
-  stepProgress: number;
   totalDurationInFrames: number;
 };
 
