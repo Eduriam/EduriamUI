@@ -33,6 +33,7 @@ export { StudyBlockComponentType } from "./components/study-session/components/s
 export type { StudyBlockDTO } from "./components/study-session/components/study-blocks/StudyBlockDTO";
 export type { AnswerState } from "./components/study-session/types/AnswerState";
 export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";
+export type { StudySessionDataTest } from "./components/study-session/types/StudySessionDataTest";
 export type { ID } from "./models/ID";
 
 // Specific Component Types

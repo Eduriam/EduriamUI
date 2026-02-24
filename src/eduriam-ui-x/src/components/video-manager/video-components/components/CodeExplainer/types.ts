@@ -33,7 +33,6 @@ export interface ICodeExplainer extends BaseVideoComponent {
   steps: CodeExplainerStep[];
   /** Parse twoslash-style directives (`// ^?`, `// @errors:`) from TS/TSX steps. @default true */
   autoParseTwoslash?: boolean;
-  transitionDurationMs?: number;
   colorMode?: CodeExplainerColorMode;
   showLineNumbers?: boolean;
 }

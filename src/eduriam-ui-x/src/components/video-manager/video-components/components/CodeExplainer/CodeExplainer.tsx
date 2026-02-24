@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import { positionToStyle } from "../../../utils/positionToStyle";
 import { CodeStepLayer } from "./components/CodeStepLayer/CodeStepLayer";
 import { CodeTransitionLayer } from "./components/CodeTransitionLayer/CodeTransitionLayer";
-import { CODE_THEME } from "./constants";
+import { CODE_EXPLAINER_CONFIG, CODE_THEME } from "./constants";
 import type { ICodeExplainerProps } from "./types";
 import { computeResponsiveCodeLayout } from "./util/layout";
 import { computeStepScrollOffsets } from "./util/scroll";
@@ -42,7 +42,7 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
   const colorMode = comp.colorMode ?? "DARK";
   const theme = CODE_THEME[colorMode];
   const showLineNumbers = comp.showLineNumbers !== false;
-  const transitionDurationMs = comp.transitionDurationMs ?? 550;
+  const transitionDurationMs = CODE_EXPLAINER_CONFIG.transitionDurationMs;
   const processedSteps = useMemo(
     () =>
       processStepsWithTwoslash(comp.steps, comp.autoParseTwoslash !== false),
