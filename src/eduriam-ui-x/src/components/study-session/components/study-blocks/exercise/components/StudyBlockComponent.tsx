@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AnswerState } from "../../../../types/AnswerState";
+import type { StudySessionDataTest } from "../../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../../types/StudySessionLocalization";
 import { StudyBlockComponentDTO } from "./StudyBlockComponentDTO";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
@@ -36,6 +37,7 @@ export interface IStudyBlockComponent {
   checkDisabled?: boolean;
   /** Called when the user triggers a check (e.g. via the keyboard check button). */
   onCheckPress?: () => void;
+  dataTest?: StudySessionDataTest;
 }
 
 export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
@@ -45,6 +47,7 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
   passiveTabsUnlocked,
   checkDisabled,
   onCheckPress,
+  dataTest,
 }) => {
   switch (component.type) {
     case StudyBlockComponentType.HEADER:
@@ -64,6 +67,7 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           component={component}
           onAnswerStateChange={onAnswerStateChange}
           localization={localization.multipleChoiceExercise}
+          dataTest={dataTest?.multipleChoiceExercise}
         />
       );
     case StudyBlockComponentType.SHORT_AUDIO:

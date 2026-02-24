@@ -16,11 +16,12 @@ export interface IMultipleChoiceExerciseStudyBlockComponent {
   component: MultipleChoiceExerciseComponent;
   onAnswerStateChange?: (answer: AnswerState) => void;
   localization?: MultipleChoiceExerciseLocalization;
+  dataTest?: string;
 }
 
 export const MultipleChoiceExercise: React.FC<
   IMultipleChoiceExerciseStudyBlockComponent
-> = ({ component, onAnswerStateChange, localization }) => {
+> = ({ component, onAnswerStateChange, localization, dataTest }) => {
   const [selectedId, setSelectedId] = useState<string | undefined>();
 
   const assignmentTitle = localization?.assignmentTitle;
@@ -35,7 +36,7 @@ export const MultipleChoiceExercise: React.FC<
   }, [state, onAnswerStateChange]);
 
   return (
-    <Stack direction="column" alignItems="center">
+    <Stack direction="column" alignItems="center" data-test={dataTest}>
       <Stack direction="column" alignItems="flex-start" spacing={4}>
         {assignmentTitle ? (
           <>

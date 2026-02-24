@@ -26,6 +26,7 @@ import {
 import { useSwipeNavigation } from "./hooks/useSwipeNavigation";
 import { AnswerState } from "./types/AnswerState";
 import type { StudySessionDTO as StudySessionModel } from "./types/StudySessionDTO";
+import type { StudySessionDataTest } from "./types/StudySessionDataTest";
 import type { StudySessionLocalization } from "./types/StudySessionLocalization";
 
 const slideForward = keyframes({
@@ -60,6 +61,7 @@ export interface IStudySession {
   ) => void;
   onExit: () => void;
   localization?: StudySessionLocalization;
+  dataTest?: StudySessionDataTest;
 }
 
 interface AtomStats {
@@ -72,6 +74,7 @@ const StudySession: React.FC<IStudySession> = ({
   onFinish,
   onExit,
   localization: localizationProp,
+  dataTest,
 }) => {
   const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
   const theme = useTheme();
@@ -192,7 +195,7 @@ const StudySession: React.FC<IStudySession> = ({
     setStudyBlockQueue((prev) => [...prev, studyBlock]);
   }
 
-  function handleContinue(result: AnswerState) {
+  function handleContinue(result: AnswerState, rescheduleWhenWrong = true) {
     clearTimeout(drawerTimeoutRef.current);
     setDrawerVariant(null);
     setCheckedResult(null);
@@ -216,7 +219,7 @@ const StudySession: React.FC<IStudySession> = ({
       return next;
     });
 
-    if (result === "WRONG") {
+    if (result === "WRONG" && rescheduleWhenWrong) {
       rescheduleStudyBlock(currentBlock);
     }
 
@@ -334,6 +337,16 @@ const StudySession: React.FC<IStudySession> = ({
   // ---------------------------------------------------------------------------
 
   const isRevisiting = index <= furthestCompletedIndex;
+  const currentStudyBlock = studyBlockQueue[index];
+  const currentWrongAttempts =
+    currentStudyBlock && checkedResult === "WRONG"
+      ? (atomStatsMap.get(currentStudyBlock.atomId)?.wrong ?? 0) + 1
+      : 0;
+  const allowSkipExercise =
+    !isRevisiting &&
+    drawerVariant === "incorrect" &&
+    checkedResult === "WRONG" &&
+    currentWrongAttempts >= 3;
 
   return (
     <StudySessionAudioProvider>
@@ -345,10 +358,11 @@ const StudySession: React.FC<IStudySession> = ({
           conceptCount={finishedStatsSnapshot.conceptCount}
           onContinue={onExit}
           localization={localization}
+          dataTest={dataTest}
         />
       ) : (
         <Stack
-          data-test="study-session-page"
+          data-test={dataTest?.studySessionPage ?? "study-session-page"}
           sx={{
             minHeight: "100dvh",
             display: "flex",
@@ -393,6 +407,7 @@ const StudySession: React.FC<IStudySession> = ({
                     }}
                     localization={localization}
                     isRevisiting={isRevisiting}
+                    dataTest={dataTest}
                   />
                 )}
               {studyBlockQueue[index] &&
@@ -402,6 +417,7 @@ const StudySession: React.FC<IStudySession> = ({
                     scenes={studyBlockQueue[index].scenes}
                     onComplete={handleExplanationComplete}
                     localization={localization}
+                    dataTest={dataTest}
                   />
                 )}
             </ContentContainer>
@@ -422,8 +438,19 @@ const StudySession: React.FC<IStudySession> = ({
                   handleContinue(checkedResult);
                 }
               }}
+              onSkipExerciseClick={() => {
+                if (!checkedResult) return;
+                handleContinue(checkedResult, false);
+              }}
+              allowSkipExercise={allowSkipExercise}
               playSound={playDrawerSound}
               localization={localization}
+              dataTest={dataTest}
+              primaryButtonDataTest={
+                drawerVariant === "incorrect"
+                  ? dataTest?.retryExerciseButton
+                  : dataTest?.continueButton
+              }
             />
           )}
 

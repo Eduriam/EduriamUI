@@ -11,15 +11,21 @@ import React, {
 import { Box, useMediaQuery } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
-import type { Caption, Scene, VideoDefinition } from "../../../../video-manager";
+import type {
+  Caption,
+  Scene,
+  VideoDefinition,
+} from "../../../../video-manager";
 import { DEFAULT_VIDEO_FPS } from "../../../../video-manager";
 import { VideoPlayer } from "../../../../video-manager/video-player/VideoPlayer";
+import type { StudySessionDataTest } from "../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 
 export interface IExplanationStudyBlock {
   scenes: Scene[];
   onComplete: () => void;
   localization: StudySessionLocalization;
+  dataTest?: StudySessionDataTest;
 }
 
 const VIDEO_ASPECT_RATIO = 16 / 9;
@@ -48,6 +54,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   scenes,
   onComplete,
   localization,
+  dataTest,
 }) => {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -121,6 +128,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
     <>
       <Box
         ref={containerRef}
+        data-test={dataTest?.explanationBlockSection}
         sx={{
           width: "100%",
           position: "relative",
@@ -137,11 +145,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
             captions={captions}
             autoPlay
             onEnded={handleEnded}
-            style={
-              desktop
-                ? undefined
-                : { width: "100%", height: "100%" }
-            }
+            style={desktop ? undefined : { width: "100%", height: "100%" }}
           />
         )}
       </Box>
@@ -157,6 +161,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
           onClick={onComplete}
           disabled={!hasFinished}
           fullWidth
+          data-test={dataTest?.continueButton}
         >
           {localization.studyBlock.continueButton}
         </LargeButton>
