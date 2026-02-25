@@ -33,6 +33,13 @@ function resolveLanguage(lang: string): string {
 
 function getGrammar(language: string): Prism.Grammar | undefined {
   const resolved = resolveLanguage(language);
+  if (
+    resolved === "bash" &&
+    !Prism.languages.bash &&
+    !Prism.languages.shell
+  ) {
+    return Prism.languages.clike ?? Prism.languages.markup ?? undefined;
+  }
   return Prism.languages[resolved] ?? Prism.languages.markup ?? undefined;
 }
 
