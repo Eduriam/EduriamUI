@@ -351,6 +351,10 @@ const StudySession: React.FC<IStudySession> = ({
   // ---------------------------------------------------------------------------
 
   const isRevisiting = index <= furthestCompletedIndex;
+  const currentExerciseAnswerExplanation =
+    studyBlockQueue[index] && studyBlockQueue[index].type === "exercise"
+      ? studyBlockQueue[index].answerExplanation
+      : undefined;
   const currentWrongAttempts = wrongAttemptsByIndex.get(index) ?? 0;
   const allowSkipExercise =
     !isRevisiting &&
@@ -444,6 +448,7 @@ const StudySession: React.FC<IStudySession> = ({
             <StudySessionDrawer
               variant={drawerVariant}
               onReportClick={() => {}}
+              answerExplanation={currentExerciseAnswerExplanation}
               onContinueOrRetryClick={() => {
                 if (drawerVariant === "incorrect") {
                   handleRetryExercise();

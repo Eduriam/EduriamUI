@@ -8,6 +8,7 @@ export const STUDY_SESSION_LOCALIZATION_DEFAULT: StudySessionLocalization = {
   studySessionDrawer: {
     titleCorrect: "Correct!",
     titleIncorrect: "Incorrect",
+    explanationTitle: "Explanation",
     whyButton: "Why?",
     continueButton: "Continue",
   },

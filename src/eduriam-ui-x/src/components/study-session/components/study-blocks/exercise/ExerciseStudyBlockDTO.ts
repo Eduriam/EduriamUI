@@ -4,4 +4,7 @@ import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
 export interface ExerciseStudyBlockDTO extends BaseStudyBlock {
   type: "exercise";
   components: Array<StudyBlockComponentDTO>;
+  answerExplanation?: {
+    text: string;
+  };
 }

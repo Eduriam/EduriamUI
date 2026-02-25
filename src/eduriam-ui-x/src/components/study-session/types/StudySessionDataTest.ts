@@ -9,7 +9,7 @@ export interface StudySessionDataTest {
   correctAnswerDrawer?: string;
   incorrectAnswerDrawer?: string;
   showExplanationButton?: string;
-  explanationSection?: string;
+  exerciseAnswerExplanationSection?: string;
   gotItButton?: string;
   retryExerciseButton?: string;
   skipExerciseButton?: string;

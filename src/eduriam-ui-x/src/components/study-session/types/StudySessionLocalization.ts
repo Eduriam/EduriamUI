@@ -6,6 +6,7 @@ export interface StudySessionLocalization {
   studySessionDrawer: {
     titleCorrect: string;
     titleIncorrect: string;
+    explanationTitle: string;
     whyButton: string;
     continueButton: string;
     skipExerciseButton?: string;

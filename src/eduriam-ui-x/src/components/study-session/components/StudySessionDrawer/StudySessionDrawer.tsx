@@ -1,6 +1,11 @@
-import { Drawer, IconButton, LargeButton } from "@eduriam/ui-core";
+import {
+  Drawer,
+  ExplanationDrawer,
+  IconButton,
+  LargeButton,
+} from "@eduriam/ui-core";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,6 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { AudioPlayer } from "../../../../audio";
 import type { StudySessionDataTest } from "../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../types/StudySessionLocalization";
+import type { ExerciseStudyBlockDTO } from "../study-blocks/exercise/ExerciseStudyBlockDTO";
 
 export type StudySessionDrawerVariant = "correct" | "incorrect";
 
@@ -22,12 +28,7 @@ export interface StudySessionDrawerProps {
    */
   variant: StudySessionDrawerVariant;
 
-  /**
-   * Called when the explanation button is clicked.
-   *
-   * If undefined, the explanation button is not rendered.
-   */
-  onExplanationClick?: () => void;
+  answerExplanation?: ExerciseStudyBlockDTO["answerExplanation"];
 
   /**
    * Called when the report icon button is clicked.
@@ -41,7 +42,7 @@ export interface StudySessionDrawerProps {
   /**
    * Called when the skip exercise button is clicked.
    *
-   * If undefined, `onContinueClick` is used as fallback.
+   * If undefined, `onContinueOrRetryClick` is used as fallback.
    */
   onSkipExerciseClick?: () => void;
   /**
@@ -80,7 +81,7 @@ export interface StudySessionDrawerProps {
  */
 export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   variant,
-  onExplanationClick,
+  answerExplanation,
   onReportClick,
   onContinueOrRetryClick: onContinueClick,
   onSkipExerciseClick,
@@ -93,10 +94,10 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
 }) => {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
-
-  const hasExplanation = Boolean(onExplanationClick);
+  const [isExplanationOpen, setIsExplanationOpen] = useState(false);
 
   const isCorrect = variant === "correct";
+  const hasExplanation = !isCorrect && Boolean(answerExplanation?.text);
 
   useEffect(() => {
     if (!playSound) return;
@@ -137,102 +138,137 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   const whyDataTest = dataTestConfig?.showExplanationButton;
   const skipDataTest = dataTestConfig?.skipExerciseButton;
   const handleSkipExerciseClick = onSkipExerciseClick ?? onContinueClick;
+  const handleExplanationClick = () => {
+    setIsExplanationOpen(true);
+  };
 
   return (
-    <Drawer
-      open
-      onClose={() => undefined}
-      maxDialogWidth={520}
-      data-test={drawerDataTest}
-      backgroundColor={isCorrect ? "success" : "error"}
-      disableDesktopDialog={true}
-      maxContentWidth="medium"
-      hideBackdrop={true}
-    >
-      <Box
-        sx={(theme) => ({
-          position: "relative",
-          borderRadius: 2,
-        })}
+    <>
+      <Drawer
+        open
+        onClose={() => undefined}
+        maxDialogWidth={520}
+        data-test={drawerDataTest}
+        backgroundColor={isCorrect ? "success" : "error"}
+        disableDesktopDialog={true}
+        maxContentWidth="medium"
+        hideBackdrop={true}
       >
-        {/* Header row with title and report icon */}
         <Box
-          sx={{
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            mb: 3,
-            gap: 2,
-          }}
+          sx={(theme) => ({
+            position: "relative",
+            borderRadius: 2,
+          })}
         >
-          <Typography variant="h5" fontWeight={600}>
-            {title}
-          </Typography>
+          {/* Header row with title and report icon */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              mb: 3,
+              gap: 2,
+            }}
+          >
+            <Typography variant="h5" fontWeight={600}>
+              {title}
+            </Typography>
 
-          <IconButton
-            size="medium"
-            variant="text"
-            color={isCorrect ? "success" : "error"}
-            icon="report"
-            onClick={onReportClick}
-            data-test="study-session-drawer-report"
-          />
-        </Box>
+            <IconButton
+              size="medium"
+              variant="text"
+              color={isCorrect ? "success" : "error"}
+              icon="report"
+              onClick={onReportClick}
+              data-test="study-session-drawer-report"
+            />
+          </Box>
 
-        {/* Buttons */}
-        {showSkipButton ? (
-          hasExplanation ? (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: desktop ? "row" : "column",
-                gap: 1.25,
-                alignItems: "stretch",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: 1.25, alignItems: "stretch" }}>
+          {/* Buttons */}
+          {showSkipButton ? (
+            hasExplanation ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: desktop ? "row" : "column",
+                  gap: 1.25,
+                  alignItems: "stretch",
+                }}
+              >
+                <Box sx={{ display: "flex", gap: 1.25, alignItems: "stretch" }}>
+                  <LargeButton
+                    fullWidth={false}
+                    variant="outlined"
+                    color={primaryColor}
+                    onClick={handleExplanationClick}
+                    data-test={whyDataTest ?? "study-session-drawer-why"}
+                  >
+                    {whyButtonLabel}
+                  </LargeButton>
+
+                  <Box sx={{ flex: 1, minWidth: 0 }}>
+                    <LargeButton
+                      fullWidth
+                      variant="outlined"
+                      color={primaryColor}
+                      onClick={handleSkipExerciseClick}
+                      data-test={skipDataTest}
+                    >
+                      {skipExerciseButtonLabel}
+                    </LargeButton>
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    width: desktop ? undefined : "100%",
+                    flex: 1,
+                    minWidth: 0,
+                  }}
+                >
+                  <LargeButton
+                    fullWidth
+                    variant="contained"
+                    color={primaryColor}
+                    onClick={onContinueClick}
+                    data-test={primaryActionDataTest}
+                  >
+                    {primaryButtonLabel}
+                  </LargeButton>
+                </Box>
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1.25,
+                  alignItems: "stretch",
+                }}
+              >
                 <LargeButton
                   fullWidth={false}
                   variant="outlined"
                   color={primaryColor}
-                  onClick={onExplanationClick}
-                  data-test={whyDataTest ?? "study-session-drawer-why"}
+                  onClick={handleSkipExerciseClick}
+                  data-test={skipDataTest}
                 >
-                  {whyButtonLabel}
+                  {skipExerciseButtonLabel}
                 </LargeButton>
 
                 <Box sx={{ flex: 1, minWidth: 0 }}>
                   <LargeButton
                     fullWidth
-                    variant="outlined"
+                    variant="contained"
                     color={primaryColor}
-                    onClick={handleSkipExerciseClick}
-                    data-test={skipDataTest}
+                    onClick={onContinueClick}
+                    data-test={primaryActionDataTest}
                   >
-                    {skipExerciseButtonLabel}
+                    {primaryButtonLabel}
                   </LargeButton>
                 </Box>
               </Box>
-
-              <Box
-                sx={{
-                  width: desktop ? undefined : "100%",
-                  flex: 1,
-                  minWidth: 0,
-                }}
-              >
-                <LargeButton
-                  fullWidth
-                  variant="contained"
-                  color={primaryColor}
-                  onClick={onContinueClick}
-                  data-test={primaryActionDataTest}
-                >
-                  {primaryButtonLabel}
-                </LargeButton>
-              </Box>
-            </Box>
-          ) : (
+            )
+          ) : hasExplanation ? (
             <Box
               sx={{
                 display: "flex",
@@ -244,10 +280,10 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 fullWidth={false}
                 variant="outlined"
                 color={primaryColor}
-                onClick={handleSkipExerciseClick}
-                data-test={skipDataTest}
+                onClick={handleExplanationClick}
+                data-test={whyDataTest ?? "study-session-drawer-why"}
               >
-                {skipExerciseButtonLabel}
+                {whyButtonLabel}
               </LargeButton>
 
               <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -262,26 +298,8 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 </LargeButton>
               </Box>
             </Box>
-          )
-        ) : hasExplanation ? (
-          <Box
-            sx={{
-              display: "flex",
-              gap: 1.25,
-              alignItems: "stretch",
-            }}
-          >
-            <LargeButton
-              fullWidth={false}
-              variant="outlined"
-              color={primaryColor}
-              onClick={onExplanationClick}
-              data-test={whyDataTest ?? "study-session-drawer-why"}
-            >
-              {whyButtonLabel}
-            </LargeButton>
-
-            <Box sx={{ flex: 1, minWidth: 0 }}>
+          ) : (
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <LargeButton
                 fullWidth
                 variant="contained"
@@ -292,22 +310,20 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 {primaryButtonLabel}
               </LargeButton>
             </Box>
-          </Box>
-        ) : (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <LargeButton
-              fullWidth
-              variant="contained"
-              color={primaryColor}
-              onClick={onContinueClick}
-              data-test={primaryActionDataTest}
-            >
-              {primaryButtonLabel}
-            </LargeButton>
-          </Box>
-        )}
-      </Box>
-    </Drawer>
+          )}
+        </Box>
+      </Drawer>
+      {answerExplanation?.text && (
+        <ExplanationDrawer
+          open={isExplanationOpen}
+          onClose={() => setIsExplanationOpen(false)}
+          title={studySessionDrawer.explanationTitle}
+          bodyText={answerExplanation.text}
+          continueButtonLabel={studySessionDrawer.continueButton}
+          data-test={dataTestConfig?.exerciseAnswerExplanationSection}
+        />
+      )}
+    </>
   );
 };
 
