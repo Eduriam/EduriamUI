@@ -5,7 +5,6 @@ import { Header } from "../../data-display/Header";
 import { Paragraph } from "../../data-display/Paragraph";
 import { IconButton } from "../../inputs/IconButton";
 import { LargeButton } from "../../inputs/LargeButton";
-import type { DrawerProps } from "../../navigation/Drawer";
 import { Drawer } from "../../navigation/Drawer";
 
 /**
@@ -14,7 +13,19 @@ import { Drawer } from "../../navigation/Drawer";
  * Renders a drawer that contains an explanation block with title, body text,
  * optional feedback icons (thumbs up/down), and a continue button that closes the drawer.
  */
-export interface ExplanationDrawerProps extends Pick<DrawerProps, "data-test"> {
+export interface ExplanationDrawerDataTest {
+  /**
+   * Data test id for the explanation drawer section.
+   */
+  explanationSection?: string;
+
+  /**
+   * Data test id for the "Got it"/continue button.
+   */
+  gotItButton?: string;
+}
+
+export interface ExplanationDrawerProps {
   /**
    * Whether the drawer is open.
    */
@@ -49,6 +60,11 @@ export interface ExplanationDrawerProps extends Pick<DrawerProps, "data-test"> {
    * Called when the user taps the thumbs-down icon. If omitted, feedback icons are hidden.
    */
   onThumbsDown?: () => void;
+
+  /**
+   * Optional data test ids for the drawer section and continue button.
+   */
+  dataTest?: ExplanationDrawerDataTest;
 }
 
 /**
@@ -66,12 +82,16 @@ export const ExplanationDrawer: React.FC<ExplanationDrawerProps> = ({
   continueButtonLabel,
   onThumbsUp,
   onThumbsDown,
-  "data-test": dataTest,
+  dataTest,
 }) => {
   const showFeedback = onThumbsUp !== undefined || onThumbsDown !== undefined;
 
   return (
-    <Drawer open={open} onClose={onClose} data-test={dataTest}>
+    <Drawer
+      open={open}
+      onClose={onClose}
+      data-test={dataTest?.explanationSection}
+    >
       <Stack spacing={3} sx={{ flex: 1, minHeight: 0 }}>
         <Header variant="section" text={title} />
         <Paragraph text={bodyText} />
@@ -96,7 +116,9 @@ export const ExplanationDrawer: React.FC<ExplanationDrawerProps> = ({
           </Box>
         )}
         <Box sx={{ width: "100%", paddingTop: showFeedback ? 0 : 12 }}>
-          <LargeButton onClick={onClose}>{continueButtonLabel}</LargeButton>
+          <LargeButton onClick={onClose} data-test={dataTest?.gotItButton}>
+            {continueButtonLabel}
+          </LargeButton>
         </Box>
       </Stack>
     </Drawer>
