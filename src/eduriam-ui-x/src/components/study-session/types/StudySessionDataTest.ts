@@ -1,8 +1,10 @@
+import { MultipleChoiceExerciseDataTest } from "../components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
+
 export interface StudySessionDataTest {
   studySessionPage?: string;
   explanationBlockSection?: string;
   continueButton?: string;
-  multipleChoiceExercise?: string;
+  multipleChoiceExercise?: MultipleChoiceExerciseDataTest;
   checkAnswerButton?: string;
   correctAnswerDrawer?: string;
   incorrectAnswerDrawer?: string;

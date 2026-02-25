@@ -16,7 +16,13 @@ export interface IMultipleChoiceExerciseStudyBlockComponent {
   component: MultipleChoiceExerciseComponent;
   onAnswerStateChange?: (answer: AnswerState) => void;
   localization?: MultipleChoiceExerciseLocalization;
-  dataTest?: string;
+  dataTest?: MultipleChoiceExerciseDataTest;
+}
+
+export interface MultipleChoiceExerciseDataTest {
+  exerciseSection?: string;
+  correctAnswerButton?: string;
+  incorrectAnswerButton?: string;
 }
 
 export const MultipleChoiceExercise: React.FC<
@@ -31,12 +37,33 @@ export const MultipleChoiceExercise: React.FC<
     return selectedId === component.correctOptionId ? "RIGHT" : "WRONG";
   }, [component.correctOptionId, selectedId]);
 
+  const optionsWithDataTest = useMemo(
+    () =>
+      component.options.map((option) => ({
+        ...option,
+        "data-test":
+          option.id === component.correctOptionId
+            ? dataTest?.correctAnswerButton
+            : dataTest?.incorrectAnswerButton,
+      })),
+    [
+      component.correctOptionId,
+      component.options,
+      dataTest?.correctAnswerButton,
+      dataTest?.incorrectAnswerButton,
+    ],
+  );
+
   useEffect(() => {
     onAnswerStateChange?.(state);
   }, [state, onAnswerStateChange]);
 
   return (
-    <Stack direction="column" alignItems="center" data-test={dataTest}>
+    <Stack
+      direction="column"
+      alignItems="center"
+      data-test={dataTest?.exerciseSection}
+    >
       <Stack direction="column" alignItems="flex-start" spacing={4}>
         {assignmentTitle ? (
           <>
@@ -51,7 +78,7 @@ export const MultipleChoiceExercise: React.FC<
           <Typography variant="h5">{component.question}</Typography>
         )}
         <LargeRadioButtonGroup
-          options={component.options}
+          options={optionsWithDataTest}
           fullWidth={false}
           onChange={(id) => setSelectedId(id)}
         />
