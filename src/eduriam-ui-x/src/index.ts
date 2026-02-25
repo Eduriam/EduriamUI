@@ -37,6 +37,7 @@ export type { StudyBlockDTO } from "./components/study-session/components/study-
 export type { AnswerState } from "./components/study-session/types/AnswerState";
 export type { StudySessionDataTest } from "./components/study-session/types/StudySessionDataTest";
 export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";
+export type { StudySessionLocalization } from "./components/study-session/types/StudySessionLocalization";
 export type {
   Caption,
   Scene,
