@@ -201,7 +201,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                     variant="outlined"
                     color={primaryColor}
                     onClick={handleExplanationClick}
-                    data-test={whyDataTest ?? "study-session-drawer-why"}
+                    data-test={whyDataTest}
                   >
                     {whyButtonLabel}
                   </LargeButton>
@@ -281,7 +281,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 variant="outlined"
                 color={primaryColor}
                 onClick={handleExplanationClick}
-                data-test={whyDataTest ?? "study-session-drawer-why"}
+                data-test={whyDataTest}
               >
                 {whyButtonLabel}
               </LargeButton>
@@ -320,7 +320,11 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
           title={studySessionDrawer.explanationTitle}
           bodyText={answerExplanation.text}
           continueButtonLabel={studySessionDrawer.continueButton}
-          data-test={dataTestConfig?.exerciseAnswerExplanationSection}
+          dataTest={{
+            explanationSection:
+              dataTestConfig?.exerciseAnswerExplanationSection,
+            gotItButton: dataTestConfig?.gotItButton,
+          }}
         />
       )}
     </>
