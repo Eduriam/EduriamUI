@@ -25,6 +25,8 @@ export type { IStudySessionProgressBar } from "./components/study-session/compon
 // Study Session Shared Components
 export { CodeBlank } from "./components/study-session/components/shared/CodeBlank";
 export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
+export { MermaidDiagram } from "./components/study-session/components/shared/MermaidDiagram";
+export type { MermaidDiagramProps } from "./components/study-session/components/shared/MermaidDiagram";
 
 // Types and Models
 export type { MultipleChoiceExerciseDataTest } from "./components/study-session/components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
