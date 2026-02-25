@@ -30,7 +30,7 @@ export const WithoutExplanation: Story = {
 export const WithExplanation: Story = {
   args: {
     variant: "incorrect",
-    onExplanationClick: () => {},
+    answerExplanation: { text: "Explanation" },
     onReportClick: () => {},
     onContinueOrRetryClick: () => {},
   },
@@ -40,7 +40,7 @@ export const WithSkipExercise: Story = {
   args: {
     variant: "incorrect",
     allowSkipExercise: true,
-    onExplanationClick: () => {},
+    answerExplanation: { text: "Explanation" },
     onReportClick: () => {},
     onContinueOrRetryClick: () => {},
     onSkipExerciseClick: () => {},
@@ -96,7 +96,7 @@ export const OpenAndClose: Story = {
   render: (args) => <DrawerWithOpenButton {...args} />,
   args: {
     variant: "correct",
-    onExplanationClick: () => {},
+    answerExplanation: { text: "Explanation" },
     onReportClick: () => {},
     onContinueOrRetryClick: () => {},
   },
