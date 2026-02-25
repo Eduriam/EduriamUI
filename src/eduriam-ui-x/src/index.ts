@@ -28,6 +28,7 @@ export { CodeBlank } from "./components/study-session/components/shared/CodeBlan
 export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
 
 // Types and Models
+export type { MultipleChoiceExerciseDataTest } from "./components/study-session/components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
 export type { StudyBlockComponentDTO } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentDTO";
 export { StudyBlockComponentType } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponentTypes";
 export type { ExerciseStudyBlockDTO } from "./components/study-session/components/study-blocks/exercise/ExerciseStudyBlockDTO";
