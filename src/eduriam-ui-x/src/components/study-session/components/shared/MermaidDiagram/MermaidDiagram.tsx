@@ -26,7 +26,9 @@ export const MermaidDiagram: FC<MermaidDiagramProps> = ({ chart }) => {
 
     const renderDiagram = async () => {
       try {
-        const mermaid = (await import("mermaid")).default;
+        // Use Mermaid's bundled ESM build to avoid pulling langium's Node entrypoints
+        // into consumer app builds (e.g. Next.js webpack critical dependency warnings).
+        const mermaid = (await import("mermaid/dist/mermaid.esm.mjs")).default;
 
         if (!isMermaidInitialized) {
           mermaid.initialize({
