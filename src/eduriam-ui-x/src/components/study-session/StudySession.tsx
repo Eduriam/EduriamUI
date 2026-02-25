@@ -43,11 +43,6 @@ const slideBack = keyframes({
   "100%": { transform: "translate3d(0, 0, 0)" },
 });
 
-export interface StudyStats {
-  correctAnswerCount: number;
-  incorrectAnswerCount: number;
-}
-
 export interface AtomProgressRating {
   atomId: ID;
   rating: number;
@@ -55,10 +50,7 @@ export interface AtomProgressRating {
 
 export interface IStudySession {
   studySession: StudySessionModel;
-  onFinish: (
-    studyStats: StudyStats,
-    atomProgressRatings: AtomProgressRating[],
-  ) => void;
+  onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
   onExit: () => void;
   localization?: StudySessionLocalization;
   dataTest?: StudySessionDataTest;
@@ -237,23 +229,22 @@ const StudySession: React.FC<IStudySession> = ({
         wrong: prevStats.wrong + (result === "WRONG" ? 1 : 0),
       });
 
-      const studyStats = evaluateStats(updatedMap);
+      const { correctAnswerCount, incorrectAnswerCount } =
+        evaluateAnswerCounts(updatedMap);
       const atomProgressRatings = computeAtomRatings(
         studySession.studyBlocks,
         updatedMap,
       );
 
-      const total =
-        studyStats.correctAnswerCount + studyStats.incorrectAnswerCount;
+      const total = correctAnswerCount + incorrectAnswerCount;
       setFinishedStatsSnapshot({
         totalXp: exerciseBlockCount * XP_PER_EXERCISE,
         timeStudiedMs: Date.now() - startedAtRef.current,
-        correctRate:
-          total > 0 ? (studyStats.correctAnswerCount / total) * 100 : 0,
+        correctRate: total > 0 ? (correctAnswerCount / total) * 100 : 0,
         conceptCount,
       });
 
-      onFinish(studyStats, atomProgressRatings);
+      onFinish(atomProgressRatings);
     }
   }
 
@@ -271,23 +262,22 @@ const StudySession: React.FC<IStudySession> = ({
     } else {
       setFinishedSession(true);
 
-      const studyStats = evaluateStats(atomStatsMap);
+      const { correctAnswerCount, incorrectAnswerCount } =
+        evaluateAnswerCounts(atomStatsMap);
       const atomProgressRatings = computeAtomRatings(
         studySession.studyBlocks,
         atomStatsMap,
       );
 
-      const total =
-        studyStats.correctAnswerCount + studyStats.incorrectAnswerCount;
+      const total = correctAnswerCount + incorrectAnswerCount;
       setFinishedStatsSnapshot({
         totalXp: exerciseBlockCount * XP_PER_EXERCISE,
         timeStudiedMs: Date.now() - startedAtRef.current,
-        correctRate:
-          total > 0 ? (studyStats.correctAnswerCount / total) * 100 : 0,
+        correctRate: total > 0 ? (correctAnswerCount / total) * 100 : 0,
         conceptCount,
       });
 
-      onFinish(studyStats, atomProgressRatings);
+      onFinish(atomProgressRatings);
     }
   }
 
@@ -295,7 +285,7 @@ const StudySession: React.FC<IStudySession> = ({
   // Stats helpers
   // ---------------------------------------------------------------------------
 
-  function evaluateStats(statsMap: Map<ID, AtomStats>) {
+  function evaluateAnswerCounts(statsMap: Map<ID, AtomStats>) {
     let correctAnswerCount = 0;
     let incorrectAnswerCount = 0;
 
