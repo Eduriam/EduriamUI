@@ -9,7 +9,6 @@ export { default as StudySession } from "./components/study-session/StudySession
 export type {
   AtomProgressRating,
   IStudySession,
-  StudyStats,
 } from "./components/study-session/StudySession";
 
 // Study Block Components
