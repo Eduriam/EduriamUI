@@ -12,7 +12,7 @@ import { List } from "../components/List/List";
 import { PageHeader } from "../components/PageHeader/PageHeader";
 import { PageSubheader } from "../components/PageSubheader/PageSubheader";
 import { Paragraph } from "../components/Paragraph/Paragraph";
-import { Table } from "../components/Table/Table";
+import { TableVideoComponent } from "../components/Table/TableVideoComponent";
 import { Video } from "../components/Video/Video";
 
 export class VideoComponentFactory {
@@ -29,7 +29,7 @@ export class VideoComponentFactory {
       case "LIST":
         return <List comp={comp} />;
       case "TABLE":
-        return <Table comp={comp} />;
+        return <TableVideoComponent comp={comp} />;
       case "DATABASE_TABLE":
         return <DatabaseTableVideoComponent comp={comp} />;
       case "IMAGE":

@@ -1,11 +1,11 @@
 import { theme } from "@eduriam/ui-core";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Table } from "./Table";
+import TableVideoComponent from "./TableVideoComponent";
 
-const meta: Meta<typeof Table> = {
+const meta: Meta<typeof TableVideoComponent> = {
   title: "x/video-manager/video-components/Table",
-  component: Table,
+  component: TableVideoComponent,
   decorators: [
     (Story) => (
       <div
@@ -24,7 +24,7 @@ const meta: Meta<typeof Table> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Table>;
+type Story = StoryObj<typeof TableVideoComponent>;
 
 export const WithHeader: Story = {
   args: {

@@ -10,7 +10,7 @@ import type { IList } from "./components/List/List";
 import type { IPageHeader } from "./components/PageHeader/PageHeader";
 import type { IPageSubheader } from "./components/PageSubheader/PageSubheader";
 import type { IParagraph } from "./components/Paragraph/Paragraph";
-import type { ITable } from "./components/Table/Table";
+import type { ITable } from "./components/Table/TableVideoComponent";
 import type { IVideo } from "./components/Video/Video";
 
 export interface BaseVideoComponent {
