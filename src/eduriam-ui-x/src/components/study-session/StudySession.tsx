@@ -86,6 +86,10 @@ const StudySession: React.FC<IStudySession> = ({
     Map<number, StudySessionDrawerVariant>
   >(new Map());
   const [playDrawerSound, setPlayDrawerSound] = useState(false);
+  const [exerciseRenderVersion, setExerciseRenderVersion] = useState(0);
+  const [wrongAttemptsByIndex, setWrongAttemptsByIndex] = useState<
+    Map<number, number>
+  >(new Map());
 
   const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
     new Map(),
@@ -191,6 +195,12 @@ const StudySession: React.FC<IStudySession> = ({
     clearTimeout(drawerTimeoutRef.current);
     setDrawerVariant(null);
     setCheckedResult(null);
+    setWrongAttemptsByIndex((prev) => {
+      if (!prev.has(index)) return prev;
+      const next = new Map(prev);
+      next.delete(index);
+      return next;
+    });
 
     const variant: StudySessionDrawerVariant =
       result === "RIGHT" ? "correct" : "incorrect";
@@ -251,6 +261,20 @@ const StudySession: React.FC<IStudySession> = ({
   // ---------------------------------------------------------------------------
   // Explanation completion
   // ---------------------------------------------------------------------------
+
+  function handleRetryExercise() {
+    clearTimeout(drawerTimeoutRef.current);
+    setDrawerVariant(null);
+    setCheckedResult(null);
+    setPlayDrawerSound(false);
+    setCompletedResults((prev) => {
+      if (!prev.has(index)) return prev;
+      const next = new Map(prev);
+      next.delete(index);
+      return next;
+    });
+    setExerciseRenderVersion((prev) => prev + 1);
+  }
 
   function handleExplanationComplete() {
     setFurthestCompletedIndex((prev) => Math.max(prev, index));
@@ -327,11 +351,7 @@ const StudySession: React.FC<IStudySession> = ({
   // ---------------------------------------------------------------------------
 
   const isRevisiting = index <= furthestCompletedIndex;
-  const currentStudyBlock = studyBlockQueue[index];
-  const currentWrongAttempts =
-    currentStudyBlock && checkedResult === "WRONG"
-      ? (atomStatsMap.get(currentStudyBlock.atomId)?.wrong ?? 0) + 1
-      : 0;
+  const currentWrongAttempts = wrongAttemptsByIndex.get(index) ?? 0;
   const allowSkipExercise =
     !isRevisiting &&
     drawerVariant === "incorrect" &&
@@ -386,7 +406,7 @@ const StudySession: React.FC<IStudySession> = ({
               {studyBlockQueue[index] &&
                 studyBlockQueue[index].type === "exercise" && (
                   <ExerciseStudyBlock
-                    key={index}
+                    key={`${index}-${exerciseRenderVersion}`}
                     components={studyBlockQueue[index].components}
                     onCheck={(result) => {
                       setCheckedResult(result);
@@ -394,6 +414,13 @@ const StudySession: React.FC<IStudySession> = ({
                       setDrawerVariant(
                         result === "RIGHT" ? "correct" : "incorrect",
                       );
+                      if (result === "WRONG") {
+                        setWrongAttemptsByIndex((prev) => {
+                          const next = new Map(prev);
+                          next.set(index, (next.get(index) ?? 0) + 1);
+                          return next;
+                        });
+                      }
                     }}
                     localization={localization}
                     isRevisiting={isRevisiting}
@@ -417,7 +444,12 @@ const StudySession: React.FC<IStudySession> = ({
             <StudySessionDrawer
               variant={drawerVariant}
               onReportClick={() => {}}
-              onContinueClick={() => {
+              onContinueOrRetryClick={() => {
+                if (drawerVariant === "incorrect") {
+                  handleRetryExercise();
+                  return;
+                }
+
                 if (isRevisiting) {
                   const nextIndex = index + 1;
                   if (nextIndex < studyBlockQueue.length) {

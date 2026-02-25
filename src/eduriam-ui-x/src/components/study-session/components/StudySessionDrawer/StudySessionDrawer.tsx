@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { AudioPlayer } from "../../../../audio";
 import type { StudySessionDataTest } from "../../types/StudySessionDataTest";
@@ -35,9 +35,9 @@ export interface StudySessionDrawerProps {
   onReportClick: () => void;
 
   /**
-   * Called when the continue button is clicked.
+   * Called when the primary action button is clicked ("Continue" or "Retry").
    */
-  onContinueClick: () => void;
+  onContinueOrRetryClick: () => void;
   /**
    * Called when the skip exercise button is clicked.
    *
@@ -82,7 +82,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   variant,
   onExplanationClick,
   onReportClick,
-  onContinueClick,
+  onContinueOrRetryClick: onContinueClick,
   onSkipExerciseClick,
   allowSkipExercise = false,
   playSound = true,
@@ -118,6 +118,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
     ? studySessionDrawer.titleCorrect
     : studySessionDrawer.titleIncorrect;
   const continueButtonLabel = studySessionDrawer.continueButton;
+  const primaryButtonLabel = isCorrect ? continueButtonLabel : "Retry";
   const whyButtonLabel = studySessionDrawer.whyButton;
   const skipExerciseButtonLabel =
     studySessionDrawer.skipExerciseButton ?? "Skip exercise";
@@ -128,8 +129,11 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
       ? dataTestConfig?.correctAnswerDrawer
       : dataTestConfig?.incorrectAnswerDrawer) ??
     "study-session-drawer";
-  const continueDataTest =
-    primaryButtonDataTest ?? dataTestConfig?.continueButton;
+  const primaryActionDataTest =
+    primaryButtonDataTest ??
+    (isCorrect
+      ? dataTestConfig?.continueButton
+      : dataTestConfig?.retryExerciseButton);
   const whyDataTest = dataTestConfig?.showExplanationButton;
   const skipDataTest = dataTestConfig?.skipExerciseButton;
   const handleSkipExerciseClick = onSkipExerciseClick ?? onContinueClick;
@@ -210,17 +214,21 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 </Box>
               </Box>
 
-              <Box sx={{ width: desktop ? undefined : "100%", flex: 1, minWidth: 0 }}>
+              <Box
+                sx={{
+                  width: desktop ? undefined : "100%",
+                  flex: 1,
+                  minWidth: 0,
+                }}
+              >
                 <LargeButton
                   fullWidth
                   variant="contained"
                   color={primaryColor}
                   onClick={onContinueClick}
-                  data-test={
-                    continueDataTest ?? "study-session-drawer-continue"
-                  }
+                  data-test={primaryActionDataTest}
                 >
-                  {continueButtonLabel}
+                  {primaryButtonLabel}
                 </LargeButton>
               </Box>
             </Box>
@@ -248,11 +256,9 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                   variant="contained"
                   color={primaryColor}
                   onClick={onContinueClick}
-                  data-test={
-                    continueDataTest ?? "study-session-drawer-continue"
-                  }
+                  data-test={primaryActionDataTest}
                 >
-                  {continueButtonLabel}
+                  {primaryButtonLabel}
                 </LargeButton>
               </Box>
             </Box>
@@ -281,9 +287,9 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 variant="contained"
                 color={primaryColor}
                 onClick={onContinueClick}
-                data-test={continueDataTest ?? "study-session-drawer-continue"}
+                data-test={primaryActionDataTest}
               >
-                {continueButtonLabel}
+                {primaryButtonLabel}
               </LargeButton>
             </Box>
           </Box>
@@ -294,9 +300,9 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               variant="contained"
               color={primaryColor}
               onClick={onContinueClick}
-              data-test={continueDataTest ?? "study-session-drawer-continue"}
+              data-test={primaryActionDataTest}
             >
-              {continueButtonLabel}
+              {primaryButtonLabel}
             </LargeButton>
           </Box>
         )}

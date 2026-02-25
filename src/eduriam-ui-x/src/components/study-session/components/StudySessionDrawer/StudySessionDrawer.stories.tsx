@@ -1,11 +1,11 @@
+import { LargeButton } from "@eduriam/ui-core";
 import type { Meta, StoryObj } from "@storybook/react";
+
 import React, { useState } from "react";
 
-import { LargeButton } from "@eduriam/ui-core";
 import Box from "@mui/material/Box";
 
 import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "../../StudySessionLocalizationDefault";
-
 import StudySessionDrawer from "./StudySessionDrawer";
 
 const meta: Meta<typeof StudySessionDrawer> = {
@@ -23,7 +23,7 @@ export const WithoutExplanation: Story = {
   args: {
     variant: "correct",
     onReportClick: () => {},
-    onContinueClick: () => {},
+    onContinueOrRetryClick: () => {},
   },
 };
 
@@ -32,7 +32,7 @@ export const WithExplanation: Story = {
     variant: "incorrect",
     onExplanationClick: () => {},
     onReportClick: () => {},
-    onContinueClick: () => {},
+    onContinueOrRetryClick: () => {},
   },
 };
 
@@ -42,13 +42,13 @@ export const WithSkipExercise: Story = {
     allowSkipExercise: true,
     onExplanationClick: () => {},
     onReportClick: () => {},
-    onContinueClick: () => {},
+    onContinueOrRetryClick: () => {},
     onSkipExerciseClick: () => {},
   },
 };
 
 function DrawerWithOpenButton(
-  args: React.ComponentProps<typeof StudySessionDrawer>
+  args: React.ComponentProps<typeof StudySessionDrawer>,
 ) {
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState<"correct" | "incorrect">("correct");
@@ -80,7 +80,7 @@ function DrawerWithOpenButton(
         <StudySessionDrawer
           {...args}
           variant={variant}
-          onContinueClick={() => setOpen(false)}
+          onContinueOrRetryClick={() => setOpen(false)}
           onReportClick={() => {}}
         />
       )}
@@ -98,7 +98,6 @@ export const OpenAndClose: Story = {
     variant: "correct",
     onExplanationClick: () => {},
     onReportClick: () => {},
-    onContinueClick: () => {},
+    onContinueOrRetryClick: () => {},
   },
 };
-
