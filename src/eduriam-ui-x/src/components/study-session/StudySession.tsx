@@ -452,7 +452,17 @@ const StudySession: React.FC<IStudySession> = ({
                     key={index}
                     scenes={studyBlockQueue[index].scenes}
                     onComplete={handleExplanationComplete}
+                    onReportClick={
+                      onReportStudyBlockClick && currentStudyBlock
+                        ? () =>
+                            onReportStudyBlockClick({
+                              id: currentStudyBlock.id,
+                              type: currentStudyBlock.type,
+                            })
+                        : undefined
+                    }
                     localization={localization}
+                    isRevisiting={isRevisiting}
                     dataTest={dataTest}
                   />
                 )}

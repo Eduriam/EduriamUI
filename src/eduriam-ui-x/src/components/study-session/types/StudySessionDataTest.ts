@@ -6,6 +6,7 @@ export interface StudySessionDataTest {
   explanationBlock?: {
     section?: string;
     continueButton?: string;
+    reportButton?: string;
   };
 
   exerciseBlock?: {
