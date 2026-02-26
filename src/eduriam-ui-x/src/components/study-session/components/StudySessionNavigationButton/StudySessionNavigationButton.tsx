@@ -31,7 +31,6 @@ export const StudySessionNavigationButton: React.FC<
 
   return (
     <Box
-      data-test={dataTest}
       sx={{
         position: "fixed",
         top: 0,
@@ -59,6 +58,7 @@ export const StudySessionNavigationButton: React.FC<
           variant="contained"
           color="textPrimary"
           onClick={onClick}
+          data-test={dataTest}
         />
       </Box>
     </Box>
