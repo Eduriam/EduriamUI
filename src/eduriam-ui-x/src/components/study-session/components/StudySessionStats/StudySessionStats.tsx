@@ -64,7 +64,7 @@ export const StudySessionStats: React.FC<StudySessionStatsProps> = ({
   return (
     <>
       <Stack
-        data-test={dataTest?.studyStatsSection ?? "study-session-stats"}
+        data-test={dataTest?.studyStats?.section}
         sx={{
           minHeight: "100dvh",
           display: "flex",
@@ -140,7 +140,7 @@ export const StudySessionStats: React.FC<StudySessionStatsProps> = ({
             <LargeButton
               fullWidth={true}
               onClick={onContinue}
-              data-test="study-session-stats-continue"
+              data-test={dataTest?.studyStats?.continueButton}
             >
               {loc.continueButton}
             </LargeButton>

@@ -2,16 +2,36 @@ import { MultipleChoiceExerciseDataTest } from "../components/study-blocks/exerc
 
 export interface StudySessionDataTest {
   studySessionPage?: string;
-  explanationBlockSection?: string;
-  continueButton?: string;
-  multipleChoiceExercise?: MultipleChoiceExerciseDataTest;
-  checkAnswerButton?: string;
-  correctAnswerDrawer?: string;
-  incorrectAnswerDrawer?: string;
-  showExplanationButton?: string;
-  exerciseAnswerExplanationSection?: string;
-  gotItButton?: string;
-  retryExerciseButton?: string;
-  skipExerciseButton?: string;
-  studyStatsSection?: string;
+
+  explanationBlock?: {
+    section?: string;
+    continueButton?: string;
+  };
+
+  exerciseBlock?: {
+    checkAnswerButton?: string;
+  };
+
+  exercises?: {
+    multipleChoiceExercise?: MultipleChoiceExerciseDataTest;
+  };
+
+  studySessionDrawer?: {
+    correctAnswerDrawer?: string;
+    incorrectAnswerDrawer?: string;
+    skipExerciseButton?: string;
+    showExplanationButton?: string;
+    continueButton?: string;
+    retryExerciseButton?: string;
+  };
+
+  studyStats?: {
+    continueButton?: string;
+    section?: string;
+  };
+
+  explanation?: {
+    gotItButton?: string;
+    section?: string;
+  };
 }
