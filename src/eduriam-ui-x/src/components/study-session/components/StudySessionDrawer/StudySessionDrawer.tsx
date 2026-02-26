@@ -33,7 +33,7 @@ export interface StudySessionDrawerProps {
   /**
    * Called when the report icon button is clicked.
    */
-  onReportClick: () => void;
+  onReportClick?: () => void;
 
   /**
    * Called when the primary action button is clicked ("Continue" or "Retry").
@@ -174,14 +174,16 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               {title}
             </Typography>
 
-            <IconButton
-              size="medium"
-              variant="text"
-              color={isCorrect ? "success" : "error"}
-              icon="report"
-              onClick={onReportClick}
-              data-test="study-session-drawer-report"
-            />
+            {onReportClick && (
+              <IconButton
+                size="medium"
+                variant="text"
+                color={isCorrect ? "success" : "error"}
+                icon="report"
+                onClick={onReportClick}
+                data-test="study-session-drawer-report"
+              />
+            )}
           </Box>
 
           {/* Buttons */}

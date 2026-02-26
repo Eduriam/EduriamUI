@@ -16,6 +16,7 @@ export const Base: Story = {
     studySession: {
       studyBlocks: [
         {
+          id: "base-block-1",
           type: "explanation",
           atomId: "atom-1",
           components: [
@@ -32,6 +33,7 @@ export const Base: Story = {
           ],
         },
         {
+          id: "base-block-2",
           type: "exercise",
           atomId: "atom-2",
           components: [
@@ -54,6 +56,7 @@ export const Exercise: Story = {
     studySession: {
       studyBlocks: [
         {
+          id: "exercise-block-1",
           type: "exercise",
           atomId: "atom-mc-1",
           components: [
@@ -83,6 +86,7 @@ export const ExerciseMultipleChoice3InARow: Story = {
     studySession: {
       studyBlocks: [
         {
+          id: "exercise-mc-fruit",
           type: "exercise",
           atomId: "atom-mc-fruit",
           components: [
@@ -101,6 +105,7 @@ export const ExerciseMultipleChoice3InARow: Story = {
           ],
         },
         {
+          id: "exercise-mc-animal",
           type: "exercise",
           atomId: "atom-mc-animal",
           components: [
@@ -119,6 +124,7 @@ export const ExerciseMultipleChoice3InARow: Story = {
           ],
         },
         {
+          id: "exercise-mc-planet",
           type: "exercise",
           atomId: "atom-mc-planet",
           components: [
@@ -149,6 +155,7 @@ export const ExerciseWithAudio: Story = {
     studySession: {
       studyBlocks: [
         {
+          id: "exercise-audio-1",
           type: "exercise",
           atomId: "atom-audio-1",
           components: [
@@ -177,6 +184,7 @@ export const ExerciseWithAudio: Story = {
           ],
         },
         {
+          id: "exercise-audio-2",
           type: "exercise",
           atomId: "atom-audio-2",
           components: [
@@ -214,6 +222,7 @@ export const ExampleLessonSQL: Story = {
       studyBlocks: [
         // 1. What is SELECT?
         {
+          id: "sql-select-block-1",
           type: "explanation",
           atomId: "sql-select-all",
           scenes: [
@@ -248,6 +257,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 2. The asterisk *
         {
+          id: "sql-select-block-2",
           type: "explanation",
           atomId: "sql-select-all",
           scenes: [
@@ -282,6 +292,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 3. Exercise: what does SELECT do?
         {
+          id: "sql-select-block-3",
           type: "exercise",
           atomId: "sql-select-all",
           components: [
@@ -300,6 +311,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 4. What is FROM?
         {
+          id: "sql-select-block-4",
           type: "explanation",
           atomId: "sql-select-all",
           scenes: [
@@ -334,6 +346,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 5. Exercise: what does * mean?
         {
+          id: "sql-select-block-5",
           type: "exercise",
           atomId: "sql-select-all",
           components: [
@@ -352,6 +365,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 6. Putting it together: SELECT * FROM table_name
         {
+          id: "sql-select-block-6",
           type: "explanation",
           atomId: "sql-select-all",
           scenes: [
@@ -386,6 +400,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 7. Exercise: what does FROM do?
         {
+          id: "sql-select-block-7",
           type: "exercise",
           atomId: "sql-select-all",
           components: [
@@ -407,6 +422,7 @@ export const ExampleLessonSQL: Story = {
         },
         // 8. Recap explanation
         {
+          id: "sql-select-block-8",
           type: "explanation",
           atomId: "sql-select-all",
           scenes: [
@@ -452,6 +468,7 @@ export const ComplexExercise: Story = {
     studySession: {
       studyBlocks: [
         {
+          id: "complex-exercise-block-1",
           type: "exercise",
           atomId: "atom-complex-1",
           components: [
