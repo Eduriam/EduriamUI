@@ -234,7 +234,10 @@ const StudySession: React.FC<IStudySession> = ({
       rescheduleStudyBlock(currentBlock);
     }
 
-    if (index < studyBlockQueue.length - 1) {
+    const hasNextBlock =
+      index < studyBlockQueue.length - 1 || shouldRescheduleReviewBlock;
+
+    if (hasNextBlock) {
       triggerTransition(() => {
         setIndex(index + 1);
       }, "forward");
