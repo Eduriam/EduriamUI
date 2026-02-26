@@ -1,0 +1,264 @@
+import {
+  BasicNavbar,
+  ContentContainer,
+  DrawerSelect,
+  type DrawerSelectSection,
+  FullscreenDialog,
+  Icon,
+  LargeButton,
+  PageRoot,
+  TextField,
+} from "@eduriam/ui-core";
+
+import { useEffect, useMemo, useState } from "react";
+
+import Box from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
+import Typography from "@mui/material/Typography";
+
+export interface ReportStudyBlockDialogSubmitPayload {
+  problemTypeId: string;
+  description: string;
+}
+
+export interface ReportStudyBlockDialogLocalization {
+  header: string;
+  problemTypePlaceholder: string;
+  descriptionPlaceholder: string;
+  submitLabel: string;
+  thankYouSection?: {
+    title?: string;
+    description?: string;
+    continueButton?: string;
+  };
+}
+
+export interface ReportStudyBlockDialogDataTest {
+  report?: {
+    section?: string;
+    problemTypeSelectButton?: string;
+    problemDescriptionField?: string;
+    submitButton?: string;
+  };
+
+  selectDrawer?: {
+    section?: string;
+  };
+
+  thankYouSection: {
+    section?: string;
+    continueButton?: string;
+  };
+}
+
+export interface ReportStudyBlockDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onSubmit: (payload: ReportStudyBlockDialogSubmitPayload) => void;
+  problemTypeSections: DrawerSelectSection[];
+  localization: ReportStudyBlockDialogLocalization;
+  dataTest?: ReportStudyBlockDialogDataTest;
+}
+
+export const ReportStudyBlockDialog: React.FC<ReportStudyBlockDialogProps> = ({
+  open,
+  onClose,
+  onSubmit,
+  problemTypeSections,
+  localization,
+  dataTest,
+}) => {
+  const [problemTypeDrawerOpen, setProblemTypeDrawerOpen] = useState(false);
+  const [selectedProblemTypeId, setSelectedProblemTypeId] = useState<
+    string | undefined
+  >();
+  const [description, setDescription] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const submittedTitle =
+    localization.thankYouSection?.title ?? "Thank you for your feedback!";
+  const submittedDescription =
+    localization.thankYouSection?.description ??
+    "We will review your problem report as soon as possible.";
+  const continueLabel = localization.thankYouSection?.continueButton ?? "Continue";
+
+  const selectedProblemTypeLabel = useMemo(() => {
+    if (!selectedProblemTypeId) {
+      return undefined;
+    }
+
+    for (const section of problemTypeSections) {
+      const option = section.options.find(
+        (entry) => entry.id === selectedProblemTypeId,
+      );
+      if (option) {
+        return option.label;
+      }
+    }
+
+    return undefined;
+  }, [problemTypeSections, selectedProblemTypeId]);
+
+  const resetState = () => {
+    setProblemTypeDrawerOpen(false);
+    setSelectedProblemTypeId(undefined);
+    setDescription("");
+    setSubmitted(false);
+  };
+
+  const handleClose = () => {
+    resetState();
+    onClose();
+  };
+
+  const handleSubmit = () => {
+    if (!selectedProblemTypeId) {
+      return;
+    }
+
+    onSubmit({
+      problemTypeId: selectedProblemTypeId,
+      description: description.trim(),
+    });
+    setSubmitted(true);
+  };
+
+  useEffect(() => {
+    if (!open) {
+      setProblemTypeDrawerOpen(false);
+      setSelectedProblemTypeId(undefined);
+      setDescription("");
+      setSubmitted(false);
+    }
+  }, [open]);
+
+  const handleContinue = () => {
+    handleClose();
+  };
+
+  return (
+    <>
+      <FullscreenDialog open={open} onClose={handleClose}>
+        <PageRoot>
+          {!submitted && (
+            <BasicNavbar
+              header={localization.header}
+              leftButton={{
+                icon: "chevronLeft",
+                onClick: handleClose,
+              }}
+            />
+          )}
+          <ContentContainer
+            width="small"
+            justifyContent="flex-start"
+            paddingTop="large"
+          >
+            {submitted ? (
+              <Box
+                data-test={dataTest?.thankYouSection?.section}
+                sx={{
+                  width: "273px",
+                  mx: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 3.5,
+                }}
+              >
+                <Typography
+                  sx={{
+                    typography: "h4",
+                    textAlign: "center",
+                  }}
+                >
+                  {submittedTitle}
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
+                  {submittedDescription}
+                </Typography>
+              </Box>
+            ) : (
+              <Box
+                data-test={dataTest?.report?.section}
+                sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+              >
+                <ButtonBase
+                  data-test={dataTest?.report?.problemTypeSelectButton}
+                  onClick={() => setProblemTypeDrawerOpen(true)}
+                  sx={(theme) => ({
+                    border: `1.5px solid ${theme.palette.divider}`,
+                    borderRadius: "12px",
+                    height: "54px",
+                    width: "100%",
+                    px: 2,
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  })}
+                >
+                  <Typography
+                    variant="body1"
+                    color={
+                      selectedProblemTypeLabel
+                        ? "text.primary"
+                        : "text.secondary"
+                    }
+                  >
+                    {selectedProblemTypeLabel ??
+                      localization.problemTypePlaceholder}
+                  </Typography>
+                  <Icon
+                    name="arrowDown"
+                    color="textPrimary"
+                    sx={{ fontSize: 24 }}
+                  />
+                </ButtonBase>
+
+                <TextField
+                  fullWidth
+                  multiline
+                  minRows={5}
+                  data-test={dataTest?.report?.problemDescriptionField}
+                  placeholder={localization.descriptionPlaceholder}
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
+              </Box>
+            )}
+
+            <Box sx={{ mt: "auto" }}>
+              <LargeButton
+                fullWidth
+                color="primary"
+                variant="contained"
+                disabled={!submitted && !selectedProblemTypeId}
+                onClick={submitted ? handleContinue : handleSubmit}
+                data-test={
+                  submitted
+                    ? dataTest?.thankYouSection?.continueButton
+                    : dataTest?.report?.submitButton
+                }
+              >
+                {submitted ? continueLabel : localization.submitLabel}
+              </LargeButton>
+            </Box>
+          </ContentContainer>
+        </PageRoot>
+      </FullscreenDialog>
+
+      <DrawerSelect
+        open={problemTypeDrawerOpen && !submitted}
+        onClose={() => setProblemTypeDrawerOpen(false)}
+        sections={problemTypeSections}
+        drawerZIndex={1301}
+        data-test={dataTest?.selectDrawer?.section}
+        selectedOptionId={selectedProblemTypeId}
+        onChange={({ optionId }) => {
+          setSelectedProblemTypeId(optionId);
+          setProblemTypeDrawerOpen(false);
+        }}
+      />
+    </>
+  );
+};
+
+export default ReportStudyBlockDialog;

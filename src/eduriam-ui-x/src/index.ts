@@ -27,6 +27,12 @@ export { CodeBlank } from "./components/study-session/components/shared/CodeBlan
 export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
 export { MermaidDiagram } from "./components/study-session/components/shared/MermaidDiagram";
 export type { MermaidDiagramProps } from "./components/study-session/components/shared/MermaidDiagram";
+export { ReportStudyBlockDialog } from "./components/study-session/components/shared/ReportStudyBlockDialog";
+export type {
+  ReportStudyBlockDialogDataTest,
+  ReportStudyBlockDialogLocalization,
+  ReportStudyBlockDialogSubmitPayload,
+} from "./components/study-session/components/shared/ReportStudyBlockDialog";
 
 // Types and Models
 export type { MultipleChoiceExerciseDataTest } from "./components/study-session/components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";

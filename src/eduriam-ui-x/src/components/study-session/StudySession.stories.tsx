@@ -1,6 +1,12 @@
+import type { DrawerSelectSection } from "@eduriam/ui-core";
 import type { Meta, StoryObj } from "@storybook/react";
 
+import React, { useState } from "react";
+
+import Box from "@mui/material/Box";
+
 import StudySession, { IStudySession } from "./StudySession";
+import { ReportStudyBlockDialog } from "./components/shared/ReportStudyBlockDialog";
 import { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
 
 const meta: Meta<typeof StudySession> = {
@@ -10,6 +16,32 @@ const meta: Meta<typeof StudySession> = {
 
 export default meta;
 type Story = StoryObj<typeof StudySession>;
+
+const REPORT_PROBLEM_TYPE_SECTIONS: DrawerSelectSection[] = [
+  {
+    id: "problem-type",
+    title: "Problem type",
+    options: [
+      { id: "wrong-solution", label: "Wrong solution" },
+      { id: "unclear-instructions", label: "Unclear instructions" },
+      { id: "wrong-answer-accepted", label: "Wrong answer accepted" },
+      { id: "correct-answer-rejected", label: "Correct answer rejected" },
+      { id: "other", label: "Other issue" },
+    ],
+  },
+];
+
+const REPORT_DIALOG_LOCALIZATION = {
+  header: "Report a problem",
+  problemTypePlaceholder: "Problem type",
+  descriptionPlaceholder: "Describe problem (optional)",
+  submitLabel: "Submit",
+  thankYouSection: {
+    title: "Thank you for your feedback!",
+    description: "We will review your problem report as soon as possible.",
+    continueButton: "Continue",
+  },
+};
 
 export const Base: Story = {
   args: {
@@ -79,6 +111,66 @@ export const Exercise: Story = {
     onFinish: () => {},
     onExit: () => {},
   } as IStudySession,
+};
+
+const StudySessionWithReportDialogStory: React.FC = () => {
+  const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [reportTarget, setReportTarget] = useState<{
+    id: string;
+    type: string;
+  } | null>(null);
+
+  return (
+    <Box sx={{ minHeight: "100dvh" }}>
+      <StudySession
+        studySession={{
+          studyBlocks: [
+            {
+              id: "exercise-report-block-1",
+              type: "exercise",
+              atomId: "atom-report-1",
+              components: [
+                {
+                  id: "mc-report-1",
+                  type: StudyBlockComponentType.MULTIPLE_CHOICE,
+                  question: "What does SQL SELECT do?",
+                  options: [
+                    { id: "read", text: "Reads data (correct)" },
+                    { id: "delete", text: "Deletes data" },
+                    { id: "insert", text: "Inserts rows" },
+                  ],
+                  correctOptionId: "read",
+                },
+              ],
+            },
+          ],
+        }}
+        onFinish={() => {}}
+        onExit={() => {}}
+        onReportStudyBlockClick={(studyBlock) => {
+          setReportTarget(studyBlock);
+          setReportDialogOpen(true);
+        }}
+      />
+
+      <ReportStudyBlockDialog
+        open={reportDialogOpen}
+        onClose={() => setReportDialogOpen(false)}
+        problemTypeSections={REPORT_PROBLEM_TYPE_SECTIONS}
+        localization={REPORT_DIALOG_LOCALIZATION}
+        onSubmit={(payload) => {
+          console.info("Study block report submitted", {
+            studyBlock: reportTarget,
+            report: payload,
+          });
+        }}
+      />
+    </Box>
+  );
+};
+
+export const WithReportStudyBlockDialog: Story = {
+  render: () => <StudySessionWithReportDialogStory />,
 };
 
 export const ExerciseMultipleChoice3InARow: Story = {

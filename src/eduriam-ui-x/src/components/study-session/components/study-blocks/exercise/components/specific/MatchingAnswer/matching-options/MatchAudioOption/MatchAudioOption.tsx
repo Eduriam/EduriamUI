@@ -115,13 +115,13 @@ const MatchAudioOption: React.FC<IMatchAudioOptionProps> = ({
               <Icon
                 name="play"
                 color={disabled ? undefined : "primary"}
-                fontSize="large"
+                sx={{ fontSize: "large" }}
               />
             ) : (
               <Icon
                 name="play"
                 color={disabled ? undefined : "primary"}
-                fontSize="large"
+                sx={{ fontSize: "large" }}
               />
             )}
           </IconButton>
