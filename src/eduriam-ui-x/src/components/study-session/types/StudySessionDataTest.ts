@@ -12,6 +12,11 @@ export interface StudySessionDataTest {
     checkAnswerButton?: string;
   };
 
+  studyBlockNavigation?: {
+    previousStudyBlockButton?: string;
+    nextStudyBlockButton?: string;
+  };
+
   exercises?: {
     multipleChoiceExercise?: MultipleChoiceExerciseDataTest;
   };

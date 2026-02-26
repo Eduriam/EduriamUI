@@ -52,7 +52,9 @@ export interface IStudySession {
   studySession: StudySessionModel;
   onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
   onExit: () => void;
-  onReportStudyBlockClick?: (studyBlock: Pick<StudyBlockModel, "id" | "type">) => void;
+  onReportStudyBlockClick?: (
+    studyBlock: Pick<StudyBlockModel, "id" | "type">,
+  ) => void;
   localization?: StudySessionLocalization;
   dataTest?: StudySessionDataTest;
 }
@@ -506,14 +508,16 @@ const StudySession: React.FC<IStudySession> = ({
             <StudySessionNavigationButton
               direction="prev"
               onClick={handleGoBack}
-              data-test="study-session-nav-prev"
+              data-test={
+                dataTest?.studyBlockNavigation?.previousStudyBlockButton
+              }
             />
           )}
           {desktop && canGoForward && (
             <StudySessionNavigationButton
               direction="next"
               onClick={handleGoForward}
-              data-test="study-session-nav-next"
+              data-test={dataTest?.studyBlockNavigation?.nextStudyBlockButton}
             />
           )}
         </Stack>
