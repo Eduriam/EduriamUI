@@ -9,6 +9,7 @@ import { DatabaseTableVideoComponent } from "../components/DatabaseTable/Databas
 import { Header } from "../components/Header/Header";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
+import { MermaidClassDiagramVideoComponent } from "../components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 import { PageHeader } from "../components/PageHeader/PageHeader";
 import { PageSubheader } from "../components/PageSubheader/PageSubheader";
 import { Paragraph } from "../components/Paragraph/Paragraph";
@@ -44,6 +45,8 @@ export class VideoComponentFactory {
         return <BackgroundVideo comp={comp} />;
       case "CODE_EXPLAINER":
         return <CodeExplainer comp={comp} />;
+      case "MERMAID_CLASS_DIAGRAM":
+        return <MermaidClassDiagramVideoComponent comp={comp} />;
       default: {
         // Exhaustive check to ensure that all component types have been handled
         const _: never = comp;
