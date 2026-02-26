@@ -81,6 +81,11 @@ export interface DrawerSelectProps {
    * Optional data test identifier for the component root.
    */
   "data-test"?: string;
+
+  /**
+   * Optional z-index override passed to the underlying drawer modal.
+   */
+  drawerZIndex?: number;
 }
 
 /**
@@ -97,6 +102,7 @@ export const DrawerSelect: React.FC<DrawerSelectProps> = ({
   defaultSelectedOptionId,
   onChange,
   "data-test": dataTest,
+  drawerZIndex,
 }) => {
   const allOptions = useMemo(
     () =>
@@ -144,7 +150,12 @@ export const DrawerSelect: React.FC<DrawerSelectProps> = ({
   };
 
   return (
-    <Drawer open={open} onClose={onClose} data-test={dataTest}>
+    <Drawer
+      open={open}
+      onClose={onClose}
+      data-test={dataTest}
+      zIndex={drawerZIndex}
+    >
       <Box
         role="radiogroup"
         sx={{

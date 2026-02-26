@@ -98,6 +98,13 @@ export interface DrawerProps {
   hideBackdrop?: boolean;
 
   /**
+   * Optional z-index override for the underlying modal container.
+   *
+   * Use this when a drawer must render above other modal surfaces.
+   */
+  zIndex?: number;
+
+  /**
    * Drawer content.
    */
   children?: ReactNode;
@@ -126,6 +133,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   paddingX = "medium",
   backgroundColor,
   hideBackdrop = false,
+  zIndex,
   children,
   "data-test": dataTest,
 }) => {
@@ -140,6 +148,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       ModalProps={{
         keepMounted: true,
         hideBackdrop,
+        sx: zIndex !== undefined ? { zIndex } : undefined,
       }}
       PaperProps={{
         "data-test": dataTest,

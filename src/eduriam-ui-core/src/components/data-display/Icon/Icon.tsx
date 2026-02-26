@@ -33,10 +33,10 @@ const ICON_COLOR_MAP: Record<IconColor, (palette: Palette) => string> = {
 };
 
 /**
- * Additional props required by the `Icon` component.
+ * Props for the `Icon` component.
  *
- * Extends MUI `IconProps` with a `name` that maps to a Material Icon glyph
- * and variant via `iconConfig`.
+ * Only allows a semantic `name`, optional semantic `color`, and a limited
+ * subset of MUI `IconProps` (`sx` and `key`).
  */
 export interface IconPropsExtended {
   /**
@@ -48,6 +48,18 @@ export interface IconPropsExtended {
    * Semantic color from the theme palette.
    */
   color?: IconColor;
+
+  /**
+   * `sx` prop forwarded to MUI `Icon`.
+   */
+  sx?: IconProps["sx"];
+
+  /**
+   * Optional React `key` (for use when rendering lists).
+   *
+   * Note: React treats `key` specially and it is not forwarded to `MuiIcon`.
+   */
+  key?: React.Key;
 }
 
 /**
@@ -71,8 +83,8 @@ function resolveIcon(name: IconName): { glyph: string; outlined: boolean } {
  * Use this whenever you need a Material icon so styling and font setup
  * remain consistent.
  */
-export const Icon: React.FC<IconPropsExtended & IconProps> = (props) => {
-  const { name, color, sx, ...rest } = props;
+export const Icon: React.FC<IconPropsExtended> = (props) => {
+  const { name, color, sx } = props;
   const theme = useTheme();
   const { glyph, outlined } = resolveIcon(name);
 
@@ -90,7 +102,6 @@ export const Icon: React.FC<IconPropsExtended & IconProps> = (props) => {
     <MuiIcon
       baseClassName={outlined ? "material-icons-outlined" : undefined}
       sx={combinedSx.length > 0 ? combinedSx : undefined}
-      {...rest}
     >
       {glyph}
     </MuiIcon>

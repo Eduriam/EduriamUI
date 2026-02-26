@@ -96,9 +96,9 @@ export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({
         </Box>
         <IconButton onClick={handleClick} size="large" aria-label="Play audio">
           {state === "STOPPED" || state === "PAUSED" ? (
-            <Icon name="play" color="primary" fontSize="large" />
+            <Icon name="play" color="primary" sx={{ fontSize: "large" }} />
           ) : (
-            <Icon name="play" color="primary" fontSize="large" />
+            <Icon name="play" color="primary" sx={{ fontSize: "large" }} />
           )}
         </IconButton>
         <Box>
