@@ -52,6 +52,7 @@ export interface IStudySession {
   studySession: StudySessionModel;
   onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
   onExit: () => void;
+  onReportStudyBlockClick?: (studyBlock: Pick<StudyBlockModel, "id" | "type">) => void;
   localization?: StudySessionLocalization;
   dataTest?: StudySessionDataTest;
 }
@@ -65,6 +66,7 @@ const StudySession: React.FC<IStudySession> = ({
   studySession,
   onFinish,
   onExit,
+  onReportStudyBlockClick,
   localization: localizationProp,
   dataTest,
 }) => {
@@ -358,9 +360,10 @@ const StudySession: React.FC<IStudySession> = ({
   // ---------------------------------------------------------------------------
 
   const isRevisiting = index <= furthestCompletedIndex;
+  const currentStudyBlock = studyBlockQueue[index];
   const currentExerciseAnswerExplanation =
-    studyBlockQueue[index] && studyBlockQueue[index].type === "exercise"
-      ? studyBlockQueue[index].answerExplanation
+    currentStudyBlock && currentStudyBlock.type === "exercise"
+      ? currentStudyBlock.answerExplanation
       : undefined;
   const currentWrongAttempts = wrongAttemptsByIndex.get(index) ?? 0;
   const allowSkipExercise =
@@ -454,7 +457,15 @@ const StudySession: React.FC<IStudySession> = ({
           {drawerVariant && (
             <StudySessionDrawer
               variant={drawerVariant}
-              onReportClick={() => {}}
+              onReportClick={
+                onReportStudyBlockClick && currentStudyBlock
+                  ? () =>
+                      onReportStudyBlockClick({
+                        id: currentStudyBlock.id,
+                        type: currentStudyBlock.type,
+                      })
+                  : undefined
+              }
               answerExplanation={currentExerciseAnswerExplanation}
               onContinueOrRetryClick={() => {
                 if (drawerVariant === "incorrect") {
