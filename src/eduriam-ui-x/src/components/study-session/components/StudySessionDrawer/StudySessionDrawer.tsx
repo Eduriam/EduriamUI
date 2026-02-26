@@ -127,16 +127,16 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   const drawerDataTest =
     dataTest ??
     (isCorrect
-      ? dataTestConfig?.correctAnswerDrawer
-      : dataTestConfig?.incorrectAnswerDrawer) ??
+      ? dataTestConfig?.studySessionDrawer?.correctAnswerDrawer
+      : dataTestConfig?.studySessionDrawer?.incorrectAnswerDrawer) ??
     "study-session-drawer";
   const primaryActionDataTest =
     primaryButtonDataTest ??
     (isCorrect
-      ? dataTestConfig?.continueButton
-      : dataTestConfig?.retryExerciseButton);
-  const whyDataTest = dataTestConfig?.showExplanationButton;
-  const skipDataTest = dataTestConfig?.skipExerciseButton;
+      ? dataTestConfig?.studySessionDrawer?.continueButton
+      : dataTestConfig?.studySessionDrawer?.retryExerciseButton);
+  const whyDataTest = dataTestConfig?.studySessionDrawer?.showExplanationButton;
+  const skipDataTest = dataTestConfig?.studySessionDrawer?.skipExerciseButton;
   const handleSkipExerciseClick = onSkipExerciseClick ?? onContinueClick;
   const handleExplanationClick = () => {
     setIsExplanationOpen(true);
@@ -323,9 +323,8 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
           bodyText={answerExplanation.text}
           continueButtonLabel={studySessionDrawer.continueButton}
           dataTest={{
-            explanationSection:
-              dataTestConfig?.exerciseAnswerExplanationSection,
-            gotItButton: dataTestConfig?.gotItButton,
+            explanationSection: dataTestConfig?.explanation?.section,
+            gotItButton: dataTestConfig?.explanation?.gotItButton,
           }}
         />
       )}

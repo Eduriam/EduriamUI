@@ -67,7 +67,7 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           component={component}
           onAnswerStateChange={onAnswerStateChange}
           localization={localization.multipleChoiceExercise}
-          dataTest={dataTest?.multipleChoiceExercise}
+          dataTest={dataTest?.exercises?.multipleChoiceExercise}
         />
       );
     case StudyBlockComponentType.SHORT_AUDIO:

@@ -128,7 +128,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
     <>
       <Box
         ref={containerRef}
-        data-test={dataTest?.explanationBlockSection}
+        data-test={dataTest?.explanationBlock?.section}
         sx={{
           width: "100%",
           position: "relative",
@@ -161,7 +161,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
           onClick={onComplete}
           disabled={!hasFinished}
           fullWidth
-          data-test={dataTest?.continueButton}
+          data-test={dataTest?.explanationBlock?.continueButton}
         >
           {localization.studyBlock.continueButton}
         </LargeButton>

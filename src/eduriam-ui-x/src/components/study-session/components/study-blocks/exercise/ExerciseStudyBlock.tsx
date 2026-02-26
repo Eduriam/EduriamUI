@@ -9,10 +9,10 @@ import { useStudyBlockAudio } from "../../../hooks/useStudyBlockAudio";
 import { AnswerState } from "../../../types/AnswerState";
 import type { StudySessionDataTest } from "../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
+import type { ExerciseStudyBlockDTO } from "./ExerciseStudyBlockDTO";
 import { isAnswerComponent } from "./components/AnswerComponentConfig";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
-import type { ExerciseStudyBlockDTO } from "./ExerciseStudyBlockDTO";
 
 export interface IExerciseStudyBlock {
   mode?: ExerciseStudyBlockDTO["mode"];
@@ -149,7 +149,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
             onClick={handleClick}
             disabled={studyBlockState !== "READY"}
             fullWidth={true}
-            data-test={dataTest?.checkAnswerButton}
+            data-test={dataTest?.exerciseBlock?.checkAnswerButton}
           >
             {localization.studyBlock.checkButton}
           </LargeButton>

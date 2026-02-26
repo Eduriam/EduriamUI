@@ -493,8 +493,8 @@ const StudySession: React.FC<IStudySession> = ({
               dataTest={dataTest}
               primaryButtonDataTest={
                 drawerVariant === "incorrect"
-                  ? dataTest?.retryExerciseButton
-                  : dataTest?.continueButton
+                  ? dataTest?.studySessionDrawer?.retryExerciseButton
+                  : dataTest?.studySessionDrawer?.continueButton
               }
             />
           )}
