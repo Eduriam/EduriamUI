@@ -181,7 +181,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
                 color={isCorrect ? "success" : "error"}
                 icon="report"
                 onClick={onReportClick}
-                data-test="study-session-drawer-report"
+                data-test={dataTestConfig?.studySessionDrawer?.reportButton}
               />
             )}
           </Box>

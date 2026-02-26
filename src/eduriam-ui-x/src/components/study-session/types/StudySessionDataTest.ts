@@ -28,6 +28,7 @@ export interface StudySessionDataTest {
     showExplanationButton?: string;
     continueButton?: string;
     retryExerciseButton?: string;
+    reportButton?: string;
   };
 
   studyStats?: {
