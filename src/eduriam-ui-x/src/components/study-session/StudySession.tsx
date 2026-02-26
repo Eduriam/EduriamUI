@@ -191,7 +191,7 @@ const StudySession: React.FC<IStudySession> = ({
     setStudyBlockQueue((prev) => [...prev, studyBlock]);
   }
 
-  function handleContinue(result: AnswerState, rescheduleWhenWrong = true) {
+  function handleContinue(result: AnswerState, skippedExercise = false) {
     clearTimeout(drawerTimeoutRef.current);
     setDrawerVariant(null);
     setCheckedResult(null);
@@ -209,6 +209,13 @@ const StudySession: React.FC<IStudySession> = ({
 
     const currentBlock = studyBlockQueue[index];
     const atomId = currentBlock.atomId;
+    const hadWrongAttempt = (wrongAttemptsByIndex.get(index) ?? 0) > 0;
+    const shouldRescheduleReviewBlock =
+      currentBlock.type === "exercise" &&
+      currentBlock.mode === "review" &&
+      result === "RIGHT" &&
+      hadWrongAttempt &&
+      !skippedExercise;
 
     setAtomStatsMap((prev) => {
       const next = new Map(prev);
@@ -221,7 +228,7 @@ const StudySession: React.FC<IStudySession> = ({
       return next;
     });
 
-    if (result === "WRONG" && rescheduleWhenWrong) {
+    if (shouldRescheduleReviewBlock) {
       rescheduleStudyBlock(currentBlock);
     }
 
@@ -467,7 +474,7 @@ const StudySession: React.FC<IStudySession> = ({
               }}
               onSkipExerciseClick={() => {
                 if (!checkedResult) return;
-                handleContinue(checkedResult, false);
+                handleContinue(checkedResult, true);
               }}
               allowSkipExercise={allowSkipExercise}
               playSound={playDrawerSound}

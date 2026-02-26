@@ -12,8 +12,10 @@ import type { StudySessionLocalization } from "../../../types/StudySessionLocali
 import { isAnswerComponent } from "./components/AnswerComponentConfig";
 import { StudyBlockComponent } from "./components/StudyBlockComponent";
 import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
+import type { ExerciseStudyBlockDTO } from "./ExerciseStudyBlockDTO";
 
 export interface IExerciseStudyBlock {
+  mode?: ExerciseStudyBlockDTO["mode"];
   components: StudyBlockComponentDTO[];
   /**
    * Called when the user presses the "Check" button.
