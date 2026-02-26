@@ -1,4 +1,4 @@
-import { LargeButton } from "@eduriam/ui-core";
+import { IconButton, LargeButton } from "@eduriam/ui-core";
 
 import React, {
   useCallback,
@@ -24,7 +24,9 @@ import type { StudySessionLocalization } from "../../../types/StudySessionLocali
 export interface IExplanationStudyBlock {
   scenes: Scene[];
   onComplete: () => void;
+  onReportClick?: () => void;
   localization: StudySessionLocalization;
+  isRevisiting?: boolean;
   dataTest?: StudySessionDataTest;
 }
 
@@ -53,7 +55,9 @@ function useAvailableHeight(ref: React.RefObject<HTMLElement | null>) {
 export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   scenes,
   onComplete,
+  onReportClick,
   localization,
+  isRevisiting = false,
   dataTest,
 }) => {
   const theme = useTheme();
@@ -63,7 +67,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   const availableHeight = useAvailableHeight(containerRef);
 
   const [containerWidth, setContainerWidth] = useState(0);
-  const [hasFinished, setHasFinished] = useState(false);
+  const [hasFinished, setHasFinished] = useState(isRevisiting);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -150,21 +154,35 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
         )}
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          pt: 2.5,
-        }}
-      >
-        <LargeButton
-          onClick={onComplete}
-          disabled={!hasFinished}
-          fullWidth
-          data-test={dataTest?.explanationBlock?.continueButton}
+      <Box sx={{ display: "flex", justifyContent: "center", pt: 2.5 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "100%",
+            maxWidth: 400,
+          }}
         >
-          {localization.studyBlock.continueButton}
-        </LargeButton>
+          {hasFinished && onReportClick && (
+            <IconButton
+              icon="report"
+              variant="text"
+              color="textSecondary"
+              size="small"
+              onClick={onReportClick}
+              data-test={dataTest?.explanationBlock?.reportButton}
+            />
+          )}
+          <LargeButton
+            onClick={onComplete}
+            disabled={!hasFinished}
+            fullWidth
+            data-test={dataTest?.explanationBlock?.continueButton}
+          >
+            {localization.studyBlock.continueButton}
+          </LargeButton>
+        </Box>
       </Box>
     </>
   );

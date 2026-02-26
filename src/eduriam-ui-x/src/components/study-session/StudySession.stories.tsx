@@ -308,7 +308,45 @@ export const ExerciseWithAudio: Story = {
 };
 
 /** Sample lesson: SELECT * FROM — basics of selecting all rows from a table in SQL. */
+const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
+  args,
+}) => {
+  const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [reportTarget, setReportTarget] = useState<{
+    id: string;
+    type: string;
+  } | null>(null);
+
+  return (
+    <Box sx={{ minHeight: "100dvh" }}>
+      <StudySession
+        {...args}
+        onReportStudyBlockClick={(studyBlock) => {
+          setReportTarget(studyBlock);
+          setReportDialogOpen(true);
+        }}
+      />
+
+      <ReportStudyBlockDialog
+        open={reportDialogOpen}
+        onClose={() => setReportDialogOpen(false)}
+        problemTypeSections={REPORT_PROBLEM_TYPE_SECTIONS}
+        localization={REPORT_DIALOG_LOCALIZATION}
+        onSubmit={(payload) => {
+          console.info("Study block report submitted", {
+            studyBlock: reportTarget,
+            report: payload,
+          });
+        }}
+      />
+    </Box>
+  );
+};
+
 export const ExampleLessonSQL: Story = {
+  render: (args) => (
+    <ExampleLessonSQLWithReportStory args={args as IStudySession} />
+  ),
   args: {
     studySession: {
       studyBlocks: [
