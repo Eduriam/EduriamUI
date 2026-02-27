@@ -42,6 +42,7 @@ export type { ExerciseStudyBlockDTO } from "./components/study-session/component
 export type { ExplanationStudyBlockDTO } from "./components/study-session/components/study-blocks/explanation/ExplanationStudyBlockDTO";
 export type { BaseStudyBlock } from "./components/study-session/components/study-blocks/StudyBlock";
 export type { StudyBlockDTO } from "./components/study-session/components/study-blocks/StudyBlockDTO";
+export type { SelectedStudyBlockData } from "./components/study-session/StudySession";
 export type { AnswerState } from "./components/study-session/types/AnswerState";
 export type { StudySessionDataTest } from "./components/study-session/types/StudySessionDataTest";
 export type { StudySessionDTO } from "./components/study-session/types/StudySessionDTO";

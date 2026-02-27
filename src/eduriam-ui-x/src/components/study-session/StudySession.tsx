@@ -48,15 +48,17 @@ export interface AtomProgressRating {
   rating: number;
 }
 
+export interface SelectedStudyBlockData {
+  id: StudyBlockModel["id"];
+  type: StudyBlockModel["type"];
+  answerState: AnswerState | null;
+}
+
 export interface IStudySession {
   studySession: StudySessionModel;
   onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
   onExit: () => void;
-  onReportStudyBlockClick?: (
-    studyBlockData: Pick<StudyBlockModel, "id" | "type"> & {
-      answerState: AnswerState | null;
-    },
-  ) => void;
+  onReportStudyBlockClick?: (studyBlockData: SelectedStudyBlockData) => void;
   localization?: StudySessionLocalization;
   dataTest?: StudySessionDataTest;
 }
