@@ -21,6 +21,9 @@ export interface CodeEditorFillInCodeProps {
 
   /** Optional Prism language for syntax highlighting (e.g. "javascript", "python"). */
   language?: string;
+  dataTest?: {
+    textField?: string;
+  };
 }
 
 /**
@@ -34,6 +37,7 @@ export const CodeEditorFillInCode: React.FC<CodeEditorFillInCodeProps> = ({
   onChange,
   defaultValue = "",
   language,
+  dataTest,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
@@ -101,6 +105,7 @@ export const CodeEditorFillInCode: React.FC<CodeEditorFillInCodeProps> = ({
             ref={textareaRef}
             component="textarea"
             value={value}
+            data-test={dataTest?.textField}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               onChange(e.target.value)
             }
@@ -136,6 +141,7 @@ export const CodeEditorFillInCode: React.FC<CodeEditorFillInCodeProps> = ({
           ref={textareaRef}
           component="textarea"
           value={value}
+          data-test={dataTest?.textField}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             onChange(e.target.value)
           }

@@ -15,6 +15,13 @@ import { CodeEditorFillInCode } from "./windows/CodeEditorFillInCode";
 import { CodeEditorTable } from "./windows/CodeEditorTable";
 import { CodeEditorTerminal } from "./windows/CodeEditorTerminal";
 
+export interface CodeEditorDataTest {
+  resultSection?: string;
+  fillInCode?: {
+    textField?: string;
+  };
+}
+
 export interface CodeEditorProps {
   /** Tab definitions for the editor. */
   tabs: CodeEditorTab[];
@@ -53,6 +60,7 @@ export interface CodeEditorProps {
 
   /** Called when the user edits code in a fillInCode tab. */
   onCodeValueChange?: (tabId: string, value: string) => void;
+  dataTest?: CodeEditorDataTest;
 }
 
 /**
@@ -73,6 +81,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   onBlankChange,
   codeValues = {},
   onCodeValueChange,
+  dataTest,
 }) => {
   // Build tabs config for the Tabs component.
   const tabItems = useMemo(
@@ -118,6 +127,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             onChange={(val) => onCodeValueChange?.(activeTab.id, val)}
             defaultValue={activeTab.defaultValue}
             language={activeTab.language}
+            dataTest={dataTest?.fillInCode}
           />
         );
 
@@ -127,17 +137,30 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             html={activeTab.html}
             inlineCss={activeTab.inlineCss}
             inlineJs={activeTab.inlineJs}
+            dataTest={
+              passiveTabsUnlocked ? dataTest?.resultSection : undefined
+            }
           />
         );
 
       case "table":
-        return <CodeEditorTable rows={activeTab.rows} />;
+        return (
+          <CodeEditorTable
+            rows={activeTab.rows}
+            dataTest={
+              passiveTabsUnlocked ? dataTest?.resultSection : undefined
+            }
+          />
+        );
 
       case "terminal":
         return (
           <CodeEditorTerminal
             lines={activeTab.lines}
             language={activeTab.language}
+            dataTest={
+              passiveTabsUnlocked ? dataTest?.resultSection : undefined
+            }
           />
         );
 
