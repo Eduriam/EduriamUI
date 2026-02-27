@@ -9,5 +9,6 @@
   "conventionalCommits.promptScopes": false,
   "conventionalCommits.promptFooter": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "chatgpt.openOnStartup": true
 }
