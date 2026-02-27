@@ -53,7 +53,9 @@ export interface IStudySession {
   onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
   onExit: () => void;
   onReportStudyBlockClick?: (
-    studyBlock: Pick<StudyBlockModel, "id" | "type">,
+    studyBlockData: Pick<StudyBlockModel, "id" | "type"> & {
+      answerState: AnswerState | null;
+    },
   ) => void;
   localization?: StudySessionLocalization;
   dataTest?: StudySessionDataTest;
@@ -376,6 +378,14 @@ const StudySession: React.FC<IStudySession> = ({
     drawerVariant === "incorrect" &&
     checkedResult === "WRONG" &&
     currentWrongAttempts >= 3;
+  const studyBlockData =
+    currentStudyBlock && onReportStudyBlockClick
+      ? {
+          id: currentStudyBlock.id,
+          type: currentStudyBlock.type,
+          answerState: checkedResult,
+        }
+      : null;
 
   return (
     <StudySessionAudioProvider>
@@ -453,12 +463,8 @@ const StudySession: React.FC<IStudySession> = ({
                     scenes={studyBlockQueue[index].scenes}
                     onComplete={handleExplanationComplete}
                     onReportClick={
-                      onReportStudyBlockClick && currentStudyBlock
-                        ? () =>
-                            onReportStudyBlockClick({
-                              id: currentStudyBlock.id,
-                              type: currentStudyBlock.type,
-                            })
+                      studyBlockData
+                        ? () => onReportStudyBlockClick?.(studyBlockData)
                         : undefined
                     }
                     localization={localization}
@@ -473,12 +479,8 @@ const StudySession: React.FC<IStudySession> = ({
             <StudySessionDrawer
               variant={drawerVariant}
               onReportClick={
-                onReportStudyBlockClick && currentStudyBlock
-                  ? () =>
-                      onReportStudyBlockClick({
-                        id: currentStudyBlock.id,
-                        type: currentStudyBlock.type,
-                      })
+                studyBlockData
+                  ? () => onReportStudyBlockClick?.(studyBlockData)
                   : undefined
               }
               answerExplanation={currentExerciseAnswerExplanation}

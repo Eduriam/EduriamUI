@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import StudySession, { IStudySession } from "./StudySession";
 import { ReportStudyBlockDialog } from "./components/shared/ReportStudyBlockDialog";
 import { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
+import type { AnswerState } from "./types/AnswerState";
 
 const meta: Meta<typeof StudySession> = {
   title: "x/study-session/StudySession",
@@ -118,6 +119,7 @@ const StudySessionWithReportDialogStory: React.FC = () => {
   const [reportTarget, setReportTarget] = useState<{
     id: string;
     type: string;
+    answerState: AnswerState | null;
   } | null>(null);
 
   return (
@@ -147,8 +149,8 @@ const StudySessionWithReportDialogStory: React.FC = () => {
         }}
         onFinish={() => {}}
         onExit={() => {}}
-        onReportStudyBlockClick={(studyBlock) => {
-          setReportTarget(studyBlock);
+        onReportStudyBlockClick={(studyBlockData) => {
+          setReportTarget(studyBlockData);
           setReportDialogOpen(true);
         }}
       />
@@ -315,14 +317,15 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
   const [reportTarget, setReportTarget] = useState<{
     id: string;
     type: string;
+    answerState: AnswerState | null;
   } | null>(null);
 
   return (
     <Box sx={{ minHeight: "100dvh" }}>
       <StudySession
         {...args}
-        onReportStudyBlockClick={(studyBlock) => {
-          setReportTarget(studyBlock);
+        onReportStudyBlockClick={(studyBlockData) => {
+          setReportTarget(studyBlockData);
           setReportDialogOpen(true);
         }}
       />
