@@ -52,6 +52,7 @@ export interface SelectedStudyBlockData {
   id: StudyBlockModel["id"];
   type: StudyBlockModel["type"];
   answerState: AnswerState | null;
+  userAnswerReport: string;
 }
 
 export interface IStudySession {
@@ -85,6 +86,7 @@ const StudySession: React.FC<IStudySession> = ({
   const [drawerVariant, setDrawerVariant] =
     useState<StudySessionDrawerVariant | null>(null);
   const [checkedResult, setCheckedResult] = useState<AnswerState | null>(null);
+  const [userAnswerReport, setUserAnswerReport] = useState("");
   const [studyBlockQueue, setStudyBlockQueue] = useState(
     studySession.studyBlocks,
   );
@@ -146,6 +148,7 @@ const StudySession: React.FC<IStudySession> = ({
       clearTimeout(drawerTimeoutRef.current);
       setDrawerVariant(null);
       setCheckedResult(null);
+      setUserAnswerReport("");
 
       triggerTransition(() => {
         setIndex(targetIndex);
@@ -203,6 +206,7 @@ const StudySession: React.FC<IStudySession> = ({
     clearTimeout(drawerTimeoutRef.current);
     setDrawerVariant(null);
     setCheckedResult(null);
+    setUserAnswerReport("");
     setWrongAttemptsByIndex((prev) => {
       if (!prev.has(index)) return prev;
       const next = new Map(prev);
@@ -284,6 +288,7 @@ const StudySession: React.FC<IStudySession> = ({
     clearTimeout(drawerTimeoutRef.current);
     setDrawerVariant(null);
     setCheckedResult(null);
+    setUserAnswerReport("");
     setPlayDrawerSound(false);
     setCompletedResults((prev) => {
       if (!prev.has(index)) return prev;
@@ -295,6 +300,7 @@ const StudySession: React.FC<IStudySession> = ({
   }
 
   function handleExplanationComplete() {
+    setUserAnswerReport("");
     setFurthestCompletedIndex((prev) => Math.max(prev, index));
 
     if (index < studyBlockQueue.length - 1) {
@@ -386,6 +392,7 @@ const StudySession: React.FC<IStudySession> = ({
           id: currentStudyBlock.id,
           type: currentStudyBlock.type,
           answerState: checkedResult,
+          userAnswerReport,
         }
       : null;
 
@@ -439,8 +446,9 @@ const StudySession: React.FC<IStudySession> = ({
                   <ExerciseStudyBlock
                     key={`${index}-${exerciseRenderVersion}`}
                     components={studyBlockQueue[index].components}
-                    onCheck={(result) => {
+                    onCheck={(result, report) => {
                       setCheckedResult(result);
+                      setUserAnswerReport(report);
                       setPlayDrawerSound(true);
                       setDrawerVariant(
                         result === "RIGHT" ? "correct" : "incorrect",

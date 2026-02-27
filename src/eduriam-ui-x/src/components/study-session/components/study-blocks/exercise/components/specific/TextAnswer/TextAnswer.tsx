@@ -10,7 +10,7 @@ import { TextAnswerComponent } from "../../StudyBlockComponentDTO";
 export interface ITextAnswerStudyBlockComponent {
   component: TextAnswerComponent;
   showAnswerState?: boolean;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
 }
 
 function evaluateAnswer(
@@ -48,8 +48,8 @@ export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
   );
 
   useEffect(() => {
-    onAnswerStateChange?.(state);
-  }, [state, onAnswerStateChange]);
+    onAnswerStateChange?.(state, value);
+  }, [state, value, onAnswerStateChange]);
 
   const isLong = component.variant === "long";
 

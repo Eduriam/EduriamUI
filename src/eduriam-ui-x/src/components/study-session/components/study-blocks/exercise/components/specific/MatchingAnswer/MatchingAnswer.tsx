@@ -27,7 +27,7 @@ function isImageOption(o: MatchOptionDTO): o is ImageMatchOptionDTO {
 
 export interface IMatchingAnswerStudyBlockComponent {
   component: MatchingAnswerComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
 }
 
 export const MatchingAnswer: React.FC<IMatchingAnswerStudyBlockComponent> = ({
@@ -45,6 +45,14 @@ export const MatchingAnswer: React.FC<IMatchingAnswerStudyBlockComponent> = ({
   const [answerStates, setAnswerStates] = useState<Array<AnswerState>>(
     component.options1.map(() => "NONE"),
   );
+  const [attemptReports, setAttemptReports] = useState<Array<string>>([]);
+
+  function getOptionLabel(option: MatchOptionDTO): string {
+    if (isTextOption(option)) return option.text;
+    if (isAudioOption(option)) return option.audioUrl;
+    if (isImageOption(option)) return option.imageUrl;
+    return "";
+  }
 
   const aggregate = useMemo<AnswerState>(() => {
     if (answerStates.every((s) => s === "RIGHT")) return "RIGHT";
@@ -53,8 +61,8 @@ export const MatchingAnswer: React.FC<IMatchingAnswerStudyBlockComponent> = ({
   }, [answerStates]);
 
   useEffect(() => {
-    onAnswerStateChange?.(aggregate);
-  }, [aggregate, onAnswerStateChange]);
+    onAnswerStateChange?.(aggregate, attemptReports.join(" | "));
+  }, [aggregate, attemptReports, onAnswerStateChange]);
 
   useEffect(() => {
     if (selectedIndex1 !== undefined || selectedIndex2 !== undefined) {
@@ -67,6 +75,10 @@ export const MatchingAnswer: React.FC<IMatchingAnswerStudyBlockComponent> = ({
         (component.options1[selectedIndex1] as any).matchIndex ===
         selectedIndex2;
       const state: AnswerState = right ? "RIGHT" : "WRONG";
+      const leftLabel = getOptionLabel(component.options1[selectedIndex1]);
+      const rightLabel = getOptionLabel(component.options2[selectedIndex2]);
+      const pairReport = `${leftLabel} -> ${rightLabel}`;
+      setAttemptReports((prev) => [...prev, pairReport]);
 
       setOptionStates1((prev) => {
         const arr = [...prev];

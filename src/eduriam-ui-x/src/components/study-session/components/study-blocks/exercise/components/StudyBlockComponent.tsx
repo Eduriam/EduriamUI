@@ -23,7 +23,7 @@ import Timer from "./specific/Timer/Timer";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   localization: StudySessionLocalization;
   /**
    * Whether passive code-editor tabs (browser / table / terminal) are

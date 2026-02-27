@@ -22,7 +22,7 @@ interface LetterOption {
 
 export interface IBuildWordStudyBlockComponent {
   component: BuildWordComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
@@ -59,9 +59,8 @@ export const BuildWord: React.FC<IBuildWordStudyBlockComponent> = ({
     newAnswerArray.splice(index, 1);
     setAnswerArray(newAnswerArray);
 
-    onAnswerStateChange?.(
-      evaluateAggregate(newAnswerArray.map((l) => l.character).join("")),
-    );
+    const userAnswerReport = newAnswerArray.map((l) => l.character).join("");
+    onAnswerStateChange?.(evaluateAggregate(userAnswerReport), userAnswerReport);
   }
 
   function handleAddLetter(index: number) {
@@ -73,9 +72,8 @@ export const BuildWord: React.FC<IBuildWordStudyBlockComponent> = ({
     const arr = [...letters];
     arr[index] = { ...arr[index], used: true };
     setLetters(arr);
-    onAnswerStateChange?.(
-      evaluateAggregate(newAnswerArray.map((l) => l.character).join("")),
-    );
+    const userAnswerReport = newAnswerArray.map((l) => l.character).join("");
+    onAnswerStateChange?.(evaluateAggregate(userAnswerReport), userAnswerReport);
   }
 
   return (

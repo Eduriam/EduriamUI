@@ -9,7 +9,7 @@ import { CheckListComponent } from "../../StudyBlockComponentDTO";
 
 export interface ICheckListStudyBlockComponent {
   component: CheckListComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
 }
 
 export const CheckList: React.FC<ICheckListStudyBlockComponent> = ({
@@ -26,8 +26,11 @@ export const CheckList: React.FC<ICheckListStudyBlockComponent> = ({
   }, [checked]);
 
   useEffect(() => {
-    onAnswerStateChange?.(state);
-  }, [state, onAnswerStateChange]);
+    const userAnswerReport = component.items
+      .filter((_, index) => checked[index])
+      .join(", ");
+    onAnswerStateChange?.(state, userAnswerReport);
+  }, [checked, component.items, state, onAnswerStateChange]);
 
   return (
     <FormGroup>

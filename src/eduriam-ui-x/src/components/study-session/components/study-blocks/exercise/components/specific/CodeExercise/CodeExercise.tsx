@@ -67,7 +67,7 @@ export interface CodeExerciseProps {
    * Callback emitting the current answer state every time the user
    * interacts with the exercise.
    */
-  onAnswerStateChange?: (state: AnswerState) => void;
+  onAnswerStateChange?: (state: AnswerState, userAnswerReport: string) => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -138,6 +138,16 @@ function computeAggregateState(states: AnswerState[]): AnswerState {
   if (states.some((s) => s === "NONE")) return "NONE";
   if (states.some((s) => s === "WRONG")) return "WRONG";
   return "RIGHT";
+}
+
+function buildUserAnswerReport(
+  blanks: Record<string, string>,
+  codes: Record<string, string>,
+): string {
+  return JSON.stringify({
+    blanks,
+    codes,
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -248,7 +258,10 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
       for (const tab of fillInCodeTabs) {
         states.push(evaluateFillInCodeTab(tab, codes[tab.id] ?? ""));
       }
-      onAnswerStateChange?.(computeAggregateState(states));
+      onAnswerStateChange?.(
+        computeAggregateState(states),
+        buildUserAnswerReport(blanks, codes),
+      );
     },
     [fillInBlankTabs, fillInCodeTabs, onAnswerStateChange],
   );

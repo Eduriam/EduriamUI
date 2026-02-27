@@ -14,7 +14,7 @@ export interface MultipleChoiceExerciseLocalization {
 
 export interface IMultipleChoiceExerciseStudyBlockComponent {
   component: MultipleChoiceExerciseComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   localization?: MultipleChoiceExerciseLocalization;
   dataTest?: MultipleChoiceExerciseDataTest;
 }
@@ -55,8 +55,11 @@ export const MultipleChoiceExercise: React.FC<
   );
 
   useEffect(() => {
-    onAnswerStateChange?.(state);
-  }, [state, onAnswerStateChange]);
+    const selectedOption = component.options.find(
+      (option) => option.id === selectedId,
+    );
+    onAnswerStateChange?.(state, selectedOption?.text ?? "");
+  }, [component.options, selectedId, state, onAnswerStateChange]);
 
   return (
     <Stack
