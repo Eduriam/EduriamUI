@@ -22,7 +22,7 @@ export interface IExerciseStudyBlock {
    *
    * Receives the evaluation result for the current block.
    */
-  onCheck?: (answer: AnswerState) => void;
+  onCheck?: (answer: AnswerState, userAnswerReport: string) => void;
   localization: StudySessionLocalization;
   /**
    * When `true` the block has already been completed and audio should
@@ -40,6 +40,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   dataTest,
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
+  const [answerReports, setAnswerReports] = useState<string[]>([]);
   const [studyBlockState, setStudyBlockState] = useState<
     "NOT_READY" | "READY" | "SUBMITTED"
   >("NOT_READY");
@@ -55,6 +56,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   function handleAnswerStateChange(
     newAnswerState: AnswerState,
     componentIndex: number,
+    userAnswerReport: string,
   ) {
     setAnswerStates((prev) => {
       // Guard against infinite update loops when a component re-emits
@@ -71,6 +73,12 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
       copy[componentIndex] = newAnswerState;
       return copy;
     });
+    setAnswerReports((prev) => {
+      if (prev[componentIndex] === userAnswerReport) return prev;
+      const copy = [...prev];
+      copy[componentIndex] = userAnswerReport;
+      return copy;
+    });
   }
 
   function handleClick() {
@@ -83,7 +91,11 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
       const isAllRight =
         answerableIndexes.length > 0 &&
         answerableIndexes.every((index) => answerStates[index] === "RIGHT");
-      onCheck?.(isAllRight ? "RIGHT" : "WRONG");
+      const userAnswerReport = answerableIndexes
+        .map((answerableIndex) => answerReports[answerableIndex] ?? "")
+        .filter((report) => report.length > 0)
+        .join(" | ");
+      onCheck?.(isAllRight ? "RIGHT" : "WRONG", userAnswerReport);
       setStudyBlockState("SUBMITTED");
     }
   }
@@ -116,8 +128,8 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
           <StudyBlockComponent
             key={index}
             component={component}
-            onAnswerStateChange={(answerState) =>
-              handleAnswerStateChange(answerState, index)
+            onAnswerStateChange={(answerState, userAnswerReport) =>
+              handleAnswerStateChange(answerState, index, userAnswerReport)
             }
             localization={localization}
             passiveTabsUnlocked={studyBlockState === "SUBMITTED"}

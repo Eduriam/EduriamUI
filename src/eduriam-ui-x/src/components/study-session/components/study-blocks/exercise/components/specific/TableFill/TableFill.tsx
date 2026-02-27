@@ -16,7 +16,7 @@ import { TableFillComponent } from "../../StudyBlockComponentDTO";
 
 export interface ITableFillStudyBlockComponent {
   component: TableFillComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
@@ -69,7 +69,7 @@ export const TableFill: React.FC<ITableFillStudyBlockComponent> = ({
         ? "WRONG"
         : "NONE";
 
-    onAnswerStateChange?.(aggregateState);
+    onAnswerStateChange?.(aggregateState, answerStrings.join(" | "));
   }
 
   // Fire initial NONE state on mount and whenever answers grid changes shape
@@ -92,7 +92,10 @@ export const TableFill: React.FC<ITableFillStudyBlockComponent> = ({
       : states.some((s) => s === "WRONG")
         ? "WRONG"
         : "NONE";
-    onAnswerStateChange?.(aggregate);
+    const answerStrings = component.blankCellCoords.map(
+      (coord) => answers[coord[1]]?.[coord[0]] ?? "",
+    );
+    onAnswerStateChange?.(aggregate, answerStrings.join(" | "));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component.blankCellCoords, component.tableContent, answers.length]);
 

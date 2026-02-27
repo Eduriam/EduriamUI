@@ -16,7 +16,7 @@ import styles from "./PronunciationAnswer.module.css";
 
 export interface IPronunciationAnswerStudyBlockComponent {
   component: PronunciationAnswerComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   // testing-only helper to bypass microphone in stories/tests
   mockTranscript?: string | undefined;
 }
@@ -48,8 +48,8 @@ export const PronunciationAnswer: React.FC<
   );
 
   useEffect(() => {
-    onAnswerStateChange?.(state);
-  }, [state, onAnswerStateChange]);
+    onAnswerStateChange?.(state, effectiveTranscript);
+  }, [effectiveTranscript, state, onAnswerStateChange]);
 
   // Word-by-word feedback, similar to AudioQuestionAnswer
   const removePunctuation = (s: string) => s.replace(/[.,?!]/g, "");

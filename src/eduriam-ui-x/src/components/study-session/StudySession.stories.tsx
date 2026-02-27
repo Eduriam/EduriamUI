@@ -120,6 +120,7 @@ const StudySessionWithReportDialogStory: React.FC = () => {
     id: string;
     type: string;
     answerState: AnswerState | null;
+    userAnswerReport: string;
   } | null>(null);
 
   return (
@@ -318,6 +319,7 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
     id: string;
     type: string;
     answerState: AnswerState | null;
+    userAnswerReport: string;
   } | null>(null);
 
   return (

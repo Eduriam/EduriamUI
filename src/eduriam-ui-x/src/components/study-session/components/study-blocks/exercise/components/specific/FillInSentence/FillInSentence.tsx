@@ -9,7 +9,7 @@ import { FillInSentenceComponent } from "../../StudyBlockComponentDTO";
 
 export interface IFillInSentenceStudyBlockComponent {
   component: FillInSentenceComponent;
-  onAnswerStateChange?: (answer: AnswerState) => void;
+  onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
@@ -38,7 +38,10 @@ export const FillInSentence: React.FC<IFillInSentenceStudyBlockComponent> = ({
       : states.some((s) => s === "WRONG")
         ? "WRONG"
         : "NONE";
-    onAnswerStateChange?.(aggregate);
+    const userAnswerReport = component.blankWordIndexes
+      .map((blankIndex) => updated[blankIndex] ?? "")
+      .join(" | ");
+    onAnswerStateChange?.(aggregate, userAnswerReport);
   }
 
   function handleAddAnswer(optionIndex: number) {
