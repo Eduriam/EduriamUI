@@ -55,12 +55,32 @@ export interface SelectedStudyBlockData {
   userAnswerReport: string;
 }
 
+/**
+ * Props for the `StudySession` component.
+ */
 export interface IStudySession {
+  /** Full session payload including ordered study blocks. */
   studySession: StudySessionModel;
+
+  /** Called once when the session is completed with aggregated atom ratings. */
   onFinish: (atomProgressRatings: AtomProgressRating[]) => void;
+
+  /** Called when the user exits after the session has finished. */
   onExit: () => void;
+
+  /**
+   * Called when the user quits while the session is still in progress.
+   * Falls back to `onExit` when not provided.
+   */
+  onQuit?: () => void;
+
+  /** Optional callback used by report actions for the currently selected study block. */
   onReportStudyBlockClick?: (studyBlockData: SelectedStudyBlockData) => void;
+
+  /** Optional localization overrides for labels and copy. */
   localization?: StudySessionLocalization;
+
+  /** Optional `data-test` mapping used by E2E tests. */
   dataTest?: StudySessionDataTest;
 }
 
@@ -73,11 +93,13 @@ const StudySession: React.FC<IStudySession> = ({
   studySession,
   onFinish,
   onExit,
+  onQuit,
   onReportStudyBlockClick,
   localization: localizationProp,
   dataTest,
 }) => {
   const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
+  const handleQuit = onQuit ?? onExit;
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -421,7 +443,7 @@ const StudySession: React.FC<IStudySession> = ({
             currentIndex={index}
             furthestCompletedIndex={furthestCompletedIndex}
             total={studyBlockQueue.length}
-            onExit={onExit}
+            onExit={handleQuit}
           />
 
           <Box
