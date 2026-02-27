@@ -13,6 +13,7 @@ export interface CodeEditorBrowserProps {
 
   /** Optional inline JS injected into the document. */
   inlineJs?: string;
+  dataTest?: string;
 }
 
 /**
@@ -101,6 +102,7 @@ export const CodeEditorBrowser: React.FC<CodeEditorBrowserProps> = ({
   html,
   inlineCss,
   inlineJs,
+  dataTest,
 }) => {
   const srcdoc = useMemo(
     () => buildDocument(html, inlineCss, inlineJs),
@@ -109,6 +111,7 @@ export const CodeEditorBrowser: React.FC<CodeEditorBrowserProps> = ({
 
   return (
     <Box
+      data-test={dataTest}
       sx={{
         flexGrow: 1,
         overflow: "hidden",

@@ -68,6 +68,15 @@ export interface CodeExerciseProps {
    * interacts with the exercise.
    */
   onAnswerStateChange?: (state: AnswerState, userAnswerReport: string) => void;
+  dataTest?: CodeExerciseDataTest;
+}
+
+export interface CodeExerciseDataTest {
+  section?: string;
+  resultSection?: string;
+  fillInCode?: {
+    textField?: string;
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -171,6 +180,7 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
   checkDisabled,
   onCheckPress,
   onAnswerStateChange,
+  dataTest,
 }) => {
   // ---- Derived: interactive tabs ----
   const fillInBlankTabs = useMemo(
@@ -379,7 +389,11 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
   const hasHeading = Boolean(assignmentTitle || assignmentDescription);
 
   return (
-    <Stack spacing={4} onFocusCapture={handleFocusCapture}>
+    <Stack
+      spacing={4}
+      onFocusCapture={handleFocusCapture}
+      data-test={dataTest?.section}
+    >
       {hasHeading ? (
         assignmentTitle ? (
           <>
@@ -406,6 +420,12 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
         onBlankChange={handleBlankChange}
         codeValues={codeValues}
         onCodeValueChange={handleCodeValueChange}
+        dataTest={{
+          resultSection: dataTest?.resultSection,
+          fillInCode: {
+            textField: dataTest?.fillInCode?.textField,
+          },
+        }}
       />
       {keyboardCharacters && (
         <KeyboardExtension

@@ -130,6 +130,13 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           checkDisabled={checkDisabled}
           onCheckPress={onCheckPress}
           onAnswerStateChange={onAnswerStateChange}
+          dataTest={{
+            section: dataTest?.exercises?.codeExercise?.section,
+            resultSection: dataTest?.exercises?.codeExercise?.resultSection,
+            fillInCode: {
+              textField: dataTest?.exercises?.codeExercise?.fillInCode?.textField,
+            },
+          }}
         />
       );
     default:

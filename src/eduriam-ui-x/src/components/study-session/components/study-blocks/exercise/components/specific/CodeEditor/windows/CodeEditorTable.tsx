@@ -10,6 +10,7 @@ export interface CodeEditorTableProps {
    * The first row is treated as the header.
    */
   rows: string[][];
+  dataTest?: string;
 }
 
 /**
@@ -18,7 +19,10 @@ export interface CodeEditorTableProps {
  * The container is scrollable both horizontally and vertically to
  * accommodate tables with many columns or rows.
  */
-export const CodeEditorTable: React.FC<CodeEditorTableProps> = ({ rows }) => {
+export const CodeEditorTable: React.FC<CodeEditorTableProps> = ({
+  rows,
+  dataTest,
+}) => {
   if (rows.length === 0) return null;
 
   const columns = rows[0].map((cell, index) => ({
@@ -32,6 +36,7 @@ export const CodeEditorTable: React.FC<CodeEditorTableProps> = ({ rows }) => {
 
   return (
     <Box
+      data-test={dataTest}
       sx={{
         flexGrow: 1,
         minHeight: 0,

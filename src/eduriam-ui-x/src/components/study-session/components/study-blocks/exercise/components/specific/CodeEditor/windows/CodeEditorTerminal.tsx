@@ -15,6 +15,7 @@ export interface CodeEditorTerminalProps {
 
   /** Optional Prism language for syntax highlighting (e.g. "bash", "shell"). */
   language?: string;
+  dataTest?: string;
 }
 
 /**
@@ -27,9 +28,11 @@ export interface CodeEditorTerminalProps {
 export const CodeEditorTerminal: React.FC<CodeEditorTerminalProps> = ({
   lines,
   language,
+  dataTest,
 }) => {
   return (
     <Box
+      data-test={dataTest}
       sx={{
         flexGrow: 1,
         overflow: "auto",

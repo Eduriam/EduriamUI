@@ -1,3 +1,4 @@
+import { CodeExerciseDataTest } from "../components/study-blocks/exercise/components/specific/CodeExercise/CodeExercise";
 import { MultipleChoiceExerciseDataTest } from "../components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
 
 export interface StudySessionDataTest {
@@ -20,6 +21,7 @@ export interface StudySessionDataTest {
 
   exercises?: {
     multipleChoiceExercise?: MultipleChoiceExerciseDataTest;
+    codeExercise?: CodeExerciseDataTest;
   };
 
   studySessionDrawer?: {
