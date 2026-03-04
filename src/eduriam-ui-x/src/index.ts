@@ -28,6 +28,7 @@ export { BackgroundImage } from "./components/video-manager/video-components/com
 export { BackgroundVideo } from "./components/video-manager/video-components/components/BackgroundVideo/BackgroundVideo";
 export { Browser } from "./components/video-manager/video-components/components/Browser/Browser";
 export { CodeExplainer } from "./components/video-manager/video-components/components/CodeExplainer/CodeExplainer";
+export { TerminalExplainer } from "./components/video-manager/video-components/components/TerminalExplainer/TerminalExplainer";
 export { DatabaseTable } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTable";
 export { MermaidArchitectureDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
 export { MermaidClassDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";

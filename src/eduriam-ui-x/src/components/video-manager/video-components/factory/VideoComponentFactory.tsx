@@ -8,6 +8,7 @@ import { Gif } from "../components/Gif/Gif";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
 import { Table } from "../components/Table/Table";
+import { TerminalExplainer } from "../components/TerminalExplainer/TerminalExplainer";
 import { Text } from "../components/Text/Text";
 import { Video } from "../components/Video/Video";
 import { MermaidArchitectureDiagram } from "../components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
@@ -38,6 +39,8 @@ export class VideoComponentFactory {
         return <Video comp={comp} />;
       case "CODE_EXPLAINER":
         return <CodeExplainer comp={comp} />;
+      case "TERMINAL_EXPLAINER":
+        return <TerminalExplainer comp={comp} />;
       case "FLOWCHART_DIAGRAM":
         return <MermaidFlowchartDiagram comp={comp} />;
       case "CLASS_DIAGRAM":
