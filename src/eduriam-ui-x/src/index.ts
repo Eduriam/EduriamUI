@@ -32,7 +32,6 @@ export { Header } from "./components/video-manager/video-components/components/H
 export { Image } from "./components/video-manager/video-components/components/Image/Image";
 export { List } from "./components/video-manager/video-components/components/List/List";
 export { MermaidClassDiagramVideoComponent } from "./components/video-manager/video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
-export { Paragraph } from "./components/video-manager/video-components/components/Paragraph/Paragraph";
 export { TableVideoComponent } from "./components/video-manager/video-components/components/Table/TableVideoComponent";
 export { Video } from "./components/video-manager/video-components/components/Video/Video";
 

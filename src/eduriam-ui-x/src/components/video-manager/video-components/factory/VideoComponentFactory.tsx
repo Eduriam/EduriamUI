@@ -7,7 +7,6 @@ import { Header } from "../components/Header/Header";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
 import { MermaidClassDiagramVideoComponent } from "../components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
-import { Paragraph } from "../components/Paragraph/Paragraph";
 import { TableVideoComponent } from "../components/Table/TableVideoComponent";
 import { Video } from "../components/Video/Video";
 
@@ -16,8 +15,6 @@ export class VideoComponentFactory {
     switch (comp.type) {
       case "HEADER":
         return <Header comp={comp} />;
-      case "PARAGRAPH":
-        return <Paragraph comp={comp} />;
       case "LIST":
         return <List comp={comp} />;
       case "TABLE":
