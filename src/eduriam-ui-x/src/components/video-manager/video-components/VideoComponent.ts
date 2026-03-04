@@ -8,8 +8,6 @@ import type { IHeader } from "./components/Header/Header";
 import type { IImage } from "./components/Image/Image";
 import type { IList } from "./components/List/List";
 import type { IMermaidClassDiagramVideoComponent } from "./components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
-import type { IPageHeader } from "./components/PageHeader/PageHeader";
-import type { IPageSubheader } from "./components/PageSubheader/PageSubheader";
 import type { IParagraph } from "./components/Paragraph/Paragraph";
 import type { ITable } from "./components/Table/TableVideoComponent";
 import type { IVideo } from "./components/Video/Video";
@@ -33,8 +31,6 @@ export interface BackgroundVideoComponent {
 /** Union of all renderable content components in RAW slide columns. */
 export type VideoComponent =
   | IHeader
-  | IPageHeader
-  | IPageSubheader
   | IParagraph
   | IList
   | ITable
