@@ -114,6 +114,35 @@ export interface CodeExerciseComponent extends BaseStudyBlockComponent {
   assignmentDescription?: string;
 }
 
+export interface DiagramComponentBase extends BaseStudyBlockComponent {
+  chart: string;
+}
+
+export interface FlowchartDiagramComponent extends DiagramComponentBase {
+  type: StudyBlockComponentType.FLOWCHART_DIAGRAM;
+}
+
+export interface ClassDiagramComponent extends DiagramComponentBase {
+  type: StudyBlockComponentType.CLASS_DIAGRAM;
+}
+
+export interface StateDiagramComponent extends DiagramComponentBase {
+  type: StudyBlockComponentType.STATE_DIAGRAM;
+}
+
+export interface EntityRelationshipDiagramComponent
+  extends DiagramComponentBase {
+  type: StudyBlockComponentType.ENTITY_RELATIONSHIP_DIAGRAM;
+}
+
+export interface GitGraphDiagramComponent extends DiagramComponentBase {
+  type: StudyBlockComponentType.GIT_GRAPH_DIAGRAM;
+}
+
+export interface ArchitectureDiagramComponent extends DiagramComponentBase {
+  type: StudyBlockComponentType.ARCHITECTURE_DIAGRAM;
+}
+
 export type StudyBlockComponentDTO =
   | HeaderComponent
   | ParagraphComponent
@@ -129,4 +158,10 @@ export type StudyBlockComponentDTO =
   | FillInSentenceComponent
   | BuildWordComponent
   | MatchingAnswerComponent
-  | CodeExerciseComponent;
+  | CodeExerciseComponent
+  | FlowchartDiagramComponent
+  | ClassDiagramComponent
+  | StateDiagramComponent
+  | EntityRelationshipDiagramComponent
+  | GitGraphDiagramComponent
+  | ArchitectureDiagramComponent;

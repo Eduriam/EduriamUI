@@ -2,10 +2,7 @@ import { theme } from "@eduriam/ui-core";
 import { Player } from "@remotion/player";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  type IMermaidClassDiagramVideoComponent,
-  MermaidClassDiagramVideoComponent,
-} from "./MermaidClassDiagramVideoComponent";
+import { type IMermaidDiagram, MermaidDiagram } from "./MermaidDiagram";
 import { getTotalDurationFramesFromStepStarts } from "./util/timing";
 
 const STORYBOOK_FPS = 30;
@@ -15,12 +12,10 @@ const STORYBOOK_HEIGHT = 1080;
 const StoryComposition = ({
   comp,
 }: {
-  comp: IMermaidClassDiagramVideoComponent;
-}) => <MermaidClassDiagramVideoComponent comp={comp} />;
+  comp: IMermaidDiagram;
+}) => <MermaidDiagram comp={comp} />;
 
-const getDurationInFrames = (
-  comp: IMermaidClassDiagramVideoComponent,
-): number => {
+const getDurationInFrames = (comp: IMermaidDiagram): number => {
   return getTotalDurationFramesFromStepStarts({
     steps: comp.steps,
     fps: STORYBOOK_FPS,
@@ -36,9 +31,9 @@ const withStepStartTimes = <T extends { id: string; diagram: string }>(
     startTime: index * stepIntervalMs,
   }));
 
-const meta: Meta<typeof MermaidClassDiagramVideoComponent> = {
-  title: "x/video-manager/video-components/MermaidClassDiagram",
-  component: MermaidClassDiagramVideoComponent,
+const meta: Meta<typeof MermaidDiagram> = {
+  title: "x/video-manager/video-components/diagrams/MermaidDiagram",
+  component: MermaidDiagram,
   decorators: [
     (Story) => (
       <div
@@ -57,7 +52,7 @@ const meta: Meta<typeof MermaidClassDiagramVideoComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof MermaidClassDiagramVideoComponent>;
+type Story = StoryObj<typeof MermaidDiagram>;
 
 export const StepByStepClassDiagram: Story = {
   render: (args) => (
@@ -79,7 +74,7 @@ export const StepByStepClassDiagram: Story = {
   args: {
     comp: {
       id: "mermaid-class-diagram-1",
-      type: "MERMAID_CLASS_DIAGRAM",
+      type: "CLASS_DIAGRAM",
       startTime: 0,
       column: "first",
       steps: withStepStartTimes(
@@ -151,6 +146,3 @@ Instructor "1" --> "*" Course : teaches`,
     },
   },
 };
-
-
-

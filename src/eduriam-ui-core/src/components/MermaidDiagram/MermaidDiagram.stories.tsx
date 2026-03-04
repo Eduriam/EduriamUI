@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { MermaidDiagram } from "./MermaidDiagram";
 
 const meta: Meta<typeof MermaidDiagram> = {
-  title: "x/study-session/shared/MermaidDiagram",
+  title: "core/components/MermaidDiagram",
   component: MermaidDiagram,
   decorators: [
     (Story) => (

@@ -1,12 +1,9 @@
-import { MERMAID_CLASS_DIAGRAM_CONFIG } from "../constants";
-import type {
-  MermaidClassDiagramStep,
-  MermaidStepState,
-} from "../types";
+import { MERMAID_DIAGRAM_CONFIG } from "../constants";
+import type { MermaidDiagramStep, MermaidStepState } from "../types";
 
 export const sortStepsByStartTime = (
-  steps: MermaidClassDiagramStep[],
-): MermaidClassDiagramStep[] => {
+  steps: MermaidDiagramStep[],
+): MermaidDiagramStep[] => {
   return steps
     .map((step, index) => ({ step, index }))
     .sort((a, b) => {
@@ -19,21 +16,19 @@ export const sortStepsByStartTime = (
     .map(({ step }) => step);
 };
 
-export const validateStepStartTimes = (
-  steps: MermaidClassDiagramStep[],
-): void => {
+export const validateStepStartTimes = (steps: MermaidDiagramStep[]): void => {
   for (let index = 0; index < steps.length; index += 1) {
     const startTime = steps[index]?.startTime;
     if (!Number.isFinite(startTime) || startTime < 0) {
       throw new Error(
-        `MERMAID_CLASS_DIAGRAM step at index ${index} must have a non-negative numeric startTime.`,
+        `MERMAID_DIAGRAM step at index ${index} must have a non-negative numeric startTime.`,
       );
     }
   }
 };
 
 export const getStepStartFrames = (
-  steps: MermaidClassDiagramStep[],
+  steps: MermaidDiagramStep[],
   fps: number,
 ): number[] => {
   return steps.map((step) =>
@@ -76,7 +71,7 @@ export const getTotalDurationFramesFromStepStarts = ({
   steps,
   fps,
 }: {
-  steps: MermaidClassDiagramStep[];
+  steps: MermaidDiagramStep[];
   fps: number;
 }): number => {
   if (steps.length === 0) return 1;
@@ -91,7 +86,7 @@ export const getTotalDurationFramesFromStepStarts = ({
           (sorted[sorted.length - 1]?.startTime ?? 0) -
             (sorted[sorted.length - 2]?.startTime ?? 0),
         );
-  const transitionMs = MERMAID_CLASS_DIAGRAM_CONFIG.transitionDurationMs;
+  const transitionMs = MERMAID_DIAGRAM_CONFIG.transitionDurationMs;
   const totalMs = Math.max(1, lastStartMs + holdMs + transitionMs);
 
   return Math.max(1, Math.round((totalMs / 1000) * fps));

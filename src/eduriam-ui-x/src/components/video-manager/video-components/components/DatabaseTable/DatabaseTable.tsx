@@ -7,12 +7,12 @@ import type {
   DatabaseRow,
   DatabaseValue,
 } from "../../../../study-session/components/shared/DatabaseTable/DatabaseTable";
-import { DatabaseTable } from "../../../../study-session/components/shared/DatabaseTable/DatabaseTable";
+import { DatabaseTable as SharedDatabaseTable } from "../../../../study-session/components/shared/DatabaseTable/DatabaseTable";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type { DatabaseColumn, DatabaseRow, DatabaseValue };
 
-export interface IDatabaseTableVideoComponent extends BaseVideoComponent {
+export interface IDatabaseTable extends BaseVideoComponent {
   type: "DATABASE_TABLE";
   columns: DatabaseColumn[];
   rows: DatabaseRow[];
@@ -20,13 +20,11 @@ export interface IDatabaseTableVideoComponent extends BaseVideoComponent {
   maxHeight?: number | string;
 }
 
-export interface IDatabaseTableVideoComponentProps {
-  comp: IDatabaseTableVideoComponent;
+export interface IDatabaseTableProps {
+  comp: IDatabaseTable;
 }
 
-export const DatabaseTableVideoComponent: React.FC<
-  IDatabaseTableVideoComponentProps
-> = ({ comp }) => (
+export const DatabaseTable: React.FC<IDatabaseTableProps> = ({ comp }) => (
   <Box
     sx={{
       position: "absolute",
@@ -37,7 +35,7 @@ export const DatabaseTableVideoComponent: React.FC<
     }}
   >
     <Box sx={{ width: "min(100%, 1180px)" }}>
-      <DatabaseTable
+      <SharedDatabaseTable
         columns={comp.columns}
         rows={comp.rows}
         tableName={comp.tableName}
@@ -47,4 +45,4 @@ export const DatabaseTableVideoComponent: React.FC<
   </Box>
 );
 
-export default DatabaseTableVideoComponent;
+export default DatabaseTable;

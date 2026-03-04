@@ -15,7 +15,7 @@ export interface ITable extends BaseVideoComponent {
   rows: TableRow[];
 }
 
-export interface ITableVideoComponentProps {
+export interface ITableProps {
   comp: ITable;
 }
 
@@ -44,9 +44,7 @@ const createRows = (rows: TableRow[], columnCount: number) =>
     ),
   );
 
-export const TableVideoComponent: React.FC<ITableVideoComponentProps> = ({
-  comp,
-}) => {
+export const Table: React.FC<ITableProps> = ({ comp }) => {
   const header = comp.highlightHeader ? (comp.rows[0] ?? []) : [];
   const body = comp.highlightHeader ? comp.rows.slice(1) : comp.rows;
   const columnCount = getColumnCount(comp.rows);
@@ -87,4 +85,4 @@ export const TableVideoComponent: React.FC<ITableVideoComponentProps> = ({
   );
 };
 
-export default TableVideoComponent;
+export default Table;

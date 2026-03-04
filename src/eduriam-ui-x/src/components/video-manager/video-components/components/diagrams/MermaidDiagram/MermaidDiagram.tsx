@@ -2,11 +2,12 @@ import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import React, { useMemo } from "react";
 
+import { MermaidDiagram as CoreMermaidDiagram } from "@eduriam/ui-core";
+
 import Box from "@mui/material/Box";
 
-import { MermaidDiagram } from "../../../../study-session/components/shared/MermaidDiagram";
-import { MERMAID_CLASS_DIAGRAM_CONFIG } from "./constants";
-import type { IMermaidClassDiagramVideoComponentProps } from "./types";
+import { MERMAID_DIAGRAM_CONFIG } from "./constants";
+import type { IMermaidDiagramProps } from "./types";
 import {
   getStepStartFrames,
   getStepState,
@@ -15,21 +16,18 @@ import {
 } from "./util/timing";
 
 export type {
-  IMermaidClassDiagramVideoComponent,
-  IMermaidClassDiagramVideoComponentProps,
-  MermaidClassDiagramStep,
+  IMermaidDiagram,
+  IMermaidDiagramProps,
+  MermaidDiagramStep,
+  MermaidDiagramType,
 } from "./types";
 
-export const MermaidClassDiagramVideoComponent: React.FC<
-  IMermaidClassDiagramVideoComponentProps
-> = ({ comp }) => {
+export const MermaidDiagram: React.FC<IMermaidDiagramProps> = ({ comp }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   if (!Array.isArray(comp.steps) || comp.steps.length === 0) {
-    throw new Error(
-      "MERMAID_CLASS_DIAGRAM component requires at least one step.",
-    );
+    throw new Error("MERMAID_DIAGRAM component requires at least one step.");
   }
 
   const timelineSteps = useMemo(() => {
@@ -51,21 +49,16 @@ export const MermaidClassDiagramVideoComponent: React.FC<
 
   const transitionDurationFrames = Math.max(
     1,
-    Math.round((MERMAID_CLASS_DIAGRAM_CONFIG.transitionDurationMs / 1000) * fps),
+    Math.round((MERMAID_DIAGRAM_CONFIG.transitionDurationMs / 1000) * fps),
   );
   const isTransitioning = Boolean(
     previousStep && stepState.frameInStep < transitionDurationFrames,
   );
   const transitionProgress = previousStep
-    ? interpolate(
-        stepState.frameInStep,
-        [0, transitionDurationFrames],
-        [0, 1],
-        {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        },
-      )
+    ? interpolate(stepState.frameInStep, [0, transitionDurationFrames], [0, 1], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      })
     : 1;
 
   return (
@@ -83,18 +76,18 @@ export const MermaidClassDiagramVideoComponent: React.FC<
           <>
             <Box sx={{ ...layerSx, opacity: 1 - transitionProgress }}>
               <Box sx={diagramContainerSx}>
-                <MermaidDiagram chart={previousStep.diagram} />
+                <CoreMermaidDiagram chart={previousStep.diagram} />
               </Box>
             </Box>
             <Box sx={{ ...layerSx, opacity: transitionProgress }}>
               <Box sx={diagramContainerSx}>
-                <MermaidDiagram chart={currentStep.diagram} />
+                <CoreMermaidDiagram chart={currentStep.diagram} />
               </Box>
             </Box>
           </>
         ) : (
           <Box sx={diagramContainerSx}>
-            <MermaidDiagram chart={currentStep.diagram} />
+            <CoreMermaidDiagram chart={currentStep.diagram} />
           </Box>
         )}
       </Box>
@@ -125,4 +118,4 @@ const diagramContainerSx = {
   },
 };
 
-export default MermaidClassDiagramVideoComponent;
+export default MermaidDiagram;
