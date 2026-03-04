@@ -42,21 +42,24 @@ export const WithHeaderAndBackground: Story = {
     slide: {
       id: "raw-1",
       type: "RAW",
-      components: [
+      backgroundComponents: [
         {
           id: "bg1",
           type: "BACKGROUND_COLOR",
           startTime: 0,
           color: "#0ea5e9",
         },
+      ],
+      components: [
         {
           id: "h1",
-          type: "HEADER",
+          type: "TEXT",
           startTime: 0,
+          column: "first",
           text: "Raw Slide Demo",
-          position: "CENTER",
         },
       ],
     },
   },
 };
+

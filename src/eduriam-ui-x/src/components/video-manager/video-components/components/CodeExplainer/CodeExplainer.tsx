@@ -3,8 +3,6 @@ import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import React, { useMemo } from "react";
 
 import Box from "@mui/material/Box";
-
-import { positionToStyle } from "../../../utils/positionToStyle";
 import { CodeStepLayer } from "./components/CodeStepLayer/CodeStepLayer";
 import { CodeTransitionLayer } from "./components/CodeTransitionLayer/CodeTransitionLayer";
 import { CODE_EXPLAINER_CONFIG, CODE_THEME } from "./constants";
@@ -165,7 +163,15 @@ export const CodeExplainer: React.FC<ICodeExplainerProps> = ({ comp }) => {
     : 1;
 
   return (
-    <Box style={positionToStyle(comp.position)}>
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Box
         sx={{
           width: panelWidth,

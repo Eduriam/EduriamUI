@@ -1,4 +1,3 @@
-import type { ComponentPosition } from "../../../types/shared";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type CodeExplainerColorMode = "DARK" | "LIGHT";
@@ -29,7 +28,6 @@ export interface CodeExplainerStep {
 
 export interface ICodeExplainer extends BaseVideoComponent {
   type: "CODE_EXPLAINER";
-  position: ComponentPosition;
   steps: CodeExplainerStep[];
   showLineNumbers?: boolean;
 }

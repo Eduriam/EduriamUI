@@ -4,7 +4,7 @@ import React from "react";
 
 import { useTheme } from "@mui/material/styles";
 
-import { Header } from "../../../video-components/components/Header/Header";
+import { Text } from "../../../video-components/components/Text/Text";
 import type { BaseSlide } from "../../BaseSlide";
 
 export interface IOneHeaderSlide extends BaseSlide {
@@ -18,7 +18,7 @@ export interface IOneHeaderSlideProps {
 }
 
 /**
- * Renders a {@link IOneHeaderSlide} template – a single centred header
+ * Renders a {@link IOneHeaderSlide} template – a single centred text
  * over the theme's default background.
  */
 export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide }) => {
@@ -28,13 +28,13 @@ export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide }) => {
       <AbsoluteFill
         style={{ backgroundColor: theme.palette.background.default }}
       />
-      <Header
+      <Text
         comp={{
           id: `${slide.id}-header`,
-          type: "HEADER",
+          type: "TEXT",
           startTime: 0,
+          column: "first",
           text: slide.text,
-          position: "CENTER",
         }}
       />
     </AbsoluteFill>

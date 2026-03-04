@@ -20,6 +20,12 @@ import { ShortAudio } from "./specific/ShortAudio/ShortAudio";
 import TableFill from "./specific/TableFill/TableFill";
 import { TextAnswer } from "./specific/TextAnswer/TextAnswer";
 import Timer from "./specific/Timer/Timer";
+import { ArchitectureDiagram } from "./specific/diagrams/specific/ArchitectureDiagram/ArchitectureDiagram";
+import { ClassDiagram } from "./specific/diagrams/specific/ClassDiagram/ClassDiagram";
+import { EntityRelationshipDiagram } from "./specific/diagrams/specific/EntityRelationshipDiagram/EntityRelationshipDiagram";
+import { FlowchartDiagram } from "./specific/diagrams/specific/FlowchartDiagram/FlowchartDiagram";
+import { GitGraphDiagram } from "./specific/diagrams/specific/GitGraphDiagram/GitGraphDiagram";
+import { StateDiagram } from "./specific/diagrams/specific/StateDiagram/StateDiagram";
 
 export interface IStudyBlockComponent {
   component: StudyBlockComponentDTO;
@@ -139,6 +145,18 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           }}
         />
       );
+    case StudyBlockComponentType.FLOWCHART_DIAGRAM:
+      return <FlowchartDiagram chart={component.chart} />;
+    case StudyBlockComponentType.CLASS_DIAGRAM:
+      return <ClassDiagram chart={component.chart} />;
+    case StudyBlockComponentType.STATE_DIAGRAM:
+      return <StateDiagram chart={component.chart} />;
+    case StudyBlockComponentType.ENTITY_RELATIONSHIP_DIAGRAM:
+      return <EntityRelationshipDiagram chart={component.chart} />;
+    case StudyBlockComponentType.GIT_GRAPH_DIAGRAM:
+      return <GitGraphDiagram chart={component.chart} />;
+    case StudyBlockComponentType.ARCHITECTURE_DIAGRAM:
+      return <ArchitectureDiagram chart={component.chart} />;
     default:
       return null;
   }

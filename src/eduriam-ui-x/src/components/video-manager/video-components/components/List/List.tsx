@@ -3,8 +3,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import type { ComponentPosition } from "../../../types/shared";
-import { positionToStyle } from "../../../utils/positionToStyle";
 import type { BaseVideoComponent } from "../../VideoComponent";
 import { ListDot } from "./components/ListDot";
 
@@ -12,7 +10,6 @@ export type ListItem = { id: string; text: string };
 
 export interface IList extends BaseVideoComponent {
   type: "LIST";
-  position: ComponentPosition;
   title: string;
   items: ListItem[];
   ordered: boolean;
@@ -23,7 +20,15 @@ export interface IListProps {
 }
 
 export const List: React.FC<IListProps> = ({ comp }) => (
-  <Box style={positionToStyle(comp.position)}>
+  <Box
+    sx={{
+      position: "absolute",
+      inset: 0,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
     <Box
       sx={{
         display: "flex",

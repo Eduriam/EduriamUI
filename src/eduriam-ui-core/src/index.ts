@@ -28,5 +28,6 @@ export * from "./components/surfaces/Card";
 export * from "./components/navigation/Drawer";
 export * from "./components/TabBarPanel";
 export * from "./components/YouTubeVideoEmbed";
+export * from "./components/MermaidDiagram";
 export * from "./sounds";
 export * from "./theme";

@@ -49,23 +49,27 @@ const sampleScenes: Scene[] = [
       {
         id: "slide-1",
         type: "RAW",
-        components: [
+        backgroundComponents: [
           {
             id: "bg1",
             type: "BACKGROUND_COLOR",
             startTime: 0,
             color: "#0ea5e9",
           },
+        ],
+        components: [
           {
-            id: "ph1",
-            type: "PAGE_HEADER",
+            id: "h-main",
+            type: "TEXT",
             startTime: 0,
+            column: "first",
             text: "Explanation",
           },
           {
-            id: "ps1",
-            type: "PAGE_SUBHEADER",
+            id: "h-sub",
+            type: "TEXT",
             startTime: 800,
+            column: "first",
             text: "Key concepts in this lesson",
           },
         ],
@@ -126,19 +130,21 @@ const sampleScenes: Scene[] = [
       {
         id: "slide-2",
         type: "RAW",
-        components: [
+        backgroundComponents: [
           {
             id: "bg2",
             type: "BACKGROUND_COLOR",
             startTime: 0,
             color: "#e5e5e5",
           },
+        ],
+        components: [
           {
             id: "h1",
-            type: "HEADER",
+            type: "TEXT",
             startTime: 0,
+            column: "first",
             text: "Scene 2",
-            position: "CENTER",
           },
         ],
       },
@@ -188,7 +194,7 @@ const databaseTableOnlyScenes: Scene[] = [
             id: "db-table-1",
             type: "DATABASE_TABLE",
             startTime: 0,
-            position: "CENTER",
+            column: "first",
             tableName: "query_result",
             columns: [
               { key: "id", label: "id" },
@@ -247,18 +253,20 @@ const makeCodeExplainerScenes = ({
       {
         id: slideId,
         type: "RAW",
-        components: [
+        backgroundComponents: [
           {
             id: `${componentId}-bg`,
             type: "BACKGROUND_COLOR",
             startTime: 0,
             color: "#020617",
           },
+        ],
+        components: [
           {
             id: componentId,
             type: "CODE_EXPLAINER",
             startTime: 0,
-            position: "CENTER",
+            column: "first",
             showLineNumbers: true,
             steps: steps.map((step, index) => ({
               ...step,

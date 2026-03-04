@@ -1,0 +1,88 @@
+import { Table as CoreTable } from "@eduriam/ui-core";
+
+import React from "react";
+
+import Box from "@mui/material/Box";
+
+import type { BaseVideoComponent } from "../../VideoComponent";
+
+export type TableCell = string | number;
+export type TableRow = TableCell[];
+
+export interface ITable extends BaseVideoComponent {
+  type: "TABLE";
+  highlightHeader: boolean;
+  rows: TableRow[];
+}
+
+export interface ITableProps {
+  comp: ITable;
+}
+
+const buildColumnKey = (index: number): string => `col_${index}`;
+
+const getColumnCount = (rows: TableRow[]): number =>
+  rows.reduce((max, row) => Math.max(max, row.length), 0);
+
+const createColumns = (
+  header: TableRow,
+  columnCount: number,
+  withHeader: boolean,
+) =>
+  Array.from({ length: columnCount }, (_, index) => ({
+    key: buildColumnKey(index),
+    label: withHeader ? String(header[index] ?? "") : "",
+  }));
+
+const createRows = (rows: TableRow[], columnCount: number) =>
+  rows.map((row) =>
+    Object.fromEntries(
+      Array.from({ length: columnCount }, (_, index) => [
+        buildColumnKey(index),
+        row[index] ?? "",
+      ]),
+    ),
+  );
+
+export const Table: React.FC<ITableProps> = ({ comp }) => {
+  const header = comp.highlightHeader ? (comp.rows[0] ?? []) : [];
+  const body = comp.highlightHeader ? comp.rows.slice(1) : comp.rows;
+  const columnCount = getColumnCount(comp.rows);
+
+  if (columnCount === 0) {
+    return null;
+  }
+
+  const columns = createColumns(header, columnCount, comp.highlightHeader);
+  const rows = createRows(body, columnCount);
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: "min(92%, 1100px)",
+        }}
+      >
+        <CoreTable
+          columns={columns}
+          rows={rows}
+          sx={
+            comp.highlightHeader
+              ? undefined
+              : { "& > [role='row']:first-of-type": { display: "none" } }
+          }
+        />
+      </Box>
+    </Box>
+  );
+};
+
+export default Table;

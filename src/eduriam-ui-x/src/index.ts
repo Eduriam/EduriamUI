@@ -26,16 +26,20 @@ export type { IExplanationStudyBlock } from "./components/study-session/componen
 export { BackgroundColor } from "./components/video-manager/video-components/components/BackgroundColor/BackgroundColor";
 export { BackgroundImage } from "./components/video-manager/video-components/components/BackgroundImage/BackgroundImage";
 export { BackgroundVideo } from "./components/video-manager/video-components/components/BackgroundVideo/BackgroundVideo";
+export { Browser } from "./components/video-manager/video-components/components/Browser/Browser";
 export { CodeExplainer } from "./components/video-manager/video-components/components/CodeExplainer/CodeExplainer";
-export { DatabaseTableVideoComponent } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export { Header } from "./components/video-manager/video-components/components/Header/Header";
+export { DatabaseTable } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTable";
+export { MermaidArchitectureDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
+export { MermaidClassDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
+export { MermaidEntityRelationshipDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
+export { MermaidFlowchartDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
+export { MermaidGitGraphDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
+export { MermaidStateDiagram } from "./components/video-manager/video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
+export { Gif } from "./components/video-manager/video-components/components/Gif/Gif";
 export { Image } from "./components/video-manager/video-components/components/Image/Image";
 export { List } from "./components/video-manager/video-components/components/List/List";
-export { MermaidClassDiagramVideoComponent } from "./components/video-manager/video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
-export { PageHeader } from "./components/video-manager/video-components/components/PageHeader/PageHeader";
-export { PageSubheader } from "./components/video-manager/video-components/components/PageSubheader/PageSubheader";
-export { Paragraph } from "./components/video-manager/video-components/components/Paragraph/Paragraph";
-export { TableVideoComponent } from "./components/video-manager/video-components/components/Table/TableVideoComponent";
+export { Table } from "./components/video-manager/video-components/components/Table/Table";
+export { Text } from "./components/video-manager/video-components/components/Text/Text";
 export { Video } from "./components/video-manager/video-components/components/Video/Video";
 
 // Study Session Progress Bar
@@ -45,8 +49,6 @@ export type { IStudySessionProgressBar } from "./components/study-session/compon
 // Study Session Shared Components
 export { CodeBlank } from "./components/study-session/components/shared/CodeBlank";
 export type { CodeBlankProps } from "./components/study-session/components/shared/CodeBlank";
-export { MermaidDiagram } from "./components/study-session/components/shared/MermaidDiagram";
-export type { MermaidDiagramProps } from "./components/study-session/components/shared/MermaidDiagram";
 export { ReportStudyBlockDialog } from "./components/study-session/components/shared/ReportStudyBlockDialog";
 export type {
   ReportStudyBlockDialogDataTest,
@@ -89,11 +91,16 @@ export type { ID } from "./models/ID";
 
 // Specific Component Types
 export type {
+  ArchitectureDiagramComponent,
   BaseStudyBlockComponent,
   BuildWordComponent,
   CheckListComponent,
+  ClassDiagramComponent,
   CodeExerciseComponent,
+  EntityRelationshipDiagramComponent,
   FillInSentenceComponent,
+  FlowchartDiagramComponent,
+  GitGraphDiagramComponent,
   HeaderComponent,
   ImageComponent,
   LongAudioComponent,
@@ -103,6 +110,7 @@ export type {
   ParagraphComponent,
   PronunciationAnswerComponent,
   ShortAudioComponent,
+  StateDiagramComponent,
   TableFillComponent,
   TextAnswerComponent,
   TimerComponent,

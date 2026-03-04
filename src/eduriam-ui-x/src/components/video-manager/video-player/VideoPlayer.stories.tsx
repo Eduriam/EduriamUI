@@ -16,19 +16,21 @@ const sampleDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
-          components: [
+          backgroundComponents: [
             {
               id: "bg1",
               type: "BACKGROUND_COLOR",
               startTime: 0,
               color: "#0ea5e9",
             },
+          ],
+          components: [
             {
               id: "h1",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 0,
+              column: "first",
               text: "Welcome to Eduriam",
-              position: "CENTER",
             },
           ],
         },
@@ -49,23 +51,27 @@ const multiSceneDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
-          components: [
+          backgroundComponents: [
             {
               id: "bg1",
               type: "BACKGROUND_COLOR",
               startTime: 0,
               color: "#ffffff",
             },
+          ],
+          components: [
             {
-              id: "ph1",
-              type: "PAGE_HEADER",
+              id: "h1",
+              type: "TEXT",
               startTime: 0,
+              column: "first",
               text: "Key Concepts",
             },
             {
-              id: "ps1",
-              type: "PAGE_SUBHEADER",
+              id: "h2",
+              type: "TEXT",
               startTime: 1000,
+              column: "first",
               text: "Understanding the fundamentals",
             },
           ],
@@ -79,18 +85,20 @@ const multiSceneDefinition: VideoDefinition = {
         {
           id: "slide-2",
           type: "RAW",
-          components: [
+          backgroundComponents: [
             {
               id: "bg2",
               type: "BACKGROUND_COLOR",
               startTime: 0,
               color: "#e5e5e5",
             },
+          ],
+          components: [
             {
               id: "l1",
               type: "LIST",
               startTime: 0,
-              position: "CENTER",
+              column: "first",
               title: "Topics",
               ordered: true,
               items: [
@@ -129,19 +137,21 @@ const templateSlideDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
-          components: [
+          backgroundComponents: [
             {
               id: "bg1",
               type: "BACKGROUND_COLOR",
               startTime: 0,
               color: "#0ea5e9",
             },
+          ],
+          components: [
             {
               id: "h1",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 0,
+              column: "first",
               text: "Second Scene",
-              position: "CENTER",
             },
           ],
         },
@@ -162,18 +172,20 @@ const codeExplainerDefinition: VideoDefinition = {
         {
           id: "slide-code-1",
           type: "RAW",
-          components: [
+          backgroundComponents: [
             {
               id: "bg-code-1",
               type: "BACKGROUND_COLOR",
               startTime: 0,
               color: "#020617",
             },
+          ],
+          components: [
             {
               id: "ce-1",
               type: "CODE_EXPLAINER",
               startTime: 0,
-              position: "CENTER",
+              column: "first",
               steps: [
                 {
                   id: "step-1",
@@ -323,3 +335,4 @@ export const WithCaptions: Story = {
     captions: sampleCaptions,
   },
 };
+

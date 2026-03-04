@@ -37,3 +37,4 @@ export const Paper: Story = {
 export const CustomHex: Story = {
   args: { comp: { id: "bg3", type: "BACKGROUND_COLOR", startTime: 0, color: "#8b5cf6" } },
 };
+

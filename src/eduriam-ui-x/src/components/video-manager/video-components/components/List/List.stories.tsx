@@ -32,7 +32,7 @@ export const Unordered: Story = {
       id: "l1",
       type: "LIST",
       startTime: 0,
-      position: "CENTER",
+      column: "first",
       title: "Key Features",
       ordered: false,
       items: [
@@ -50,7 +50,7 @@ export const Ordered: Story = {
       id: "l2",
       type: "LIST",
       startTime: 0,
-      position: "CENTER_LEFT",
+      column: "first",
       title: "Steps",
       ordered: true,
       items: [
@@ -61,3 +61,6 @@ export const Ordered: Story = {
     },
   },
 };
+
+
+
