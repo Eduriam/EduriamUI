@@ -18,6 +18,26 @@ export type { IExerciseStudyBlock as IStudyBlock } from "./components/study-sess
 export { StudyBlockComponent } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponent";
 export type { IStudyBlockComponent } from "./components/study-session/components/study-blocks/exercise/components/StudyBlockComponent";
 
+// Explanation Study Block
+export { ExplanationStudyBlock } from "./components/study-session/components/study-blocks/explanation/ExplanationStudyBlock";
+export type { IExplanationStudyBlock } from "./components/study-session/components/study-blocks/explanation/ExplanationStudyBlock";
+
+// Explanation Study Block Components (Video Components)
+export { BackgroundColor } from "./components/video-manager/video-components/components/BackgroundColor/BackgroundColor";
+export { BackgroundImage } from "./components/video-manager/video-components/components/BackgroundImage/BackgroundImage";
+export { BackgroundVideo } from "./components/video-manager/video-components/components/BackgroundVideo/BackgroundVideo";
+export { CodeExplainer } from "./components/video-manager/video-components/components/CodeExplainer/CodeExplainer";
+export { DatabaseTableVideoComponent } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTableVideoComponent";
+export { Header } from "./components/video-manager/video-components/components/Header/Header";
+export { Image } from "./components/video-manager/video-components/components/Image/Image";
+export { List } from "./components/video-manager/video-components/components/List/List";
+export { MermaidClassDiagramVideoComponent } from "./components/video-manager/video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
+export { PageHeader } from "./components/video-manager/video-components/components/PageHeader/PageHeader";
+export { PageSubheader } from "./components/video-manager/video-components/components/PageSubheader/PageSubheader";
+export { Paragraph } from "./components/video-manager/video-components/components/Paragraph/Paragraph";
+export { TableVideoComponent } from "./components/video-manager/video-components/components/Table/TableVideoComponent";
+export { Video } from "./components/video-manager/video-components/components/Video/Video";
+
 // Study Session Progress Bar
 export { default as StudySessionProgressBar } from "./components/study-session/components/StudySessionProgressBar/StudySessionProgressBar";
 export type { IStudySessionProgressBar } from "./components/study-session/components/StudySessionProgressBar/StudySessionProgressBar";
