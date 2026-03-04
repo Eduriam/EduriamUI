@@ -45,36 +45,6 @@ export type {
   IDatabaseTable as DatabaseTableComponent,
   DatabaseValue,
 } from "./video-components/components/DatabaseTable/DatabaseTable";
-export type { IGif as GifComponent } from "./video-components/components/Gif/Gif";
-export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
-export type {
-  IList as ListComponent,
-  ListItem,
-} from "./video-components/components/List/List";
-export type {
-  IMermaidClassDiagram as MermaidClassDiagramComponent,
-  MermaidClassDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
-export type {
-  IMermaidFlowchartDiagram as MermaidFlowchartDiagramComponent,
-  MermaidFlowchartDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
-export type {
-  IMermaidStateDiagram as MermaidStateDiagramComponent,
-  MermaidStateDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
-export type {
-  IMermaidEntityRelationshipDiagram as MermaidEntityRelationshipDiagramComponent,
-  MermaidEntityRelationshipDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
-export type {
-  IMermaidGitGraphDiagram as MermaidGitGraphDiagramComponent,
-  MermaidGitGraphDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
-export type {
-  IMermaidArchitectureDiagram as MermaidArchitectureDiagramComponent,
-  MermaidArchitectureDiagramStep,
-} from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
 export type {
   IMermaidDiagram as MermaidDiagramComponent,
   IMermaidDiagramProps as MermaidDiagramComponentProps,
@@ -82,11 +52,45 @@ export type {
   MermaidDiagramType,
 } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
 export type {
+  IMermaidArchitectureDiagram as MermaidArchitectureDiagramComponent,
+  MermaidArchitectureDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
+export type {
+  IMermaidClassDiagram as MermaidClassDiagramComponent,
+  MermaidClassDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
+export type {
+  IMermaidEntityRelationshipDiagram as MermaidEntityRelationshipDiagramComponent,
+  MermaidEntityRelationshipDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
+export type {
+  IMermaidFlowchartDiagram as MermaidFlowchartDiagramComponent,
+  MermaidFlowchartDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
+export type {
+  IMermaidGitGraphDiagram as MermaidGitGraphDiagramComponent,
+  MermaidGitGraphDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
+export type {
+  IMermaidStateDiagram as MermaidStateDiagramComponent,
+  MermaidStateDiagramStep,
+} from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
+export type { IGif as GifComponent } from "./video-components/components/Gif/Gif";
+export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
+export type {
+  IList as ListComponent,
+  ListItem,
+} from "./video-components/components/List/List";
+export type {
   ITableProps,
   TableCell,
   ITable as TableComponent,
   TableRow,
 } from "./video-components/components/Table/Table";
+export type {
+  ITerminalExplainer as TerminalExplainerComponent,
+  TerminalExplainerStep,
+} from "./video-components/components/TerminalExplainer/TerminalExplainer";
 export type { IText as HeaderComponent } from "./video-components/components/Text/Text";
 export type { IVideo as VideoComponent } from "./video-components/components/Video/Video";
 
@@ -97,17 +101,18 @@ export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-com
 export type { IBrowser as VMBrowserComponent } from "./video-components/components/Browser/Browser";
 export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IDatabaseTable as VMDatabaseTableComponent } from "./video-components/components/DatabaseTable/DatabaseTable";
+export type { IMermaidDiagram as VMMermaidDiagramComponent } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
+export type { IMermaidArchitectureDiagram as VMMermaidArchitectureDiagramComponent } from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
+export type { IMermaidClassDiagram as VMMermaidClassDiagramComponent } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
+export type { IMermaidEntityRelationshipDiagram as VMMermaidEntityRelationshipDiagramComponent } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
+export type { IMermaidFlowchartDiagram as VMMermaidFlowchartDiagramComponent } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
+export type { IMermaidGitGraphDiagram as VMMermaidGitGraphDiagramComponent } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
+export type { IMermaidStateDiagram as VMMermaidStateDiagramComponent } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
 export type { IGif as VMGifComponent } from "./video-components/components/Gif/Gif";
 export type { IImage as VMImageComponent } from "./video-components/components/Image/Image";
 export type { IList as VMListComponent } from "./video-components/components/List/List";
-export type { IMermaidClassDiagram as VMMermaidClassDiagramComponent } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
-export type { IMermaidFlowchartDiagram as VMMermaidFlowchartDiagramComponent } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
-export type { IMermaidStateDiagram as VMMermaidStateDiagramComponent } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
-export type { IMermaidEntityRelationshipDiagram as VMMermaidEntityRelationshipDiagramComponent } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
-export type { IMermaidGitGraphDiagram as VMMermaidGitGraphDiagramComponent } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
-export type { IMermaidArchitectureDiagram as VMMermaidArchitectureDiagramComponent } from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
-export type { IMermaidDiagram as VMMermaidDiagramComponent } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
 export type { ITable as VMTableComponent } from "./video-components/components/Table/Table";
+export type { ITerminalExplainer as VMTerminalExplainerComponent } from "./video-components/components/TerminalExplainer/TerminalExplainer";
 export type { IText as VMHeaderComponent } from "./video-components/components/Text/Text";
 export type { IVideo as VMVideoComponent } from "./video-components/components/Video/Video";
 
@@ -123,7 +128,10 @@ export { resolveSize } from "./utils/resolveSize";
 export { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export { BackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
-export { Browser, Browser as VideoBrowser } from "./video-components/components/Browser/Browser";
+export {
+  Browser,
+  Browser as VideoBrowser,
+} from "./video-components/components/Browser/Browser";
 export {
   CodeExplainer,
   CodeExplainer as VideoCodeExplainer,
@@ -132,36 +140,51 @@ export {
   DatabaseTable,
   DatabaseTable as VideoDatabaseTable,
 } from "./video-components/components/DatabaseTable/DatabaseTable";
-export { Gif, Gif as VideoGif } from "./video-components/components/Gif/Gif";
-export { Image, Image as VideoImage } from "./video-components/components/Image/Image";
-export { List, List as VideoList } from "./video-components/components/List/List";
 export { MermaidDiagram } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
-export { MermaidFlowchartDiagram } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
-export { MermaidClassDiagram } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
-export { MermaidStateDiagram } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
-export { MermaidEntityRelationshipDiagram } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
-export { MermaidGitGraphDiagram } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
 export { MermaidArchitectureDiagram } from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
+export { MermaidClassDiagram } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
+export { MermaidEntityRelationshipDiagram } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
+export { MermaidFlowchartDiagram } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
+export { MermaidGitGraphDiagram } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
+export { MermaidStateDiagram } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
+export { Gif, Gif as VideoGif } from "./video-components/components/Gif/Gif";
+export {
+  Image,
+  Image as VideoImage,
+} from "./video-components/components/Image/Image";
+export {
+  List,
+  List as VideoList,
+} from "./video-components/components/List/List";
 export { Table } from "./video-components/components/Table/Table";
-export { Text, Text as VideoHeader } from "./video-components/components/Text/Text";
+export {
+  TerminalExplainer,
+  TerminalExplainer as VideoTerminalExplainer,
+} from "./video-components/components/TerminalExplainer/TerminalExplainer";
+export {
+  Text,
+  Text as VideoHeader,
+} from "./video-components/components/Text/Text";
 export { Video as VideoVideo } from "./video-components/components/Video/Video";
 
-export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
-export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
-export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
-export type { IBrowserProps as IBrowser } from "./video-components/components/Browser/Browser";
-export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
-export type { IDatabaseTableProps as IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTable";
-export type { IGifProps as IGif } from "./video-components/components/Gif/Gif";
-export type { IImageProps as IImage } from "./video-components/components/Image/Image";
-export type { IListProps as IList } from "./video-components/components/List/List";
-export type { IMermaidDiagramProps as IMermaidDiagram } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
-export type { IMermaidClassDiagramProps as IMermaidClassDiagram } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
-export type { IMermaidFlowchartDiagramProps as IMermaidFlowchartDiagram } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
-export type { IMermaidStateDiagramProps as IMermaidStateDiagram } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
-export type { IMermaidEntityRelationshipDiagramProps as IMermaidEntityRelationshipDiagram } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
-export type { IMermaidGitGraphDiagramProps as IMermaidGitGraphDiagram } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
-export type { IMermaidArchitectureDiagramProps as IMermaidArchitectureDiagram } from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
-export type { ITableProps as ITable } from "./video-components/components/Table/Table";
-export type { ITextProps as IHeader } from "./video-components/components/Text/Text";
-export type { IVideoProps as IVideo } from "./video-components/components/Video/Video";
+// Video
+export type { IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
+export type { IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
+export type { IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { IBrowser } from "./video-components/components/Browser/Browser";
+export type { ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
+export type { IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTable";
+export type { IMermaidDiagram } from "./video-components/components/diagrams/MermaidDiagram/MermaidDiagram";
+export type { IMermaidArchitectureDiagram } from "./video-components/components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
+export type { IMermaidClassDiagram } from "./video-components/components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
+export type { IMermaidEntityRelationshipDiagram } from "./video-components/components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
+export type { IMermaidFlowchartDiagram } from "./video-components/components/diagrams/specific/MermaidFlowchartDiagram/MermaidFlowchartDiagram";
+export type { IMermaidGitGraphDiagram } from "./video-components/components/diagrams/specific/MermaidGitGraphDiagram/MermaidGitGraphDiagram";
+export type { IMermaidStateDiagram } from "./video-components/components/diagrams/specific/MermaidStateDiagram/MermaidStateDiagram";
+export type { IGif } from "./video-components/components/Gif/Gif";
+export type { IImage } from "./video-components/components/Image/Image";
+export type { IList } from "./video-components/components/List/List";
+export type { ITable } from "./video-components/components/Table/Table";
+export type { ITerminalExplainer } from "./video-components/components/TerminalExplainer/TerminalExplainer";
+export type { IText } from "./video-components/components/Text/Text";
+export type { IVideo } from "./video-components/components/Video/Video";

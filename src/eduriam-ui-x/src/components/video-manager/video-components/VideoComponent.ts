@@ -8,6 +8,7 @@ import type { IDatabaseTable } from "./components/DatabaseTable/DatabaseTable";
 import type { IGif } from "./components/Gif/Gif";
 import type { IImage } from "./components/Image/Image";
 import type { IList } from "./components/List/List";
+import type { ITerminalExplainer } from "./components/TerminalExplainer/TerminalExplainer";
 import type { IMermaidArchitectureDiagram } from "./components/diagrams/specific/MermaidArchitectureDiagram/MermaidArchitectureDiagram";
 import type { IMermaidClassDiagram } from "./components/diagrams/specific/MermaidClassDiagram/MermaidClassDiagram";
 import type { IMermaidEntityRelationshipDiagram } from "./components/diagrams/specific/MermaidEntityRelationshipDiagram/MermaidEntityRelationshipDiagram";
@@ -45,6 +46,7 @@ export type VideoComponent =
   | IImage
   | IVideo
   | ICodeExplainer
+  | ITerminalExplainer
   | IMermaidFlowchartDiagram
   | IMermaidClassDiagram
   | IMermaidStateDiagram
@@ -59,4 +61,3 @@ export type BackgroundComponent =
   | IBackgroundVideo;
 
 export type ComponentType = VideoComponent["type"];
-
