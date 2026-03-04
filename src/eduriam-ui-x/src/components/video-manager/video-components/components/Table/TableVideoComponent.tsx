@@ -1,6 +1,7 @@
+import { Table as CoreTable } from "@eduriam/ui-core";
+
 import React from "react";
 
-import { Table as CoreTable } from "@eduriam/ui-core";
 import Box from "@mui/material/Box";
 
 import type { BaseVideoComponent } from "../../VideoComponent";
@@ -70,8 +71,6 @@ export const TableVideoComponent: React.FC<ITableVideoComponentProps> = ({
       <Box
         sx={{
           width: "min(92%, 1100px)",
-          px: 3,
-          py: 2,
         }}
       >
         <CoreTable

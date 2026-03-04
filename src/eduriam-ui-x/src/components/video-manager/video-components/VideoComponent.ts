@@ -4,6 +4,7 @@ import { IBackgroundImage } from "./components/BackgroundImage/BackgroundImage";
 import type { IBackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
 import type { ICodeExplainer } from "./components/CodeExplainer/CodeExplainer";
 import type { IDatabaseTableVideoComponent } from "./components/DatabaseTable/DatabaseTableVideoComponent";
+import type { IGif } from "./components/Gif/Gif";
 import type { IImage } from "./components/Image/Image";
 import type { IList } from "./components/List/List";
 import type { IMermaidClassDiagramVideoComponent } from "./components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
@@ -33,6 +34,7 @@ export type VideoComponent =
   | IList
   | ITable
   | IDatabaseTableVideoComponent
+  | IGif
   | IImage
   | IVideo
   | ICodeExplainer
@@ -45,3 +47,4 @@ export type BackgroundComponent =
   | IBackgroundVideo;
 
 export type ComponentType = VideoComponent["type"];
+

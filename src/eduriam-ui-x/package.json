@@ -23,6 +23,7 @@
   "dependencies": {
     "@eduriam/ui-core": "^0.6.52",
     "@remotion/captions": "^4.0.353",
+    "@remotion/gif": "^4.0.353",
     "@remotion/player": "^4.0.353",
     "canvas-confetti": "^1.9.3",
     "dompurify": "^3.3.1",

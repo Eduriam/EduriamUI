@@ -3,6 +3,7 @@ import React from "react";
 import { VideoComponent } from "../VideoComponent";
 import { CodeExplainer } from "../components/CodeExplainer/CodeExplainer";
 import { DatabaseTableVideoComponent } from "../components/DatabaseTable/DatabaseTableVideoComponent";
+import { Gif } from "../components/Gif/Gif";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
 import { MermaidClassDiagramVideoComponent } from "../components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
@@ -21,6 +22,8 @@ export class VideoComponentFactory {
         return <TableVideoComponent comp={comp} />;
       case "DATABASE_TABLE":
         return <DatabaseTableVideoComponent comp={comp} />;
+      case "GIF":
+        return <Gif comp={comp} />;
       case "IMAGE":
         return <Image comp={comp} />;
       case "VIDEO":

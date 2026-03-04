@@ -44,6 +44,7 @@ export type {
   IDatabaseTableVideoComponent as DatabaseTableComponent,
   DatabaseValue,
 } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
+export type { IGif as GifComponent } from "./video-components/components/Gif/Gif";
 export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
 export type {
   IList as ListComponent,
@@ -68,6 +69,7 @@ export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-com
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
 export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IDatabaseTableVideoComponent as VMDatabaseTableComponent } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
+export type { IGif as VMGifComponent } from "./video-components/components/Gif/Gif";
 export type { IImage as VMImageComponent } from "./video-components/components/Image/Image";
 export type { IList as VMListComponent } from "./video-components/components/List/List";
 export type { IMermaidClassDiagramVideoComponent as VMMermaidClassDiagramComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
@@ -97,6 +99,10 @@ export {
   DatabaseTableVideoComponent as VideoDatabaseTable,
 } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export {
+  Gif,
+  Gif as VideoGif,
+} from "./video-components/components/Gif/Gif";
+export {
   Image,
   Image as VideoImage,
 } from "./video-components/components/Image/Image";
@@ -117,9 +123,11 @@ export type { IBackgroundImageProps as IBackgroundImage } from "./video-componen
 export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
 export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IDatabaseTableVideoComponentProps as IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
+export type { IGifProps as IGif } from "./video-components/components/Gif/Gif";
 export type { IImageProps as IImage } from "./video-components/components/Image/Image";
 export type { IListProps as IList } from "./video-components/components/List/List";
 export type { IMermaidClassDiagramVideoComponentProps as IMermaidClassDiagramVideoComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export type { ITableVideoComponentProps as ITable } from "./video-components/components/Table/TableVideoComponent";
 export type { ITextProps as IHeader } from "./video-components/components/Text/Text";
 export type { IVideoProps as IVideo } from "./video-components/components/Video/Video";
+

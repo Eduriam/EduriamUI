@@ -28,6 +28,7 @@ export { BackgroundImage } from "./components/video-manager/video-components/com
 export { BackgroundVideo } from "./components/video-manager/video-components/components/BackgroundVideo/BackgroundVideo";
 export { CodeExplainer } from "./components/video-manager/video-components/components/CodeExplainer/CodeExplainer";
 export { DatabaseTableVideoComponent } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTableVideoComponent";
+export { Gif } from "./components/video-manager/video-components/components/Gif/Gif";
 export { Image } from "./components/video-manager/video-components/components/Image/Image";
 export { List } from "./components/video-manager/video-components/components/List/List";
 export { MermaidClassDiagramVideoComponent } from "./components/video-manager/video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
@@ -139,3 +140,4 @@ export type {
   MatchOptionDTO,
   TextMatchOptionDTO,
 } from "./components/study-session/components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
+
