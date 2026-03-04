@@ -59,15 +59,15 @@ const sampleScenes: Scene[] = [
         ],
         components: [
           {
-            id: "ph1",
-            type: "PAGE_HEADER",
+            id: "h-main",
+            type: "HEADER",
             startTime: 0,
             column: "first",
             text: "Explanation",
           },
           {
-            id: "ps1",
-            type: "PAGE_SUBHEADER",
+            id: "h-sub",
+            type: "HEADER",
             startTime: 800,
             column: "first",
             text: "Key concepts in this lesson",

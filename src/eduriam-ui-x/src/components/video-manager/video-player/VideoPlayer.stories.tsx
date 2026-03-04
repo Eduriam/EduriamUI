@@ -61,15 +61,15 @@ const multiSceneDefinition: VideoDefinition = {
           ],
           components: [
             {
-              id: "ph1",
-              type: "PAGE_HEADER",
+              id: "h1",
+              type: "HEADER",
               startTime: 0,
               column: "first",
               text: "Key Concepts",
             },
             {
-              id: "ps1",
-              type: "PAGE_SUBHEADER",
+              id: "h2",
+              type: "HEADER",
               startTime: 1000,
               column: "first",
               text: "Understanding the fundamentals",
