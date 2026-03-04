@@ -8,10 +8,7 @@ export type { Caption } from "./video-scenes/Scene";
 export { VideoBuilder } from "./video-builder/VideoBuilder";
 
 // Types – shared
-export type {
-  ComponentSize,
-  ComponentSize as ImageSize,
-} from "./types/shared";
+export type { ComponentSize, ComponentSize as ImageSize } from "./types/shared";
 
 // Types – scene & video
 export type { Scene } from "./video-scenes/Scene";
@@ -42,27 +39,27 @@ export type {
   CodeExplainerStep,
 } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type {
-  IMermaidClassDiagramVideoComponent as MermaidClassDiagramComponent,
-  MermaidClassDiagramStep,
-} from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
-export type {
   DatabaseColumn,
   DatabaseRow,
   IDatabaseTableVideoComponent as DatabaseTableComponent,
   DatabaseValue,
 } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export type { IHeader as HeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as ImageComponent } from "./video-components/components/Image/Image";
 export type {
   IList as ListComponent,
   ListItem,
 } from "./video-components/components/List/List";
 export type {
+  IMermaidClassDiagramVideoComponent as MermaidClassDiagramComponent,
+  MermaidClassDiagramStep,
+} from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
+export type {
   ITableVideoComponentProps,
   TableCell,
   ITable as TableComponent,
   TableRow,
 } from "./video-components/components/Table/TableVideoComponent";
+export type { IText as HeaderComponent } from "./video-components/components/Text/Text";
 export type { IVideo as VideoComponent } from "./video-components/components/Video/Video";
 
 // VM-prefixed type aliases for package public API
@@ -70,12 +67,12 @@ export type { IBackgroundColor as VMBackgroundColorComponent } from "./video-com
 export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
 export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
-export type { IMermaidClassDiagramVideoComponent as VMMermaidClassDiagramComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export type { IDatabaseTableVideoComponent as VMDatabaseTableComponent } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export type { IHeader as VMHeaderComponent } from "./video-components/components/Header/Header";
 export type { IImage as VMImageComponent } from "./video-components/components/Image/Image";
 export type { IList as VMListComponent } from "./video-components/components/List/List";
+export type { IMermaidClassDiagramVideoComponent as VMMermaidClassDiagramComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export type { ITable as VMTableComponent } from "./video-components/components/Table/TableVideoComponent";
+export type { IText as VMHeaderComponent } from "./video-components/components/Text/Text";
 export type { IVideo as VMVideoComponent } from "./video-components/components/Video/Video";
 
 // Slides – renderers & factory
@@ -94,16 +91,11 @@ export {
   CodeExplainer,
   CodeExplainer as VideoCodeExplainer,
 } from "./video-components/components/CodeExplainer/CodeExplainer";
-export { MermaidClassDiagramVideoComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export {
   DatabaseTableVideoComponent as DatabaseTable,
   DatabaseTableVideoComponent,
   DatabaseTableVideoComponent as VideoDatabaseTable,
 } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export {
-  Header,
-  Header as VideoHeader,
-} from "./video-components/components/Header/Header";
 export {
   Image,
   Image as VideoImage,
@@ -112,17 +104,22 @@ export {
   List,
   List as VideoList,
 } from "./video-components/components/List/List";
+export { MermaidClassDiagramVideoComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export { TableVideoComponent } from "./video-components/components/Table/TableVideoComponent";
+export {
+  Text,
+  Text as VideoHeader,
+} from "./video-components/components/Text/Text";
 export { Video as VideoVideo } from "./video-components/components/Video/Video";
 
 export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
 export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
-export type { IMermaidClassDiagramVideoComponentProps as IMermaidClassDiagramVideoComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export type { IDatabaseTableVideoComponentProps as IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export type { IHeaderProps as IHeader } from "./video-components/components/Header/Header";
 export type { IImageProps as IImage } from "./video-components/components/Image/Image";
 export type { IListProps as IList } from "./video-components/components/List/List";
+export type { IMermaidClassDiagramVideoComponentProps as IMermaidClassDiagramVideoComponent } from "./video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export type { ITableVideoComponentProps as ITable } from "./video-components/components/Table/TableVideoComponent";
+export type { ITextProps as IHeader } from "./video-components/components/Text/Text";
 export type { IVideoProps as IVideo } from "./video-components/components/Video/Video";

@@ -53,7 +53,7 @@ export const WithHeaderAndBackground: Story = {
       components: [
         {
           id: "h1",
-          type: "HEADER",
+          type: "TEXT",
           startTime: 0,
           column: "first",
           text: "Raw Slide Demo",

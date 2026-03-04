@@ -28,11 +28,11 @@ export { BackgroundImage } from "./components/video-manager/video-components/com
 export { BackgroundVideo } from "./components/video-manager/video-components/components/BackgroundVideo/BackgroundVideo";
 export { CodeExplainer } from "./components/video-manager/video-components/components/CodeExplainer/CodeExplainer";
 export { DatabaseTableVideoComponent } from "./components/video-manager/video-components/components/DatabaseTable/DatabaseTableVideoComponent";
-export { Header } from "./components/video-manager/video-components/components/Header/Header";
 export { Image } from "./components/video-manager/video-components/components/Image/Image";
 export { List } from "./components/video-manager/video-components/components/List/List";
 export { MermaidClassDiagramVideoComponent } from "./components/video-manager/video-components/components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 export { TableVideoComponent } from "./components/video-manager/video-components/components/Table/TableVideoComponent";
+export { Text } from "./components/video-manager/video-components/components/Text/Text";
 export { Video } from "./components/video-manager/video-components/components/Video/Video";
 
 // Study Session Progress Bar

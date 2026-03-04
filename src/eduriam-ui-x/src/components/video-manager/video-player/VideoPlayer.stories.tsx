@@ -27,7 +27,7 @@ const sampleDefinition: VideoDefinition = {
           components: [
             {
               id: "h1",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 0,
               column: "first",
               text: "Welcome to Eduriam",
@@ -62,14 +62,14 @@ const multiSceneDefinition: VideoDefinition = {
           components: [
             {
               id: "h1",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 0,
               column: "first",
               text: "Key Concepts",
             },
             {
               id: "h2",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 1000,
               column: "first",
               text: "Understanding the fundamentals",
@@ -148,7 +148,7 @@ const templateSlideDefinition: VideoDefinition = {
           components: [
             {
               id: "h1",
-              type: "HEADER",
+              type: "TEXT",
               startTime: 0,
               column: "first",
               text: "Second Scene",

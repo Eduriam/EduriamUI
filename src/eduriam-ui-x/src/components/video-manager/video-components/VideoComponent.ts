@@ -4,11 +4,11 @@ import { IBackgroundImage } from "./components/BackgroundImage/BackgroundImage";
 import type { IBackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
 import type { ICodeExplainer } from "./components/CodeExplainer/CodeExplainer";
 import type { IDatabaseTableVideoComponent } from "./components/DatabaseTable/DatabaseTableVideoComponent";
-import type { IHeader } from "./components/Header/Header";
 import type { IImage } from "./components/Image/Image";
 import type { IList } from "./components/List/List";
 import type { IMermaidClassDiagramVideoComponent } from "./components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 import type { ITable } from "./components/Table/TableVideoComponent";
+import type { IText } from "./components/Text/Text";
 import type { IVideo } from "./components/Video/Video";
 
 export type VideoComponentColumn = "first" | "second" | "third";
@@ -29,7 +29,7 @@ export interface BackgroundVideoComponent {
 
 /** Union of all renderable content components in RAW slide columns. */
 export type VideoComponent =
-  | IHeader
+  | IText
   | IList
   | ITable
   | IDatabaseTableVideoComponent

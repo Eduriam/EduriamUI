@@ -60,14 +60,14 @@ const sampleScenes: Scene[] = [
         components: [
           {
             id: "h-main",
-            type: "HEADER",
+            type: "TEXT",
             startTime: 0,
             column: "first",
             text: "Explanation",
           },
           {
             id: "h-sub",
-            type: "HEADER",
+            type: "TEXT",
             startTime: 800,
             column: "first",
             text: "Key concepts in this lesson",
@@ -141,7 +141,7 @@ const sampleScenes: Scene[] = [
         components: [
           {
             id: "h1",
-            type: "HEADER",
+            type: "TEXT",
             startTime: 0,
             column: "first",
             text: "Scene 2",
@@ -595,4 +595,3 @@ export const WithCodeExplainerLongCodeAutoScroll: Story = {
     scenes: codeExplainerLongCodeAutoScrollScenes,
   },
 };
-

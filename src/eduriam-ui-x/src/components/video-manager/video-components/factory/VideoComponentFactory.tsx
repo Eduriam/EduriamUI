@@ -3,18 +3,18 @@ import React from "react";
 import { VideoComponent } from "../VideoComponent";
 import { CodeExplainer } from "../components/CodeExplainer/CodeExplainer";
 import { DatabaseTableVideoComponent } from "../components/DatabaseTable/DatabaseTableVideoComponent";
-import { Header } from "../components/Header/Header";
 import { Image } from "../components/Image/Image";
 import { List } from "../components/List/List";
 import { MermaidClassDiagramVideoComponent } from "../components/MermaidClassDiagramVideoComponent/MermaidClassDiagramVideoComponent";
 import { TableVideoComponent } from "../components/Table/TableVideoComponent";
+import { Text } from "../components/Text/Text";
 import { Video } from "../components/Video/Video";
 
 export class VideoComponentFactory {
   static renderComponent(comp: VideoComponent): React.ReactNode {
     switch (comp.type) {
-      case "HEADER":
-        return <Header comp={comp} />;
+      case "TEXT":
+        return <Text comp={comp} />;
       case "LIST":
         return <List comp={comp} />;
       case "TABLE":
@@ -37,4 +37,3 @@ export class VideoComponentFactory {
     }
   }
 }
-
