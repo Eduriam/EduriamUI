@@ -33,6 +33,7 @@ export type {
 export type { IBackgroundColor as BackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as BackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as BackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { IBrowser as BrowserComponent } from "./video-components/components/Browser/Browser";
 export type {
   CodeExplainerAnnotation,
   ICodeExplainer as CodeExplainerComponent,
@@ -67,6 +68,7 @@ export type { IVideo as VideoComponent } from "./video-components/components/Vid
 export type { IBackgroundColor as VMBackgroundColorComponent } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImage as VMBackgroundImageComponent } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideo as VMBackgroundVideoComponent } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { IBrowser as VMBrowserComponent } from "./video-components/components/Browser/Browser";
 export type { ICodeExplainer as VMCodeExplainerComponent } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IDatabaseTableVideoComponent as VMDatabaseTableComponent } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export type { IGif as VMGifComponent } from "./video-components/components/Gif/Gif";
@@ -89,6 +91,10 @@ export { resolveSize } from "./utils/resolveSize";
 export { BackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export { BackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export { BackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export {
+  Browser,
+  Browser as VideoBrowser,
+} from "./video-components/components/Browser/Browser";
 export {
   CodeExplainer,
   CodeExplainer as VideoCodeExplainer,
@@ -121,6 +127,7 @@ export { Video as VideoVideo } from "./video-components/components/Video/Video";
 export type { IBackgroundColorProps as IBackgroundColor } from "./video-components/components/BackgroundColor/BackgroundColor";
 export type { IBackgroundImageProps as IBackgroundImage } from "./video-components/components/BackgroundImage/BackgroundImage";
 export type { IBackgroundVideoProps as IBackgroundVideo } from "./video-components/components/BackgroundVideo/BackgroundVideo";
+export type { IBrowserProps as IBrowser } from "./video-components/components/Browser/Browser";
 export type { ICodeExplainerProps as ICodeExplainer } from "./video-components/components/CodeExplainer/CodeExplainer";
 export type { IDatabaseTableVideoComponentProps as IDatabaseTable } from "./video-components/components/DatabaseTable/DatabaseTableVideoComponent";
 export type { IGifProps as IGif } from "./video-components/components/Gif/Gif";
@@ -130,4 +137,7 @@ export type { IMermaidClassDiagramVideoComponentProps as IMermaidClassDiagramVid
 export type { ITableVideoComponentProps as ITable } from "./video-components/components/Table/TableVideoComponent";
 export type { ITextProps as IHeader } from "./video-components/components/Text/Text";
 export type { IVideoProps as IVideo } from "./video-components/components/Video/Video";
+
+
+
 

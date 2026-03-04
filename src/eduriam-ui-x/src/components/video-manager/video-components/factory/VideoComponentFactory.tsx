@@ -1,6 +1,7 @@
 import React from "react";
 
 import { VideoComponent } from "../VideoComponent";
+import { Browser } from "../components/Browser/Browser";
 import { CodeExplainer } from "../components/CodeExplainer/CodeExplainer";
 import { DatabaseTableVideoComponent } from "../components/DatabaseTable/DatabaseTableVideoComponent";
 import { Gif } from "../components/Gif/Gif";
@@ -22,6 +23,8 @@ export class VideoComponentFactory {
         return <TableVideoComponent comp={comp} />;
       case "DATABASE_TABLE":
         return <DatabaseTableVideoComponent comp={comp} />;
+      case "BROWSER":
+        return <Browser comp={comp} />;
       case "GIF":
         return <Gif comp={comp} />;
       case "IMAGE":

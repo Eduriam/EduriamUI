@@ -2,6 +2,7 @@ import type { ID } from "../../../models/ID";
 import type { IBackgroundColor } from "./components/BackgroundColor/BackgroundColor";
 import { IBackgroundImage } from "./components/BackgroundImage/BackgroundImage";
 import type { IBackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo";
+import type { IBrowser } from "./components/Browser/Browser";
 import type { ICodeExplainer } from "./components/CodeExplainer/CodeExplainer";
 import type { IDatabaseTableVideoComponent } from "./components/DatabaseTable/DatabaseTableVideoComponent";
 import type { IGif } from "./components/Gif/Gif";
@@ -34,6 +35,7 @@ export type VideoComponent =
   | IList
   | ITable
   | IDatabaseTableVideoComponent
+  | IBrowser
   | IGif
   | IImage
   | IVideo
@@ -47,4 +49,5 @@ export type BackgroundComponent =
   | IBackgroundVideo;
 
 export type ComponentType = VideoComponent["type"];
+
 
