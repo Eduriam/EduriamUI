@@ -28,6 +28,7 @@ type Story = StoryObj<typeof PageHeader>;
 
 export const Default: Story = {
   args: {
-    comp: { id: "ph1", type: "PAGE_HEADER", startTime: 0, text: "Chapter 1: Introduction" },
+    comp: { id: "ph1", type: "PAGE_HEADER", startTime: 0, column: "first", text: "Chapter 1: Introduction" },
   },
 };
+

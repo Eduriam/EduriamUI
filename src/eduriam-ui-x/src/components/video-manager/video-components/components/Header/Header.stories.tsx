@@ -32,6 +32,7 @@ export const Center: Story = {
       id: "h1",
       type: "HEADER",
       startTime: 0,
+      column: "first",
       text: "Welcome to Eduriam",
     },
   },
@@ -43,7 +44,11 @@ export const TopLeft: Story = {
       id: "h2",
       type: "HEADER",
       startTime: 0,
+      column: "first",
       text: "Top Left Header",
     },
   },
 };
+
+
+

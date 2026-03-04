@@ -32,6 +32,7 @@ export const WithHeader: Story = {
       id: "t1",
       type: "TABLE",
       startTime: 0,
+      column: "first",
       highlightHeader: true,
       rows: [
         ["Feature", "Status", "Priority"],
@@ -49,6 +50,7 @@ export const WithoutHeader: Story = {
       id: "t2",
       type: "TABLE",
       startTime: 0,
+      column: "first",
       highlightHeader: false,
       rows: [
         ["Cell A1", "Cell A2", "Cell A3"],
@@ -57,3 +59,6 @@ export const WithoutHeader: Story = {
     },
   },
 };
+
+
+

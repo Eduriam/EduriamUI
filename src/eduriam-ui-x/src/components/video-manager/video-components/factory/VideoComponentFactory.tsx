@@ -1,9 +1,6 @@
 import React from "react";
 
 import { VideoComponent } from "../VideoComponent";
-import BackgroundColor from "../components/BackgroundColor/BackgroundColor";
-import BackgroundImage from "../components/BackgroundImage/BackgroundImage";
-import { BackgroundVideo } from "../components/BackgroundVideo/BackgroundVideo";
 import { CodeExplainer } from "../components/CodeExplainer/CodeExplainer";
 import { DatabaseTableVideoComponent } from "../components/DatabaseTable/DatabaseTableVideoComponent";
 import { Header } from "../components/Header/Header";
@@ -37,12 +34,6 @@ export class VideoComponentFactory {
         return <Image comp={comp} />;
       case "VIDEO":
         return <Video comp={comp} />;
-      case "BACKGROUND_COLOR":
-        return <BackgroundColor comp={comp} />;
-      case "BACKGROUND_IMAGE":
-        return <BackgroundImage comp={comp} />;
-      case "BACKGROUND_VIDEO":
-        return <BackgroundVideo comp={comp} />;
       case "CODE_EXPLAINER":
         return <CodeExplainer comp={comp} />;
       case "MERMAID_CLASS_DIAGRAM":
@@ -55,3 +46,4 @@ export class VideoComponentFactory {
     }
   }
 }
+

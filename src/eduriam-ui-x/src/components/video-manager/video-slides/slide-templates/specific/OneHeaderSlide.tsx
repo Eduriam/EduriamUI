@@ -33,6 +33,7 @@ export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide }) => {
           id: `${slide.id}-header`,
           type: "HEADER",
           startTime: 0,
+          column: "first",
           text: slide.text,
         }}
       />

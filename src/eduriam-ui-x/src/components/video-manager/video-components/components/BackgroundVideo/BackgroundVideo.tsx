@@ -2,9 +2,9 @@ import { AbsoluteFill } from "remotion";
 
 import React from "react";
 
-import type { BaseVideoComponent } from "../../VideoComponent";
+import type { BackgroundVideoComponent } from "../../VideoComponent";
 
-export interface IBackgroundVideo extends BaseVideoComponent {
+export interface IBackgroundVideo extends BackgroundVideoComponent {
   type: "BACKGROUND_VIDEO";
   url: string;
 }
@@ -26,3 +26,4 @@ export const BackgroundVideo: React.FC<IBackgroundVideoProps> = ({ comp }) => (
 );
 
 export default BackgroundVideo;
+

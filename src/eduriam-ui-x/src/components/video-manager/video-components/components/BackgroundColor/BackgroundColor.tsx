@@ -4,9 +4,9 @@ import React from "react";
 
 import { useTheme } from "@mui/material/styles";
 
-import type { BaseVideoComponent } from "../../VideoComponent";
+import type { BackgroundVideoComponent } from "../../VideoComponent";
 
-export interface IBackgroundColor extends BaseVideoComponent {
+export interface IBackgroundColor extends BackgroundVideoComponent {
   type: "BACKGROUND_COLOR";
   color: string;
 }
@@ -26,3 +26,4 @@ export const BackgroundColor: React.FC<IBackgroundColorProps> = ({ comp }) => {
 };
 
 export default BackgroundColor;
+

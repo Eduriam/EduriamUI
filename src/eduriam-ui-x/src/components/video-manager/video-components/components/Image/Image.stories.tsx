@@ -32,6 +32,7 @@ export const Medium: Story = {
       id: "img1",
       type: "IMAGE",
       startTime: 0,
+      column: "first",
       url: "https://placehold.co/600x400/0ea5e9/white?text=Eduriam",
       size: "MEDIUM",
     },
@@ -44,8 +45,12 @@ export const Small: Story = {
       id: "img2",
       type: "IMAGE",
       startTime: 0,
+      column: "first",
       url: "https://placehold.co/300x200/10b981/white?text=Small",
       size: "SMALL",
     },
   },
 };
+
+
+

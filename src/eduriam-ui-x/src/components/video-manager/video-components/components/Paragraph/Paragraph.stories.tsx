@@ -32,6 +32,7 @@ export const CenterAligned: Story = {
       id: "p1",
       type: "PARAGRAPH",
       startTime: 0,
+      column: "first",
       text: "Remotion is a framework for creating videos programmatically using React. It allows you to write video content as React components.",
       alignment: "CENTER",
     },
@@ -44,8 +45,12 @@ export const LeftAligned: Story = {
       id: "p2",
       type: "PARAGRAPH",
       startTime: 0,
+      column: "first",
       text: "This is a left-aligned paragraph demonstrating the alignment options available.",
       alignment: "LEFT",
     },
   },
 };
+
+
+

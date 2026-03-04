@@ -30,6 +30,7 @@ const defaultComp = {
   id: "v1",
   type: "VIDEO" as const,
   startTime: 0,
+  column: "first" as const,
   url: "https://www.w3schools.com/html/mov_bbb.mp4",
 };
 

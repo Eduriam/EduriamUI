@@ -32,7 +32,11 @@ export const Default: Story = {
       id: "ps1",
       type: "PAGE_SUBHEADER",
       startTime: 0,
+      column: "first",
       text: "Understanding the Basics",
     },
   },
 };
+
+
+

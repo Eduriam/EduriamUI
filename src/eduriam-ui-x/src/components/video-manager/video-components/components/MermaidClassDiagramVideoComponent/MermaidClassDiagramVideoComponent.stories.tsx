@@ -81,6 +81,7 @@ export const StepByStepClassDiagram: Story = {
       id: "mermaid-class-diagram-1",
       type: "MERMAID_CLASS_DIAGRAM",
       startTime: 0,
+      column: "first",
       steps: withStepStartTimes(
         [
           {
@@ -150,3 +151,6 @@ Instructor "1" --> "*" Course : teaches`,
     },
   },
 };
+
+
+

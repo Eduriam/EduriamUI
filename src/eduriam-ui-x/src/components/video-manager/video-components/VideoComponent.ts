@@ -14,18 +14,25 @@ import type { IParagraph } from "./components/Paragraph/Paragraph";
 import type { ITable } from "./components/Table/TableVideoComponent";
 import type { IVideo } from "./components/Video/Video";
 
+export type VideoComponentColumn = "first" | "second" | "third";
+export type BackgroundComponentType = BackgroundComponent["type"];
+
 export interface BaseVideoComponent {
   id: ID;
   type: ComponentType;
   startTime: number;
+  column: VideoComponentColumn;
 }
 
-export type ComponentType = VideoComponent["type"];
+export interface BackgroundVideoComponent {
+  id: ID;
+  type: BackgroundComponentType;
+  startTime: number;
+}
 
-/** Union of all concrete scene component types. */
+/** Union of all renderable content components in RAW slide columns. */
 export type VideoComponent =
   | IHeader
-  | IBackgroundColor
   | IPageHeader
   | IPageSubheader
   | IParagraph
@@ -34,7 +41,13 @@ export type VideoComponent =
   | IDatabaseTableVideoComponent
   | IImage
   | IVideo
-  | IBackgroundImage
-  | IBackgroundVideo
   | ICodeExplainer
   | IMermaidClassDiagramVideoComponent;
+
+/** Union of RAW slide background layer components. */
+export type BackgroundComponent =
+  | IBackgroundColor
+  | IBackgroundImage
+  | IBackgroundVideo;
+
+export type ComponentType = VideoComponent["type"];
