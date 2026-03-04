@@ -9,10 +9,8 @@ export { VideoBuilder } from "./video-builder/VideoBuilder";
 
 // Types – shared
 export type {
-  ComponentPosition,
   ComponentSize,
   ComponentSize as ImageSize,
-  ComponentPosition as Position,
 } from "./types/shared";
 export type { Alignment } from "./video-components/components/Paragraph/Paragraph";
 
@@ -93,7 +91,6 @@ export { RawSlide } from "./video-slides/raw-slide/RawSlide";
 export { OneHeaderSlide } from "./video-slides/slide-templates/specific/OneHeaderSlide";
 
 // Utils
-export { positionToStyle } from "./utils/positionToStyle";
 export { resolveSize } from "./utils/resolveSize";
 
 // Scene components

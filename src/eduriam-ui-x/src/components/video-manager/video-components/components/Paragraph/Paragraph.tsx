@@ -3,8 +3,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import type { ComponentPosition } from "../../../types/shared";
-import { positionToStyle } from "../../../utils/positionToStyle";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type Alignment = "LEFT" | "CENTER" | "RIGHT" | "JUSTIFY";
@@ -12,7 +10,6 @@ export type Alignment = "LEFT" | "CENTER" | "RIGHT" | "JUSTIFY";
 export interface IParagraph extends BaseVideoComponent {
   type: "PARAGRAPH";
   text: string;
-  position: ComponentPosition;
   alignment: Alignment;
   color?: string;
 }
@@ -31,7 +28,15 @@ export const Paragraph: React.FC<IParagraphProps> = ({ comp }) => {
           ? "justify"
           : "center";
   return (
-    <Box style={positionToStyle(comp.position)}>
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Typography
         variant="h4"
         sx={{

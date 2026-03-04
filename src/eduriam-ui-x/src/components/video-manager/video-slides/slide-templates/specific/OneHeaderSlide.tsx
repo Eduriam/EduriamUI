@@ -34,7 +34,6 @@ export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide }) => {
           type: "HEADER",
           startTime: 0,
           text: slide.text,
-          position: "CENTER",
         }}
       />
     </AbsoluteFill>

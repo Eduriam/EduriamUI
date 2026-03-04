@@ -138,7 +138,6 @@ const sampleScenes: Scene[] = [
             type: "HEADER",
             startTime: 0,
             text: "Scene 2",
-            position: "CENTER",
           },
         ],
       },
@@ -188,7 +187,6 @@ const databaseTableOnlyScenes: Scene[] = [
             id: "db-table-1",
             type: "DATABASE_TABLE",
             startTime: 0,
-            position: "CENTER",
             tableName: "query_result",
             columns: [
               { key: "id", label: "id" },
@@ -258,7 +256,6 @@ const makeCodeExplainerScenes = ({
             id: componentId,
             type: "CODE_EXPLAINER",
             startTime: 0,
-            position: "CENTER",
             showLineNumbers: true,
             steps: steps.map((step, index) => ({
               ...step,

@@ -155,7 +155,6 @@ export const JavaScriptWalkthrough: Story = {
       id: "code-explainer-1",
       type: "CODE_EXPLAINER",
       startTime: 0,
-      position: "CENTER",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -204,7 +203,6 @@ export const FewLinesLargeFont: Story = {
       id: "code-explainer-few-lines",
       type: "CODE_EXPLAINER",
       startTime: 0,
-      position: "CENTER",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -238,7 +236,6 @@ export const ManyLinesSmallerFont: Story = {
       id: "code-explainer-many-lines",
       type: "CODE_EXPLAINER",
       startTime: 0,
-      position: "CENTER",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -292,7 +289,6 @@ export const LongLineWrapsToFit: Story = {
       id: "code-explainer-wrap",
       type: "CODE_EXPLAINER",
       startTime: 0,
-      position: "CENTER",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {
@@ -320,7 +316,6 @@ export const LongCodeAutoScroll: Story = {
       id: "code-explainer-auto-scroll",
       type: "CODE_EXPLAINER",
       startTime: 0,
-      position: "CENTER",
       showLineNumbers: true,
       steps: withStepStartTimes([
         {

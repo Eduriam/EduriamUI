@@ -5,7 +5,6 @@ import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 
 import { MermaidDiagram } from "../../../../study-session/components/shared/MermaidDiagram";
-import { positionToStyle } from "../../../utils/positionToStyle";
 import { MERMAID_CLASS_DIAGRAM_CONFIG } from "./constants";
 import type { IMermaidClassDiagramVideoComponentProps } from "./types";
 import {
@@ -70,7 +69,15 @@ export const MermaidClassDiagramVideoComponent: React.FC<
     : 1;
 
   return (
-    <Box style={positionToStyle(comp.position)}>
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Box sx={{ width: "100%", position: "relative" }}>
         {previousStep && isTransitioning ? (
           <>

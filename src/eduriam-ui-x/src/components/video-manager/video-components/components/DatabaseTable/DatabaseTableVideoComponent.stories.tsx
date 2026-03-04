@@ -32,7 +32,6 @@ export const QueryResult: Story = {
       id: "db-query-1",
       type: "DATABASE_TABLE",
       startTime: 0,
-      position: "CENTER",
       tableName: "query_result",
       columns: [
         { key: "id", label: "id" },
@@ -74,7 +73,6 @@ export const UsersTable: Story = {
       id: "db-users-1",
       type: "DATABASE_TABLE",
       startTime: 0,
-      position: "CENTER",
       tableName: "users",
       columns: [
         { key: "user_id", label: "user_id" },

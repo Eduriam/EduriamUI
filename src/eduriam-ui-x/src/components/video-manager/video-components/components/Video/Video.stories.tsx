@@ -31,7 +31,6 @@ const defaultComp = {
   type: "VIDEO" as const,
   startTime: 0,
   url: "https://www.w3schools.com/html/mov_bbb.mp4",
-  position: "CENTER" as const,
 };
 
 export const Small: Story = {

@@ -8,15 +8,12 @@ import type {
   DatabaseValue,
 } from "../../../../study-session/components/shared/DatabaseTable/DatabaseTable";
 import { DatabaseTable } from "../../../../study-session/components/shared/DatabaseTable/DatabaseTable";
-import type { ComponentPosition } from "../../../types/shared";
-import { positionToStyle } from "../../../utils/positionToStyle";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type { DatabaseColumn, DatabaseRow, DatabaseValue };
 
 export interface IDatabaseTableVideoComponent extends BaseVideoComponent {
   type: "DATABASE_TABLE";
-  position: ComponentPosition;
   columns: DatabaseColumn[];
   rows: DatabaseRow[];
   tableName?: string;
@@ -30,7 +27,15 @@ export interface IDatabaseTableVideoComponentProps {
 export const DatabaseTableVideoComponent: React.FC<
   IDatabaseTableVideoComponentProps
 > = ({ comp }) => (
-  <Box style={positionToStyle(comp.position)}>
+  <Box
+    sx={{
+      position: "absolute",
+      inset: 0,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
     <Box sx={{ width: "min(100%, 1180px)" }}>
       <DatabaseTable
         columns={comp.columns}

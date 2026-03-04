@@ -27,8 +27,7 @@ const sampleDefinition: VideoDefinition = {
               id: "h1",
               type: "HEADER",
               startTime: 0,
-              text: "Welcome to Eduriam",
-              position: "CENTER",
+          text: "Welcome to Eduriam",
             },
           ],
         },
@@ -90,7 +89,6 @@ const multiSceneDefinition: VideoDefinition = {
               id: "l1",
               type: "LIST",
               startTime: 0,
-              position: "CENTER",
               title: "Topics",
               ordered: true,
               items: [
@@ -140,8 +138,7 @@ const templateSlideDefinition: VideoDefinition = {
               id: "h1",
               type: "HEADER",
               startTime: 0,
-              text: "Second Scene",
-              position: "CENTER",
+          text: "Second Scene",
             },
           ],
         },
@@ -173,7 +170,6 @@ const codeExplainerDefinition: VideoDefinition = {
               id: "ce-1",
               type: "CODE_EXPLAINER",
               startTime: 0,
-              position: "CENTER",
               steps: [
                 {
                   id: "step-1",

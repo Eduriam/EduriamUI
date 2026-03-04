@@ -1,4 +1,3 @@
-import type { ComponentPosition } from "../../../types/shared";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export interface MermaidClassDiagramStep {
@@ -9,7 +8,6 @@ export interface MermaidClassDiagramStep {
 
 export interface IMermaidClassDiagramVideoComponent extends BaseVideoComponent {
   type: "MERMAID_CLASS_DIAGRAM";
-  position: ComponentPosition;
   steps: MermaidClassDiagramStep[];
 }
 

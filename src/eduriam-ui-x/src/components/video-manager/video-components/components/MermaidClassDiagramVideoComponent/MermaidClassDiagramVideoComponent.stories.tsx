@@ -81,7 +81,6 @@ export const StepByStepClassDiagram: Story = {
       id: "mermaid-class-diagram-1",
       type: "MERMAID_CLASS_DIAGRAM",
       startTime: 0,
-      position: "CENTER",
       steps: withStepStartTimes(
         [
           {

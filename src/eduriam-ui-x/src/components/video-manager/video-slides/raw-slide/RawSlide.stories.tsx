@@ -54,7 +54,6 @@ export const WithHeaderAndBackground: Story = {
           type: "HEADER",
           startTime: 0,
           text: "Raw Slide Demo",
-          position: "CENTER",
         },
       ],
     },

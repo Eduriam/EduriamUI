@@ -3,8 +3,6 @@ import React from "react";
 import { Table as CoreTable } from "@eduriam/ui-core";
 import Box from "@mui/material/Box";
 
-import type { ComponentPosition } from "../../../types/shared";
-import { positionToStyle } from "../../../utils/positionToStyle";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type TableCell = string | number;
@@ -12,7 +10,6 @@ export type TableRow = TableCell[];
 
 export interface ITable extends BaseVideoComponent {
   type: "TABLE";
-  position: ComponentPosition;
   highlightHeader: boolean;
   rows: TableRow[];
 }
@@ -61,7 +58,15 @@ export const TableVideoComponent: React.FC<ITableVideoComponentProps> = ({
   const rows = createRows(body, columnCount);
 
   return (
-    <Box style={positionToStyle(comp.position)}>
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Box
         sx={{
           width: "min(92%, 1100px)",

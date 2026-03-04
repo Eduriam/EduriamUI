@@ -3,7 +3,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { positionToStyle } from "../../../utils/positionToStyle";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export interface IPageHeader extends BaseVideoComponent {
@@ -16,7 +15,15 @@ export interface IPageHeaderProps {
 }
 
 export const PageHeader: React.FC<IPageHeaderProps> = ({ comp }) => (
-  <Box style={positionToStyle("TOP_CENTER")}>
+  <Box
+    sx={{
+      position: "absolute",
+      inset: 0,
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "center",
+    }}
+  >
     <Typography
       variant="h1"
       sx={{

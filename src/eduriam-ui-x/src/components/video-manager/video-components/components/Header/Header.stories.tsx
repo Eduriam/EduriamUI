@@ -33,7 +33,6 @@ export const Center: Story = {
       type: "HEADER",
       startTime: 0,
       text: "Welcome to Eduriam",
-      position: "CENTER",
     },
   },
 };
@@ -45,7 +44,6 @@ export const TopLeft: Story = {
       type: "HEADER",
       startTime: 0,
       text: "Top Left Header",
-      position: "TOP_LEFT",
     },
   },
 };

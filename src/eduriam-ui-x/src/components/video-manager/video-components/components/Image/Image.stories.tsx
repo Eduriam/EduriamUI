@@ -34,7 +34,6 @@ export const Medium: Story = {
       startTime: 0,
       url: "https://placehold.co/600x400/0ea5e9/white?text=Eduriam",
       size: "MEDIUM",
-      position: "CENTER",
     },
   },
 };
@@ -47,7 +46,6 @@ export const Small: Story = {
       startTime: 0,
       url: "https://placehold.co/300x200/10b981/white?text=Small",
       size: "SMALL",
-      position: "CENTER",
     },
   },
 };
