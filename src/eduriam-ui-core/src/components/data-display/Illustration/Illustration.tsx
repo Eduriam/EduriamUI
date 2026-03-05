@@ -4,6 +4,7 @@ import check from "../../../../public/images/illustrations/check.svg";
 import chest from "../../../../public/images/illustrations/chest.svg";
 import clappingHands from "../../../../public/images/illustrations/clappingHands.svg";
 import coin from "../../../../public/images/illustrations/coin.svg";
+import coinDisabled from "../../../../public/images/illustrations/coinDisabled.svg";
 import concept from "../../../../public/images/illustrations/concept.svg";
 import confetti from "../../../../public/images/illustrations/confetti.svg";
 import cross from "../../../../public/images/illustrations/cross.svg";
@@ -41,6 +42,7 @@ export const ILLUSTRATION_NAMES = [
   "chest",
   "clappingHands",
   "coin",
+  "coinDisabled",
   "concept",
   "confetti",
   "cross",
@@ -98,6 +100,7 @@ const ILLUSTRATION_SRC_BY_NAME: Record<IllustrationName, string> = {
   chest,
   clappingHands,
   coin,
+  coinDisabled,
   concept,
   confetti,
   cross,
