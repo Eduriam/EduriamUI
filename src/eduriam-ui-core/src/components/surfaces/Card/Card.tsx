@@ -42,6 +42,15 @@ export interface CardProps {
   paddingX?: "small" | "medium" | "large" | number;
 
   /**
+   * If `true`, the card will stretch to fill the available vertical space.
+   *
+   * This sets the card height to `100%`.
+   *
+   * @default false
+   */
+  fullHeight?: boolean;
+
+  /**
    * Content rendered inside the card.
    */
   children?: ReactNode;
@@ -69,6 +78,7 @@ export const Card: React.FC<CardProps> = ({
   variant = "default",
   paddingY = "large",
   paddingX = "large",
+  fullHeight = false,
   children,
   onClick,
   "data-test": dataTest,
@@ -136,6 +146,7 @@ export const Card: React.FC<CardProps> = ({
 
         return {
           width: "100%",
+          ...(fullHeight && { height: "100%" }),
           boxSizing: "border-box",
           borderStyle: "solid",
           borderRadius: theme.shape.borderRadius,
@@ -173,7 +184,13 @@ export const Card: React.FC<CardProps> = ({
 
   if (hasPressEffect) {
     return (
-      <Box ref={wrapperRef} sx={{ minHeight: minHeight ?? undefined }}>
+      <Box
+        ref={wrapperRef}
+        sx={{
+          minHeight: minHeight ?? undefined,
+          ...(fullHeight && { height: "100%" }),
+        }}
+      >
         {paper}
       </Box>
     );
