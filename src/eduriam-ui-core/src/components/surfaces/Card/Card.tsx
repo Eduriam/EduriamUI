@@ -3,7 +3,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import type { Theme } from "@mui/material/styles";
+import type { SxProps, Theme } from "@mui/material/styles";
+import type { SystemStyleObject } from "@mui/system";
 
 /**
  * Visual variants for the `Card` component.
@@ -11,8 +12,9 @@ import type { Theme } from "@mui/material/styles";
  * - `"default"` – neutral card with standard border.
  * - `"clickable"` – interactive card that responds to hover/active.
  * - `"selected"` – highlighted card used for the chosen option.
+ * - `"disabled"` – looks like `"default"` but uses `background.paper`.
  */
-export type CardVariant = "default" | "clickable" | "selected";
+export type CardVariant = "default" | "clickable" | "selected" | "disabled";
 
 /**
  * Props for the `Card` component.
@@ -42,13 +44,9 @@ export interface CardProps {
   paddingX?: "small" | "medium" | "large" | number;
 
   /**
-   * If `true`, the card will stretch to fill the available vertical space.
-   *
-   * This sets the card height to `100%`.
-   *
-   * @default false
+   * Custom `sx` styles merged into the underlying MUI `Paper`.
    */
-  fullHeight?: boolean;
+  sx?: SxProps<Theme>;
 
   /**
    * Content rendered inside the card.
@@ -78,13 +76,14 @@ export const Card: React.FC<CardProps> = ({
   variant = "default",
   paddingY = "large",
   paddingX = "large",
-  fullHeight = false,
+  sx,
   children,
   onClick,
   "data-test": dataTest,
 }) => {
   const isClickable = variant === "clickable";
   const isSelected = variant === "selected";
+  const isDisabled = variant === "disabled";
   const hasPressEffect = isClickable || isSelected;
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -98,7 +97,7 @@ export const Card: React.FC<CardProps> = ({
   }, [hasPressEffect, children]);
 
   const borderColor = isSelected ? "primary.main" : "divider";
-  const baseBottomBorderWidth = variant === "default" ? 2 : 4;
+  const baseBottomBorderWidth = variant === "default" || isDisabled ? 2 : 4;
   const resolvePaddingScale = (
     value: "small" | "medium" | "large" | number,
   ) => {
@@ -116,7 +115,7 @@ export const Card: React.FC<CardProps> = ({
   const paddingScaleY = resolvePaddingScale(paddingY);
   const paddingScaleX = resolvePaddingScale(paddingX);
   const borderWidths =
-    variant === "default"
+    variant === "default" || isDisabled
       ? { borderWidth: 2 }
       : {
           borderTopWidth: 2,
@@ -132,7 +131,7 @@ export const Card: React.FC<CardProps> = ({
       elevation={0}
       onClick={onClick}
       data-test={dataTest}
-      sx={(theme: Theme) => {
+      sx={(theme: Theme): SystemStyleObject<Theme> => {
         const basePaddingY = theme.spacing(paddingScaleY);
         const basePaddingX = theme.spacing(paddingScaleX);
 
@@ -142,15 +141,16 @@ export const Card: React.FC<CardProps> = ({
         const borderRightWidth = 2;
         const borderLeftWidth = 2;
         const borderBottomWidth =
-          variant === "default" ? 2 : baseBottomBorderWidth;
+          variant === "default" || isDisabled ? 2 : baseBottomBorderWidth;
 
-        return {
+        const baseStyles: SystemStyleObject<Theme> = {
           width: "100%",
-          ...(fullHeight && { height: "100%" }),
           boxSizing: "border-box",
           borderStyle: "solid",
           borderRadius: theme.shape.borderRadius,
-          backgroundColor: "background.default",
+          backgroundColor: isDisabled
+            ? "background.paper"
+            : "background.default",
           borderColor,
           paddingTop: `calc(${basePaddingY} - ${borderTopWidth}px)`,
           paddingRight: `calc(${basePaddingX} - ${borderRightWidth}px)`,
@@ -176,6 +176,14 @@ export const Card: React.FC<CardProps> = ({
           ...((isClickable || isSelected) && { cursor: "pointer" }),
           ...borderWidths,
         };
+
+        const resolvedSx =
+          typeof sx === "function" ? sx(theme) : sx;
+
+        return {
+          ...baseStyles,
+          ...(resolvedSx as SystemStyleObject<Theme> | undefined),
+        };
       }}
     >
       {children}
@@ -184,13 +192,7 @@ export const Card: React.FC<CardProps> = ({
 
   if (hasPressEffect) {
     return (
-      <Box
-        ref={wrapperRef}
-        sx={{
-          minHeight: minHeight ?? undefined,
-          ...(fullHeight && { height: "100%" }),
-        }}
-      >
+      <Box ref={wrapperRef} sx={{ minHeight: minHeight ?? undefined }}>
         {paper}
       </Box>
     );
