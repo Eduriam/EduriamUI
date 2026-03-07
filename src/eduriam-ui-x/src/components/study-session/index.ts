@@ -20,12 +20,12 @@ export type { IStudySessionProgressBar } from "./components/StudySessionProgress
 // Study Session Shared Components
 export { CodeBlank } from "./components/shared/CodeBlank";
 export type { CodeBlankProps } from "./components/shared/CodeBlank";
-export { ReportStudyBlockDialog } from "./components/shared/ReportStudyBlockDialog";
+export { ReportDialog } from "../shared/ReportDialog";
 export type {
-  ReportStudyBlockDialogDataTest,
-  ReportStudyBlockDialogLocalization,
-  ReportStudyBlockDialogSubmitPayload,
-} from "./components/shared/ReportStudyBlockDialog";
+  ReportDialogDataTest,
+  ReportDialogLocalization,
+  ReportDialogSubmitPayload,
+} from "../shared/ReportDialog";
 
 // Types and Models
 export type { MultipleChoiceExerciseDataTest } from "./components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
@@ -102,3 +102,4 @@ export type {
   MatchOptionDTO,
   TextMatchOptionDTO,
 } from "./components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
+

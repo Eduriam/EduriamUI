@@ -16,12 +16,12 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
 
-export interface ReportStudyBlockDialogSubmitPayload {
+export interface ReportDialogSubmitPayload {
   problemTypeId: string;
   description: string;
 }
 
-export interface ReportStudyBlockDialogLocalization {
+export interface ReportDialogLocalization {
   header: string;
   problemTypePlaceholder: string;
   descriptionPlaceholder: string;
@@ -33,7 +33,7 @@ export interface ReportStudyBlockDialogLocalization {
   };
 }
 
-export interface ReportStudyBlockDialogDataTest {
+export interface ReportDialogDataTest {
   report?: {
     section?: string;
     problemTypeSelectButton?: string;
@@ -51,16 +51,16 @@ export interface ReportStudyBlockDialogDataTest {
   };
 }
 
-export interface ReportStudyBlockDialogProps {
+export interface ReportDialogProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (payload: ReportStudyBlockDialogSubmitPayload) => void;
+  onSubmit: (payload: ReportDialogSubmitPayload) => void;
   problemTypeSections: DrawerSelectSection[];
-  localization: ReportStudyBlockDialogLocalization;
-  dataTest?: ReportStudyBlockDialogDataTest;
+  localization: ReportDialogLocalization;
+  dataTest?: ReportDialogDataTest;
 }
 
-export const ReportStudyBlockDialog: React.FC<ReportStudyBlockDialogProps> = ({
+export const ReportDialog: React.FC<ReportDialogProps> = ({
   open,
   onClose,
   onSubmit,
@@ -261,4 +261,5 @@ export const ReportStudyBlockDialog: React.FC<ReportStudyBlockDialogProps> = ({
   );
 };
 
-export default ReportStudyBlockDialog;
+export default ReportDialog;
+
