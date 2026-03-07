@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 
 import StudySession, { IStudySession } from "./StudySession";
-import { ReportStudyBlockDialog } from "./components/shared/ReportStudyBlockDialog";
+import { ReportDialog } from "../shared/ReportDialog";
 import { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
 import type { AnswerState } from "./types/AnswerState";
 
@@ -156,7 +156,7 @@ const StudySessionWithReportDialogStory: React.FC = () => {
         }}
       />
 
-      <ReportStudyBlockDialog
+      <ReportDialog
         open={reportDialogOpen}
         onClose={() => setReportDialogOpen(false)}
         problemTypeSections={REPORT_PROBLEM_TYPE_SECTIONS}
@@ -172,7 +172,7 @@ const StudySessionWithReportDialogStory: React.FC = () => {
   );
 };
 
-export const WithReportStudyBlockDialog: Story = {
+export const WithReportDialog: Story = {
   render: () => <StudySessionWithReportDialogStory />,
 };
 
@@ -332,7 +332,7 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
         }}
       />
 
-      <ReportStudyBlockDialog
+      <ReportDialog
         open={reportDialogOpen}
         onClose={() => setReportDialogOpen(false)}
         problemTypeSections={REPORT_PROBLEM_TYPE_SECTIONS}
@@ -718,4 +718,5 @@ export const ComplexExercise: Story = {
     onExit: () => {},
   } as IStudySession,
 };
+
 

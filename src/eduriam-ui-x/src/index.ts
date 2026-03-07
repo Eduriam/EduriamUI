@@ -6,3 +6,6 @@ export * from "./components/study-session";
 
 // Audio Player
 export { AudioPlayer, type AudioPlayerSound } from "./audio";
+
+// Shared Components
+export * from "./components/shared";
