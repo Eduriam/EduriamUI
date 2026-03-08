@@ -35,6 +35,7 @@ export function PageRoot({ children, "data-test": dataTest }: PageRootProps) {
         minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
+        backgroundColor: "background.default",
       }}
     >
       {children}
