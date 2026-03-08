@@ -85,10 +85,11 @@ export const Switch: React.FC<SwitchProps> = ({
         borderRadius: "16px",
         boxSizing: "border-box",
         display: "flex",
-        height: "32px",
+
         justifyContent: resolvedChecked ? "flex-end" : "flex-start",
         opacity: disabled ? 0.5 : 1,
-        px: "4px",
+        px: "3px",
+        py: "3px",
         transition:
           "background-color 120ms ease, border-color 120ms ease, opacity 120ms ease",
         width: "60px",
