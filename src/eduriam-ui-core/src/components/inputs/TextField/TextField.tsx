@@ -11,18 +11,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
  */
 export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
   /**
-   * Whether to show a label above the input.
-   *
-   * When true, the label is rendered using the `fieldLabel` typography variant.
-   *
-   * @default false
-   */
-  displayLabel?: boolean;
-
-  /**
-   * Label text shown when `displayLabel` is true.
-   *
-   * @default "Label"
+   * Label text shown above the input when provided.
    */
   label?: string;
 
@@ -46,8 +35,7 @@ export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
  * MUI `TextField` when you want Eduriam's visual style.
  */
 export const TextField: React.FC<TextFieldProps> = ({
-  displayLabel = false,
-  label = "Label",
+  label,
   multiline = false,
   disabled = false,
   fullWidth = false,
@@ -60,20 +48,21 @@ export const TextField: React.FC<TextFieldProps> = ({
 }) => {
   const { inputProps, ...restInputBaseProps } = rest;
   const resolvedMinRows = multiline ? (minRows ?? 4) : undefined;
+  const hasLabel = label !== undefined;
 
   return (
     <Box
       sx={[
         {
           display: "flex",
-          flexDirection: displayLabel ? "column" : "row",
-          gap: displayLabel ? "8px" : 0,
+          flexDirection: hasLabel ? "column" : "row",
+          gap: hasLabel ? "8px" : 0,
           width: fullWidth ? "100%" : "357px",
         },
         ...(Array.isArray(containerSx) ? containerSx : [containerSx]),
       ].filter(Boolean)}
     >
-      {displayLabel && (
+      {hasLabel && (
         <Typography color="text.primary" variant="fieldLabel">
           {label}
         </Typography>
