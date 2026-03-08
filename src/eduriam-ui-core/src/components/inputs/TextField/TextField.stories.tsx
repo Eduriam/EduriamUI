@@ -15,7 +15,7 @@ export const Outlined: Story = {
 };
 
 export const OutlinedWithLabel: Story = {
-  args: { displayLabel: true, label: "Label", placeholder: "Placeholder" },
+  args: { label: "Label", placeholder: "Placeholder" },
 };
 
 export const OutlinedMultiline: Story = {
