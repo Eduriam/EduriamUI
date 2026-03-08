@@ -18,6 +18,7 @@ export * from "./components/inputs/LargeButton";
 export * from "./components/inputs/LargeRadioButton";
 export * from "./components/inputs/LargeRadioButtonGroup";
 export * from "./components/inputs/Select";
+export * from "./components/inputs/Switch";
 export * from "./components/inputs/TextField";
 export * from "./components/layout/ContentContainer";
 export * from "./components/layout/PageRoot";
