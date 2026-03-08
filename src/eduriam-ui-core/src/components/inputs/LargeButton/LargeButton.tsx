@@ -220,7 +220,6 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
         height: 48,
         width: fullWidth ? "100%" : "fit-content",
         maxWidth: 400,
-        alignSelf: fullWidth ? "stretch" : "flex-start",
       }}
     >
       <Button
