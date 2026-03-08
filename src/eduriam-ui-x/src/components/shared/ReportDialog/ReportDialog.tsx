@@ -4,16 +4,15 @@ import {
   DrawerSelect,
   type DrawerSelectSection,
   FullscreenDialog,
-  Icon,
   LargeButton,
   PageRoot,
+  Select,
   TextField,
 } from "@eduriam/ui-core";
 
 import { useEffect, useMemo, useState } from "react";
 
 import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
 
 export interface ReportDialogSubmitPayload {
@@ -23,6 +22,7 @@ export interface ReportDialogSubmitPayload {
 
 export interface ReportDialogLocalization {
   header: string;
+  problemTypeLabel?: string;
   problemTypePlaceholder: string;
   descriptionPlaceholder: string;
   submitLabel: string;
@@ -182,36 +182,14 @@ export const ReportDialog: React.FC<ReportDialogProps> = ({
                 data-test={dataTest?.report?.section}
                 sx={{ display: "flex", flexDirection: "column", gap: 2 }}
               >
-                <ButtonBase
+                <Select
                   data-test={dataTest?.report?.problemTypeSelectButton}
+                  fullWidth
+                  label={localization.problemTypeLabel}
                   onClick={() => setProblemTypeDrawerOpen(true)}
-                  sx={(theme) => ({
-                    border: `1.5px solid ${theme.palette.divider}`,
-                    borderRadius: "12px",
-                    height: "54px",
-                    width: "100%",
-                    px: 2,
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  })}
-                >
-                  <Typography
-                    variant="body1"
-                    color={
-                      selectedProblemTypeLabel
-                        ? "text.primary"
-                        : "text.secondary"
-                    }
-                  >
-                    {selectedProblemTypeLabel ??
-                      localization.problemTypePlaceholder}
-                  </Typography>
-                  <Icon
-                    name="arrowDown"
-                    color="textPrimary"
-                    sx={{ fontSize: 24 }}
-                  />
-                </ButtonBase>
+                  placeholder={localization.problemTypePlaceholder}
+                  value={selectedProblemTypeLabel}
+                />
 
                 <TextField
                   fullWidth
