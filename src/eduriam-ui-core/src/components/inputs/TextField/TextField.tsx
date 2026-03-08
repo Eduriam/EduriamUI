@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import Box from "@mui/material/Box";
 import InputBase, { InputBaseProps } from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
@@ -14,6 +16,11 @@ export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
    * Label text shown above the input when provided.
    */
   label?: string;
+
+  /**
+   * Helper text shown below the input when provided.
+   */
+  helperText?: ReactNode;
 
   /**
    * Additional styling for the outer container box.
@@ -36,6 +43,7 @@ export interface TextFieldProps extends Omit<InputBaseProps, "size"> {
  */
 export const TextField: React.FC<TextFieldProps> = ({
   label,
+  helperText,
   multiline = false,
   disabled = false,
   fullWidth = false,
@@ -46,17 +54,18 @@ export const TextField: React.FC<TextFieldProps> = ({
   "data-test": dataTest,
   ...rest
 }) => {
-  const { inputProps, ...restInputBaseProps } = rest;
+  const { inputProps, error = false, ...restInputBaseProps } = rest;
   const resolvedMinRows = multiline ? (minRows ?? 4) : undefined;
   const hasLabel = label !== undefined;
+  const hasHelperText = helperText !== undefined;
 
   return (
     <Box
       sx={[
         {
           display: "flex",
-          flexDirection: hasLabel ? "column" : "row",
-          gap: hasLabel ? "8px" : 0,
+          flexDirection: "column",
+          gap: hasLabel || hasHelperText ? "8px" : 0,
           width: fullWidth ? "100%" : "357px",
         },
         ...(Array.isArray(containerSx) ? containerSx : [containerSx]),
@@ -71,7 +80,9 @@ export const TextField: React.FC<TextFieldProps> = ({
         sx={(theme: Theme) => ({
           alignItems: multiline ? "flex-start" : "center",
           backgroundColor: theme.palette.background.default,
-          border: `1.5px solid ${theme.palette.divider}`,
+          border: `1.5px solid ${
+            error ? theme.palette.error.main : theme.palette.divider
+          }`,
           borderRadius: "12px",
           boxSizing: "border-box",
           display: "flex",
@@ -81,6 +92,7 @@ export const TextField: React.FC<TextFieldProps> = ({
       >
         <InputBase
           disabled={disabled}
+          error={error}
           fullWidth
           minRows={resolvedMinRows}
           multiline={multiline}
@@ -114,6 +126,15 @@ export const TextField: React.FC<TextFieldProps> = ({
           {...restInputBaseProps}
         />
       </Box>
+      {hasHelperText && (
+        <Typography
+          color={error ? "error.main" : "text.secondary"}
+          sx={{ pl: 4 }}
+          variant="caption"
+        >
+          {helperText}
+        </Typography>
+      )}
     </Box>
   );
 };
