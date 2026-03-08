@@ -21,3 +21,15 @@ export const OutlinedWithLabel: Story = {
 export const OutlinedMultiline: Story = {
   args: { multiline: true, placeholder: "Placeholder" },
 };
+
+export const OutlinedWithHelperText: Story = {
+  args: { helperText: "Helper text", placeholder: "Placeholder" },
+};
+
+export const OutlinedError: Story = {
+  args: {
+    error: true,
+    helperText: "This field has an error",
+    placeholder: "Placeholder",
+  },
+};
