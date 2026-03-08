@@ -1,5 +1,3 @@
-import achievement_1 from "../../../../public/images/illustrations/achievement_1.svg";
-import achievement_1_disabled from "../../../../public/images/illustrations/achievement_1_disabled.svg";
 import bell from "../../../../public/images/illustrations/bell.svg";
 import certificate from "../../../../public/images/illustrations/certificate.svg";
 import check from "../../../../public/images/illustrations/check.svg";
@@ -38,8 +36,6 @@ import xp from "../../../../public/images/illustrations/xp.svg";
  * Use these to avoid typos and keep illustration choices consistent.
  */
 export const ILLUSTRATION_NAMES = [
-  "achievement_1",
-  "achievement_1_disabled",
   "bell",
   "certificate",
   "check",
@@ -98,8 +94,6 @@ export interface IllustrationProps {
 }
 
 const ILLUSTRATION_SRC_BY_NAME: Record<IllustrationName, string> = {
-  achievement_1,
-  achievement_1_disabled,
   bell,
   certificate,
   check,
