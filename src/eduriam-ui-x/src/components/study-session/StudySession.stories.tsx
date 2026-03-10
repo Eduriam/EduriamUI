@@ -52,16 +52,32 @@ export const Base: Story = {
           id: "base-block-1",
           type: "explanation",
           atomId: "atom-1",
-          components: [
+          scenes: [
             {
-              id: "hdr-1",
-              type: StudyBlockComponentType.HEADER,
-              text: "Study Block Header Component",
-            },
-            {
-              id: "para-1",
-              type: StudyBlockComponentType.PARAGRAPH,
-              text: "This is an study block paragraph component.",
+              id: "base-scene-1",
+              duration: 7000,
+              slides: [
+                {
+                  id: "base-slide-1",
+                  type: "RAW",
+                  components: [
+                    {
+                      id: "hdr-1",
+                      type: "TEXT",
+                      startTime: 0,
+                      column: "first",
+                      text: "Study Block Header Component",
+                    },
+                    {
+                      id: "para-1",
+                      type: "TEXT",
+                      startTime: 800,
+                      column: "first",
+                      text: "This is an study block paragraph component.",
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -374,14 +390,14 @@ export const ExampleLessonSQL: Story = {
                   components: [
                     {
                       id: "ph1",
-                      type: "PAGE_HEADER",
+                      type: "TEXT",
                       startTime: 0,
                       column: "first",
                       text: "What is SELECT?",
                     },
                     {
                       id: "ps1",
-                      type: "PAGE_SUBHEADER",
+                      type: "TEXT",
                       startTime: 1200,
                       column: "first",
                       text: "The command to read data from a database",
@@ -411,14 +427,14 @@ export const ExampleLessonSQL: Story = {
                   components: [
                     {
                       id: "ph2",
-                      type: "PAGE_HEADER",
+                      type: "TEXT",
                       startTime: 0,
                       column: "first",
                       text: "The asterisk *",
                     },
                     {
                       id: "ps2",
-                      type: "PAGE_SUBHEADER",
+                      type: "TEXT",
                       startTime: 1000,
                       column: "first",
                       text: "Means: all columns",
@@ -467,14 +483,14 @@ export const ExampleLessonSQL: Story = {
                   components: [
                     {
                       id: "ph3",
-                      type: "PAGE_HEADER",
+                      type: "TEXT",
                       startTime: 0,
                       column: "first",
                       text: "The FROM clause",
                     },
                     {
                       id: "ps3",
-                      type: "PAGE_SUBHEADER",
+                      type: "TEXT",
                       startTime: 1000,
                       column: "first",
                       text: "Specifies which table to read from",
@@ -523,14 +539,14 @@ export const ExampleLessonSQL: Story = {
                   components: [
                     {
                       id: "ph4",
-                      type: "PAGE_HEADER",
+                      type: "TEXT",
                       startTime: 0,
                       column: "first",
                       text: "SELECT * FROM table_name",
                     },
                     {
                       id: "ps4",
-                      type: "PAGE_SUBHEADER",
+                      type: "TEXT",
                       startTime: 1500,
                       column: "first",
                       text: "All columns, all rows, from one table",
@@ -582,14 +598,14 @@ export const ExampleLessonSQL: Story = {
                   components: [
                     {
                       id: "ph5",
-                      type: "PAGE_HEADER",
+                      type: "TEXT",
                       startTime: 0,
                       column: "first",
                       text: "Recap: SELECT * FROM",
                     },
                     {
                       id: "ps5",
-                      type: "PAGE_SUBHEADER",
+                      type: "TEXT",
                       startTime: 800,
                       column: "first",
                       text: "SELECT = read, * = all columns, FROM = which table",
@@ -718,5 +734,6 @@ export const ComplexExercise: Story = {
     onExit: () => {},
   } as IStudySession,
 };
+
 
 
