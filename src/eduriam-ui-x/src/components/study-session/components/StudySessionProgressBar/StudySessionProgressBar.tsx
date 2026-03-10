@@ -32,6 +32,9 @@ export interface IStudySessionProgressBar {
 
   /** Called when the user clicks the close / exit button. */
   onExit: () => void;
+
+  /** Optional test id for the close / exit button. */
+  quitButtonDataTest?: string;
 }
 
 /**
@@ -45,6 +48,7 @@ const StudySessionProgressBar: React.FC<IStudySessionProgressBar> = ({
   furthestCompletedIndex,
   total,
   onExit,
+  quitButtonDataTest,
 }) => {
   const safeTotal = total > 0 ? total : 1;
 
@@ -82,7 +86,7 @@ const StudySessionProgressBar: React.FC<IStudySessionProgressBar> = ({
         <Box>
           <ButtonBase
             onClick={onExit}
-            data-test="study-session-exit"
+            data-test={quitButtonDataTest ?? "study-session-exit"}
             sx={{
               alignItems: "center",
               borderRadius: "12px",
