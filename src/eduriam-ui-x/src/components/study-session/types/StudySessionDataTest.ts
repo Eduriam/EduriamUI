@@ -3,6 +3,7 @@ import { MultipleChoiceExerciseDataTest } from "../components/study-blocks/exerc
 
 export interface StudySessionDataTest {
   studySessionPage?: string;
+  quitButton?: string;
 
   explanationBlock?: {
     section?: string;

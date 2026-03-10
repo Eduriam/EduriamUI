@@ -444,6 +444,7 @@ const StudySession: React.FC<IStudySession> = ({
             furthestCompletedIndex={furthestCompletedIndex}
             total={studyBlockQueue.length}
             onExit={handleQuit}
+            quitButtonDataTest={dataTest?.quitButton}
           />
 
           <Box
