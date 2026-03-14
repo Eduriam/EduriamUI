@@ -20,46 +20,56 @@ export interface StudySessionNavigationButtonProps {
 
 /**
  * Desktop-only hover-activated navigation button anchored to the left or
- * right edge of the viewport.  Appears when the user hovers within ~200 px
- * of the corresponding screen edge.
+ * right edge of the viewport. Appears when the user hovers within ~200 px of
+ * the corresponding screen edge below the top progress bar area.
  */
 export const StudySessionNavigationButton: React.FC<
   StudySessionNavigationButtonProps
 > = ({ direction, onClick, "data-test": dataTest }) => {
   const isLeft = direction === "prev";
   const icon: IconName = isLeft ? "arrowLeft" : "arrowRight";
+  const TOP_BAR_HEIGHT_PX = 64;
 
   return (
     <Box
       sx={{
         position: "fixed",
-        top: 0,
+        top: TOP_BAR_HEIGHT_PX,
         bottom: 0,
         [isLeft ? "left" : "right"]: 0,
         width: 200,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
+        pointerEvents: "none",
         zIndex: 1400,
-        "& .StudySessionNavigationButton-icon": {
-          opacity: 0,
-          transition: "opacity 200ms ease",
-        },
-        "&:hover .StudySessionNavigationButton-icon": {
-          opacity: 1,
-        },
-        paddingX: 8,
       }}
     >
-      <Box className="StudySessionNavigationButton-icon">
-        <IconButton
-          icon={icon}
-          size="large"
-          variant="contained"
-          color="textPrimary"
-          onClick={onClick}
-          data-test={dataTest}
-        />
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isLeft ? "flex-start" : "flex-end",
+          pointerEvents: "auto",
+          "& .StudySessionNavigationButton-icon": {
+            opacity: 0,
+            transition: "opacity 200ms ease",
+          },
+          "&:hover .StudySessionNavigationButton-icon": {
+            opacity: 1,
+          },
+          paddingX: 8,
+        }}
+      >
+        <Box className="StudySessionNavigationButton-icon">
+          <IconButton
+            icon={icon}
+            size="large"
+            variant="contained"
+            color="textPrimary"
+            onClick={onClick}
+            data-test={dataTest}
+          />
+        </Box>
       </Box>
     </Box>
   );
