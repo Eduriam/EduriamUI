@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "storybook/test";
 
+import Box from "@mui/material/Box";
+
 import { BasicNavbar } from "./BasicNavbar";
 
 const meta: Meta<typeof BasicNavbar> = {
@@ -24,4 +26,23 @@ export const WithTextButtons: Story = {
     leftButton: { text: "Back", onClick: fn() },
     rightButton: { text: "Edit", onClick: fn() },
   },
+};
+
+export const TransparentBackground: Story = {
+  args: {
+    header: "Page Header",
+    leftButton: { icon: "menu", onClick: fn() },
+    background: "transparent",
+  },
+  render: (args) => (
+    <Box
+      sx={{
+        background:
+          "linear-gradient(120deg, rgba(255, 204, 128, 1) 0%, rgba(187, 222, 251, 1) 100%)",
+        minHeight: "50vh",
+      }}
+    >
+      <BasicNavbar {...args} />
+    </Box>
+  ),
 };
