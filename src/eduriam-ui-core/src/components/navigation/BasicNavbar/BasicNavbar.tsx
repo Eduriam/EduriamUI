@@ -131,14 +131,17 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
   background = "default",
 }) => {
   const theme = useTheme();
+  const isTransparentBackground = background === "transparent";
 
   return (
     <AppBar
       position="static"
       elevation={0}
+      color={isTransparentBackground ? "transparent" : "default"}
       sx={{
-        backgroundColor:
-          background === "transparent" ? "transparent" : "background.default",
+        backgroundColor: isTransparentBackground
+          ? "transparent"
+          : "background.default",
         boxShadow: "none",
       }}
     >
