@@ -53,6 +53,7 @@ export type BasicNavbarTextButton = {
 };
 
 export type BasicNavbarButton = BasicNavbarIconButton | BasicNavbarTextButton;
+export type BasicNavbarBackground = "default" | "transparent";
 
 /**
  * Props for the `BasicNavbar` component.
@@ -74,6 +75,11 @@ export interface BasicNavbarProps {
    * Optional right-aligned button (icon or text).
    */
   rightButton?: BasicNavbarButton;
+
+  /**
+   * Optional navbar background style.
+   */
+  background?: BasicNavbarBackground;
 }
 
 const isIconButton = (
@@ -122,6 +128,7 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
   header,
   leftButton,
   rightButton,
+  background = "default",
 }) => {
   const theme = useTheme();
 
@@ -130,7 +137,8 @@ export const BasicNavbar: React.FC<BasicNavbarProps> = ({
       position="static"
       elevation={0}
       sx={{
-        backgroundColor: "background.default",
+        backgroundColor:
+          background === "transparent" ? "transparent" : "background.default",
         boxShadow: "none",
       }}
     >
