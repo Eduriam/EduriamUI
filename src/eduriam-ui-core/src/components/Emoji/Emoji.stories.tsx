@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Emoji } from "./Emoji";
 
 const meta: Meta<typeof Emoji> = {
-  title: "core/components/Emoji",
+  title: "core/other/Emoji",
   component: Emoji,
 };
 
