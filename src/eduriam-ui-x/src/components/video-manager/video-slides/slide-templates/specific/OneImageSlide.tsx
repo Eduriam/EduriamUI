@@ -24,6 +24,7 @@ export const OneImageSlide: React.FC<IOneImageSlideProps> = ({ slide, fps }) => 
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
+    startTime: slide.startTime,
     components: [
       {
         id: slide.image.id,

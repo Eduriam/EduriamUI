@@ -42,6 +42,7 @@ export const WithHeaderAndBackground: Story = {
     slide: {
       id: "raw-1",
       type: "RAW",
+      startTime: 0,
       backgroundComponents: [
         {
           id: "bg1",

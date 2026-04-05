@@ -29,6 +29,7 @@ export const ThreeImagesSlide: React.FC<IThreeImagesSlideProps> = ({
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
+    startTime: slide.startTime,
     components: [
       {
         id: slide.leftImage.id,

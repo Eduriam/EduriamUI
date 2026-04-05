@@ -60,6 +60,7 @@ export const Base: Story = {
                 {
                   id: "base-slide-1",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "hdr-1",
@@ -387,6 +388,7 @@ export const ExampleLessonSQL: Story = {
                 {
                   id: "slide-select-intro",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "ph1",
@@ -424,6 +426,7 @@ export const ExampleLessonSQL: Story = {
                 {
                   id: "slide-asterisk",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "ph2",
@@ -480,6 +483,7 @@ export const ExampleLessonSQL: Story = {
                 {
                   id: "slide-from",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "ph3",
@@ -536,6 +540,7 @@ export const ExampleLessonSQL: Story = {
                 {
                   id: "slide-putting-together",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "ph4",
@@ -595,6 +600,7 @@ export const ExampleLessonSQL: Story = {
                 {
                   id: "slide-recap",
                   type: "RAW",
+                  startTime: 0,
                   components: [
                     {
                       id: "ph5",

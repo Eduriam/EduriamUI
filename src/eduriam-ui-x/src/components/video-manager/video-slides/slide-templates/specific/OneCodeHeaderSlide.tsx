@@ -24,6 +24,7 @@ export const OneCodeHeaderSlide: React.FC<IOneCodeHeaderSlideProps> = ({
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
+    startTime: slide.startTime,
     components: [
       {
         id: `${slide.id}-code-header`,

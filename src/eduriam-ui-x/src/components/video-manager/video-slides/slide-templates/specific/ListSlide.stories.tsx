@@ -42,6 +42,7 @@ export const Default: Story = {
     slide: {
       id: "list-1",
       type: "LIST",
+      startTime: 0,
       variant: "UNORDERED",
       items: [
         { id: "item-1", text: "Understand the input problem", startTime: 0 },
@@ -57,6 +58,7 @@ export const Ordered: Story = {
     slide: {
       id: "list-2",
       type: "LIST",
+      startTime: 0,
       variant: "ORDERED",
       items: [
         { id: "item-1", text: "Capture requirements", startTime: 0 },

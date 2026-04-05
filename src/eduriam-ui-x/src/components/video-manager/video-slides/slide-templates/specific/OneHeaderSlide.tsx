@@ -22,6 +22,7 @@ export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide, fps }) =
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
+    startTime: slide.startTime,
     components: [
       {
         id: `${slide.id}-header`,
