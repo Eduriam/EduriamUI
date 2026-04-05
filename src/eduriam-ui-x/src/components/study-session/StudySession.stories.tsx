@@ -97,7 +97,7 @@ export const Base: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 export const Exercise: Story = {
@@ -127,13 +127,13 @@ export const Exercise: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 const StudySessionWithReportDialogStory: React.FC = () => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [reportTarget, setReportTarget] = useState<{
-    id: string;
+    id: number;
     type: string;
     answerState: AnswerState | null;
     userAnswerReport: string;
@@ -145,9 +145,9 @@ const StudySessionWithReportDialogStory: React.FC = () => {
         studySession={{
           studyBlocks: [
             {
-              id: "exercise-report-block-1",
+              id: 31,
               type: "exercise",
-              atomId: "atom-report-1",
+              atomId: 3101,
               components: [
                 {
                   id: "mc-report-1",
@@ -257,7 +257,7 @@ export const ExerciseMultipleChoice3InARow: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 /** Exercise with sequential paragraph audio that plays on load. */
@@ -323,7 +323,7 @@ export const ExerciseWithAudio: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 /** Sample lesson: SELECT * FROM — basics of selecting all rows from a table in SQL. */
@@ -332,7 +332,7 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
 }) => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [reportTarget, setReportTarget] = useState<{
-    id: string;
+    id: number;
     type: string;
     answerState: AnswerState | null;
     userAnswerReport: string;
@@ -366,7 +366,7 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
 
 export const ExampleLessonSQL: Story = {
   render: (args) => (
-    <ExampleLessonSQLWithReportStory args={args as IStudySession} />
+    <ExampleLessonSQLWithReportStory args={args as unknown as IStudySession} />
   ),
   args: {
     studySession: {
@@ -620,7 +620,7 @@ export const ExampleLessonSQL: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 /** HTML + CSS fill-in-blank exercise with browser preview (single exercise). */
@@ -732,7 +732,7 @@ export const ComplexExercise: Story = {
     },
     onFinish: () => {},
     onExit: () => {},
-  } as IStudySession,
+  } as unknown as IStudySession,
 };
 
 

@@ -1,11 +1,11 @@
-import { ID } from "../../../../../../models/ID";
+import { IDString } from "../../../../../../models/ID";
 import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
 import type { CodeEditorTab } from "./specific/CodeEditor/CodeEditorTypes";
 import { MatchOptionDTO } from "./specific/MatchingAnswer/matching-options/MatchOptionDTO";
 
 export interface BaseStudyBlockComponent {
   type: StudyBlockComponentType;
-  id: ID;
+  id: IDString;
   /** Optional audio attached to this component, played sequentially by the study block. */
   audio?: { url: string };
 }
@@ -70,7 +70,6 @@ export interface CheckListComponent extends BaseStudyBlockComponent {
 
 export interface PronunciationAnswerComponent extends BaseStudyBlockComponent {
   type: StudyBlockComponentType.PRONUNCIATION_ANSWER;
-  id: ID;
   correctAnswer: string;
 }
 
@@ -130,8 +129,7 @@ export interface StateDiagramComponent extends DiagramComponentBase {
   type: StudyBlockComponentType.STATE_DIAGRAM;
 }
 
-export interface EntityRelationshipDiagramComponent
-  extends DiagramComponentBase {
+export interface EntityRelationshipDiagramComponent extends DiagramComponentBase {
   type: StudyBlockComponentType.ENTITY_RELATIONSHIP_DIAGRAM;
 }
 

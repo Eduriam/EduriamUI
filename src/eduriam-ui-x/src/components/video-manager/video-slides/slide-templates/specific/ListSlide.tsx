@@ -1,12 +1,12 @@
 import React from "react";
 
-import { ID } from "../../../../../models/ID";
+import { IDString } from "../../../../../models/ID";
 import type { BaseSlide } from "../../BaseSlide";
 import type { IRawSlide } from "../../raw-slide/RawSlide";
 import { RawSlide } from "../../raw-slide/RawSlide";
 
 export interface IListSlideItem {
-  id: ID;
+  id: IDString;
   text: string;
   startTime: number;
 }

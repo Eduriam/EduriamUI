@@ -1,3 +1,4 @@
+import { IDString } from "../../../../../models/ID";
 import type { BaseVideoComponent } from "../../VideoComponent";
 
 export type CodeExplainerColorMode = "DARK" | "LIGHT";
@@ -16,7 +17,7 @@ export interface CodeExplainerAnnotation {
 }
 
 export interface CodeExplainerStep {
-  id?: string;
+  id?: IDString;
   code: string;
   language: string;
   startTime: number;
@@ -86,4 +87,3 @@ export type StepState = {
   frameInStep: number;
   totalDurationInFrames: number;
 };
-
