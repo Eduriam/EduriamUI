@@ -4,31 +4,33 @@ import type { BaseSlide } from "../../BaseSlide";
 import type { IRawSlide } from "../../raw-slide/RawSlide";
 import { RawSlide } from "../../raw-slide/RawSlide";
 
-export interface IOneHeaderSlide extends BaseSlide {
-  type: "ONE_HEADER";
+export interface IOneCodeHeaderSlide extends BaseSlide {
+  type: "ONE_CODE_HEADER";
   text: string;
 }
 
-export interface IOneHeaderSlideProps {
-  slide: IOneHeaderSlide;
+export interface IOneCodeHeaderSlideProps {
+  slide: IOneCodeHeaderSlide;
   fps: number;
 }
 
 /**
- * Renders a {@link IOneHeaderSlide} template as a RAW slide with one text
- * component in the first column.
+ * Renders a single centered code-styled text using inline markdown code.
  */
-export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide, fps }) => {
+export const OneCodeHeaderSlide: React.FC<IOneCodeHeaderSlideProps> = ({
+  slide,
+  fps,
+}) => {
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
     components: [
       {
-        id: `${slide.id}-header`,
+        id: `${slide.id}-code-header`,
         type: "TEXT",
         startTime: 0,
         column: "first",
-        text: slide.text,
+        text: `\`${slide.text}\``,
       },
     ],
   };
@@ -36,4 +38,4 @@ export const OneHeaderSlide: React.FC<IOneHeaderSlideProps> = ({ slide, fps }) =
   return <RawSlide slide={rawSlide} fps={fps} />;
 };
 
-export default OneHeaderSlide;
+export default OneCodeHeaderSlide;

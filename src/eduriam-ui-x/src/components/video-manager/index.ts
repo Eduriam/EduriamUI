@@ -20,7 +20,12 @@ export type { BaseSlide } from "./video-slides/BaseSlide";
 export type { IRawSlide } from "./video-slides/raw-slide/RawSlide";
 export type { Slide, SlideType } from "./video-slides/Slide";
 export type { SlideTemplates } from "./video-slides/slide-templates/SlideTemplate";
+export type { ICodeExplanationSlide } from "./video-slides/slide-templates/specific/CodeExplanationSlide";
+export type { IListSlide } from "./video-slides/slide-templates/specific/ListSlide";
+export type { IOneCodeHeaderSlide } from "./video-slides/slide-templates/specific/OneCodeHeaderSlide";
 export type { IOneHeaderSlide } from "./video-slides/slide-templates/specific/OneHeaderSlide";
+export type { IOneImageSlide } from "./video-slides/slide-templates/specific/OneImageSlide";
+export type { IThreeImagesSlide } from "./video-slides/slide-templates/specific/ThreeImagesSlide";
 
 // Types - SceneComponent (and ComponentType)
 export type {
@@ -119,7 +124,12 @@ export type { IVideo as VMVideoComponent } from "./video-components/components/V
 // Slides - renderers & factory
 export { SlideFactory } from "./video-slides/factory/SlideFactory";
 export { RawSlide } from "./video-slides/raw-slide/RawSlide";
+export { CodeExplanationSlide } from "./video-slides/slide-templates/specific/CodeExplanationSlide";
+export { ListSlide } from "./video-slides/slide-templates/specific/ListSlide";
+export { OneCodeHeaderSlide } from "./video-slides/slide-templates/specific/OneCodeHeaderSlide";
 export { OneHeaderSlide } from "./video-slides/slide-templates/specific/OneHeaderSlide";
+export { OneImageSlide } from "./video-slides/slide-templates/specific/OneImageSlide";
+export { ThreeImagesSlide } from "./video-slides/slide-templates/specific/ThreeImagesSlide";
 
 // Utils
 export { resolveSize } from "./utils/resolveSize";
