@@ -47,6 +47,7 @@ export const Default: Story = {
     slide: {
       id: "one-code-header-1",
       type: "ONE_CODE_HEADER",
+      startTime: 0,
       text: "npm run build",
     },
   },

@@ -44,6 +44,7 @@ export const Default: Story = {
     slide: {
       id: "three-images-1",
       type: "THREE_IMAGES",
+      startTime: 0,
       leftImage: {
         id: "left-image-1",
         startTime: 0,

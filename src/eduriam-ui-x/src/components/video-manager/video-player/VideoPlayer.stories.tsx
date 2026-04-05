@@ -16,6 +16,7 @@ const sampleDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
+          startTime: 0,
           backgroundComponents: [
             {
               id: "bg1",
@@ -51,6 +52,7 @@ const multiSceneDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
+          startTime: 0,
           backgroundComponents: [
             {
               id: "bg1",
@@ -85,6 +87,7 @@ const multiSceneDefinition: VideoDefinition = {
         {
           id: "slide-2",
           type: "RAW",
+          startTime: 0,
           backgroundComponents: [
             {
               id: "bg2",
@@ -125,6 +128,7 @@ const templateSlideDefinition: VideoDefinition = {
         {
           id: "oh-1",
           type: "ONE_HEADER",
+          startTime: 0,
           text: "Welcome to Eduriam",
         },
       ],
@@ -136,6 +140,7 @@ const templateSlideDefinition: VideoDefinition = {
         {
           id: "slide-1",
           type: "RAW",
+          startTime: 0,
           backgroundComponents: [
             {
               id: "bg1",
@@ -171,6 +176,7 @@ const codeExplainerDefinition: VideoDefinition = {
         {
           id: "slide-code-1",
           type: "RAW",
+          startTime: 0,
           backgroundComponents: [
             {
               id: "bg-code-1",

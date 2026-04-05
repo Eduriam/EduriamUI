@@ -49,6 +49,7 @@ export const Default: Story = {
     slide: {
       id: "code-explanation-1",
       type: "CODE_EXPLANATION",
+      startTime: 0,
       codeExplanation: {
         id: "ce-1",
         steps: [

@@ -42,6 +42,7 @@ export const Default: Story = {
     slide: {
       id: "one-image-1",
       type: "ONE_IMAGE",
+      startTime: 0,
       image: {
         id: "one-image-content-1",
         startTime: 0,

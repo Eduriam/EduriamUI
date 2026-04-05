@@ -4,4 +4,5 @@ import { SlideType } from "./Slide";
 export interface BaseSlide {
   id: IDString;
   type: SlideType;
+  startTime: number;
 }

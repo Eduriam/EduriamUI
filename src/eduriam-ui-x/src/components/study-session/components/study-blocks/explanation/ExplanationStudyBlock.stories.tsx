@@ -49,6 +49,7 @@ const sampleScenes: Scene[] = [
       {
         id: "slide-1",
         type: "RAW",
+        startTime: 0,
         backgroundComponents: [
           {
             id: "bg1",
@@ -130,6 +131,7 @@ const sampleScenes: Scene[] = [
       {
         id: "slide-2",
         type: "RAW",
+        startTime: 0,
         backgroundComponents: [
           {
             id: "bg2",
@@ -189,6 +191,7 @@ const databaseTableOnlyScenes: Scene[] = [
       {
         id: "db-slide-1",
         type: "RAW",
+        startTime: 0,
         components: [
           {
             id: "db-table-1",
@@ -253,6 +256,7 @@ const makeCodeExplainerScenes = ({
       {
         id: slideId,
         type: "RAW",
+        startTime: 0,
         backgroundComponents: [
           {
             id: `${componentId}-bg`,

@@ -25,6 +25,7 @@ export const CodeExplanationSlide: React.FC<ICodeExplanationSlideProps> = ({
   const rawSlide: IRawSlide = {
     id: slide.id,
     type: "RAW",
+    startTime: slide.startTime,
     components: [
       {
         ...slide.codeExplanation,

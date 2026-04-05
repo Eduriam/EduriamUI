@@ -6,22 +6,36 @@ import type { Scene } from "../video-scenes/Scene";
 import { SlideFactory } from "../video-slides/factory/SlideFactory";
 import type { Video } from "../video/Video";
 import type { VideoDefinition } from "../video/VideoDefinition";
+import { buildSlideTimings } from "./slideTiming";
 
 interface SceneRendererProps {
   scene: Scene;
   fps: number;
+  sceneDurationFrames: number;
 }
 
-const SceneRenderer: React.FC<SceneRendererProps> = ({ scene, fps }) => (
-  <AbsoluteFill>
-    {scene.audio ? <Audio src={scene.audio.url} /> : null}
-    {scene.slides.map((slide) => (
-      <AbsoluteFill key={slide.id}>
-        {SlideFactory.renderSlide(slide, fps)}
-      </AbsoluteFill>
-    ))}
-  </AbsoluteFill>
-);
+const SceneRenderer: React.FC<SceneRendererProps> = ({
+  scene,
+  fps,
+  sceneDurationFrames,
+}) => {
+  const slideTimings = buildSlideTimings(scene.slides, fps, sceneDurationFrames);
+
+  return (
+    <AbsoluteFill>
+      {scene.audio ? <Audio src={scene.audio.url} /> : null}
+      {slideTimings.map(({ slide, from, durationInFrames }, index) => (
+        <Sequence
+          key={`${slide.id}-${index}`}
+          from={from}
+          durationInFrames={durationInFrames}
+        >
+          <AbsoluteFill>{SlideFactory.renderSlide(slide, fps)}</AbsoluteFill>
+        </Sequence>
+      ))}
+    </AbsoluteFill>
+  );
+};
 
 interface CompositionProps {
   scenes: Scene[];
@@ -44,7 +58,11 @@ const Composition: React.FC<CompositionProps> = ({ scenes, fps }) => {
             from={sceneStartFrame}
             durationInFrames={sceneDurationFrames}
           >
-            <SceneRenderer scene={scene} fps={fps} />
+            <SceneRenderer
+              scene={scene}
+              fps={fps}
+              sceneDurationFrames={sceneDurationFrames}
+            />
           </Sequence>
         );
       })}

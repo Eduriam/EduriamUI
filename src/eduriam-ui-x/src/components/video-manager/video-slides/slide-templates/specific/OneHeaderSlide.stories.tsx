@@ -42,6 +42,7 @@ export const Default: Story = {
     slide: {
       id: "oh-1",
       type: "ONE_HEADER",
+      startTime: 0,
       text: "Hello World!",
     },
   },
