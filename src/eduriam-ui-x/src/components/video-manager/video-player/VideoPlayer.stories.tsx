@@ -99,7 +99,6 @@ const multiSceneDefinition: VideoDefinition = {
               type: "LIST",
               startTime: 0,
               column: "first",
-              title: "Topics",
               ordered: true,
               items: [
                 { id: "i1", text: "Variables and Types" },
