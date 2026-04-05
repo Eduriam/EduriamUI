@@ -1,4 +1,4 @@
-import type { ID } from "../../../models/ID";
+import type { IDString } from "../../../models/ID";
 import { Slide } from "../video-slides/Slide";
 
 export interface Caption {
@@ -9,7 +9,7 @@ export interface Caption {
 }
 
 export type Scene = {
-  id?: ID;
+  id?: IDString;
   slides: Slide[];
   audio?: {
     url: string;

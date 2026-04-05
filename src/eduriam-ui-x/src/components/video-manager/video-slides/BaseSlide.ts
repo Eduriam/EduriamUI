@@ -1,7 +1,7 @@
-import type { ID } from "../../../models/ID";
+import type { IDString } from "../../../models/ID";
 import { SlideType } from "./Slide";
 
 export interface BaseSlide {
-  id: ID;
+  id: IDString;
   type: SlideType;
 }

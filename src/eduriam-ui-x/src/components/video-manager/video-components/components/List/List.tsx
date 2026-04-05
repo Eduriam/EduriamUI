@@ -5,10 +5,11 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import type { IDString } from "../../../../../models/ID";
 import type { BaseVideoComponent } from "../../VideoComponent";
 import { ListDot } from "./components/ListDot";
 
-export type ListItem = { id: string; text: string; startTime?: number };
+export type ListItem = { id: IDString; text: string; startTime?: number };
 
 export interface IList extends BaseVideoComponent {
   type: "LIST";
