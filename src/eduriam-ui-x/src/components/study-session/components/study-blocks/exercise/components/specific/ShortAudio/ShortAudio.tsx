@@ -6,14 +6,14 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fab from "@mui/material/Fab";
 
-import { ShortAudioComponent } from "../../StudyBlockComponentDTO";
+import { ShortAudioComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface IShortAudioStudyBlockComponent {
+export interface IShortAudioExerciseStudyBlockComponent {
   component: ShortAudioComponent;
   playOnMount?: boolean;
 }
 
-export const ShortAudio: React.FC<IShortAudioStudyBlockComponent> = ({
+export const ShortAudio: React.FC<IShortAudioExerciseStudyBlockComponent> = ({
   component,
   playOnMount = true,
 }) => {

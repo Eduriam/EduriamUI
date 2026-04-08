@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import MultipleChoiceExercise from "./MultipleChoiceExercise";
 
 const meta = {
@@ -19,7 +19,7 @@ export const Base: Story = {
     onAnswerStateChange: fn(),
     component: {
       id: "mc-1",
-      type: StudyBlockComponentType.MULTIPLE_CHOICE,
+      type: ExerciseStudyBlockComponentType.MULTIPLE_CHOICE,
       question: "Question",
       options: [
         { id: "0", text: "Option 1" },
@@ -52,7 +52,7 @@ export const WithAssignmentTitle: Story = {
     onAnswerStateChange: fn(),
     component: {
       id: "mc-2",
-      type: StudyBlockComponentType.MULTIPLE_CHOICE,
+      type: ExerciseStudyBlockComponentType.MULTIPLE_CHOICE,
       question: "Question Lorem Ipsum Dolor sit amet.",
       options: [
         { id: "0", text: "Option 1" },

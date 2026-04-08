@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import Timer from "./Timer";
 
 const meta: Meta<typeof Timer> = {
@@ -16,7 +16,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "timer-1",
-      type: StudyBlockComponentType.TIMER,
+      type: ExerciseStudyBlockComponentType.TIMER,
       seconds: 3,
     },
   },

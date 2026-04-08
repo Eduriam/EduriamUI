@@ -12,15 +12,15 @@ import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton from "../../../../../shared/CharacterButton/CharacterButton";
-import { TableFillComponent } from "../../StudyBlockComponentDTO";
+import { TableFillComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface ITableFillStudyBlockComponent {
+export interface ITableFillExerciseStudyBlockComponent {
   component: TableFillComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
-export const TableFill: React.FC<ITableFillStudyBlockComponent> = ({
+export const TableFill: React.FC<ITableFillExerciseStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
   showAnswerState = false,

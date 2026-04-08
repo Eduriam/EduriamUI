@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import MatchingAnswer from "./MatchingAnswer";
 import { MatchOptionType } from "./matching-options/MatchOptionDTO";
 
@@ -18,7 +18,7 @@ export const Base: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.MATCHING_ANSWER,
+      type: ExerciseStudyBlockComponentType.MATCHING_ANSWER,
       id: "match-1",
       title: "Match the pairs",
       options1: [
@@ -56,7 +56,7 @@ export const TextToAudio: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.MATCHING_ANSWER,
+      type: ExerciseStudyBlockComponentType.MATCHING_ANSWER,
       id: "match-2",
       title: "Match word to audio",
       options1: [
@@ -81,7 +81,7 @@ export const ImageToText: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.MATCHING_ANSWER,
+      type: ExerciseStudyBlockComponentType.MATCHING_ANSWER,
       id: "match-3",
       title: "Match image to word",
       options1: [

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { Paragraph } from "./Paragraph";
 
 const meta: Meta<typeof Paragraph> = {
@@ -16,7 +16,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "para-1",
-      type: StudyBlockComponentType.PARAGRAPH,
+      type: ExerciseStudyBlockComponentType.PARAGRAPH,
       text: "This is a paragraph.",
     },
   },

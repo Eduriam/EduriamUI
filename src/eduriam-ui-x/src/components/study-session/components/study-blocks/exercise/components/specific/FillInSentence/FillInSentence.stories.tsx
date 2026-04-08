@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { FillInSentence } from "./FillInSentence";
 
 const meta = {
@@ -19,7 +19,7 @@ export const Base: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.FILL_IN_SENTENCE,
+      type: ExerciseStudyBlockComponentType.FILL_IN_SENTENCE,
       id: "fis-1",
       title: "Complete the sentence",
       sentence: "je suis content",

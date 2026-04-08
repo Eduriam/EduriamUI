@@ -6,14 +6,14 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import LinearProgress from "@mui/material/LinearProgress";
 
-import { LongAudioComponent } from "../../StudyBlockComponentDTO";
+import { LongAudioComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface ILongAudioStudyBlockComponent {
+export interface ILongAudioExerciseStudyBlockComponent {
   component: LongAudioComponent;
   playOnMount?: boolean;
 }
 
-export const LongAudio: React.FC<ILongAudioStudyBlockComponent> = ({
+export const LongAudio: React.FC<ILongAudioExerciseStudyBlockComponent> = ({
   component,
   playOnMount = false,
 }) => {

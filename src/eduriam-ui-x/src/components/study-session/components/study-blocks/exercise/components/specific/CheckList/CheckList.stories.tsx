@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { CheckList } from "./CheckList";
 
 const meta: Meta<typeof CheckList> = {
@@ -16,7 +16,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "cl-1",
-      type: StudyBlockComponentType.CHECKLIST,
+      type: ExerciseStudyBlockComponentType.CHECKLIST,
       items: ["One", "Two", "Three"],
     },
     onAnswerStateChange: fn(),

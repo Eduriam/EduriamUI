@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
-import { MatchingAnswerComponent } from "../../StudyBlockComponentDTO";
+import { MatchingAnswerComponent } from "../../ExerciseStudyBlockComponentDTO";
 import MatchAudioOption from "./matching-options/MatchAudioOption/MatchAudioOption";
 import MatchImageOption from "./matching-options/MatchImageOption/MatchImageOption";
 import {
@@ -25,15 +25,14 @@ function isImageOption(o: MatchOptionDTO): o is ImageMatchOptionDTO {
   return o.type === "image";
 }
 
-export interface IMatchingAnswerStudyBlockComponent {
+export interface IMatchingAnswerExerciseStudyBlockComponent {
   component: MatchingAnswerComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
 }
 
-export const MatchingAnswer: React.FC<IMatchingAnswerStudyBlockComponent> = ({
-  component,
-  onAnswerStateChange,
-}) => {
+export const MatchingAnswer: React.FC<
+  IMatchingAnswerExerciseStudyBlockComponent
+> = ({ component, onAnswerStateChange }) => {
   const [selectedIndex1, setSelectedIndex1] = useState<number | undefined>();
   const [selectedIndex2, setSelectedIndex2] = useState<number | undefined>();
   const [optionStates1, setOptionStates1] = useState<Array<AnswerState>>(

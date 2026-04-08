@@ -6,7 +6,7 @@ import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
-import { MultipleChoiceExerciseComponent } from "../../StudyBlockComponentDTO";
+import { MultipleChoiceExerciseComponent } from "../../ExerciseStudyBlockComponentDTO";
 
 export interface MultipleChoiceExerciseLocalization {
   assignmentTitle?: string;

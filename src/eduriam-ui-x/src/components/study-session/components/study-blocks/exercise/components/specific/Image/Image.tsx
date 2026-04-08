@@ -4,13 +4,15 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 
-import { ImageComponent } from "../../StudyBlockComponentDTO";
+import { ImageComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface IImageStudyBlockComponent {
+export interface IImageExerciseStudyBlockComponent {
   component: ImageComponent;
 }
 
-export const Image: React.FC<IImageStudyBlockComponent> = ({ component }) => {
+export const Image: React.FC<IImageExerciseStudyBlockComponent> = ({
+  component,
+}) => {
   const sizeToMax: Record<
     NonNullable<typeof component.size>,
     { w: number; h: number }

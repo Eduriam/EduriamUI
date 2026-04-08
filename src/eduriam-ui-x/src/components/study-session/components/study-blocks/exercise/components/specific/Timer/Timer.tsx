@@ -7,9 +7,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
 import SimpleCircularProgress from "../../../../../shared/SimpleCircularProgress/SimpleCircularProgress";
-import { TimerComponent } from "../../StudyBlockComponentDTO";
+import { TimerComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface ITimerStudyBlockComponent {
+export interface ITimerExerciseStudyBlockComponent {
   component: TimerComponent;
 }
 
@@ -22,7 +22,9 @@ function formatMmSs(remainingMs: number): string {
   return `${mm}:${ss}`;
 }
 
-export const Timer: React.FC<ITimerStudyBlockComponent> = ({ component }) => {
+export const Timer: React.FC<ITimerExerciseStudyBlockComponent> = ({
+  component,
+}) => {
   const totalMs = component.seconds * 1000;
   const [elapsedMs, setElapsedMs] = useState<number>(0);
   const [state, setState] = useState<"STOPPED" | "RUNNING" | "PAUSED">(

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { TextAnswer } from "./TextAnswer";
 
 const meta: Meta<typeof TextAnswer> = {
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof TextAnswer>;
 export const Base: Story = {
   args: {
     component: {
-      type: StudyBlockComponentType.TEXT_ANSWER,
+      type: ExerciseStudyBlockComponentType.TEXT_ANSWER,
       id: "abc",
       correctAnswer: "Hello",
       evaluationStrategy: "case_insensitive",
@@ -49,7 +49,7 @@ export const Base: Story = {
 export const WithCharacters: Story = {
   args: {
     component: {
-      type: StudyBlockComponentType.TEXT_ANSWER,
+      type: ExerciseStudyBlockComponentType.TEXT_ANSWER,
       id: "char-1",
       correctAnswer: "c'est",
       evaluationStrategy: "case_insensitive",

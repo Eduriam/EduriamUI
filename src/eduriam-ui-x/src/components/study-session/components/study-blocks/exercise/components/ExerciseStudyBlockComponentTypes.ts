@@ -1,4 +1,4 @@
-export enum StudyBlockComponentType {
+export enum ExerciseStudyBlockComponentType {
   HEADER = "HEADER",
   PARAGRAPH = "PARAGRAPH",
   SHORT_AUDIO = "SHORT_AUDIO",

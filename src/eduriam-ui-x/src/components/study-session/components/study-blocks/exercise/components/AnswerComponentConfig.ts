@@ -1,25 +1,24 @@
-import { StudyBlockComponentDTO } from "./StudyBlockComponentDTO";
-import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentDTO } from "./ExerciseStudyBlockComponentDTO";
+import { ExerciseStudyBlockComponentType } from "./ExerciseStudyBlockComponentTypes";
 
-export const ANSWER_COMPONENT_TYPES: StudyBlockComponentType[] = [
-  StudyBlockComponentType.TEXT_ANSWER,
-  StudyBlockComponentType.MULTIPLE_CHOICE,
-  StudyBlockComponentType.CHECKLIST,
-  StudyBlockComponentType.PRONUNCIATION_ANSWER,
-  StudyBlockComponentType.TABLE_FILL,
-  StudyBlockComponentType.FILL_IN_SENTENCE,
-  StudyBlockComponentType.BUILD_WORD,
-  StudyBlockComponentType.MATCHING_ANSWER,
-  StudyBlockComponentType.CODE_EXERCISE,
+export const ANSWER_COMPONENT_TYPES: ExerciseStudyBlockComponentType[] = [
+  ExerciseStudyBlockComponentType.TEXT_ANSWER,
+  ExerciseStudyBlockComponentType.MULTIPLE_CHOICE,
+  ExerciseStudyBlockComponentType.CHECKLIST,
+  ExerciseStudyBlockComponentType.PRONUNCIATION_ANSWER,
+  ExerciseStudyBlockComponentType.TABLE_FILL,
+  ExerciseStudyBlockComponentType.FILL_IN_SENTENCE,
+  ExerciseStudyBlockComponentType.BUILD_WORD,
+  ExerciseStudyBlockComponentType.MATCHING_ANSWER,
+  ExerciseStudyBlockComponentType.CODE_EXERCISE,
 ];
 
-const ANSWER_COMPONENT_TYPE_SET = new Set<StudyBlockComponentType>(
+const ANSWER_COMPONENT_TYPE_SET = new Set<ExerciseStudyBlockComponentType>(
   ANSWER_COMPONENT_TYPES,
 );
 
 export function isAnswerComponent(
-  component: StudyBlockComponentDTO,
+  component: ExerciseStudyBlockComponentDTO,
 ): boolean {
   return ANSWER_COMPONENT_TYPE_SET.has(component.type);
 }
-

@@ -5,9 +5,9 @@ import TextField from "@mui/material/TextField";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton from "../../../../../shared/CharacterButton/CharacterButton";
-import { TextAnswerComponent } from "../../StudyBlockComponentDTO";
+import { TextAnswerComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface ITextAnswerStudyBlockComponent {
+export interface ITextAnswerExerciseStudyBlockComponent {
   component: TextAnswerComponent;
   showAnswerState?: boolean;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
@@ -31,7 +31,7 @@ function evaluateAnswer(
   return normalizedUserAnswer === normalizedCorrectAnswer ? "RIGHT" : "WRONG";
 }
 
-export const TextAnswer: React.FC<ITextAnswerStudyBlockComponent> = ({
+export const TextAnswer: React.FC<ITextAnswerExerciseStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
   showAnswerState = false,

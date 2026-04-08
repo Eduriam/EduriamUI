@@ -3,8 +3,8 @@ import React from "react";
 import { AnswerState } from "../../../../types/AnswerState";
 import type { StudySessionDataTest } from "../../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../../types/StudySessionLocalization";
-import { StudyBlockComponentDTO } from "./StudyBlockComponentDTO";
-import { StudyBlockComponentType } from "./StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentDTO } from "./ExerciseStudyBlockComponentDTO";
+import { ExerciseStudyBlockComponentType } from "./ExerciseStudyBlockComponentTypes";
 import BuildWord from "./specific/BuildWord/BuildWord";
 import CheckList from "./specific/CheckList/CheckList";
 import { CodeExercise } from "./specific/CodeExercise/CodeExercise";
@@ -27,8 +27,8 @@ import { FlowchartDiagram } from "./specific/diagrams/specific/FlowchartDiagram/
 import { GitGraphDiagram } from "./specific/diagrams/specific/GitGraphDiagram/GitGraphDiagram";
 import { StateDiagram } from "./specific/diagrams/specific/StateDiagram/StateDiagram";
 
-export interface IStudyBlockComponent {
-  component: StudyBlockComponentDTO;
+export interface IExerciseStudyBlockComponent {
+  component: ExerciseStudyBlockComponentDTO;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   localization: StudySessionLocalization;
   /**
@@ -46,7 +46,9 @@ export interface IStudyBlockComponent {
   dataTest?: StudySessionDataTest;
 }
 
-export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
+export const ExerciseStudyBlockComponent: React.FC<
+  IExerciseStudyBlockComponent
+> = ({
   component,
   onAnswerStateChange,
   localization,
@@ -56,18 +58,18 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
   dataTest,
 }) => {
   switch (component.type) {
-    case StudyBlockComponentType.HEADER:
+    case ExerciseStudyBlockComponentType.HEADER:
       return <Header component={component} />;
-    case StudyBlockComponentType.PARAGRAPH:
+    case ExerciseStudyBlockComponentType.PARAGRAPH:
       return <Paragraph component={component} />;
-    case StudyBlockComponentType.TEXT_ANSWER:
+    case ExerciseStudyBlockComponentType.TEXT_ANSWER:
       return (
         <TextAnswer
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.MULTIPLE_CHOICE:
+    case ExerciseStudyBlockComponentType.MULTIPLE_CHOICE:
       return (
         <MultipleChoiceExercise
           component={component}
@@ -76,57 +78,57 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
           dataTest={dataTest?.exercises?.multipleChoiceExercise}
         />
       );
-    case StudyBlockComponentType.SHORT_AUDIO:
+    case ExerciseStudyBlockComponentType.SHORT_AUDIO:
       return <ShortAudio component={component} />;
-    case StudyBlockComponentType.LONG_AUDIO:
+    case ExerciseStudyBlockComponentType.LONG_AUDIO:
       return <LongAudio component={component} />;
-    case StudyBlockComponentType.IMAGE:
+    case ExerciseStudyBlockComponentType.IMAGE:
       return <Image component={component} />;
-    case StudyBlockComponentType.TIMER:
+    case ExerciseStudyBlockComponentType.TIMER:
       return <Timer component={component} />;
-    case StudyBlockComponentType.CHECKLIST:
+    case ExerciseStudyBlockComponentType.CHECKLIST:
       return (
         <CheckList
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.PRONUNCIATION_ANSWER:
+    case ExerciseStudyBlockComponentType.PRONUNCIATION_ANSWER:
       return (
         <PronunciationAnswer
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.TABLE_FILL:
+    case ExerciseStudyBlockComponentType.TABLE_FILL:
       return (
         <TableFill
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.BUILD_WORD:
+    case ExerciseStudyBlockComponentType.BUILD_WORD:
       return (
         <BuildWord
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.MATCHING_ANSWER:
+    case ExerciseStudyBlockComponentType.MATCHING_ANSWER:
       return (
         <MatchingAnswer
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.FILL_IN_SENTENCE:
+    case ExerciseStudyBlockComponentType.FILL_IN_SENTENCE:
       return (
         <FillInSentence
           component={component}
           onAnswerStateChange={onAnswerStateChange}
         />
       );
-    case StudyBlockComponentType.CODE_EXERCISE:
+    case ExerciseStudyBlockComponentType.CODE_EXERCISE:
       return (
         <CodeExercise
           tabs={component.tabs}
@@ -140,22 +142,23 @@ export const StudyBlockComponent: React.FC<IStudyBlockComponent> = ({
             section: dataTest?.exercises?.codeExercise?.section,
             resultSection: dataTest?.exercises?.codeExercise?.resultSection,
             fillInCode: {
-              textField: dataTest?.exercises?.codeExercise?.fillInCode?.textField,
+              textField:
+                dataTest?.exercises?.codeExercise?.fillInCode?.textField,
             },
           }}
         />
       );
-    case StudyBlockComponentType.FLOWCHART_DIAGRAM:
+    case ExerciseStudyBlockComponentType.FLOWCHART_DIAGRAM:
       return <FlowchartDiagram chart={component.chart} />;
-    case StudyBlockComponentType.CLASS_DIAGRAM:
+    case ExerciseStudyBlockComponentType.CLASS_DIAGRAM:
       return <ClassDiagram chart={component.chart} />;
-    case StudyBlockComponentType.STATE_DIAGRAM:
+    case ExerciseStudyBlockComponentType.STATE_DIAGRAM:
       return <StateDiagram chart={component.chart} />;
-    case StudyBlockComponentType.ENTITY_RELATIONSHIP_DIAGRAM:
+    case ExerciseStudyBlockComponentType.ENTITY_RELATIONSHIP_DIAGRAM:
       return <EntityRelationshipDiagram chart={component.chart} />;
-    case StudyBlockComponentType.GIT_GRAPH_DIAGRAM:
+    case ExerciseStudyBlockComponentType.GIT_GRAPH_DIAGRAM:
       return <GitGraphDiagram chart={component.chart} />;
-    case StudyBlockComponentType.ARCHITECTURE_DIAGRAM:
+    case ExerciseStudyBlockComponentType.ARCHITECTURE_DIAGRAM:
       return <ArchitectureDiagram chart={component.chart} />;
     default:
       return null;
