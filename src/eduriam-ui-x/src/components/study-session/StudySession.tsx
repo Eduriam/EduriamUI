@@ -15,6 +15,10 @@ import { StudySessionNavigationButton } from "./components/StudySessionNavigatio
 import StudySessionProgressBar from "./components/StudySessionProgressBar/StudySessionProgressBar";
 import { StudySessionStats } from "./components/StudySessionStats/StudySessionStats";
 import { XP_PER_EXERCISE } from "./components/StudySessionStats/studySessionStatsConfig";
+import {
+  StudyBlockMode,
+  StudyBlockType,
+} from "./components/study-blocks/StudyBlock";
 import { StudyBlockDTO as StudyBlockModel } from "./components/study-blocks/StudyBlockDTO";
 import { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
 import { ExplanationStudyBlock } from "./components/study-blocks/explanation/ExplanationStudyBlock";
@@ -136,7 +140,10 @@ const StudySession: React.FC<IStudySession> = ({
   } | null>(null);
 
   const exerciseBlockCount = useMemo(
-    () => studySession.studyBlocks.filter((b) => b.type === "exercise").length,
+    () =>
+      studySession.studyBlocks.filter(
+        (b) => b.type === StudyBlockType.Exercise,
+      ).length,
     [studySession.studyBlocks],
   );
 
@@ -245,8 +252,8 @@ const StudySession: React.FC<IStudySession> = ({
     const atomId = currentBlock.atomId;
     const hadWrongAttempt = (wrongAttemptsByIndex.get(index) ?? 0) > 0;
     const shouldRescheduleReviewBlock =
-      currentBlock.type === "exercise" &&
-      currentBlock.mode === "review" &&
+      currentBlock.type === StudyBlockType.Exercise &&
+      currentBlock.mode === StudyBlockMode.Review &&
       result === "RIGHT" &&
       hadWrongAttempt &&
       !skippedExercise;
@@ -399,8 +406,8 @@ const StudySession: React.FC<IStudySession> = ({
   const isRevisiting = index <= furthestCompletedIndex;
   const currentStudyBlock = studyBlockQueue[index];
   const currentExerciseAnswerExplanation =
-    currentStudyBlock && currentStudyBlock.type === "exercise"
-      ? currentStudyBlock.answerExplanation
+    currentStudyBlock && currentStudyBlock.type === StudyBlockType.Exercise
+      ? currentStudyBlock.content.answerExplanation
       : undefined;
   const currentWrongAttempts = wrongAttemptsByIndex.get(index) ?? 0;
   const allowSkipExercise =
@@ -465,10 +472,10 @@ const StudySession: React.FC<IStudySession> = ({
               justifyContent="space-between"
             >
               {studyBlockQueue[index] &&
-                studyBlockQueue[index].type === "exercise" && (
+                studyBlockQueue[index].type === StudyBlockType.Exercise && (
                   <ExerciseStudyBlock
                     key={`${index}-${exerciseRenderVersion}`}
-                    components={studyBlockQueue[index].components}
+                    components={studyBlockQueue[index].content.components}
                     onCheck={(result, report) => {
                       setCheckedResult(result);
                       setUserAnswerReport(report);
@@ -490,10 +497,10 @@ const StudySession: React.FC<IStudySession> = ({
                   />
                 )}
               {studyBlockQueue[index] &&
-                studyBlockQueue[index].type === "explanation" && (
+                studyBlockQueue[index].type === StudyBlockType.Explanation && (
                   <ExplanationStudyBlock
                     key={index}
-                    scenes={studyBlockQueue[index].scenes}
+                    scenes={studyBlockQueue[index].content.scenes}
                     onComplete={handleExplanationComplete}
                     onReportClick={
                       studyBlockData

@@ -5,10 +5,13 @@ import React, { useState } from "react";
 
 import Box from "@mui/material/Box";
 
-import StudySession, { IStudySession } from "./StudySession";
+import StudySession, {
+  IStudySession,
+  type SelectedStudyBlockData,
+} from "./StudySession";
 import { ReportDialog } from "../shared/ReportDialog";
+import { StudyBlockMode, StudyBlockType } from "./components/study-blocks/StudyBlock";
 import { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
-import type { AnswerState } from "./types/AnswerState";
 
 const meta: Meta<typeof StudySession> = {
   title: "x/study-session/StudySession",
@@ -47,12 +50,15 @@ const REPORT_DIALOG_LOCALIZATION = {
 export const Base: Story = {
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         {
           id: "base-block-1",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-1",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "base-scene-1",
               duration: 7000,
@@ -81,18 +87,22 @@ export const Base: Story = {
               ],
             },
           ],
+          },
         },
         {
           id: "base-block-2",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-2",
-          components: [
+          content: {
+            components: [
             {
               id: "para-2",
               type: StudyBlockComponentType.PARAGRAPH,
               text: "Exercise placeholder content goes here.",
             },
           ],
+          },
         },
       ],
     },
@@ -104,12 +114,15 @@ export const Base: Story = {
 export const Exercise: Story = {
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         {
           id: "exercise-block-1",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-mc-1",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-1",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -123,6 +136,7 @@ export const Exercise: Story = {
               correctOptionId: "1",
             },
           ],
+          },
         },
       ],
     },
@@ -133,35 +147,34 @@ export const Exercise: Story = {
 
 const StudySessionWithReportDialogStory: React.FC = () => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
-  const [reportTarget, setReportTarget] = useState<{
-    id: number;
-    type: string;
-    answerState: AnswerState | null;
-    userAnswerReport: string;
-  } | null>(null);
+  const [reportTarget, setReportTarget] = useState<SelectedStudyBlockData | null>(null);
 
   return (
     <Box sx={{ minHeight: "100dvh" }}>
       <StudySession
         studySession={{
+          id: "story-study-session",
           studyBlocks: [
             {
               id: 31,
-              type: "exercise",
+              type: StudyBlockType.Exercise,
+              mode: StudyBlockMode.Learn,
               atomId: 3101,
-              components: [
-                {
-                  id: "mc-report-1",
-                  type: StudyBlockComponentType.MULTIPLE_CHOICE,
-                  question: "What does SQL SELECT do?",
-                  options: [
-                    { id: "read", text: "Reads data (correct)" },
-                    { id: "delete", text: "Deletes data" },
-                    { id: "insert", text: "Inserts rows" },
-                  ],
-                  correctOptionId: "read",
-                },
-              ],
+              content: {
+                components: [
+                  {
+                    id: "mc-report-1",
+                    type: StudyBlockComponentType.MULTIPLE_CHOICE,
+                    question: "What does SQL SELECT do?",
+                    options: [
+                      { id: "read", text: "Reads data (correct)" },
+                      { id: "delete", text: "Deletes data" },
+                      { id: "insert", text: "Inserts rows" },
+                    ],
+                    correctOptionId: "read",
+                  },
+                ],
+              },
             },
           ],
         }}
@@ -196,12 +209,15 @@ export const WithReportDialog: Story = {
 export const ExerciseMultipleChoice3InARow: Story = {
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         {
           id: "exercise-mc-fruit",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-mc-fruit",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-fruit-1",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -215,12 +231,15 @@ export const ExerciseMultipleChoice3InARow: Story = {
               correctOptionId: "mango",
             },
           ],
+          },
         },
         {
           id: "exercise-mc-animal",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-mc-animal",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-animal-1",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -234,12 +253,15 @@ export const ExerciseMultipleChoice3InARow: Story = {
               correctOptionId: "eagle",
             },
           ],
+          },
         },
         {
           id: "exercise-mc-planet",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-mc-planet",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-planet-1",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -253,6 +275,7 @@ export const ExerciseMultipleChoice3InARow: Story = {
               correctOptionId: "mars",
             },
           ],
+          },
         },
       ],
     },
@@ -265,12 +288,15 @@ export const ExerciseMultipleChoice3InARow: Story = {
 export const ExerciseWithAudio: Story = {
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         {
           id: "exercise-audio-1",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-audio-1",
-          components: [
+          content: {
+            components: [
             {
               id: "para-audio-1",
               type: StudyBlockComponentType.PARAGRAPH,
@@ -294,12 +320,15 @@ export const ExerciseWithAudio: Story = {
               correctOptionId: "first-second",
             },
           ],
+          },
         },
         {
           id: "exercise-audio-2",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-audio-2",
-          components: [
+          content: {
+            components: [
             {
               id: "para-audio-3",
               type: StudyBlockComponentType.PARAGRAPH,
@@ -319,6 +348,7 @@ export const ExerciseWithAudio: Story = {
               correctOptionId: "a",
             },
           ],
+          },
         },
       ],
     },
@@ -332,12 +362,7 @@ const ExampleLessonSQLWithReportStory: React.FC<{ args: IStudySession }> = ({
   args,
 }) => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
-  const [reportTarget, setReportTarget] = useState<{
-    id: number;
-    type: string;
-    answerState: AnswerState | null;
-    userAnswerReport: string;
-  } | null>(null);
+  const [reportTarget, setReportTarget] = useState<SelectedStudyBlockData | null>(null);
 
   return (
     <Box sx={{ minHeight: "100dvh" }}>
@@ -371,13 +396,16 @@ export const ExampleLessonSQL: Story = {
   ),
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         // 1. What is SELECT?
         {
           id: "sql-select-block-1",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "scene-select-intro",
               duration: 12000,
@@ -409,13 +437,16 @@ export const ExampleLessonSQL: Story = {
               ],
             },
           ],
+          },
         },
         // 2. The asterisk *
         {
           id: "sql-select-block-2",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "scene-asterisk",
               duration: 12000,
@@ -447,13 +478,16 @@ export const ExampleLessonSQL: Story = {
               ],
             },
           ],
+          },
         },
         // 3. Exercise: what does SELECT do?
         {
           id: "sql-select-block-3",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-select",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -466,13 +500,16 @@ export const ExampleLessonSQL: Story = {
               correctOptionId: "read",
             },
           ],
+          },
         },
         // 4. What is FROM?
         {
           id: "sql-select-block-4",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "scene-from",
               duration: 16000,
@@ -504,13 +541,16 @@ export const ExampleLessonSQL: Story = {
               ],
             },
           ],
+          },
         },
         // 5. Exercise: what does * mean?
         {
           id: "sql-select-block-5",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-asterisk",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -523,13 +563,16 @@ export const ExampleLessonSQL: Story = {
               correctOptionId: "all-cols",
             },
           ],
+          },
         },
         // 6. Putting it together: SELECT * FROM table_name
         {
           id: "sql-select-block-6",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "scene-putting-together",
               duration: 20000,
@@ -561,13 +604,16 @@ export const ExampleLessonSQL: Story = {
               ],
             },
           ],
+          },
         },
         // 7. Exercise: what does FROM do?
         {
           id: "sql-select-block-7",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          components: [
+          content: {
+            components: [
             {
               id: "mc-from",
               type: StudyBlockComponentType.MULTIPLE_CHOICE,
@@ -583,13 +629,16 @@ export const ExampleLessonSQL: Story = {
               correctOptionId: "specify-table",
             },
           ],
+          },
         },
         // 8. Recap explanation
         {
           id: "sql-select-block-8",
-          type: "explanation",
+          type: StudyBlockType.Explanation,
+          mode: StudyBlockMode.Learn,
           atomId: "sql-select-all",
-          scenes: [
+          content: {
+            scenes: [
             {
               id: "scene-recap",
               duration: 17000,
@@ -621,6 +670,7 @@ export const ExampleLessonSQL: Story = {
               ],
             },
           ],
+          },
         },
       ],
     },
@@ -633,12 +683,15 @@ export const ExampleLessonSQL: Story = {
 export const ComplexExercise: Story = {
   args: {
     studySession: {
+      id: "story-study-session",
       studyBlocks: [
         {
           id: "complex-exercise-block-1",
-          type: "exercise",
+          type: StudyBlockType.Exercise,
+          mode: StudyBlockMode.Learn,
           atomId: "atom-complex-1",
-          components: [
+          content: {
+            components: [
             {
               id: "code-ex-1",
               type: StudyBlockComponentType.CODE_EXERCISE,
@@ -733,6 +786,7 @@ export const ComplexExercise: Story = {
               ],
             },
           ],
+          },
         },
       ],
     },
@@ -740,6 +794,7 @@ export const ComplexExercise: Story = {
     onExit: () => {},
   } as unknown as IStudySession,
 };
+
 
 
 

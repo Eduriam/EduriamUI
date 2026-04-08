@@ -33,6 +33,7 @@ export type { StudyBlockComponentDTO } from "./components/study-blocks/exercise/
 export { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
 export type { ExerciseStudyBlockDTO } from "./components/study-blocks/exercise/ExerciseStudyBlockDTO";
 export type { ExplanationStudyBlockDTO } from "./components/study-blocks/explanation/ExplanationStudyBlockDTO";
+export { StudyBlockMode, StudyBlockType } from "./components/study-blocks/StudyBlock";
 export type { BaseStudyBlock } from "./components/study-blocks/StudyBlock";
 export type { StudyBlockDTO } from "./components/study-blocks/StudyBlockDTO";
 export type { SelectedStudyBlockData } from "./StudySession";

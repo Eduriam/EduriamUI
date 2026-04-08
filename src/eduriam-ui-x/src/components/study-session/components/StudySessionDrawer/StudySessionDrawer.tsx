@@ -28,7 +28,7 @@ export interface StudySessionDrawerProps {
    */
   variant: StudySessionDrawerVariant;
 
-  answerExplanation?: ExerciseStudyBlockDTO["answerExplanation"];
+  answerExplanation?: ExerciseStudyBlockDTO["content"]["answerExplanation"];
 
   /**
    * Called when the report icon button is clicked.
