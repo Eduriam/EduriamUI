@@ -1,7 +1,15 @@
 import { Scene } from "../../../../video-manager";
-import { BaseStudyBlock } from "../StudyBlock";
+import { BaseStudyBlock, StudyBlockType } from "../StudyBlock";
 
-export interface ExplanationStudyBlockDTO extends BaseStudyBlock {
-  type: "explanation";
+export interface ExplanationStudyBlockContent {
   scenes: Scene[];
+}
+
+export interface ExplanationStudyBlockDTO
+  extends BaseStudyBlock<
+    typeof StudyBlockType.Explanation,
+    ExplanationStudyBlockContent
+  > {
+  type: typeof StudyBlockType.Explanation;
+  content: ExplanationStudyBlockContent;
 }
