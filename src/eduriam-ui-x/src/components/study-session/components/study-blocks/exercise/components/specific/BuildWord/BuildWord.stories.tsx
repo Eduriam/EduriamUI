@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import BuildWord from "./BuildWord";
 
 const meta = {
@@ -19,7 +19,7 @@ export const Base: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.BUILD_WORD,
+      type: ExerciseStudyBlockComponentType.BUILD_WORD,
       id: "bw-1",
       title: "Build the word",
       word: "chat",

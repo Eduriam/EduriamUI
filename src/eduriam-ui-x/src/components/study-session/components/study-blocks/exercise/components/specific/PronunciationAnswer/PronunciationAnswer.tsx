@@ -11,10 +11,10 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
-import { PronunciationAnswerComponent } from "../../StudyBlockComponentDTO";
+import { PronunciationAnswerComponent } from "../../ExerciseStudyBlockComponentDTO";
 import styles from "./PronunciationAnswer.module.css";
 
-export interface IPronunciationAnswerStudyBlockComponent {
+export interface IPronunciationAnswerExerciseStudyBlockComponent {
   component: PronunciationAnswerComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   // testing-only helper to bypass microphone in stories/tests
@@ -29,7 +29,7 @@ function evaluateCaseInsensitive(user: string, correct: string): AnswerState {
 }
 
 export const PronunciationAnswer: React.FC<
-  IPronunciationAnswerStudyBlockComponent
+  IPronunciationAnswerExerciseStudyBlockComponent
 > = ({ component, onAnswerStateChange, mockTranscript }) => {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, waitFor } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { TableFill } from "./TableFill";
 
 const meta = {
@@ -28,7 +28,7 @@ export const Base: Story = {
   args: {
     onAnswerStateChange: fn(),
     component: {
-      type: StudyBlockComponentType.TABLE_FILL,
+      type: ExerciseStudyBlockComponentType.TABLE_FILL,
       id: "tbl-1",
       title: "Complete the table",
       tableContent,

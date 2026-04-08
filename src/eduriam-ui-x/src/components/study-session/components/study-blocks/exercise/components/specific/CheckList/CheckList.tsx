@@ -5,14 +5,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
-import { CheckListComponent } from "../../StudyBlockComponentDTO";
+import { CheckListComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface ICheckListStudyBlockComponent {
+export interface ICheckListExerciseStudyBlockComponent {
   component: CheckListComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
 }
 
-export const CheckList: React.FC<ICheckListStudyBlockComponent> = ({
+export const CheckList: React.FC<ICheckListExerciseStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
 }) => {

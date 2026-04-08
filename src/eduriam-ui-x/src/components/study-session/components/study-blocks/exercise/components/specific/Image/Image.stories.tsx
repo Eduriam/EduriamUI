@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import Image from "./Image";
 
 const meta: Meta<typeof Image> = {
@@ -16,7 +16,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "img-1",
-      type: StudyBlockComponentType.IMAGE,
+      type: ExerciseStudyBlockComponentType.IMAGE,
       url: "https://picsum.photos/seed/eduriam/320/320",
       alt: "Sample image",
       size: "medium",

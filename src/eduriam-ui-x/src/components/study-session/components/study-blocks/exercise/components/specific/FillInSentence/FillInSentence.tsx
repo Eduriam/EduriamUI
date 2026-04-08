@@ -5,19 +5,17 @@ import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import WordButton from "../../../../../shared/WordButton/WordButton";
-import { FillInSentenceComponent } from "../../StudyBlockComponentDTO";
+import { FillInSentenceComponent } from "../../ExerciseStudyBlockComponentDTO";
 
-export interface IFillInSentenceStudyBlockComponent {
+export interface IFillInSentenceExerciseStudyBlockComponent {
   component: FillInSentenceComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
-export const FillInSentence: React.FC<IFillInSentenceStudyBlockComponent> = ({
-  component,
-  onAnswerStateChange,
-  showAnswerState = false,
-}) => {
+export const FillInSentence: React.FC<
+  IFillInSentenceExerciseStudyBlockComponent
+> = ({ component, onAnswerStateChange, showAnswerState = false }) => {
   const [options, setOptions] = useState<Array<string>>(component.wordOptions);
   const [answerArray, setAnswerArray] = useState<Array<string | undefined>>([]);
   const words = useMemo(

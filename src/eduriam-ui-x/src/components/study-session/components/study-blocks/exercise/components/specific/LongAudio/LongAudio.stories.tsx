@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import LongAudio from "./LongAudio";
 
 const meta: Meta<typeof LongAudio> = {
@@ -16,7 +16,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "aud-long-1",
-      type: StudyBlockComponentType.LONG_AUDIO,
+      type: ExerciseStudyBlockComponentType.LONG_AUDIO,
       audioUrl: "https://mocks.linguino.org/audio-long.mp3",
     },
   },

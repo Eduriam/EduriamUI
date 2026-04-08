@@ -3,7 +3,7 @@ import { expect, fn, waitFor } from "storybook/test";
 
 import React, { useEffect, useState } from "react";
 
-import { StudyBlockComponentType } from "../../StudyBlockComponentTypes";
+import { ExerciseStudyBlockComponentType } from "../../ExerciseStudyBlockComponentTypes";
 import { PronunciationAnswer } from "./PronunciationAnswer";
 
 const Harness: React.FC<React.ComponentProps<typeof PronunciationAnswer>> = (
@@ -44,7 +44,7 @@ export const Base: Story = {
   args: {
     component: {
       id: "pron-1",
-      type: StudyBlockComponentType.PRONUNCIATION_ANSWER,
+      type: ExerciseStudyBlockComponentType.PRONUNCIATION_ANSWER,
       correctAnswer: "hello",
     },
     onAnswerStateChange: fn(),

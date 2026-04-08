@@ -6,8 +6,8 @@ export type { AtomProgressRating, IStudySession } from "./StudySession";
 export { ExerciseStudyBlock as StudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
 export type { IExerciseStudyBlock as IStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
 
-export { StudyBlockComponent } from "./components/study-blocks/exercise/components/StudyBlockComponent";
-export type { IStudyBlockComponent } from "./components/study-blocks/exercise/components/StudyBlockComponent";
+export { ExerciseStudyBlockComponent as StudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
+export type { IExerciseStudyBlockComponent as IStudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
 
 // Explanation Study Block
 export { ExplanationStudyBlock } from "./components/study-blocks/explanation/ExplanationStudyBlock";
@@ -18,22 +18,25 @@ export { default as StudySessionProgressBar } from "./components/StudySessionPro
 export type { IStudySessionProgressBar } from "./components/StudySessionProgressBar/StudySessionProgressBar";
 
 // Study Session Shared Components
-export { CodeBlank } from "./components/shared/CodeBlank";
-export type { CodeBlankProps } from "./components/shared/CodeBlank";
 export { ReportDialog } from "../shared/ReportDialog";
 export type {
   ReportDialogDataTest,
   ReportDialogLocalization,
   ReportDialogSubmitPayload,
 } from "../shared/ReportDialog";
+export { CodeBlank } from "./components/shared/CodeBlank";
+export type { CodeBlankProps } from "./components/shared/CodeBlank";
 
 // Types and Models
+export type { ExerciseStudyBlockComponentDTO as StudyBlockComponentDTO } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentDTO";
+export { ExerciseStudyBlockComponentType as StudyBlockComponentType } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentTypes";
 export type { MultipleChoiceExerciseDataTest } from "./components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
-export type { StudyBlockComponentDTO } from "./components/study-blocks/exercise/components/StudyBlockComponentDTO";
-export { StudyBlockComponentType } from "./components/study-blocks/exercise/components/StudyBlockComponentTypes";
 export type { ExerciseStudyBlockDTO } from "./components/study-blocks/exercise/ExerciseStudyBlockDTO";
 export type { ExplanationStudyBlockDTO } from "./components/study-blocks/explanation/ExplanationStudyBlockDTO";
-export { StudyBlockMode, StudyBlockType } from "./components/study-blocks/StudyBlock";
+export {
+  StudyBlockMode,
+  StudyBlockType,
+} from "./components/study-blocks/StudyBlock";
 export type { BaseStudyBlock } from "./components/study-blocks/StudyBlock";
 export type { StudyBlockDTO } from "./components/study-blocks/StudyBlockDTO";
 export type { SelectedStudyBlockData } from "./StudySession";
@@ -45,7 +48,7 @@ export type { StudySessionLocalization } from "./types/StudySessionLocalization"
 // Specific Component Types
 export type {
   ArchitectureDiagramComponent,
-  BaseStudyBlockComponent,
+  BaseExerciseStudyBlockComponent as BaseStudyBlockComponent,
   BuildWordComponent,
   CheckListComponent,
   ClassDiagramComponent,
@@ -67,7 +70,7 @@ export type {
   TableFillComponent,
   TextAnswerComponent,
   TimerComponent,
-} from "./components/study-blocks/exercise/components/StudyBlockComponentDTO";
+} from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentDTO";
 
 // Code Editor Types
 export { PASSIVE_TAB_TYPES } from "./components/study-blocks/exercise/components/specific/CodeEditor/CodeEditorTypes";
@@ -103,4 +106,3 @@ export type {
   MatchOptionDTO,
   TextMatchOptionDTO,
 } from "./components/study-blocks/exercise/components/specific/MatchingAnswer/matching-options/MatchOptionDTO";
-

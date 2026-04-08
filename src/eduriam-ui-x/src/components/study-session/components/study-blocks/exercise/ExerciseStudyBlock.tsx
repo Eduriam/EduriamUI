@@ -11,12 +11,12 @@ import type { StudySessionDataTest } from "../../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../../types/StudySessionLocalization";
 import type { ExerciseStudyBlockDTO } from "./ExerciseStudyBlockDTO";
 import { isAnswerComponent } from "./components/AnswerComponentConfig";
-import { StudyBlockComponent } from "./components/StudyBlockComponent";
-import { StudyBlockComponentDTO } from "./components/StudyBlockComponentDTO";
+import { ExerciseStudyBlockComponent } from "./components/ExerciseStudyBlockComponent";
+import { ExerciseStudyBlockComponentDTO } from "./components/ExerciseStudyBlockComponentDTO";
 
 export interface IExerciseStudyBlock {
   mode?: ExerciseStudyBlockDTO["mode"];
-  components: StudyBlockComponentDTO[];
+  components: ExerciseStudyBlockComponentDTO[];
   /**
    * Called when the user presses the "Check" button.
    *
@@ -125,7 +125,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
     <>
       <Stack spacing={6}>
         {components.map((component, index) => (
-          <StudyBlockComponent
+          <ExerciseStudyBlockComponent
             key={index}
             component={component}
             onAnswerStateChange={(answerState, userAnswerReport) =>

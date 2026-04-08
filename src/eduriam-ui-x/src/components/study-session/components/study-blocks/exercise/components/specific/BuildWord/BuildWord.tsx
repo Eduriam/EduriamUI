@@ -8,7 +8,7 @@ import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton, {
   CHARACTER_BUTTON_SIZE,
 } from "../../../../../shared/CharacterButton/CharacterButton";
-import { BuildWordComponent } from "../../StudyBlockComponentDTO";
+import { BuildWordComponent } from "../../ExerciseStudyBlockComponentDTO";
 
 interface LetterAnswer {
   character: string;
@@ -20,13 +20,13 @@ interface LetterOption {
   used: boolean;
 }
 
-export interface IBuildWordStudyBlockComponent {
+export interface IBuildWordExerciseStudyBlockComponent {
   component: BuildWordComponent;
   onAnswerStateChange?: (answer: AnswerState, userAnswerReport: string) => void;
   showAnswerState?: boolean;
 }
 
-export const BuildWord: React.FC<IBuildWordStudyBlockComponent> = ({
+export const BuildWord: React.FC<IBuildWordExerciseStudyBlockComponent> = ({
   component,
   onAnswerStateChange,
   showAnswerState = false,
@@ -60,7 +60,10 @@ export const BuildWord: React.FC<IBuildWordStudyBlockComponent> = ({
     setAnswerArray(newAnswerArray);
 
     const userAnswerReport = newAnswerArray.map((l) => l.character).join("");
-    onAnswerStateChange?.(evaluateAggregate(userAnswerReport), userAnswerReport);
+    onAnswerStateChange?.(
+      evaluateAggregate(userAnswerReport),
+      userAnswerReport,
+    );
   }
 
   function handleAddLetter(index: number) {
@@ -73,7 +76,10 @@ export const BuildWord: React.FC<IBuildWordStudyBlockComponent> = ({
     arr[index] = { ...arr[index], used: true };
     setLetters(arr);
     const userAnswerReport = newAnswerArray.map((l) => l.character).join("");
-    onAnswerStateChange?.(evaluateAggregate(userAnswerReport), userAnswerReport);
+    onAnswerStateChange?.(
+      evaluateAggregate(userAnswerReport),
+      userAnswerReport,
+    );
   }
 
   return (
