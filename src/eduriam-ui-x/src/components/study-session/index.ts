@@ -3,11 +3,11 @@ export { default as StudySession } from "./StudySession";
 export type { AtomProgressRating, IStudySession } from "./StudySession";
 
 // Study Block Components
-export { ExerciseStudyBlock as StudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
-export type { IExerciseStudyBlock as IStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
+export { ExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
+export type { IExerciseStudyBlock } from "./components/study-blocks/exercise/ExerciseStudyBlock";
 
-export { ExerciseStudyBlockComponent as StudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
-export type { IExerciseStudyBlockComponent as IStudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
+export { ExerciseStudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
+export type { IExerciseStudyBlockComponent } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponent";
 
 // Explanation Study Block
 export { ExplanationStudyBlock } from "./components/study-blocks/explanation/ExplanationStudyBlock";
@@ -28,8 +28,8 @@ export { CodeBlank } from "./components/shared/CodeBlank";
 export type { CodeBlankProps } from "./components/shared/CodeBlank";
 
 // Types and Models
-export type { ExerciseStudyBlockComponentDTO as StudyBlockComponentDTO } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentDTO";
-export { ExerciseStudyBlockComponentType as StudyBlockComponentType } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentTypes";
+export type { ExerciseStudyBlockComponentDTO } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentDTO";
+export { ExerciseStudyBlockComponentType } from "./components/study-blocks/exercise/components/ExerciseStudyBlockComponentTypes";
 export type { MultipleChoiceExerciseDataTest } from "./components/study-blocks/exercise/components/specific/MultipleChoiceExercise/MultipleChoiceExercise";
 export type { ExerciseStudyBlockDTO } from "./components/study-blocks/exercise/ExerciseStudyBlockDTO";
 export type { ExplanationStudyBlockDTO } from "./components/study-blocks/explanation/ExplanationStudyBlockDTO";
@@ -48,7 +48,7 @@ export type { StudySessionLocalization } from "./types/StudySessionLocalization"
 // Specific Component Types
 export type {
   ArchitectureDiagramComponent,
-  BaseExerciseStudyBlockComponent as BaseStudyBlockComponent,
+  BaseExerciseStudyBlockComponent,
   BuildWordComponent,
   CheckListComponent,
   ClassDiagramComponent,
