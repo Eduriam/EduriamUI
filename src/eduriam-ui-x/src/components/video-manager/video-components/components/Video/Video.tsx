@@ -17,7 +17,7 @@ export interface IVideoProps {
 }
 
 export const Video: React.FC<IVideoProps> = ({ comp }) => {
-  const width = resolveSize(comp.size);
+  const responsiveWidth = resolveSize(comp.size);
   return (
     <Box
       sx={{
@@ -31,7 +31,7 @@ export const Video: React.FC<IVideoProps> = ({ comp }) => {
       <Box
         component="video"
         src={comp.url}
-        sx={{ width, height: "auto", borderRadius: 2 }}
+        sx={{ width: responsiveWidth, height: "auto", borderRadius: 2 }}
         autoPlay
         loop
         muted
