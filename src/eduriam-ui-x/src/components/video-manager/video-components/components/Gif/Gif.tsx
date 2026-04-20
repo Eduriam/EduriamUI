@@ -18,7 +18,7 @@ export interface IGifProps {
 }
 
 export const Gif: React.FC<IGifProps> = ({ comp }) => {
-  const width = resolveSize(comp.size);
+  const responsiveWidth = resolveSize(comp.size);
 
   return (
     <Box
@@ -32,10 +32,8 @@ export const Gif: React.FC<IGifProps> = ({ comp }) => {
     >
       <RemotionGif
         src={comp.url}
-        width={width}
-        height={width}
         fit="contain"
-        style={{ borderRadius: 8 }}
+        style={{ width: responsiveWidth, height: "auto", borderRadius: 8 }}
       />
     </Box>
   );

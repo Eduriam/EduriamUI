@@ -17,7 +17,7 @@ export interface IImageProps {
 }
 
 export const Image: React.FC<IImageProps> = ({ comp }) => {
-  const width = resolveSize(comp.size);
+  const responsiveWidth = resolveSize(comp.size);
   return (
     <Box
       sx={{
@@ -32,7 +32,7 @@ export const Image: React.FC<IImageProps> = ({ comp }) => {
         component="img"
         src={comp.url}
         sx={{
-          width,
+          width: responsiveWidth,
           height: "auto",
           borderRadius: 2,
         }}
