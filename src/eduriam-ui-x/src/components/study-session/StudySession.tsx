@@ -103,7 +103,7 @@ const StudySession: React.FC<IStudySession> = ({
   dataTest,
 }) => {
   const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
-  const handleQuit = onQuit ?? onExit;
+  const onQuitHandler = onQuit ?? onExit;
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -126,6 +126,7 @@ const StudySession: React.FC<IStudySession> = ({
   const [wrongAttemptsByIndex, setWrongAttemptsByIndex] = useState<
     Map<number, number>
   >(new Map());
+  const [pauseExplanationVideo, setPauseExplanationVideo] = useState(false);
 
   const [atomStatsMap, setAtomStatsMap] = useState<Map<ID, AtomStats>>(
     new Map(),
@@ -222,6 +223,11 @@ const StudySession: React.FC<IStudySession> = ({
     onSwipeRight: handleGoBack,
     enabled: !desktop && !finishedSession,
   });
+
+  const handleQuitRequest = useCallback(() => {
+    setPauseExplanationVideo(true);
+    onQuitHandler();
+  }, [onQuitHandler]);
 
   // ---------------------------------------------------------------------------
   // Exercise completion
@@ -450,7 +456,7 @@ const StudySession: React.FC<IStudySession> = ({
             currentIndex={index}
             furthestCompletedIndex={furthestCompletedIndex}
             total={studyBlockQueue.length}
-            onExit={handleQuit}
+            onExit={handleQuitRequest}
             quitButtonDataTest={dataTest?.quitButton}
           />
 
@@ -501,6 +507,7 @@ const StudySession: React.FC<IStudySession> = ({
                   <ExplanationStudyBlock
                     key={index}
                     scenes={studyBlockQueue[index].content.scenes}
+                    pauseVideo={pauseExplanationVideo}
                     onComplete={handleExplanationComplete}
                     onReportClick={
                       studyBlockData
