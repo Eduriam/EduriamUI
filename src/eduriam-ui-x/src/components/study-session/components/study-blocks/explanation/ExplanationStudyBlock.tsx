@@ -27,6 +27,7 @@ export interface IExplanationStudyBlock {
   onReportClick?: () => void;
   localization: StudySessionLocalization;
   isRevisiting?: boolean;
+  pauseVideo?: boolean;
   dataTest?: StudySessionDataTest;
 }
 
@@ -58,6 +59,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   onReportClick,
   localization,
   isRevisiting = false,
+  pauseVideo = false,
   dataTest,
 }) => {
   const theme = useTheme();
@@ -148,6 +150,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
             videoDefinition={videoDefinition}
             captions={captions}
             autoPlay
+            paused={pauseVideo}
             onEnded={handleEnded}
             style={desktop ? undefined : { width: "100%", height: "100%" }}
           />

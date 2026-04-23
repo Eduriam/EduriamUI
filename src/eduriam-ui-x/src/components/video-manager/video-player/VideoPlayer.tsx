@@ -36,6 +36,8 @@ export interface IVideoPlayer {
   style?: React.CSSProperties;
   /** Fired when the video reaches the end. */
   onEnded?: () => void;
+  /** Forces the player to pause when true. */
+  paused?: boolean;
 }
 
 /**
@@ -48,6 +50,7 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
   autoPlay = false,
   style: styleProp,
   onEnded,
+  paused = false,
 }) => {
   const playerRef = useRef<PlayerRef>(null);
 
@@ -104,6 +107,13 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
     if (isMuted) player.mute();
     else player.unmute();
   }, [isMuted]);
+
+  useEffect(() => {
+    if (!paused) return;
+    const player = playerRef.current;
+    if (!player) return;
+    player.pause();
+  }, [paused]);
 
   // ---------------------------------------------------------------------------
   // Playback handlers
