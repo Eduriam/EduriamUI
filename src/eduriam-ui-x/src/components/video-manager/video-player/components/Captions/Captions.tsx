@@ -48,6 +48,41 @@ export interface CaptionPage {
   tokens: CaptionToken[];
 }
 
+function shouldInsertSpaceBetween(
+  currentToken: CaptionToken,
+  nextToken: CaptionToken | undefined,
+): boolean {
+  if (!nextToken) return false;
+
+  // Preserve explicit whitespace already present in token boundaries.
+  if (/\s$/.test(currentToken.text) || /^\s/.test(nextToken.text)) {
+    return false;
+  }
+
+  const currentTrimmed = currentToken.text.trimEnd();
+  const nextTrimmed = nextToken.text.trimStart();
+  if (!currentTrimmed || !nextTrimmed) return false;
+
+  // Do not add a space before punctuation or closing delimiters.
+  if (/^[,.;:!?)}\]%]/.test(nextTrimmed)) return false;
+
+  // Do not add a space after opening delimiters.
+  if (/[(\[{'"`]/.test(currentTrimmed[currentTrimmed.length - 1] ?? "")) {
+    return false;
+  }
+
+  return true;
+}
+
+function joinCaptionTokens(tokens: CaptionToken[]): string {
+  return tokens
+    .map((token, index) => {
+      const nextToken = tokens[index + 1];
+      return `${token.text}${shouldInsertSpaceBetween(token, nextToken) ? " " : ""}`;
+    })
+    .join("");
+}
+
 /**
  * Groups captions into pages. Words within
  * combineTokensWithinMilliseconds are shown on the same page.
@@ -73,7 +108,7 @@ export function createCaptionPages(options: {
       const startMs = currentPage[0]!.fromMs;
       const last = currentPage[currentPage.length - 1]!;
       pages.push({
-        text: currentPage.map((t) => t.text).join(""),
+        text: joinCaptionTokens(currentPage),
         startMs,
         durationMs: last.toMs - startMs,
         tokens: currentPage,
@@ -92,7 +127,7 @@ export function createCaptionPages(options: {
     const startMs = currentPage[0]!.fromMs;
     const last = currentPage[currentPage.length - 1]!;
     pages.push({
-      text: currentPage.map((t) => t.text).join(""),
+      text: joinCaptionTokens(currentPage),
       startMs,
       durationMs: last.toMs - startMs,
       tokens: currentPage,
@@ -154,8 +189,9 @@ export const Captions: React.FC<ICaptions> = ({
         }}
       >
         <Typography variant="h5" component="div">
-          {currentPage.tokens.map((token) => {
+          {currentPage.tokens.map((token, index) => {
             const isRead = token.fromMs <= currentTimeMs;
+            const nextToken = currentPage.tokens[index + 1];
             return (
               <Box
                 component="span"
@@ -165,6 +201,7 @@ export const Captions: React.FC<ICaptions> = ({
                 }}
               >
                 {token.text}
+                {shouldInsertSpaceBetween(token, nextToken) ? " " : ""}
               </Box>
             );
           })}
