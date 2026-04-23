@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
+import type { ButtonBaseProps } from "@mui/material/ButtonBase";
 import type { Theme } from "@mui/material/styles";
 
 import { Icon, type IconName } from "../../data-display/Icon";
@@ -73,7 +74,7 @@ export interface IconButtonProps {
   /**
    * Called when the button is clicked.
    */
-  onClick?: () => void;
+  onClick?: ButtonBaseProps["onClick"];
 
   /**
    * Optional data attribute used to identify this icon button in E2E tests.
