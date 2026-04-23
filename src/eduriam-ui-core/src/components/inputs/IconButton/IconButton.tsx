@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
 import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+import ButtonBase from "@mui/material/ButtonBase";
 import type { Theme } from "@mui/material/styles";
 
 import { Icon, type IconName } from "../../data-display/Icon";
@@ -75,6 +75,11 @@ export interface IconButtonProps {
    * Called when the button is clicked.
    */
   onClick?: ButtonBaseProps["onClick"];
+
+  /**
+   * Called when a pointer is pressed down on the button.
+   */
+  onPointerDown?: ButtonBaseProps["onPointerDown"];
 
   /**
    * Optional data attribute used to identify this icon button in E2E tests.
@@ -205,6 +210,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   icon = "play",
   disabled = false,
   onClick,
+  onPointerDown,
   "data-test": dataTest,
 }) => {
   const config = SIZE_CONFIG[size];
@@ -219,6 +225,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
         disabled={disabled}
         disableRipple
         onClick={onClick}
+        onPointerDown={onPointerDown}
         data-test={dataTest}
         sx={(theme) => ({
           ...getIconButtonStyles(
