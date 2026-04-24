@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -61,6 +61,7 @@ const BAR_HEIGHT = 48;
 const CHECK_BUTTON_SIZE = 48;
 const CHECK_BUTTON_RADIUS = 12;
 const CHECK_ICON_SIZE = 32;
+const KEYBOARD_OVERLAY_THRESHOLD_PX = 120;
 
 // ---------------------------------------------------------------------------
 // Component
@@ -89,6 +90,40 @@ export const KeyboardExtension: React.FC<KeyboardExtensionProps> = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isSticky =
     variant === "sticky" || (variant === "standard" && isMobile);
+  const [keyboardBottomOffset, setKeyboardBottomOffset] = useState(0);
+
+  useEffect(() => {
+    if (!isSticky || typeof window === "undefined") {
+      setKeyboardBottomOffset(0);
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    if (!viewport) {
+      setKeyboardBottomOffset(0);
+      return;
+    }
+
+    const measureKeyboardInset = () => {
+      const overlap = Math.round(
+        window.innerHeight - viewport.height - viewport.offsetTop,
+      );
+      setKeyboardBottomOffset(
+        overlap > KEYBOARD_OVERLAY_THRESHOLD_PX ? overlap : 0,
+      );
+    };
+
+    measureKeyboardInset();
+    viewport.addEventListener("resize", measureKeyboardInset);
+    viewport.addEventListener("scroll", measureKeyboardInset);
+    window.addEventListener("resize", measureKeyboardInset);
+
+    return () => {
+      viewport.removeEventListener("resize", measureKeyboardInset);
+      viewport.removeEventListener("scroll", measureKeyboardInset);
+      window.removeEventListener("resize", measureKeyboardInset);
+    };
+  }, [isSticky]);
 
   return (
     <Box
@@ -101,14 +136,15 @@ export const KeyboardExtension: React.FC<KeyboardExtensionProps> = ({
         overflow: "hidden",
         ...(isSticky && {
           position: "fixed",
-          bottom: 0,
+          bottom: `${keyboardBottomOffset}px`,
           left: 0,
           right: 0,
           zIndex: "appBar",
           borderRadius: 0,
           overflow: "visible",
           // Account for bottom safe area on notched devices.
-          paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          paddingBottom:
+            keyboardBottomOffset > 0 ? 0 : "env(safe-area-inset-bottom, 0px)",
         }),
       }}
     >
