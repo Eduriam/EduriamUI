@@ -209,7 +209,6 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
         fps={fps}
         compositionWidth={videoWidth}
         compositionHeight={videoHeight}
-        numberOfSharedAudioTags={0}
         style={{ width: "100%", ...styleProp }}
         controls={false}
         autoPlay={autoPlay}

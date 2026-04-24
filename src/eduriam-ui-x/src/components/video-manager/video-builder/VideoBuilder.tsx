@@ -1,4 +1,4 @@
-import { AbsoluteFill, Audio, Sequence } from "remotion";
+import { AbsoluteFill, Html5Audio, Sequence } from "remotion";
 
 import React from "react";
 
@@ -23,7 +23,9 @@ const SceneRenderer: React.FC<SceneRendererProps> = ({
 
   return (
     <AbsoluteFill>
-      {scene.audio ? <Audio src={scene.audio.url} /> : null}
+      {scene.audio ? (
+        <Html5Audio src={scene.audio.url} pauseWhenBuffering />
+      ) : null}
       {slideTimings.map(({ slide, from, durationInFrames }, index) => (
         <Sequence
           key={`${slide.id}-${index}`}

@@ -29,6 +29,8 @@ export interface IExerciseStudyBlock {
    * not replay.
    */
   isRevisiting?: boolean;
+  /** When true, exercise audio autoplay is suppressed on mount. */
+  suppressAudioAutoplay?: boolean;
   dataTest?: StudySessionDataTest;
 }
 
@@ -37,6 +39,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
   onCheck,
   localization,
   isRevisiting = false,
+  suppressAudioAutoplay = false,
   dataTest,
 }) => {
   const [answerStates, setAnswerStates] = useState<AnswerState[]>([]);
@@ -51,7 +54,7 @@ export const ExerciseStudyBlock: React.FC<IExerciseStudyBlock> = ({
     () => components.map((c) => c.audio?.url),
     [components],
   );
-  useStudyBlockAudio(audioUrls, !isRevisiting);
+  useStudyBlockAudio(audioUrls, !isRevisiting && !suppressAudioAutoplay);
 
   function handleAnswerStateChange(
     newAnswerState: AnswerState,
