@@ -19,6 +19,10 @@ export type DrawerBackgroundColor =
    */
   | "default"
   /**
+   * Use the paper surface color.
+   */
+  | "paper"
+  /**
    * Use the success/positive color.
    */
   | "success"
@@ -175,6 +179,10 @@ export const Drawer: React.FC<DrawerProps> = ({
           const resolvedBackgroundColor = (() => {
             if (!backgroundColor || backgroundColor === "default") {
               return muiTheme.palette.background.default;
+            }
+
+            if (backgroundColor === "paper") {
+              return muiTheme.palette.background.paper;
             }
 
             if (backgroundColor === "success") {

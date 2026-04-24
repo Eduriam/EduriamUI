@@ -19,7 +19,7 @@ const meta: Meta<typeof Drawer> = {
   argTypes: {
     backgroundColor: {
       control: { type: "radio" },
-      options: ["default", "success", "error"],
+      options: ["default", "paper", "success", "error"],
     },
     disableDesktopDialog: {
       control: { type: "boolean" },

@@ -97,6 +97,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
 
   const isCorrect = variant === "correct";
+  const isDarkMode = theme.palette.mode === "dark";
   const hasExplanation = !isCorrect && Boolean(answerExplanation?.text);
 
   useEffect(() => {
@@ -114,6 +115,16 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
   }, [isCorrect, playSound]);
 
   const primaryColor = isCorrect ? "success" : "error";
+  const drawerBackgroundColor = isDarkMode
+    ? "paper"
+    : isCorrect
+      ? "success"
+      : "error";
+  const titleColor = isDarkMode
+    ? isCorrect
+      ? "success.main"
+      : "error.main"
+    : undefined;
   const { studySessionDrawer } = localization;
   const title = isCorrect
     ? studySessionDrawer.titleCorrect
@@ -149,7 +160,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
         onClose={() => undefined}
         maxDialogWidth={520}
         data-test={drawerDataTest}
-        backgroundColor={isCorrect ? "success" : "error"}
+        backgroundColor={drawerBackgroundColor}
         disableDesktopDialog={true}
         maxContentWidth="medium"
         hideBackdrop={true}
@@ -170,7 +181,7 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
               gap: 2,
             }}
           >
-            <Typography variant="h5" fontWeight={600}>
+            <Typography variant="h5" fontWeight={600} color={titleColor}>
               {title}
             </Typography>
 
