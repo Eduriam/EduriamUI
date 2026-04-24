@@ -87,11 +87,13 @@ const parseInlineText = (text: string): TextSegment[] => {
 export const Text: React.FC<ITextProps> = ({ comp }) => {
   const segments = parseInlineText(comp.text);
   const align = comp.align ?? "center";
-  const textRef = useRef<HTMLDivElement | null>(null);
+  const fittyContainerRef = useRef<HTMLDivElement | null>(null);
+  const fittedTextRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    const node = textRef.current;
-    if (!node) return;
+    const container = fittyContainerRef.current;
+    const node = fittedTextRef.current;
+    if (!node || !container) return;
 
     const fittyInstance = fitty(node, {
       minSize: 16,
@@ -99,21 +101,22 @@ export const Text: React.FC<ITextProps> = ({ comp }) => {
       multiLine: true,
     });
 
-    fittyInstance.fit();
+    const fit = () => fittyInstance.fit({ sync: true });
 
-    const fit = () => fittyInstance.fit();
+    fit();
+    const rafId = requestAnimationFrame(fit);
 
     let resizeObserver: ResizeObserver | undefined;
-    const parent = node.parentElement;
 
-    if (typeof ResizeObserver !== "undefined" && parent) {
+    if (typeof ResizeObserver !== "undefined") {
       resizeObserver = new ResizeObserver(fit);
-      resizeObserver.observe(parent);
+      resizeObserver.observe(container);
     } else if (typeof window !== "undefined") {
       window.addEventListener("resize", fit);
     }
 
     return () => {
+      cancelAnimationFrame(rafId);
       resizeObserver?.disconnect();
       if (typeof window !== "undefined") {
         window.removeEventListener("resize", fit);
@@ -139,63 +142,69 @@ export const Text: React.FC<ITextProps> = ({ comp }) => {
     >
       <Typography
         component="div"
-        ref={textRef}
         sx={{
           width: "100%",
           textAlign: align,
           lineHeight: 1.2,
         }}
       >
-        {segments.map((segment, index) => {
-          if (segment.type === "plain") {
-            return <span key={index}>{segment.content}</span>;
-          }
+        <Box ref={fittyContainerRef} sx={{ width: "100%" }}>
+          <span
+            ref={fittedTextRef}
+            style={{ display: "inline-block", whiteSpace: "nowrap" }}
+          >
+            {segments.map((segment, index) => {
+              if (segment.type === "plain") {
+                return <span key={index}>{segment.content}</span>;
+              }
 
-          if (segment.type === "bold") {
-            return (
-              <span
-                key={index}
-                style={{
-                  color: "#0ea5e9",
-                  fontWeight: "inherit",
-                  fontStyle: "inherit",
-                }}
-              >
-                {segment.content}
-              </span>
-            );
-          }
+              if (segment.type === "bold") {
+                return (
+                  <span
+                    key={index}
+                    style={{
+                      color: "#0ea5e9",
+                      fontWeight: "inherit",
+                      fontStyle: "inherit",
+                    }}
+                  >
+                    {segment.content}
+                  </span>
+                );
+              }
 
-          if (segment.type === "italic") {
-            return (
-              <span
-                key={index}
-                style={{
-                  color: "#22c55e",
-                  fontStyle: "inherit",
-                  fontWeight: "inherit",
-                }}
-              >
-                {segment.content}
-              </span>
-            );
-          }
+              if (segment.type === "italic") {
+                return (
+                  <span
+                    key={index}
+                    style={{
+                      color: "#22c55e",
+                      fontStyle: "inherit",
+                      fontWeight: "inherit",
+                    }}
+                  >
+                    {segment.content}
+                  </span>
+                );
+              }
 
-          // code
-          return (
-            <span
-              key={index}
-              style={{
-                fontFamily: "monospace",
-                backgroundColor: "rgba(148, 163, 184, 0.2)",
-                paddingInline: 4,
-                borderRadius: 4,
-              }}
-            >
-              {segment.content}
-            </span>
-          );
-        })}
+              // code
+              return (
+                <span
+                  key={index}
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "rgba(148, 163, 184, 0.2)",
+                    paddingInline: 4,
+                    borderRadius: 4,
+                  }}
+                >
+                  {segment.content}
+                </span>
+              );
+            })}
+          </span>
+        </Box>
       </Typography>
     </Box>
   );
