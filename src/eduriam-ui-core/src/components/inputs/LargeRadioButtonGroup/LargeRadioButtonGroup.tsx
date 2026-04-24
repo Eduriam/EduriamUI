@@ -126,7 +126,12 @@ export const LargeRadioButtonGroup = ({
     <Box
       role="radiogroup"
       data-test={dataTest}
-      sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        width: fullWidth ? "100%" : "fit-content",
+      }}
     >
       {optionMap.map((option) => (
         <LargeRadioButton

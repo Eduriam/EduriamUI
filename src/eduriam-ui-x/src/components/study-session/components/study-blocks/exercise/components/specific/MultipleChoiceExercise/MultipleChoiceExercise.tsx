@@ -65,9 +65,15 @@ export const MultipleChoiceExercise: React.FC<
     <Stack
       direction="column"
       alignItems="center"
+      width="100%"
       data-test={dataTest?.exerciseSection}
     >
-      <Stack direction="column" alignItems="flex-start" spacing={4}>
+      <Stack
+        direction="column"
+        alignItems="flex-start"
+        spacing={4}
+        width="100%"
+      >
         {assignmentTitle ? (
           <>
             <Typography variant="h5" fontWeight={700}>
@@ -80,9 +86,10 @@ export const MultipleChoiceExercise: React.FC<
         ) : (
           <Typography variant="h5">{component.question}</Typography>
         )}
+
         <LargeRadioButtonGroup
           options={optionsWithDataTest}
-          fullWidth={false}
+          fullWidth
           onChange={(id) => setSelectedId(id)}
         />
       </Stack>
