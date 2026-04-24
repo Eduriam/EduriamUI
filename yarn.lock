@@ -541,6 +541,7 @@ __metadata:
     "@types/dompurify": "npm:^3.2.0"
     canvas-confetti: "npm:^1.9.3"
     dompurify: "npm:^3.3.1"
+    fitty: "npm:^2.4.2"
     mermaid: "npm:^11.12.0"
     prism-react-renderer: "npm:^2.4.0"
     prismjs: "npm:^1.29.0"
@@ -5236,6 +5237,13 @@ __metadata:
     locate-path: "npm:^6.0.0"
     path-exists: "npm:^4.0.0"
   checksum: 10c0/062c5a83a9c02f53cdd6d175a37ecf8f87ea5bbff1fdfb828f04bfa021441bc7583e8ebc0872a4c1baab96221fb8a8a275a19809fb93fbc40bd69ec35634069a
+  languageName: node
+  linkType: hard
+
+"fitty@npm:^2.4.2":
+  version: 2.4.2
+  resolution: "fitty@npm:2.4.2"
+  checksum: 10c0/6134364601849b50e8c60018e6310ac8022aee18462b90b1f798ad2fec3c1dca331e142f77f162a81c32d72f27b706b77cb6425504bd58a834a78d6e4aff5c4b
   languageName: node
   linkType: hard
 
