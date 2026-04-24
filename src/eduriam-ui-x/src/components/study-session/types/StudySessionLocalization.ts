@@ -9,7 +9,8 @@ export interface StudySessionLocalization {
     explanationTitle: string;
     whyButton: string;
     continueButton: string;
-    skipExerciseButton?: string;
+    retryButton: string;
+    skipExerciseButton: string;
   };
   multipleChoiceExercise: {
     assignmentTitle: string;

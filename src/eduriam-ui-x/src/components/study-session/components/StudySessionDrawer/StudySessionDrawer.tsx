@@ -130,10 +130,10 @@ export const StudySessionDrawer: React.FC<StudySessionDrawerProps> = ({
     ? studySessionDrawer.titleCorrect
     : studySessionDrawer.titleIncorrect;
   const continueButtonLabel = studySessionDrawer.continueButton;
-  const primaryButtonLabel = isCorrect ? continueButtonLabel : "Retry";
+  const retryButtonLabel = studySessionDrawer.retryButton;
+  const primaryButtonLabel = isCorrect ? continueButtonLabel : retryButtonLabel;
   const whyButtonLabel = studySessionDrawer.whyButton;
-  const skipExerciseButtonLabel =
-    studySessionDrawer.skipExerciseButton ?? "Skip exercise";
+  const skipExerciseButtonLabel = studySessionDrawer.skipExerciseButton;
   const showSkipButton = !isCorrect && allowSkipExercise;
   const drawerDataTest =
     dataTest ??

@@ -11,6 +11,8 @@ export const STUDY_SESSION_LOCALIZATION_DEFAULT: StudySessionLocalization = {
     explanationTitle: "Explanation",
     whyButton: "Why?",
     continueButton: "Continue",
+    retryButton: "Retry",
+    skipExerciseButton: "Skip exercise",
   },
   multipleChoiceExercise: {
     assignmentTitle: "Select correct answer",
