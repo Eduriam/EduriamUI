@@ -37,17 +37,55 @@ function useAvailableHeight(ref: React.RefObject<HTMLElement | null>) {
   const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const initialEl = ref.current;
+    if (!initialEl) return;
 
     function measure() {
-      const top = el!.getBoundingClientRect().top;
-      setHeight(Math.round(window.innerHeight - top));
+      const el = ref.current;
+      if (!el) return;
+
+      const { top } = el.getBoundingClientRect();
+      const parentBottom =
+        el.parentElement?.getBoundingClientRect().bottom ?? window.innerHeight;
+      setHeight(Math.round(Math.max(0, parentBottom - top)));
     }
 
     measure();
+    const parentObserver = initialEl.parentElement
+      ? new ResizeObserver(() => measure())
+      : null;
+    if (parentObserver && initialEl.parentElement) {
+      parentObserver.observe(initialEl.parentElement);
+    }
+
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      parentObserver?.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [ref]);
+
+  return height;
+}
+
+function useElementHeight(ref: React.RefObject<HTMLElement | null>) {
+  const [height, setHeight] = useState<number>(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const measure = () => setHeight(Math.round(el.getBoundingClientRect().height));
+    measure();
+
+    const observer = new ResizeObserver(() => measure());
+    observer.observe(el);
+
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [ref]);
 
   return height;
@@ -66,7 +104,9 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
   const availableHeight = useAvailableHeight(containerRef);
+  const actionsHeight = useElementHeight(actionsRef);
 
   const [containerWidth, setContainerWidth] = useState(0);
   const [hasFinished, setHasFinished] = useState(isRevisiting);
@@ -84,14 +124,20 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
     return () => observer.disconnect();
   }, []);
 
+  const mobileVideoHeight = useMemo(() => {
+    if (availableHeight <= 0) return 0;
+    if (actionsHeight <= 0) return availableHeight;
+    return Math.max(0, availableHeight - actionsHeight);
+  }, [availableHeight, actionsHeight]);
+
   const videoDefinition: VideoDefinition | null = useMemo(() => {
     if (containerWidth <= 0) return null;
 
     const videoWidth = containerWidth;
     const videoHeight = desktop
       ? Math.round(containerWidth / VIDEO_ASPECT_RATIO)
-      : availableHeight > 0
-        ? availableHeight
+      : mobileVideoHeight > 0
+        ? mobileVideoHeight
         : Math.round(containerWidth / VIDEO_ASPECT_RATIO);
 
     return {
@@ -100,7 +146,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
       videoWidth,
       videoHeight,
     };
-  }, [scenes, containerWidth, availableHeight, desktop]);
+  }, [scenes, containerWidth, mobileVideoHeight, desktop]);
 
   const captions = useMemo<Caption[]>(() => {
     const result: Caption[] = [];
@@ -141,7 +187,7 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
           ...(desktop
             ? { aspectRatio: `${VIDEO_ASPECT_RATIO}` }
             : {
-                height: availableHeight > 0 ? availableHeight : undefined,
+                height: mobileVideoHeight > 0 ? mobileVideoHeight : undefined,
               }),
         }}
       >
@@ -157,7 +203,10 @@ export const ExplanationStudyBlock: React.FC<IExplanationStudyBlock> = ({
         )}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", pt: 2.5 }}>
+      <Box
+        ref={actionsRef}
+        sx={{ display: "flex", justifyContent: "center", pt: 2.5 }}
+      >
         <Box
           sx={{
             display: "flex",
