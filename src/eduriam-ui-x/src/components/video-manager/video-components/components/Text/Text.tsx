@@ -1,4 +1,6 @@
-import React from "react";
+import fitty from "fitty";
+
+import React, { useEffect, useRef } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -82,49 +84,43 @@ const parseInlineText = (text: string): TextSegment[] => {
   return segments;
 };
 
-const getFontSizeForLength = (text: string) => {
-  const visibleText = text.replace(/(\*\*|__|`)/g, "");
-  const lines = visibleText.split(/\r?\n/);
-  const longestLineLength = lines.reduce(
-    (max, line) => Math.max(max, line.trim().length),
-    0,
-  );
-  const effectiveLength =
-    longestLineLength + Math.max(0, lines.length - 1) * 16;
-
-  const interpolate = (
-    value: number,
-    minLength: number,
-    maxLength: number,
-    minSize: number,
-    maxSize: number,
-  ) => {
-    if (value <= minLength) {
-      return maxSize;
-    }
-
-    if (value >= maxLength) {
-      return minSize;
-    }
-
-    const t = (value - minLength) / (maxLength - minLength);
-    const easedT = Math.pow(t, 0.85);
-    return maxSize - easedT * (maxSize - minSize);
-  };
-
-  const mobileSizeRem = interpolate(effectiveLength, 18, 90, 1.2, 2.8);
-  const desktopSizeRem = interpolate(effectiveLength, 22, 120, 1.6, 4.2);
-
-  return {
-    xs: `${mobileSizeRem}rem`,
-    md: `${desktopSizeRem}rem`,
-  };
-};
-
 export const Text: React.FC<ITextProps> = ({ comp }) => {
   const segments = parseInlineText(comp.text);
   const align = comp.align ?? "center";
-  const fontSize = getFontSizeForLength(comp.text);
+  const textRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const node = textRef.current;
+    if (!node) return;
+
+    const fittyInstance = fitty(node, {
+      minSize: 16,
+      maxSize: 56,
+      multiLine: true,
+    });
+
+    fittyInstance.fit();
+
+    const fit = () => fittyInstance.fit();
+
+    let resizeObserver: ResizeObserver | undefined;
+    const parent = node.parentElement;
+
+    if (typeof ResizeObserver !== "undefined" && parent) {
+      resizeObserver = new ResizeObserver(fit);
+      resizeObserver.observe(parent);
+    } else if (typeof window !== "undefined") {
+      window.addEventListener("resize", fit);
+    }
+
+    return () => {
+      resizeObserver?.disconnect();
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", fit);
+      }
+      fittyInstance.unsubscribe();
+    };
+  }, [comp.text, align]);
 
   return (
     <Box
@@ -142,10 +138,12 @@ export const Text: React.FC<ITextProps> = ({ comp }) => {
       }}
     >
       <Typography
+        component="div"
+        ref={textRef}
         sx={{
           width: "100%",
           textAlign: align,
-          fontSize,
+          lineHeight: 1.2,
         }}
       >
         {segments.map((segment, index) => {
