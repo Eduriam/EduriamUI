@@ -123,6 +123,8 @@ const StudySession: React.FC<IStudySession> = ({
   >(new Map());
   const [playDrawerSound, setPlayDrawerSound] = useState(false);
   const [exerciseRenderVersion, setExerciseRenderVersion] = useState(0);
+  const [suppressExerciseAudioAutoplay, setSuppressExerciseAudioAutoplay] =
+    useState(false);
   const [wrongAttemptsByIndex, setWrongAttemptsByIndex] = useState<
     Map<number, number>
   >(new Map());
@@ -162,6 +164,9 @@ const StudySession: React.FC<IStudySession> = ({
 
   const drawerTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => () => clearTimeout(drawerTimeoutRef.current), []);
+  useEffect(() => {
+    setSuppressExerciseAudioAutoplay(false);
+  }, [index]);
 
   // ---------------------------------------------------------------------------
   // Navigation helpers
@@ -325,6 +330,7 @@ const StudySession: React.FC<IStudySession> = ({
     setCheckedResult(null);
     setUserAnswerReport("");
     setPlayDrawerSound(false);
+    setSuppressExerciseAudioAutoplay(true);
     setCompletedResults((prev) => {
       if (!prev.has(index)) return prev;
       const next = new Map(prev);
@@ -499,6 +505,7 @@ const StudySession: React.FC<IStudySession> = ({
                     }}
                     localization={localization}
                     isRevisiting={isRevisiting}
+                    suppressAudioAutoplay={suppressExerciseAudioAutoplay}
                     dataTest={dataTest}
                   />
                 )}
