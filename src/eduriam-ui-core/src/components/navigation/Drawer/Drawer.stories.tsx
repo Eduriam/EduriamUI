@@ -6,11 +6,15 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
+import { LargeButton } from "../../inputs/LargeButton/LargeButton";
 import { Drawer, type DrawerProps } from "./Drawer";
 
 type DrawerStoryProps = Pick<
   DrawerProps,
-  "backgroundColor" | "disableDesktopDialog" | "maxDialogWidth" | "maxContentWidth"
+  | "backgroundColor"
+  | "disableDesktopDialog"
+  | "maxDialogWidth"
+  | "maxContentWidth"
 >;
 
 const meta: Meta<typeof Drawer> = {
@@ -42,12 +46,15 @@ const DemoContent = () => (
     <Typography variant="h6">Drawer title</Typography>
     <Typography variant="body2">
       This is some example content inside the drawer. On mobile, it slides up
-      from the bottom. On desktop, it can either behave like a dialog or stay
-      as a bottom sheet depending on `disableDesktopDialog`.
+      from the bottom. On desktop, it can either behave like a dialog or stay as
+      a bottom sheet depending on `disableDesktopDialog`.
     </Typography>
     <Typography variant="body2">
       Add any form fields, text or actions you need here.
     </Typography>
+    <LargeButton variant="contained" color="primary" onClick={() => {}}>
+      Yoo
+    </LargeButton>
   </Stack>
 );
 

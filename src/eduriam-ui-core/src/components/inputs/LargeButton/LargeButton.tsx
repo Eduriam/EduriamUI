@@ -119,7 +119,7 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
     const darkColor =
       color === "textPrimary"
         ? theme.palette.text.primary
-        : theme.palette[color].dark ?? theme.palette[color].main;
+        : (theme.palette[color].dark ?? theme.palette[color].main);
     const filledTextColor = isDisabled
       ? theme.palette.text.disabled
       : theme.palette.common.white;
@@ -220,6 +220,8 @@ export const LargeButton: React.FC<LargeButtonProps> = ({
         height: 48,
         width: fullWidth ? "100%" : "fit-content",
         maxWidth: 400,
+        mx: fullWidth ? "auto" : undefined,
+        alignSelf: fullWidth ? "center" : undefined,
       }}
     >
       <Button
