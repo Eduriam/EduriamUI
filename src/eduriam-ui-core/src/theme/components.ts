@@ -3,6 +3,13 @@ import type { Components, Theme } from "@mui/material/styles";
 const elevationLight1 = "0px 3px 8px 0px rgba(0, 0, 0, 0.08)";
 
 export const componentOverrides: Components<Omit<Theme, "components">> = {
+  MuiCssBaseline: {
+    styleOverrides: {
+      "*": {
+        WebkitTapHighlightColor: "transparent",
+      },
+    },
+  },
   MuiCard: {
     styleOverrides: {
       root: { boxShadow: elevationLight1 },
