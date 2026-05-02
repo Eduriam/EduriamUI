@@ -219,6 +219,7 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
     }
     return initial;
   });
+  const [isTypingContextActive, setIsTypingContextActive] = useState(false);
 
   // ---- Active tab info ----
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -349,7 +350,23 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
       target instanceof HTMLTextAreaElement
     ) {
       lastFocusedInputRef.current = target;
+      setIsTypingContextActive(true);
     }
+  }
+
+  /**
+   * Hide keyboard extension when focus leaves this component.
+   * Keeps it visible while focus moves between inputs/textareas inside it.
+   */
+  function handleBlurCapture(e: React.FocusEvent) {
+    const nextFocused = e.relatedTarget;
+    if (
+      nextFocused instanceof Node &&
+      e.currentTarget.contains(nextFocused)
+    ) {
+      return;
+    }
+    setIsTypingContextActive(false);
   }
 
   /**
@@ -392,6 +409,7 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
     <Stack
       spacing={4}
       onFocusCapture={handleFocusCapture}
+      onBlurCapture={handleBlurCapture}
       data-test={dataTest?.section}
     >
       {hasHeading ? (
@@ -427,7 +445,7 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
           },
         }}
       />
-      {keyboardCharacters && (
+      {keyboardCharacters && isTypingContextActive && (
         <KeyboardExtension
           characters={[...keyboardCharacters]}
           variant="standard"

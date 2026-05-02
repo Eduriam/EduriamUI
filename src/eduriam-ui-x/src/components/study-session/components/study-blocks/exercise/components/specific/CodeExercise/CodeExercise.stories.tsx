@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import type { CodeEditorTab } from "../CodeEditor/CodeEditorTypes";
 import { CodeExercise } from "./CodeExercise";
@@ -295,6 +295,18 @@ export const FillInBlankWithoutOptions: Story = {
     passiveTabsUnlocked: true,
     onAnswerStateChange: fn(),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.queryByRole("button", { name: ":" })).toBeNull();
+
+    const blankInput = canvas.getByLabelText("blank kw");
+    await userEvent.click(blankInput);
+    await expect(canvas.getByRole("button", { name: ":" })).toBeInTheDocument();
+
+    await userEvent.tab();
+    await expect(canvas.queryByRole("button", { name: ":" })).toBeNull();
+  },
 };
 
 // ===========================================================================
@@ -306,6 +318,7 @@ const configTab: CodeEditorTab = {
   label: "config.json",
   type: "fillInCode",
   defaultValue: `{\n  "port": 3000\n}`,
+  keyboardSet: "javascript",
 };
 
 const serverTab: CodeEditorTab = {
@@ -327,5 +340,21 @@ export const TwoFillInCodeTabs: Story = {
     tabs: [configTab, serverTab, serverTerminalTab],
     passiveTabsUnlocked: true,
     onAnswerStateChange: fn(),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.queryByRole("button", { name: "{" })).toBeNull();
+
+    const textarea = canvasElement.querySelector("textarea");
+    if (!textarea) {
+      throw new Error("Expected fillInCode textarea to be rendered.");
+    }
+
+    await userEvent.click(textarea);
+    await expect(canvas.getByRole("button", { name: "{" })).toBeInTheDocument();
+
+    await userEvent.tab();
+    await expect(canvas.queryByRole("button", { name: "{" })).toBeNull();
   },
 };
