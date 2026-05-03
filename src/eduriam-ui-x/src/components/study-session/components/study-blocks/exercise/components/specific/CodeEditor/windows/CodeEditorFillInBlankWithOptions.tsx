@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useDraggable, useDroppable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 import Box from "@mui/material/Box";
 import type { TypographyProps } from "@mui/material/Typography";
 import Typography from "@mui/material/Typography";
@@ -18,9 +20,93 @@ export interface CodeEditorFillInBlankWithOptionsProps {
   /** Called when the user clicks a filled blank to remove the value. */
   onBlankClick?: (blankId: string) => void;
 
+  /** Returns a stable droppable id for the given blank id. */
+  getBlankDroppableId?: (blankId: string) => string;
+
+  /** Returns a stable draggable id for a filled blank token. */
+  getBlankTokenDraggableId?: (blankId: string) => string;
+
+  /** Enables drag-and-drop drop targets for blanks. */
+  dragAndDropEnabled?: boolean;
+
   /** Optional Prism language for syntax highlighting (e.g. "javascript", "html"). */
   language?: string;
 }
+
+interface DroppableCodeBlankProps {
+  blankId: string;
+  code: string;
+  filled: boolean;
+  onClick?: () => void;
+  getBlankDroppableId?: (blankId: string) => string;
+  getBlankTokenDraggableId?: (blankId: string) => string;
+  dragAndDropEnabled?: boolean;
+}
+
+const DroppableCodeBlank: React.FC<DroppableCodeBlankProps> = ({
+  blankId,
+  code,
+  filled,
+  onClick,
+  getBlankDroppableId,
+  getBlankTokenDraggableId,
+  dragAndDropEnabled = false,
+}) => {
+  const droppableId = getBlankDroppableId?.(blankId);
+  const { isOver, setNodeRef } = useDroppable({
+    id: droppableId ?? `blank:${blankId}`,
+    data: {
+      type: "code-blank",
+      blankId,
+    },
+    disabled: !dragAndDropEnabled,
+  });
+  const draggableId = getBlankTokenDraggableId?.(blankId);
+  const {
+    attributes,
+    listeners,
+    setNodeRef: setDraggableNodeRef,
+    transform,
+    isDragging,
+  } =
+    useDraggable({
+      id: draggableId ?? `blank-token:${blankId}`,
+      data: {
+        type: "code-blank-token",
+        blankId,
+      },
+      disabled: !dragAndDropEnabled || !filled,
+    });
+
+  return (
+    <Box
+      ref={setNodeRef}
+      sx={{
+        display: "inline-flex",
+        borderRadius: 2,
+        outline: isOver ? "2px solid" : "none",
+        outlineColor: isOver ? "primary.main" : "transparent",
+        outlineOffset: isOver ? "2px" : 0,
+      }}
+      data-testid={`code-blank-${blankId}`}
+    >
+      <Box
+        ref={setDraggableNodeRef}
+        sx={{
+          width: "fit-content",
+          transform: CSS.Translate.toString(transform),
+          opacity: isDragging ? 0 : 1,
+          touchAction: "none",
+          cursor: filled ? "grab" : "default",
+        }}
+        {...attributes}
+        {...listeners}
+      >
+        <CodeBlank code={code} filled={filled} onClick={onClick} />
+      </Box>
+    </Box>
+  );
+};
 
 /**
  * Renders a read-only code template where blank segments are shown as
@@ -31,6 +117,9 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
   lines,
   filledBlanks,
   onBlankClick,
+  getBlankDroppableId,
+  getBlankTokenDraggableId,
+  dragAndDropEnabled = false,
   language,
 }) => {
   return (
@@ -38,7 +127,7 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
       sx={{
         px: 4,
         py: 3,
-        overflow: "auto",
+        overflow: "hidden",
         flexGrow: 1,
       }}
     >
@@ -72,13 +161,15 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
             const value = filledBlanks[segment.blankId] ?? "\u00A0\u00A0\u00A0\u00A0";
 
             return (
-              <CodeBlank
+              <DroppableCodeBlank
                 key={segIdx}
+                blankId={segment.blankId}
                 code={value}
                 filled={filled}
-                onClick={
-                  filled ? () => onBlankClick?.(segment.blankId) : undefined
-                }
+                onClick={filled ? () => onBlankClick?.(segment.blankId) : undefined}
+                getBlankDroppableId={getBlankDroppableId}
+                getBlankTokenDraggableId={getBlankTokenDraggableId}
+                dragAndDropEnabled={dragAndDropEnabled}
               />
             );
           })}

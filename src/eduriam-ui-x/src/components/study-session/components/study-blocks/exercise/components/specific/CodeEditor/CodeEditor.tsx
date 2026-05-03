@@ -48,6 +48,15 @@ export interface CodeEditorProps {
   /** Called when a filled blank is clicked to remove its value. */
   onBlankClick?: CodeEditorFillInBlankWithOptionsProps["onBlankClick"];
 
+  /** Returns a stable droppable id for a blank in fillInBlankWithOptions tabs. */
+  getBlankDroppableId?: (blankId: string) => string;
+
+  /** Returns a stable draggable id for a filled blank token. */
+  getBlankTokenDraggableId?: (blankId: string) => string;
+
+  /** Enables drag-and-drop behavior for fillInBlankWithOptions tabs. */
+  dragAndDropEnabled?: boolean;
+
   // ---- fillInBlankWithoutOptions window props ----
 
   /** Called when the user types in a blank (without-options variant). */
@@ -78,6 +87,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   passiveTabsUnlocked = false,
   filledBlanks = {},
   onBlankClick,
+  getBlankDroppableId,
+  getBlankTokenDraggableId,
+  dragAndDropEnabled = false,
   onBlankChange,
   codeValues = {},
   onCodeValueChange,
@@ -106,6 +118,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             lines={activeTab.lines}
             filledBlanks={filledBlanks}
             onBlankClick={onBlankClick}
+            getBlankDroppableId={getBlankDroppableId}
+            getBlankTokenDraggableId={getBlankTokenDraggableId}
+            dragAndDropEnabled={dragAndDropEnabled}
             language={activeTab.language}
           />
         );
