@@ -78,7 +78,7 @@ export interface CodeEditorProps {
  * Each tab corresponds to a different "window" type
  * (fillInBlankWithOptions, fillInBlankWithoutOptions, fillInCode,
  * browser, table, terminal). Passive tabs (browser, table, terminal)
- * are disabled until `passiveTabsUnlocked` is `true`.
+ * are hidden until `passiveTabsUnlocked` is `true`.
  */
 export const CodeEditor: React.FC<CodeEditorProps> = ({
   tabs,
@@ -95,18 +95,26 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   onCodeValueChange,
   dataTest,
 }) => {
-  // Build tabs config for the Tabs component.
-  const tabItems = useMemo(
+  const visibleTabs = useMemo(
     () =>
-      tabs.map((tab) => ({
-        label: tab.label,
-        value: tab.id,
-        disabled: PASSIVE_TAB_TYPES.has(tab.type) && !passiveTabsUnlocked,
-      })),
+      tabs.filter(
+        (tab) => passiveTabsUnlocked || !PASSIVE_TAB_TYPES.has(tab.type),
+      ),
     [tabs, passiveTabsUnlocked],
   );
 
-  const activeTab = tabs.find((t) => t.id === activeTabId);
+  // Build tabs config for the Tabs component.
+  const tabItems = useMemo(
+    () =>
+      visibleTabs.map((tab) => ({
+        label: tab.label,
+        value: tab.id,
+        disabled: false,
+      })),
+    [visibleTabs],
+  );
+
+  const activeTab = visibleTabs.find((t) => t.id === activeTabId);
 
   function renderWindow() {
     if (!activeTab) return null;
