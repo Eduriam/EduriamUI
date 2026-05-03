@@ -86,6 +86,18 @@ export interface IStudySession {
 
   /** Optional `data-test` mapping used by E2E tests. */
   dataTest?: StudySessionDataTest;
+
+  /**
+   * Controlled mute state for study session audio.
+   * When provided, the parent owns mute state.
+   */
+  audioMuted?: boolean;
+
+  /**
+   * Called whenever mute state changes.
+   * Useful for persistence (e.g. localStorage).
+   */
+  onAudioMutedChange?: (isMuted: boolean) => void;
 }
 
 interface AtomStats {
@@ -101,6 +113,8 @@ const StudySession: React.FC<IStudySession> = ({
   onReportStudyBlockClick,
   localization: localizationProp,
   dataTest,
+  audioMuted,
+  onAudioMutedChange,
 }) => {
   const localization = localizationProp ?? STUDY_SESSION_LOCALIZATION_DEFAULT;
   const onQuitHandler = onQuit ?? onExit;
@@ -438,7 +452,10 @@ const StudySession: React.FC<IStudySession> = ({
       : null;
 
   return (
-    <StudySessionAudioProvider>
+    <StudySessionAudioProvider
+      isMuted={audioMuted}
+      onMutedChange={onAudioMutedChange}
+    >
       {finishedSession && finishedStatsSnapshot ? (
         <StudySessionStats
           totalXp={finishedStatsSnapshot.totalXp}
