@@ -20,6 +20,7 @@ export const Default: Story = {
     children: "Button",
     onClick: fn(),
     selected: false,
+    draggableId: "storybook-option-default",
   },
   play: async ({ canvas, args }) => {
     await userEvent.click(canvas.getByRole("button", { name: /Button/i }));
@@ -31,5 +32,6 @@ export const Selected: Story = {
   args: {
     children: "Button",
     selected: true,
+    draggableId: "storybook-option-selected",
   },
 };

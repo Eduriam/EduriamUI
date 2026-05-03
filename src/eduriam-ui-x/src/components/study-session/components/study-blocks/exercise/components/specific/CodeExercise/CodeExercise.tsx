@@ -1,4 +1,4 @@
-import { KeyboardExtension } from "@eduriam/ui-core";
+import { KeyboardExtension, LargeButton } from "@eduriam/ui-core";
 
 import React, {
   useCallback,
@@ -8,7 +8,18 @@ import React, {
   useState,
 } from "react";
 
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragCancelEvent,
+  type DragEndEvent,
+  type DragStartEvent,
+} from "@dnd-kit/core";
 import Stack from "@mui/material/Stack";
+import type { TypographyProps } from "@mui/material/Typography";
 import Typography from "@mui/material/Typography";
 
 import type { AnswerState } from "../../../../../../types/AnswerState";
@@ -21,6 +32,7 @@ import type {
 } from "../CodeEditor/CodeEditorTypes";
 import { PASSIVE_TAB_TYPES } from "../CodeEditor/CodeEditorTypes";
 import { CodeOptions } from "../CodeOptions/CodeOptions";
+import CodeBlank from "../../../../../shared/CodeBlank/CodeBlank";
 import { getKeyboardSetCharacters } from "../KeyboardExtension/keyboardSets";
 
 // ---------------------------------------------------------------------------
@@ -101,6 +113,22 @@ function getBlankIds(tab: FillInBlankTab): string[] {
     }
   }
   return ids;
+}
+
+function getOptionDraggableId(tabId: string, optionIndex: number): string {
+  return `code-option:${tabId}:${optionIndex}`;
+}
+
+function getBlankDroppableId(tabId: string, blankId: string): string {
+  return `code-blank:${tabId}:${blankId}`;
+}
+
+function getBlankTokenDraggableId(tabId: string, blankId: string): string {
+  return `code-blank-token:${tabId}:${blankId}`;
+}
+
+function getOptionsPoolDroppableId(tabId: string): string {
+  return `code-options-pool:${tabId}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -219,6 +247,8 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
     }
     return initial;
   });
+  const [isTypingContextActive, setIsTypingContextActive] = useState(false);
+  const [activeDragId, setActiveDragId] = useState<string | null>(null);
 
   // ---- Active tab info ----
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -291,24 +321,127 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
   // ---- Handlers ----
 
   /** User clicked an option button on the active fillInBlankWithOptions tab. */
+  function placeOptionInBlank(optionIndex: number, targetBlankId?: string) {
+    if (!activeFillInBlankWithOptionsTab) return false;
+
+    const tab = activeFillInBlankWithOptionsTab;
+    const blankIds = getBlankIds(tab);
+    const resolvedTargetBlankId =
+      targetBlankId ?? blankIds.find((id) => !filledBlanks[id]);
+
+    if (!resolvedTargetBlankId || !blankIds.includes(resolvedTargetBlankId)) {
+      return false;
+    }
+
+    const optionValue = tab.options[optionIndex];
+    if (optionValue === undefined) {
+      return false;
+    }
+
+    const nextBlanks = { ...filledBlanks };
+    const nextSource = { ...blankSource };
+
+    nextBlanks[resolvedTargetBlankId] = optionValue;
+    nextSource[resolvedTargetBlankId] = { tabId: tab.id, optionIndex };
+
+    setFilledBlanks(nextBlanks);
+    setBlankSource(nextSource);
+    emitState(nextBlanks, codeValues);
+    return true;
+  }
+
   function handleSelectOption(optionIndex: number) {
+    placeOptionInBlank(optionIndex);
+  }
+
+  function handleDragStart(event: DragStartEvent) {
+    setActiveDragId(String(event.active.id));
+  }
+
+  function applyBlankState(
+    nextBlanks: Record<string, string>,
+    nextSource: Record<string, { tabId: string; optionIndex: number }>,
+  ) {
+    setFilledBlanks(nextBlanks);
+    setBlankSource(nextSource);
+    emitState(nextBlanks, codeValues);
+  }
+
+  function handleDragEnd(event: DragEndEvent) {
+    setActiveDragId(null);
     if (!activeFillInBlankWithOptionsTab) return;
-    const blankIds = getBlankIds(activeFillInBlankWithOptionsTab);
-    const nextEmpty = blankIds.find((id) => !filledBlanks[id]);
-    if (!nextEmpty) return;
+    const { active, over } = event;
+    if (!over) return;
 
-    const newBlanks = {
-      ...filledBlanks,
-      [nextEmpty]: activeFillInBlankWithOptionsTab.options[optionIndex],
-    };
-    const newSource = {
-      ...blankSource,
-      [nextEmpty]: { tabId: activeFillInBlankWithOptionsTab.id, optionIndex },
-    };
+    const tabId = activeFillInBlankWithOptionsTab.id;
+    const activeId = String(active.id);
+    const overId = String(over.id);
+    const optionPrefix = `code-option:${tabId}:`;
+    const blankPrefix = `code-blank:${tabId}:`;
+    const blankTokenPrefix = `code-blank-token:${tabId}:`;
+    const optionsPoolId = getOptionsPoolDroppableId(tabId);
 
-    setFilledBlanks(newBlanks);
-    setBlankSource(newSource);
-    emitState(newBlanks, codeValues);
+    if (activeId.startsWith(optionPrefix) && overId.startsWith(blankPrefix)) {
+      const optionIndexRaw = activeId.slice(optionPrefix.length);
+      const optionIndex = Number(optionIndexRaw);
+      if (!Number.isInteger(optionIndex)) return;
+      const blankId = overId.slice(blankPrefix.length);
+      if (!blankId) return;
+      placeOptionInBlank(optionIndex, blankId);
+      return;
+    }
+
+    if (!activeId.startsWith(blankTokenPrefix)) {
+      return;
+    }
+
+    const sourceBlankId = activeId.slice(blankTokenPrefix.length);
+    if (!sourceBlankId) return;
+
+    if (overId === optionsPoolId) {
+      const nextBlanks = { ...filledBlanks };
+      const nextSource = { ...blankSource };
+      delete nextBlanks[sourceBlankId];
+      delete nextSource[sourceBlankId];
+      applyBlankState(nextBlanks, nextSource);
+      return;
+    }
+
+    if (!overId.startsWith(blankPrefix)) {
+      return;
+    }
+
+    const targetBlankId = overId.slice(blankPrefix.length);
+    if (!targetBlankId || targetBlankId === sourceBlankId) return;
+
+    const sourceValue = filledBlanks[sourceBlankId];
+    const sourceSource = blankSource[sourceBlankId];
+    if (!sourceValue || !sourceSource) return;
+
+    const targetValue = filledBlanks[targetBlankId];
+    const targetSource = blankSource[targetBlankId];
+
+    const nextBlanks = { ...filledBlanks };
+    const nextSource = { ...blankSource };
+
+    if (!targetValue || !targetSource) {
+      nextBlanks[targetBlankId] = sourceValue;
+      nextSource[targetBlankId] = sourceSource;
+      delete nextBlanks[sourceBlankId];
+      delete nextSource[sourceBlankId];
+      applyBlankState(nextBlanks, nextSource);
+      return;
+    }
+
+    nextBlanks[targetBlankId] = sourceValue;
+    nextSource[targetBlankId] = sourceSource;
+    nextBlanks[sourceBlankId] = targetValue;
+    nextSource[sourceBlankId] = targetSource;
+    applyBlankState(nextBlanks, nextSource);
+  }
+
+  function handleDragCancel(_event: DragCancelEvent) {
+    setActiveDragId(null);
   }
 
   /** User clicked a filled blank to remove its value. */
@@ -349,7 +482,23 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
       target instanceof HTMLTextAreaElement
     ) {
       lastFocusedInputRef.current = target;
+      setIsTypingContextActive(true);
     }
+  }
+
+  /**
+   * Hide keyboard extension when focus leaves this component.
+   * Keeps it visible while focus moves between inputs/textareas inside it.
+   */
+  function handleBlurCapture(e: React.FocusEvent) {
+    const nextFocused = e.relatedTarget;
+    if (
+      nextFocused instanceof Node &&
+      e.currentTarget.contains(nextFocused)
+    ) {
+      return;
+    }
+    setIsTypingContextActive(false);
   }
 
   /**
@@ -387,11 +536,40 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
   // ---- Render ----
 
   const hasHeading = Boolean(assignmentTitle || assignmentDescription);
+  const activeDragPreview = useMemo(() => {
+    if (!activeDragId || !activeFillInBlankWithOptionsTab) return null;
+    const tabId = activeFillInBlankWithOptionsTab.id;
+    const optionPrefix = `code-option:${tabId}:`;
+    const blankTokenPrefix = `code-blank-token:${tabId}:`;
+
+    if (activeDragId.startsWith(optionPrefix)) {
+      const optionIndex = Number(activeDragId.slice(optionPrefix.length));
+      if (!Number.isInteger(optionIndex)) return null;
+      const label = activeFillInBlankWithOptionsTab.options[optionIndex];
+      return label ? { label, source: "option" as const } : null;
+    }
+
+    if (activeDragId.startsWith(blankTokenPrefix)) {
+      const blankId = activeDragId.slice(blankTokenPrefix.length);
+      const label = filledBlanks[blankId];
+      return label ? { label, source: "blank" as const } : null;
+    }
+
+    return null;
+  }, [activeDragId, activeFillInBlankWithOptionsTab, filledBlanks]);
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 6,
+      },
+    }),
+  );
 
   return (
     <Stack
       spacing={4}
       onFocusCapture={handleFocusCapture}
+      onBlurCapture={handleBlurCapture}
       data-test={dataTest?.section}
     >
       {hasHeading ? (
@@ -410,37 +588,71 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
           <Typography variant="h5">{assignmentDescription}</Typography>
         )
       ) : null}
-      <CodeEditor
-        tabs={tabs}
-        activeTabId={activeTabId}
-        onActiveTabChange={setActiveTabId}
-        passiveTabsUnlocked={passiveTabsUnlocked}
-        filledBlanks={filledBlanks}
-        onBlankClick={handleBlankClick}
-        onBlankChange={handleBlankChange}
-        codeValues={codeValues}
-        onCodeValueChange={handleCodeValueChange}
-        dataTest={{
-          resultSection: dataTest?.resultSection,
-          fillInCode: {
-            textField: dataTest?.fillInCode?.textField,
-          },
-        }}
-      />
-      {keyboardCharacters && (
+      <DndContext
+        sensors={sensors}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
+      >
+        <CodeEditor
+          tabs={tabs}
+          activeTabId={activeTabId}
+          onActiveTabChange={setActiveTabId}
+          passiveTabsUnlocked={passiveTabsUnlocked}
+          filledBlanks={filledBlanks}
+          onBlankClick={handleBlankClick}
+          getBlankDroppableId={(blankId) =>
+            getBlankDroppableId(activeTabId, blankId)
+          }
+          getBlankTokenDraggableId={(blankId) =>
+            getBlankTokenDraggableId(activeTabId, blankId)
+          }
+          dragAndDropEnabled={activeTab?.type === "fillInBlankWithOptions"}
+          onBlankChange={handleBlankChange}
+          codeValues={codeValues}
+          onCodeValueChange={handleCodeValueChange}
+          dataTest={{
+            resultSection: dataTest?.resultSection,
+            fillInCode: {
+              textField: dataTest?.fillInCode?.textField,
+            },
+          }}
+        />
+        {activeFillInBlankWithOptionsTab && (
+          <CodeOptions
+            options={activeFillInBlankWithOptionsTab.options}
+            selectedIndices={selectedIndices}
+            onSelectOption={handleSelectOption}
+            getOptionDraggableId={(optionIndex) =>
+              getOptionDraggableId(activeFillInBlankWithOptionsTab.id, optionIndex)
+            }
+            optionsPoolDroppableId={getOptionsPoolDroppableId(activeFillInBlankWithOptionsTab.id)}
+          />
+        )}
+        <DragOverlay zIndex={4000} dropAnimation={null}>
+          {activeDragPreview?.source === "option" ? (
+            <LargeButton
+              variant="outlined"
+              color="textPrimary"
+              fullWidth={false}
+            >
+              <Typography variant={"codeButton" as TypographyProps["variant"]}>
+                {activeDragPreview.label}
+              </Typography>
+            </LargeButton>
+          ) : null}
+          {activeDragPreview?.source === "blank" ? (
+            <CodeBlank code={activeDragPreview.label} />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+      {keyboardCharacters && isTypingContextActive && (
         <KeyboardExtension
           characters={[...keyboardCharacters]}
           variant="standard"
           onCharacterPress={handleCharacterPress}
           onCheckPress={onCheckPress}
           checkDisabled={checkDisabled}
-        />
-      )}
-      {activeFillInBlankWithOptionsTab && (
-        <CodeOptions
-          options={activeFillInBlankWithOptionsTab.options}
-          selectedIndices={selectedIndices}
-          onSelectOption={handleSelectOption}
         />
       )}
     </Stack>
