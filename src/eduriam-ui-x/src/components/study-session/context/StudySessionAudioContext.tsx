@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 interface StudySessionAudioContextValue {
   isMuted: boolean;
@@ -10,15 +10,33 @@ const StudySessionAudioContext =
 
 export const StudySessionAudioProvider: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
-  const [isMuted, setIsMuted] = useState(false);
+  isMuted?: boolean;
+  onMutedChange?: (isMuted: boolean) => void;
+}> = ({ children, isMuted: isMutedProp, onMutedChange }) => {
+  const [uncontrolledIsMuted, setUncontrolledIsMuted] = useState(false);
+  const isControlled = isMutedProp !== undefined;
+  const isMuted = isControlled ? isMutedProp : uncontrolledIsMuted;
+
+  const setMuted = useCallback(
+    (next: boolean | ((prev: boolean) => boolean)) => {
+      const resolvedNext =
+        typeof next === "function" ? next(isMuted) : next;
+
+      if (!isControlled) {
+        setUncontrolledIsMuted(resolvedNext);
+      }
+
+      onMutedChange?.(resolvedNext);
+    },
+    [isControlled, isMuted, onMutedChange],
+  );
 
   const value = useMemo<StudySessionAudioContextValue>(
     () => ({
       isMuted,
-      toggleMute: () => setIsMuted((prev) => !prev),
+      toggleMute: () => setMuted((prev) => !prev),
     }),
-    [isMuted],
+    [isMuted, setMuted],
   );
 
   return (
