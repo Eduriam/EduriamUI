@@ -40,6 +40,7 @@ export const FullscreenDialog: React.FC<FullscreenDialogProps> = ({
       PaperProps={{
         sx: {
           bgcolor: "background.default",
+          backgroundImage: "none",
         },
       }}
     >
