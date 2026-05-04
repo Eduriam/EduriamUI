@@ -38,9 +38,9 @@ export const FullscreenDialog: React.FC<FullscreenDialogProps> = ({
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: (theme) => ({
-          backgroundColor: theme.palette.background.default,
-        }),
+        sx: {
+          bgcolor: "background.default",
+        },
       }}
     >
       <PageRoot data-test={dataTest}>{children}</PageRoot>
