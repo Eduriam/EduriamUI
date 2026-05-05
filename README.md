@@ -1,3 +1,17 @@
-# EduriamUI
+# Eduriam UI
 
-Design system pro Eduriam projekty.
+A simple UI design system for Eduriam Frontend.
+
+## Setup
+
+Install dependencies:
+
+```bash
+yarn install
+```
+
+Run Storybook:
+
+```bash
+yarn storybook
+```
