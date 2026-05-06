@@ -419,7 +419,10 @@ const StudySession: React.FC<IStudySession> = ({
     totalBlocksPerAtom.forEach((totalBlocks, atomId) => {
       const stats = statsMap.get(atomId);
       const attempts = (stats?.right ?? 0) + (stats?.wrong ?? 0);
-      const rating = totalBlocks > 0 ? totalBlocks / Math.max(attempts, 1) : 0;
+      const rating =
+        totalBlocks > 0 && attempts > 0
+          ? Math.round(((stats?.right ?? 0) / attempts) * 100)
+          : 0;
       ratings.push({ atomId, rating });
     });
     return ratings;
