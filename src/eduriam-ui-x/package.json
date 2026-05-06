@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.2.118",
+  "version": "0.2.119",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
