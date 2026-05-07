@@ -16,7 +16,7 @@ import Confetti from "./components/Confetti";
  * and passed down as display-ready primitives.
  */
 export interface StudySessionStatsProps {
-  /** Total XP earned in the session (unique exercises x XP_PER_EXERCISE). */
+  /** Total XP earned in the session. */
   totalXp: number;
 
   /** Duration of the study session in milliseconds. */
