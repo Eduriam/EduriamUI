@@ -14,7 +14,7 @@ import StudySessionDrawer, {
 import { StudySessionNavigationButton } from "./components/StudySessionNavigationButton";
 import StudySessionProgressBar from "./components/StudySessionProgressBar/StudySessionProgressBar";
 import { StudySessionStats } from "./components/StudySessionStats/StudySessionStats";
-import { XP_PER_EXERCISE } from "./components/StudySessionStats/studySessionStatsConfig";
+import { XP_PER_STUDIED_ATOM } from "./components/StudySessionStats/studySessionStatsConfig";
 import {
   StudyBlockMode,
   StudyBlockType,
@@ -155,14 +155,6 @@ const StudySession: React.FC<IStudySession> = ({
     correctRate: number;
     conceptCount: number;
   } | null>(null);
-
-  const exerciseBlockCount = useMemo(
-    () =>
-      studySession.studyBlocks.filter(
-        (b) => b.type === StudyBlockType.Exercise,
-      ).length,
-    [studySession.studyBlocks],
-  );
 
   const conceptCount = useMemo(
     () => new Set(studySession.studyBlocks.map((b) => b.atomId)).size,
@@ -324,7 +316,7 @@ const StudySession: React.FC<IStudySession> = ({
 
       const total = correctAnswerCount + incorrectAnswerCount;
       setFinishedStatsSnapshot({
-        totalXp: exerciseBlockCount * XP_PER_EXERCISE,
+        totalXp: conceptCount * XP_PER_STUDIED_ATOM,
         timeStudiedMs: Date.now() - startedAtRef.current,
         correctRate: total > 0 ? (correctAnswerCount / total) * 100 : 0,
         conceptCount,
@@ -374,7 +366,7 @@ const StudySession: React.FC<IStudySession> = ({
 
       const total = correctAnswerCount + incorrectAnswerCount;
       setFinishedStatsSnapshot({
-        totalXp: exerciseBlockCount * XP_PER_EXERCISE,
+        totalXp: conceptCount * XP_PER_STUDIED_ATOM,
         timeStudiedMs: Date.now() - startedAtRef.current,
         correctRate: total > 0 ? (correctAnswerCount / total) * 100 : 0,
         conceptCount,
