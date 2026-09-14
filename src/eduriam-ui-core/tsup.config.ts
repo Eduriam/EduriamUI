@@ -1,6 +1,6 @@
+import type { Plugin } from "esbuild";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
-import type { Plugin } from "esbuild";
 import { defineConfig } from "tsup";
 
 /**
@@ -20,15 +20,28 @@ const wavDataUrlPlugin: Plugin = {
   },
 };
 
-export default defineConfig({
-  entry: ["src/index.ts", "src/mermaid.ts"],
-  format: ["cjs", "esm"],
-  splitting: true,
-  noExternal: ["mermaid"],
-  sourcemap: true,
-  clean: true,
-  loader: {
-    ".svg": "dataurl",
+export default defineConfig([
+  {
+    format: ["cjs", "esm"] as const,
+    sourcemap: true,
+    loader: {
+      ".svg": "dataurl",
+    },
+    esbuildPlugins: [wavDataUrlPlugin],
+    entry: ["src/index.ts"],
+    splitting: false,
+    clean: true,
   },
-  esbuildPlugins: [wavDataUrlPlugin],
-});
+  {
+    format: ["cjs", "esm"] as const,
+    sourcemap: true,
+    loader: {
+      ".svg": "dataurl",
+    },
+    esbuildPlugins: [wavDataUrlPlugin],
+    entry: ["src/mermaid.ts"],
+    splitting: true,
+    noExternal: ["mermaid"],
+    clean: false,
+  },
+]);
