@@ -20,7 +20,6 @@ export * from "./components/inputs/Switch";
 export * from "./components/inputs/TextField";
 export * from "./components/layout/ContentContainer";
 export * from "./components/layout/PageRoot";
-export * from "./components/MermaidDiagram";
 export * from "./components/navigation/BasicNavbar";
 export * from "./components/navigation/Drawer";
 export * from "./components/navigation/Link";

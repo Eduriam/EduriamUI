@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MermaidDiagram, type MermaidDiagramProps } from "@eduriam/ui-core";
+import { MermaidDiagram, type MermaidDiagramProps } from "@eduriam/ui-core/mermaid";
 
 export interface EntityRelationshipDiagramProps extends MermaidDiagramProps {}
 

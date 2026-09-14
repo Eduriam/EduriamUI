@@ -2,7 +2,7 @@ import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import React, { useMemo } from "react";
 
-import { MermaidDiagram as CoreMermaidDiagram } from "@eduriam/ui-core";
+import { MermaidDiagram as CoreMermaidDiagram } from "@eduriam/ui-core/mermaid";
 
 import Box from "@mui/material/Box";
 
