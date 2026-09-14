@@ -21,8 +21,10 @@ const wavDataUrlPlugin: Plugin = {
 };
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/mermaid.ts"],
   format: ["cjs", "esm"],
+  splitting: true,
+  noExternal: ["mermaid"],
   sourcemap: true,
   clean: true,
   loader: {

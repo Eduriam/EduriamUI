@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-core",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -10,6 +10,11 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
+    },
+    "./mermaid": {
+      "types": "./dist/mermaid.d.ts",
+      "require": "./dist/mermaid.cjs",
+      "import": "./dist/mermaid.js"
     }
   },
   "files": [
