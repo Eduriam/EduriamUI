@@ -1,9 +1,7 @@
+import { Box, Typography } from "@adapters/mui";
 import { Sequence, useVideoConfig } from "remotion";
 
 import React from "react";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 import type { IDString } from "../../../../../models/ID";
 import type { BaseVideoComponent } from "../../VideoComponent";

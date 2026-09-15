@@ -1,7 +1,7 @@
-import React from "react";
-
+import { Box } from "@adapters/mui";
 import { Gif as RemotionGif } from "@remotion/gif";
-import Box from "@mui/material/Box";
+
+import React from "react";
 
 import type { ComponentSize } from "../../../types/shared";
 import { resolveSize } from "../../../utils/resolveSize";

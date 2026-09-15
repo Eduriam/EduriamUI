@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import { IconButton } from "@eduriam/ui-core";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-
-import Box from "@mui/material/Box";
 
 import { SyntaxHighlightedCode } from "./SyntaxHighlightedCode";
 

@@ -1,11 +1,14 @@
+import {
+  Box,
+  ButtonBase,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@adapters/mui";
+
 import React, { useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import { useTheme } from "@mui/material/styles";
-import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import type { TypographyProps } from "@mui/material";
 
 import { Icon } from "../../data-display/Icon";
 
@@ -88,8 +91,7 @@ export const KeyboardExtension: React.FC<KeyboardExtensionProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isSticky =
-    variant === "sticky" || (variant === "standard" && isMobile);
+  const isSticky = variant === "sticky" || (variant === "standard" && isMobile);
   const [keyboardBottomOffset, setKeyboardBottomOffset] = useState(0);
 
   useEffect(() => {

@@ -1,6 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@adapters/mui": ["src/adapters/mui.ts"],
+      "@adapters/mui-icons": ["src/adapters/mui-icons.ts"]
+    },
     "outDir": "dist",
     "rootDir": "src",
     "composite": true,

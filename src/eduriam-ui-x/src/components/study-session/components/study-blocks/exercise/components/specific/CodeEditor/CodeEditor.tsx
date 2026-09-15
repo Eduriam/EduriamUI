@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import { Tabs } from "@eduriam/ui-core";
 
 import React, { useMemo } from "react";
-
-import Box from "@mui/material/Box";
 
 import type { CodeEditorTab } from "./CodeEditorTypes";
 import { PASSIVE_TAB_TYPES } from "./CodeEditorTypes";
@@ -160,9 +159,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             html={activeTab.html}
             inlineCss={activeTab.inlineCss}
             inlineJs={activeTab.inlineJs}
-            dataTest={
-              passiveTabsUnlocked ? dataTest?.resultSection : undefined
-            }
+            dataTest={passiveTabsUnlocked ? dataTest?.resultSection : undefined}
           />
         );
 
@@ -170,9 +167,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         return (
           <CodeEditorTable
             rows={activeTab.rows}
-            dataTest={
-              passiveTabsUnlocked ? dataTest?.resultSection : undefined
-            }
+            dataTest={passiveTabsUnlocked ? dataTest?.resultSection : undefined}
           />
         );
 
@@ -181,9 +176,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <CodeEditorTerminal
             lines={activeTab.lines}
             language={activeTab.language}
-            dataTest={
-              passiveTabsUnlocked ? dataTest?.resultSection : undefined
-            }
+            dataTest={passiveTabsUnlocked ? dataTest?.resultSection : undefined}
           />
         );
 

@@ -1,4 +1,6 @@
-import Typography, { TypographyProps } from "@mui/material/Typography";
+import { Typography } from "@adapters/mui";
+
+import type { TypographyProps } from "@mui/material";
 
 /**
  * Props for the `Paragraph` component.

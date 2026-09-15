@@ -1,6 +1,5 @@
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Typography from "@mui/material/Typography";
+import { Box, ButtonBase, Typography } from "@adapters/mui";
+
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { Icon } from "../../data-display/Icon";

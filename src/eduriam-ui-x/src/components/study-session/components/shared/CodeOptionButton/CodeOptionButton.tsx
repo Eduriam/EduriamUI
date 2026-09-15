@@ -1,12 +1,11 @@
-import { LargeButton, theme } from "@eduriam/ui-core";
-
+import { Box, Typography } from "@adapters/mui";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import { LargeButton, theme } from "@eduriam/ui-core";
+
 import type { ReactNode } from "react";
 
-import Box from "@mui/material/Box";
 import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
 
 const LARGE_BUTTON_HEIGHT = 48;
 const LARGE_BUTTON_BORDER_RADIUS = "16px";

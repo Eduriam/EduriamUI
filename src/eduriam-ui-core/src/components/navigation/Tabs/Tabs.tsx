@@ -1,4 +1,5 @@
-import { Tabs as MuiTabs, Tab } from "@mui/material";
+import { Tabs as MuiTabs, Tab } from "@adapters/mui";
+
 import type { TabsProps as MuiTabsProps } from "@mui/material/Tabs";
 
 /**

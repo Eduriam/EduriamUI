@@ -1,8 +1,6 @@
-import React from "react";
+import { Box, Card, CardMedia } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
+import React from "react";
 
 import { ImageComponent } from "../../ExerciseStudyBlockComponentDTO";
 

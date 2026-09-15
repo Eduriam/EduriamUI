@@ -1,10 +1,8 @@
+import { Box, Stack, useMediaQuery, useTheme } from "@adapters/mui";
 import { ContentContainer } from "@eduriam/ui-core";
 import { keyframes } from "@emotion/react";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-
-import { Box, Stack, useMediaQuery } from "@mui/material";
-import useTheme from "@mui/material/styles/useTheme";
 
 import { ID } from "../../models/ID";
 import { STUDY_SESSION_LOCALIZATION_DEFAULT } from "./StudySessionLocalizationDefault";

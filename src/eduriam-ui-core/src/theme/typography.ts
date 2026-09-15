@@ -1,6 +1,7 @@
+import { createTheme } from "@adapters/mui";
+
 import type { CSSProperties } from "react";
 
-import createTheme from "@mui/material/styles/createTheme";
 import type { TypographyOptions } from "@mui/material/styles/createTypography";
 
 declare module "@mui/material/styles" {

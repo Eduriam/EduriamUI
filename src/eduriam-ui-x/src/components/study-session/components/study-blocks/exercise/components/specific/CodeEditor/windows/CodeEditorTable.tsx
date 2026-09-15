@@ -1,6 +1,6 @@
-import React from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import React from "react";
 
 import { DatabaseTable } from "../../../../../../shared/DatabaseTable/DatabaseTable";
 
@@ -31,7 +31,9 @@ export const CodeEditorTable: React.FC<CodeEditorTableProps> = ({
   }));
   const bodyRows = rows.slice(1);
   const mappedRows = bodyRows.map((row) =>
-    Object.fromEntries(columns.map((column, index) => [column.key, row[index] ?? ""])),
+    Object.fromEntries(
+      columns.map((column, index) => [column.key, row[index] ?? ""]),
+    ),
   );
 
   return (

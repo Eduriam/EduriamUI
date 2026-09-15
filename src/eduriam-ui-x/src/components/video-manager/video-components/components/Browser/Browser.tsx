@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import DOMPurify from "dompurify";
 
 import React, { useMemo } from "react";
-
-import Box from "@mui/material/Box";
 
 import type { BaseVideoComponent } from "../../VideoComponent";
 

@@ -18,6 +18,12 @@ Directories use **kebab-case**, except component folders which use **PascalCase*
   - `index.ts`: re-exports for convenient imports
   - `<Name>.stories.tsx`: co-located Storybook story with interaction tests
 
+## External Libraries
+
+- **Material UI**
+  - We build components on top of MUI components.
+  - To import MUI components, we use our own adapters and import them using "@adapters/mui"
+
 ## Component documentation
 
 To make the design system easy to use for AI agents and humans, document each exported component in `@eduriam/ui-core` at the type level:

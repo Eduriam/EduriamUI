@@ -1,5 +1,4 @@
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Button, Typography } from "@adapters/mui";
 
 export interface ICharacterButton {
   onClick: () => void;

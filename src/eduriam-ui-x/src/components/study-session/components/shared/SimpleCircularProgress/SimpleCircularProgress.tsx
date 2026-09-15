@@ -1,7 +1,6 @@
-import React, { ReactNode } from "react";
+import { Box, CircularProgress } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+import React, { ReactNode } from "react";
 
 export interface ISimpleCircularProgress {
   progress: number; // 0..100

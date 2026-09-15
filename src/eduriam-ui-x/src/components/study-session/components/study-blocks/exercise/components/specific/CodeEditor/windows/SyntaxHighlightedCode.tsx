@@ -1,10 +1,10 @@
+import { Box, useTheme } from "@adapters/mui";
+
 import React from "react";
 
-import { Prism } from "./prismInit";
-
-import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
+
+import { Prism } from "./prismInit";
 
 /** Prism token (string or { type, content, alias? }). */
 type PrismToken =
@@ -33,11 +33,7 @@ function resolveLanguage(lang: string): string {
 
 function getGrammar(language: string): Prism.Grammar | undefined {
   const resolved = resolveLanguage(language);
-  if (
-    resolved === "bash" &&
-    !Prism.languages.bash &&
-    !Prism.languages.shell
-  ) {
+  if (resolved === "bash" && !Prism.languages.bash && !Prism.languages.shell) {
     return Prism.languages.clike ?? Prism.languages.markup ?? undefined;
   }
   return Prism.languages[resolved] ?? Prism.languages.markup ?? undefined;
@@ -170,8 +166,7 @@ export const SyntaxHighlightedCode: React.FC<SyntaxHighlightedCodeProps> = ({
       if (v !== undefined && v !== null) tokenColors[k] = v;
     }
   }
-  const defaultColor =
-    defaultColorOverride ?? theme.palette.text.primary;
+  const defaultColor = defaultColorOverride ?? theme.palette.text.primary;
 
   const grammar = getGrammar(language);
   const tokens = grammar

@@ -1,3 +1,4 @@
+import { Box, useMediaQuery, useTheme } from "@adapters/mui";
 import { IconButton, LargeButton } from "@eduriam/ui-core";
 
 import React, {
@@ -7,9 +8,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-
-import { Box, useMediaQuery } from "@mui/material";
-import useTheme from "@mui/material/styles/useTheme";
 
 import type {
   Caption,
@@ -75,7 +73,8 @@ function useElementHeight(ref: React.RefObject<HTMLElement | null>) {
     const el = ref.current;
     if (!el) return;
 
-    const measure = () => setHeight(Math.round(el.getBoundingClientRect().height));
+    const measure = () =>
+      setHeight(Math.round(el.getBoundingClientRect().height));
     measure();
 
     const observer = new ResizeObserver(() => measure());

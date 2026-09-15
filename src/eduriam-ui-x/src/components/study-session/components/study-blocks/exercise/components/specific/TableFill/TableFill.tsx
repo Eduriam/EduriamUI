@@ -1,14 +1,16 @@
-import React, { useMemo, useState } from "react";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TextField,
+  Typography,
+} from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import React, { useMemo, useState } from "react";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton from "../../../../../shared/CharacterButton/CharacterButton";

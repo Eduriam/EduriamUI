@@ -1,8 +1,6 @@
-import React, { useMemo, useState } from "react";
+import { Box, Paper, Typography } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import React, { useMemo, useState } from "react";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton, {

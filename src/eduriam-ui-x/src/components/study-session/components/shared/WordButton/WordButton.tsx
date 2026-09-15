@@ -1,7 +1,6 @@
-import React from "react";
+import { Button, Typography } from "@adapters/mui";
 
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import React from "react";
 
 import { AnswerState } from "../../../types/AnswerState";
 

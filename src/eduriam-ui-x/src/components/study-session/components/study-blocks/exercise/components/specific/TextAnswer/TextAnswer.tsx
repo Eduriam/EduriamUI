@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { Box, TextField } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import CharacterButton from "../../../../../shared/CharacterButton/CharacterButton";

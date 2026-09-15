@@ -1,9 +1,8 @@
+import { Drawer as MuiDrawer, useMediaQuery, useTheme } from "@adapters/mui";
+
 import type { ReactNode } from "react";
 
-import MuiDrawer from "@mui/material/Drawer";
 import type { Theme } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { ContentContainer } from "../../layout/ContentContainer";
 

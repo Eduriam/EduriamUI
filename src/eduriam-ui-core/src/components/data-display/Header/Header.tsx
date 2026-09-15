@@ -1,4 +1,6 @@
-import Typography, { TypographyProps } from "@mui/material/Typography";
+import { Typography } from "@adapters/mui";
+
+import type { TypographyProps } from "@mui/material";
 
 /**
  * Logical heading variants supported by the `Header` component.
@@ -42,7 +44,10 @@ export interface HeaderProps {
   align?: HeaderAlign;
 }
 
-const TYPOGRAPHY_VARIANT_BY_VARIANT: Record<HeaderVariant, TypographyProps["variant"]> = {
+const TYPOGRAPHY_VARIANT_BY_VARIANT: Record<
+  HeaderVariant,
+  TypographyProps["variant"]
+> = {
   page: "h1",
   title: "h2",
   section: "h5",

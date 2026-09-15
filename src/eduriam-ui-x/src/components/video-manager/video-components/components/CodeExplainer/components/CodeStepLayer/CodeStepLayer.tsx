@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import React, { useMemo } from "react";
 
 import {
   CODE_FONT_FAMILY,

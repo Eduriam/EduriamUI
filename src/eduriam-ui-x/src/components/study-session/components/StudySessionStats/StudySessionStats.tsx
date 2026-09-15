@@ -1,8 +1,5 @@
+import { Box, Stack, Typography } from "@adapters/mui";
 import { ContentContainer, Illustration, LargeButton } from "@eduriam/ui-core";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 
 import type { StudySessionDataTest } from "../../types/StudySessionDataTest";
 import type { StudySessionLocalization } from "../../types/StudySessionLocalization";

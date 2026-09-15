@@ -1,14 +1,13 @@
+import { Box } from "@adapters/mui";
 import { interpolateColors } from "remotion";
 
 import React, { useMemo } from "react";
 
-import Box from "@mui/material/Box";
-
 import {
-  getTerminalBottomSafetyPx,
   TERMINAL_FONT_FAMILY,
   TERMINAL_LINE_HEIGHT,
   TERMINAL_THEME,
+  getTerminalBottomSafetyPx,
 } from "../../constants";
 import type {
   TerminalExplainerColorMode,
@@ -30,7 +29,9 @@ export interface TerminalTransitionLayerProps {
   scrollOffsetPx: number;
 }
 
-export const TerminalTransitionLayer: React.FC<TerminalTransitionLayerProps> = ({
+export const TerminalTransitionLayer: React.FC<
+  TerminalTransitionLayerProps
+> = ({
   oldStep,
   newStep,
   colorMode,
@@ -52,7 +53,10 @@ export const TerminalTransitionLayer: React.FC<TerminalTransitionLayerProps> = (
   );
 
   const newLayout = useMemo(() => buildTerminalStepTokenLayout(lines), [lines]);
-  const oldLayout = useMemo(() => buildTerminalStepTokenLayout(oldLines), [oldLines]);
+  const oldLayout = useMemo(
+    () => buildTerminalStepTokenLayout(oldLines),
+    [oldLines],
+  );
 
   const transitions = useMemo(
     () => buildTerminalTokenTransitionLayout(oldLayout.flat, newLayout.flat),
@@ -90,8 +94,12 @@ export const TerminalTransitionLayer: React.FC<TerminalTransitionLayerProps> = (
             >
               {tokens.length > 0
                 ? tokens.map((token) => {
-                    const oldToken = transitions.oldByNewGlobalIndex.get(token.globalIndex);
-                    const oldLine = oldToken ? (oldLines[oldToken.lineIndex] ?? "") : "";
+                    const oldToken = transitions.oldByNewGlobalIndex.get(
+                      token.globalIndex,
+                    );
+                    const oldLine = oldToken
+                      ? (oldLines[oldToken.lineIndex] ?? "")
+                      : "";
 
                     const newColor = getTerminalTokenColor({
                       token: token.content,

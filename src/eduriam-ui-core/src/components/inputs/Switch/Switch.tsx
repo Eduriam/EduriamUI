@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { Box, ButtonBase } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
+import { useEffect, useState } from "react";
 
 export interface SwitchProps {
   /**

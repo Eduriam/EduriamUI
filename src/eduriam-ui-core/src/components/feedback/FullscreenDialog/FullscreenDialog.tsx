@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
+import { Dialog } from "@adapters/mui";
 
-import Dialog from "@mui/material/Dialog";
+import type { ReactNode } from "react";
 
 import { PageRoot } from "../../layout/PageRoot";
 

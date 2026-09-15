@@ -1,0 +1,33 @@
+import * as Library from "@mui/material";
+
+// Preserve namespace-based access in compiled output for Next.js 13 SSR interop.
+export const {
+  AppBar,
+  Box,
+  Button,
+  ButtonBase,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CircularProgress,
+  Fab,
+  FormControlLabel,
+  FormGroup,
+  Checkbox,
+  IconButton,
+  InputBase,
+  LinearProgress,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} = Library;

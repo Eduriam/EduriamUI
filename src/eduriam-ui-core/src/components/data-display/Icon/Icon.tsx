@@ -1,7 +1,7 @@
-import { IconProps } from "@mui/material";
-import MuiIcon from "@mui/material/Icon";
+import { Icon as MuiIcon, useTheme } from "@adapters/mui";
+
+import type { IconProps } from "@mui/material";
 import type { Palette } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
 
 import { ICON_CONFIG } from "./iconConfig";
 

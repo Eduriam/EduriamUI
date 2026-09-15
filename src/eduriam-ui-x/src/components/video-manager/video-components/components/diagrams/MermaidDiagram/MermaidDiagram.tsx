@@ -1,10 +1,8 @@
+import { Box } from "@adapters/mui";
+import { MermaidDiagram as CoreMermaidDiagram } from "@eduriam/ui-core/mermaid";
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import React, { useMemo } from "react";
-
-import { MermaidDiagram as CoreMermaidDiagram } from "@eduriam/ui-core/mermaid";
-
-import Box from "@mui/material/Box";
 
 import { MERMAID_DIAGRAM_CONFIG } from "./constants";
 import type { IMermaidDiagramProps } from "./types";
@@ -55,10 +53,15 @@ export const MermaidDiagram: React.FC<IMermaidDiagramProps> = ({ comp }) => {
     previousStep && stepState.frameInStep < transitionDurationFrames,
   );
   const transitionProgress = previousStep
-    ? interpolate(stepState.frameInStep, [0, transitionDurationFrames], [0, 1], {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-      })
+    ? interpolate(
+        stepState.frameInStep,
+        [0, transitionDurationFrames],
+        [0, 1],
+        {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        },
+      )
     : 1;
 
   return (

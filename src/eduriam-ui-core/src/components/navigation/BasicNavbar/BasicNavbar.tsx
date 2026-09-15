@@ -1,9 +1,11 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import useTheme from "@mui/material/styles/useTheme";
+import {
+  AppBar,
+  Box,
+  ButtonBase,
+  Toolbar,
+  Typography,
+  useTheme,
+} from "@adapters/mui";
 
 import { type IconName } from "../../data-display/Icon";
 import { IconButton } from "../../inputs/IconButton";

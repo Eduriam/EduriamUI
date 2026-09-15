@@ -1,6 +1,6 @@
-import React from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import React from "react";
 
 import {
   ANNOTATION_ARROW_OFFSET_CH,
@@ -112,4 +112,3 @@ export const AnnotationBubble: React.FC<AnnotationBubbleProps> = ({
 };
 
 export default AnnotationBubble;
-

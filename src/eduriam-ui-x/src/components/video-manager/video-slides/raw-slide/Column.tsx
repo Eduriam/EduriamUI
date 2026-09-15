@@ -1,7 +1,8 @@
+import { Box, Stack } from "@adapters/mui";
+
 import type { ReactNode } from "react";
 
-import Box from "@mui/material/Box";
-import Stack, { type StackProps } from "@mui/material/Stack";
+import { type StackProps } from "@mui/material/Stack";
 
 const COLUMN_SPACING: StackProps["spacing"] = { xs: 3, sm: 4 };
 
@@ -23,7 +24,12 @@ export const Column: React.FC<ColumnProps> = ({ children }) => (
       width: "100%",
     }}
   >
-    <Stack width="100%" flexGrow={1} direction="column" spacing={COLUMN_SPACING}>
+    <Stack
+      width="100%"
+      flexGrow={1}
+      direction="column"
+      spacing={COLUMN_SPACING}
+    >
       {children}
     </Stack>
   </Box>

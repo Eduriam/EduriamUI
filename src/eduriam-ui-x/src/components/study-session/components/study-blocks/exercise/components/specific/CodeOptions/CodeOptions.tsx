@@ -1,7 +1,7 @@
-import React from "react";
-
+import { Box } from "@adapters/mui";
 import { useDroppable } from "@dnd-kit/core";
-import Box from "@mui/material/Box";
+
+import React from "react";
 
 import CodeOptionButton from "../../../../../shared/CodeOptionButton/CodeOptionButton";
 

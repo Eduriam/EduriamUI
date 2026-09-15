@@ -1,7 +1,6 @@
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
+import { Box, ButtonBase, Typography } from "@adapters/mui";
+
 import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
 
 /**
  * Styles matching Figma: thin divider border, 16px JetBrains Mono (mobile/code).

@@ -1,7 +1,4 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Toolbar from "@mui/material/Toolbar";
+import { AppBar, Box, ButtonBase, Toolbar } from "@adapters/mui";
 
 import { Icon, type IconName } from "../../data-display/Icon";
 import { ProgressBar, ProgressBarSize } from "../../feedback/ProgressBar";

@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import { IconButton, type IconName } from "@eduriam/ui-core";
 
 import React from "react";
-
-import Box from "@mui/material/Box";
 
 /**
  * Props for `StudySessionNavigationButton`.

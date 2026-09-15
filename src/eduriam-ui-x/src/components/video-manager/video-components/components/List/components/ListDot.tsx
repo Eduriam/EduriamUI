@@ -1,7 +1,6 @@
-import React from "react";
+import { Box, Typography } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React from "react";
 
 const DOT_SLOT_SIZE = 48;
 const ORDERED_DOT_SIZE = 48;

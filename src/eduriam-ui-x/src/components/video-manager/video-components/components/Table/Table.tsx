@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import { Table as CoreTable } from "@eduriam/ui-core";
 
 import React from "react";
-
-import Box from "@mui/material/Box";
 
 import type { BaseVideoComponent } from "../../VideoComponent";
 

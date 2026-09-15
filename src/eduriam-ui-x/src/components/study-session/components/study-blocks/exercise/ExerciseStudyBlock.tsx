@@ -1,8 +1,7 @@
+import { Box, Stack } from "@adapters/mui";
 import { IconButton, LargeButton } from "@eduriam/ui-core";
 
 import React, { useMemo, useState } from "react";
-
-import { Box, Stack } from "@mui/material";
 
 import { useStudySessionAudio } from "../../../context/StudySessionAudioContext";
 import { useStudyBlockAudio } from "../../../hooks/useStudyBlockAudio";
