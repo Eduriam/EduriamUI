@@ -1,12 +1,13 @@
+import {
+  Box,
+  Card,
+  CardActionArea,
+  IconButton,
+  LinearProgress,
+} from "@adapters/mui";
 import { Icon } from "@eduriam/ui-core";
 
 import { useEffect, useRef, useState } from "react";
-
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import IconButton from "@mui/material/IconButton";
-import LinearProgress from "@mui/material/LinearProgress";
 
 import styles from "./MatchAudioOption.module.css";
 

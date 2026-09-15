@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
+import { Box, Stack } from "@adapters/mui";
 
 import { Header } from "../../data-display/Header";
 import { Paragraph } from "../../data-display/Paragraph";

@@ -1,4 +1,4 @@
-import MuiDivider from "@mui/material/Divider";
+import { Divider as MuiDivider } from "@adapters/mui";
 
 /**
  * A horizontal divider for visually separating content.

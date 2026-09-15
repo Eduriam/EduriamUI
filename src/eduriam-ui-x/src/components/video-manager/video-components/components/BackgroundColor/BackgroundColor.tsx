@@ -1,8 +1,7 @@
+import { useTheme } from "@adapters/mui";
 import { AbsoluteFill } from "remotion";
 
 import React from "react";
-
-import { useTheme } from "@mui/material/styles";
 
 import type { BackgroundVideoComponent } from "../../VideoComponent";
 
@@ -26,4 +25,3 @@ export const BackgroundColor: React.FC<IBackgroundColorProps> = ({ comp }) => {
 };
 
 export default BackgroundColor;
-

@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import { useEffect, useMemo, useState } from "react";
 
 import { LargeRadioButton } from "../LargeRadioButton";
 

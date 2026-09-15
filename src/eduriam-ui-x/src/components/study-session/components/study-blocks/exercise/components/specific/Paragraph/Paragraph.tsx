@@ -1,6 +1,6 @@
-import React from "react";
+import { Typography } from "@adapters/mui";
 
-import Typography from "@mui/material/Typography";
+import React from "react";
 
 import { ParagraphComponent } from "../../ExerciseStudyBlockComponentDTO";
 

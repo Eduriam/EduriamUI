@@ -1,10 +1,7 @@
+import { Box, IconButton, Typography } from "@adapters/mui";
 import { Icon } from "@eduriam/ui-core";
 
 import React, { useEffect, useState } from "react";
-
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 
 import SimpleCircularProgress from "../../../../../shared/SimpleCircularProgress/SimpleCircularProgress";
 import { TimerComponent } from "../../ExerciseStudyBlockComponentDTO";

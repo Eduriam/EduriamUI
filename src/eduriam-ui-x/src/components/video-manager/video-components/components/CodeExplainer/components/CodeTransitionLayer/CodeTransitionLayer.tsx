@@ -1,8 +1,7 @@
+import { Box } from "@adapters/mui";
 import { interpolateColors } from "remotion";
 
 import React, { useMemo } from "react";
-
-import Box from "@mui/material/Box";
 
 import {
   CODE_FONT_FAMILY,

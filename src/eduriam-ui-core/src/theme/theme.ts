@@ -1,4 +1,4 @@
-import createTheme from "@mui/material/styles/createTheme";
+import { createTheme } from "@adapters/mui";
 
 import { componentOverrides } from "./components";
 import { corePalette, corePaletteDark } from "./palette";

@@ -1,8 +1,8 @@
+import { Box } from "@adapters/mui";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import Box from "@mui/material/Box";
 import { TerminalStepLayer } from "./components/TerminalStepLayer/TerminalStepLayer";
 import { TerminalTransitionLayer } from "./components/TerminalTransitionLayer/TerminalTransitionLayer";
 import {
@@ -24,15 +24,17 @@ import {
 } from "./util/timing";
 
 export type {
-  TerminalExplainerColorMode,
-  TerminalExplainerStep,
   ITerminalExplainer,
   ITerminalExplainerProps,
+  TerminalExplainerColorMode,
+  TerminalExplainerStep,
 } from "./types";
 
 const WINDOW_DOT_COLORS = ["#ef4444", "#f59e0b", "#22c55e"] as const;
 
-export const TerminalExplainer: React.FC<ITerminalExplainerProps> = ({ comp }) => {
+export const TerminalExplainer: React.FC<ITerminalExplainerProps> = ({
+  comp,
+}) => {
   const frame = useCurrentFrame();
   const {
     fps,

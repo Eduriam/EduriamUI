@@ -1,9 +1,7 @@
+import { Box, Typography } from "@adapters/mui";
 import fitty from "fitty";
 
 import React, { useEffect, useRef } from "react";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 import type { BaseVideoComponent } from "../../VideoComponent";
 

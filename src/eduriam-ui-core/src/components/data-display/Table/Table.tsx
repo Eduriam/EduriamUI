@@ -1,7 +1,8 @@
+import { Box, Typography } from "@adapters/mui";
+
 import React from "react";
 
-import Box, { BoxProps } from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import type { BoxProps } from "@mui/material";
 
 export type TableCellValue = React.ReactNode;
 

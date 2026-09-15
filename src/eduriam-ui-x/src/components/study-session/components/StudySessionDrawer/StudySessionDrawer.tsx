@@ -1,3 +1,4 @@
+import { Box, Typography, useMediaQuery, useTheme } from "@adapters/mui";
 import {
   Drawer,
   ExplanationDrawer,
@@ -6,11 +7,6 @@ import {
 } from "@eduriam/ui-core";
 
 import { useEffect, useState } from "react";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import useTheme from "@mui/material/styles/useTheme";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { AudioPlayer } from "../../../../audio";
 import type { StudySessionDataTest } from "../../types/StudySessionDataTest";

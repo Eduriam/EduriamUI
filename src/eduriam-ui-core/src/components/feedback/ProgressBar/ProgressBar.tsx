@@ -1,4 +1,4 @@
-import LinearProgress from "@mui/material/LinearProgress";
+import { LinearProgress } from "@adapters/mui";
 
 /**
  * Visual sizes for the `ProgressBar`.

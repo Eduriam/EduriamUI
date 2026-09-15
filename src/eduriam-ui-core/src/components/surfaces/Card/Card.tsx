@@ -1,8 +1,8 @@
+import { Box, Paper } from "@adapters/mui";
+
 import type { MouseEventHandler, ReactNode } from "react";
 import { useLayoutEffect, useRef, useState } from "react";
 
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { SystemStyleObject } from "@mui/system";
 
@@ -177,8 +177,7 @@ export const Card: React.FC<CardProps> = ({
           ...borderWidths,
         };
 
-        const resolvedSx =
-          typeof sx === "function" ? sx(theme) : sx;
+        const resolvedSx = typeof sx === "function" ? sx(theme) : sx;
 
         return {
           ...baseStyles,

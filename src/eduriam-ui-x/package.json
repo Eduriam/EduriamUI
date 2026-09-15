@@ -1,29 +1,26 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.3.2",
-  "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "version": "0.3.3",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --sourcemap --clean && tsc -p tsconfig.json",
+    "build": "tsup --config tsup.config.ts && tsc -p tsconfig.json",
     "clean": "rm -rf dist tsconfig.tsbuildinfo || rmdir /s /q dist && del /q tsconfig.tsbuildinfo 2>nul",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/utilities": "^3.2.2",
-    "@eduriam/ui-core": "^0.7.2",
+    "@eduriam/ui-core": "^0.7.3",
     "@remotion/captions": "^4.0.353",
     "@remotion/gif": "^4.0.353",
     "@remotion/player": "^4.0.353",

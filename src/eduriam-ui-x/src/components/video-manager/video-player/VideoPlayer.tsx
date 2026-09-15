@@ -1,3 +1,4 @@
+import { Box } from "@adapters/mui";
 import { Player, type PlayerRef } from "@remotion/player";
 
 import React, {
@@ -7,8 +8,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-
-import { Box } from "@mui/material";
 
 import { VideoBuilder } from "../video-builder/VideoBuilder";
 import { Caption } from "../video-scenes/Scene";

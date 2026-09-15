@@ -1,8 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { Box, ButtonBase, Typography } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Typography from "@mui/material/Typography";
+import { useEffect, useMemo, useState } from "react";
 
 import { Icon } from "../../data-display/Icon";
 import { Drawer } from "../../navigation/Drawer";

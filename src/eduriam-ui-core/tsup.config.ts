@@ -22,24 +22,30 @@ const wavDataUrlPlugin: Plugin = {
 
 export default defineConfig([
   {
-    format: ["cjs", "esm"] as const,
+    format: ["esm"] as const,
     sourcemap: true,
     loader: {
       ".svg": "dataurl",
     },
     esbuildPlugins: [wavDataUrlPlugin],
     entry: ["src/index.ts"],
+    outExtension: () => ({
+      js: ".mjs",
+    }),
     splitting: false,
     clean: true,
   },
   {
-    format: ["cjs", "esm"] as const,
+    format: ["esm"] as const,
     sourcemap: true,
     loader: {
       ".svg": "dataurl",
     },
     esbuildPlugins: [wavDataUrlPlugin],
     entry: ["src/mermaid.ts"],
+    outExtension: () => ({
+      js: ".mjs",
+    }),
     splitting: true,
     noExternal: ["mermaid"],
     clean: false,

@@ -1,8 +1,8 @@
+import { Box } from "@adapters/mui";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 import React, { useMemo } from "react";
 
-import Box from "@mui/material/Box";
 import { CodeStepLayer } from "./components/CodeStepLayer/CodeStepLayer";
 import { CodeTransitionLayer } from "./components/CodeTransitionLayer/CodeTransitionLayer";
 import { CODE_EXPLAINER_CONFIG, CODE_THEME } from "./constants";

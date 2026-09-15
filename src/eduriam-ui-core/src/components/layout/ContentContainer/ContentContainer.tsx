@@ -1,8 +1,8 @@
+import { Container, Stack, useTheme } from "@adapters/mui";
+
 import { ReactNode } from "react";
 
-import Container from "@mui/material/Container";
-import Stack, { StackProps } from "@mui/material/Stack";
-import useTheme from "@mui/material/styles/useTheme";
+import type { StackProps } from "@mui/material";
 
 const DESKTOP_MAX_WIDTHS = {
   small: 400,

@@ -1,3 +1,14 @@
+import { Stack, Typography } from "@adapters/mui";
+import {
+  DndContext,
+  type DragCancelEvent,
+  type DragEndEvent,
+  DragOverlay,
+  type DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { KeyboardExtension, LargeButton } from "@eduriam/ui-core";
 
 import React, {
@@ -8,21 +19,10 @@ import React, {
   useState,
 } from "react";
 
-import {
-  DndContext,
-  DragOverlay,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  type DragCancelEvent,
-  type DragEndEvent,
-  type DragStartEvent,
-} from "@dnd-kit/core";
-import Stack from "@mui/material/Stack";
 import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
 
 import type { AnswerState } from "../../../../../../types/AnswerState";
+import CodeBlank from "../../../../../shared/CodeBlank/CodeBlank";
 import { CodeEditor } from "../CodeEditor/CodeEditor";
 import type {
   CodeEditorTab,
@@ -32,7 +32,6 @@ import type {
 } from "../CodeEditor/CodeEditorTypes";
 import { PASSIVE_TAB_TYPES } from "../CodeEditor/CodeEditorTypes";
 import { CodeOptions } from "../CodeOptions/CodeOptions";
-import CodeBlank from "../../../../../shared/CodeBlank/CodeBlank";
 import { getKeyboardSetCharacters } from "../KeyboardExtension/keyboardSets";
 
 // ---------------------------------------------------------------------------
@@ -492,10 +491,7 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
    */
   function handleBlurCapture(e: React.FocusEvent) {
     const nextFocused = e.relatedTarget;
-    if (
-      nextFocused instanceof Node &&
-      e.currentTarget.contains(nextFocused)
-    ) {
+    if (nextFocused instanceof Node && e.currentTarget.contains(nextFocused)) {
       return;
     }
     setIsTypingContextActive(false);
@@ -624,9 +620,14 @@ export const CodeExercise: React.FC<CodeExerciseProps> = ({
             selectedIndices={selectedIndices}
             onSelectOption={handleSelectOption}
             getOptionDraggableId={(optionIndex) =>
-              getOptionDraggableId(activeFillInBlankWithOptionsTab.id, optionIndex)
+              getOptionDraggableId(
+                activeFillInBlankWithOptionsTab.id,
+                optionIndex,
+              )
             }
-            optionsPoolDroppableId={getOptionsPoolDroppableId(activeFillInBlankWithOptionsTab.id)}
+            optionsPoolDroppableId={getOptionsPoolDroppableId(
+              activeFillInBlankWithOptionsTab.id,
+            )}
           />
         )}
         <DragOverlay zIndex={4000} dropAnimation={null}>

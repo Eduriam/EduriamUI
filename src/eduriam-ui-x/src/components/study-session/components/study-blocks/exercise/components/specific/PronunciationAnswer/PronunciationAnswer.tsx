@@ -1,14 +1,11 @@
+import { Box, Fab, Typography } from "@adapters/mui";
+import { Mic as MicIcon } from "@adapters/mui-icons";
 import "regenerator-runtime/runtime";
 
 import React, { useEffect, useMemo, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-
-import MicIcon from "@mui/icons-material/Mic";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import { PronunciationAnswerComponent } from "../../ExerciseStudyBlockComponentDTO";

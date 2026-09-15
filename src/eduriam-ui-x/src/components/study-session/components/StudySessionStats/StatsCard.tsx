@@ -1,7 +1,5 @@
+import { Box, Typography } from "@adapters/mui";
 import { Card, Illustration, type IllustrationName } from "@eduriam/ui-core";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 /**
  * Props for the `StatsCard` component.

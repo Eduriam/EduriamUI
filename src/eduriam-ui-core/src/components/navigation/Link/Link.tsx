@@ -1,6 +1,6 @@
-import type { MouseEventHandler } from "react";
+import { Link as MuiLink } from "@adapters/mui";
 
-import { Link as MuiLink } from "@mui/material";
+import type { MouseEventHandler } from "react";
 
 /**
  * Color choices for the `Link` component, mapped to text colors.

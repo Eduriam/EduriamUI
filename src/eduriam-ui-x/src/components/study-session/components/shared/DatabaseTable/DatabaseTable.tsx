@@ -1,14 +1,16 @@
-import React from "react";
+import {
+  Box,
+  Table as MuiTable,
+  TableCell as MuiTableCell,
+  TableRow as MuiTableRow,
+  Paper,
+  TableBody,
+  TableContainer,
+  TableHead,
+  Typography,
+} from "@adapters/mui";
 
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import MuiTable from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import MuiTableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import MuiTableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
+import React from "react";
 
 export type DatabaseValue = string | number | boolean | null;
 
@@ -171,7 +173,11 @@ export const DatabaseTable: React.FC<DatabaseTableProps> = ({
                         sx={{
                           color: isNull ? "text.secondary" : "text.primary",
                           fontStyle: isNull ? "italic" : "normal",
-                          fontSize: { xs: "0.68rem", sm: "0.8rem", md: "0.875rem" },
+                          fontSize: {
+                            xs: "0.68rem",
+                            sm: "0.8rem",
+                            md: "0.875rem",
+                          },
                         }}
                       >
                         {formatValue(value)}

@@ -1,3 +1,4 @@
+import { Box, Typography } from "@adapters/mui";
 import {
   BasicNavbar,
   ContentContainer,
@@ -11,9 +12,6 @@ import {
 } from "@eduriam/ui-core";
 
 import { useEffect, useMemo, useState } from "react";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 export interface ReportDialogSubmitPayload {
   problemTypeId: string;
@@ -80,7 +78,8 @@ export const ReportDialog: React.FC<ReportDialogProps> = ({
   const submittedDescription =
     localization.thankYouSection?.description ??
     "We will review your problem report as soon as possible.";
-  const continueLabel = localization.thankYouSection?.continueButton ?? "Continue";
+  const continueLabel =
+    localization.thankYouSection?.continueButton ?? "Continue";
 
   const selectedProblemTypeLabel = useMemo(() => {
     if (!selectedProblemTypeId) {
@@ -240,4 +239,3 @@ export const ReportDialog: React.FC<ReportDialogProps> = ({
 };
 
 export default ReportDialog;
-

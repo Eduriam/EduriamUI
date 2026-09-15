@@ -1,20 +1,16 @@
 {
   "name": "@eduriam/ui-core",
-  "version": "0.7.2",
-  "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "version": "0.7.3",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     },
     "./mermaid": {
       "types": "./dist/mermaid.d.ts",
-      "require": "./dist/mermaid.cjs",
-      "import": "./dist/mermaid.js"
+      "import": "./dist/mermaid.mjs"
     }
   },
   "files": [

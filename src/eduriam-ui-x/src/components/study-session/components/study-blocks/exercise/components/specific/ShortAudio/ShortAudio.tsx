@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Box, CircularProgress, Fab } from "@adapters/mui";
+import {
+  Pause as PauseIcon,
+  PlayArrow as PlayArrowIcon,
+} from "@adapters/mui-icons";
 
-import PauseIcon from "@mui/icons-material/Pause";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
-import Fab from "@mui/material/Fab";
+import React, { useEffect, useRef, useState } from "react";
 
 import { ShortAudioComponent } from "../../ExerciseStudyBlockComponentDTO";
 

@@ -1,6 +1,6 @@
-import Box from "@mui/material/Box";
-import type { ButtonBaseProps } from "@mui/material/ButtonBase";
-import ButtonBase from "@mui/material/ButtonBase";
+import { Box, ButtonBase } from "@adapters/mui";
+
+import type { ButtonBaseProps } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
 
 import { Icon, type IconName } from "../../data-display/Icon";

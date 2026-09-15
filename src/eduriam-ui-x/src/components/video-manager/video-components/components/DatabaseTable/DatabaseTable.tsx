@@ -1,6 +1,6 @@
-import React from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import React from "react";
 
 import type {
   DatabaseColumn,

@@ -1,10 +1,7 @@
+import { Box, Stack, useTheme } from "@adapters/mui";
 import { AbsoluteFill, Sequence } from "remotion";
 
 import React from "react";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
 
 import type {
   BackgroundComponent,
@@ -89,9 +86,9 @@ export const RawSlide: React.FC<IRawSlideProps> = ({ slide, fps }) => {
   const bgImg = backgroundComponents.find(
     (c) => c.type === "BACKGROUND_IMAGE",
   ) as IBackgroundImage | undefined;
-  const bgVid = backgroundComponents.find((c) => c.type === "BACKGROUND_VIDEO") as
-    | IBackgroundVideo
-    | undefined;
+  const bgVid = backgroundComponents.find(
+    (c) => c.type === "BACKGROUND_VIDEO",
+  ) as IBackgroundVideo | undefined;
 
   const componentsByColumn = groupByColumn(components);
   const visibleColumns = resolveVisibleColumns(components);
@@ -153,4 +150,3 @@ export const RawSlide: React.FC<IRawSlideProps> = ({ slide, fps }) => {
 };
 
 export default RawSlide;
-

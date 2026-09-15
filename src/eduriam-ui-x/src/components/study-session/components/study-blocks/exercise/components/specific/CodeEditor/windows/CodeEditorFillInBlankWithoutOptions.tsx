@@ -1,9 +1,8 @@
+import { Box, InputBase, Typography } from "@adapters/mui";
+
 import React from "react";
 
-import Box from "@mui/material/Box";
-import InputBase from "@mui/material/InputBase";
 import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
 
 import type { CodeLine } from "../CodeEditorTypes";
 import { SyntaxHighlightedCode } from "./SyntaxHighlightedCode";

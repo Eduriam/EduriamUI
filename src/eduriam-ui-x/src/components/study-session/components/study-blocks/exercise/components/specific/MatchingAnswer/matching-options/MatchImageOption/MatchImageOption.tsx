@@ -1,7 +1,4 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
+import { Box, Card, CardActionArea, CardMedia } from "@adapters/mui";
 
 import styles from "./MatchImageOption.module.css";
 

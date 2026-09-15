@@ -1,5 +1,5 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography } from "@adapters/mui";
+
 import type { Theme } from "@mui/material/styles";
 
 /**

@@ -1,7 +1,6 @@
-import Box from "@mui/material/Box";
-import MuiChip, { ChipProps as MuiChipProps } from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
+import { Chip as MuiChip, Stack, useTheme } from "@adapters/mui";
+
+import type { ChipProps as MuiChipProps } from "@mui/material";
 
 import { Icon, type IconName } from "../Icon";
 
@@ -72,12 +71,7 @@ export const Chip: React.FC<ChipProps> = ({
 
   const chipLabel =
     iconName !== undefined && label !== undefined ? (
-      <Stack
-        direction="row"
-        alignItems="center"
-        gap={1}
-        sx={{ lineHeight: 1 }}
-      >
+      <Stack direction="row" alignItems="center" gap={1} sx={{ lineHeight: 1 }}>
         {label}
         <Icon
           name={iconName}

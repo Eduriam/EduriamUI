@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import { Box, Typography } from "@adapters/mui";
 
-import { Box, Typography } from "@mui/material";
+import React, { useMemo } from "react";
 
 import type { Caption } from "../../../video-scenes/Scene";
 

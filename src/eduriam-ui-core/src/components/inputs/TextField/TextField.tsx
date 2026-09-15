@@ -1,8 +1,8 @@
+import { Box, InputBase, Typography } from "@adapters/mui";
+
 import type { ReactNode } from "react";
 
-import Box from "@mui/material/Box";
-import InputBase, { InputBaseProps } from "@mui/material/InputBase";
-import Typography from "@mui/material/Typography";
+import type { InputBaseProps } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 /**

@@ -1,9 +1,7 @@
+import { Stack, Typography } from "@adapters/mui";
 import { LargeRadioButtonGroup } from "@eduriam/ui-core";
 
 import React, { useEffect, useMemo, useState } from "react";
-
-import { Stack } from "@mui/material";
-import Typography from "@mui/material/Typography";
 
 import { AnswerState } from "../../../../../../types/AnswerState";
 import { MultipleChoiceExerciseComponent } from "../../ExerciseStudyBlockComponentDTO";

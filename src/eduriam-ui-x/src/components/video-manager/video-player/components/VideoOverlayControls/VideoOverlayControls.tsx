@@ -1,9 +1,7 @@
+import { Box, LinearProgress, useTheme } from "@adapters/mui";
 import { Icon, IconButton } from "@eduriam/ui-core";
 
 import React from "react";
-
-import { Box, LinearProgress } from "@mui/material";
-import useTheme from "@mui/material/styles/useTheme";
 
 export type VideoPlaybackState = "playing" | "paused" | "ended";
 
@@ -34,7 +32,8 @@ export const VideoOverlayControls: React.FC<IVideoOverlayControls> = ({
 }) => {
   const theme = useTheme();
 
-  const showOverlay = visible || playbackState === "paused" || playbackState === "ended";
+  const showOverlay =
+    visible || playbackState === "paused" || playbackState === "ended";
 
   return (
     <Box
@@ -89,7 +88,10 @@ export const VideoOverlayControls: React.FC<IVideoOverlayControls> = ({
               p: 0,
             }}
           >
-            <Icon name="replay" sx={{ fontSize: 48, color: theme.palette.text.primary }} />
+            <Icon
+              name="replay"
+              sx={{ fontSize: 48, color: theme.palette.text.primary }}
+            />
           </Box>
         ) : (
           <Box
@@ -132,7 +134,10 @@ export const VideoOverlayControls: React.FC<IVideoOverlayControls> = ({
         onClick={(e: React.MouseEvent<HTMLDivElement>) => {
           e.stopPropagation();
           const rect = e.currentTarget.getBoundingClientRect();
-          const fraction = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          const fraction = Math.max(
+            0,
+            Math.min(1, (e.clientX - rect.left) / rect.width),
+          );
           onSeek(fraction);
         }}
       >

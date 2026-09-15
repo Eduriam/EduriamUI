@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
+import { Stack } from "@adapters/mui";
 
-import Stack from "@mui/material/Stack";
+import type { ReactNode } from "react";
 
 /**
  * Props for the `PageRoot` layout component.

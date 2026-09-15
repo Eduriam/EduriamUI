@@ -1,10 +1,7 @@
+import { Box, IconButton, LinearProgress } from "@adapters/mui";
 import { Icon } from "@eduriam/ui-core";
 
 import React, { useEffect, useRef, useState } from "react";
-
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import LinearProgress from "@mui/material/LinearProgress";
 
 import { LongAudioComponent } from "../../ExerciseStudyBlockComponentDTO";
 

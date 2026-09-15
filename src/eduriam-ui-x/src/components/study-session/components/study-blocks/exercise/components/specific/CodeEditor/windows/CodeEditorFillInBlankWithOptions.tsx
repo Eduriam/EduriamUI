@@ -1,10 +1,10 @@
-import React from "react";
-
+import { Box, Typography } from "@adapters/mui";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import Box from "@mui/material/Box";
+
+import React from "react";
+
 import type { TypographyProps } from "@mui/material/Typography";
-import Typography from "@mui/material/Typography";
 
 import CodeBlank from "../../../../../../shared/CodeBlank/CodeBlank";
 import type { CodeLine } from "../CodeEditorTypes";
@@ -68,15 +68,14 @@ const DroppableCodeBlank: React.FC<DroppableCodeBlankProps> = ({
     setNodeRef: setDraggableNodeRef,
     transform,
     isDragging,
-  } =
-    useDraggable({
-      id: draggableId ?? `blank-token:${blankId}`,
-      data: {
-        type: "code-blank-token",
-        blankId,
-      },
-      disabled: !dragAndDropEnabled || !filled,
-    });
+  } = useDraggable({
+    id: draggableId ?? `blank-token:${blankId}`,
+    data: {
+      type: "code-blank-token",
+      blankId,
+    },
+    disabled: !dragAndDropEnabled || !filled,
+  });
 
   return (
     <Box
@@ -113,7 +112,9 @@ const DroppableCodeBlank: React.FC<DroppableCodeBlankProps> = ({
  * interactive `CodeBlank` buttons and text segments use monospace code
  * typography. Users fill blanks by selecting from option buttons.
  */
-export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWithOptionsProps> = ({
+export const CodeEditorFillInBlankWithOptions: React.FC<
+  CodeEditorFillInBlankWithOptionsProps
+> = ({
   lines,
   filledBlanks,
   onBlankClick,
@@ -132,7 +133,15 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
       }}
     >
       {lines.map((line, lineIdx) => (
-        <Box key={lineIdx} sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", minHeight: 21.1 }}>
+        <Box
+          key={lineIdx}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexWrap: "wrap",
+            minHeight: 21.1,
+          }}
+        >
           {line.map((segment, segIdx) => {
             if (segment.type === "text") {
               if (language) {
@@ -158,7 +167,8 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
             }
 
             const filled = !!filledBlanks[segment.blankId];
-            const value = filledBlanks[segment.blankId] ?? "\u00A0\u00A0\u00A0\u00A0";
+            const value =
+              filledBlanks[segment.blankId] ?? "\u00A0\u00A0\u00A0\u00A0";
 
             return (
               <DroppableCodeBlank
@@ -166,7 +176,9 @@ export const CodeEditorFillInBlankWithOptions: React.FC<CodeEditorFillInBlankWit
                 blankId={segment.blankId}
                 code={value}
                 filled={filled}
-                onClick={filled ? () => onBlankClick?.(segment.blankId) : undefined}
+                onClick={
+                  filled ? () => onBlankClick?.(segment.blankId) : undefined
+                }
                 getBlankDroppableId={getBlankDroppableId}
                 getBlankTokenDraggableId={getBlankTokenDraggableId}
                 dragAndDropEnabled={dragAndDropEnabled}

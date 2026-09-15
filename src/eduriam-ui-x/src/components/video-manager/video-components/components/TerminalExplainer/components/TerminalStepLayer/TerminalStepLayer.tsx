@@ -1,12 +1,12 @@
+import { Box } from "@adapters/mui";
+
 import React, { useMemo } from "react";
 
-import Box from "@mui/material/Box";
-
 import {
-  getTerminalBottomSafetyPx,
   TERMINAL_FONT_FAMILY,
   TERMINAL_LINE_HEIGHT,
   TERMINAL_THEME,
+  getTerminalBottomSafetyPx,
 } from "../../constants";
 import type {
   TerminalExplainerColorMode,
@@ -55,7 +55,9 @@ export const TerminalStepLayer: React.FC<TerminalStepLayerProps> = ({
       >
         {lines.map((line, lineIndex) => {
           const matches = line.matchAll(/(\s+|[^\s]+)/g);
-          const tokens = [...matches].map((match) => match[0] ?? "").filter(Boolean);
+          const tokens = [...matches]
+            .map((match) => match[0] ?? "")
+            .filter(Boolean);
 
           return (
             <Box

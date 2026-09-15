@@ -1,6 +1,6 @@
-import React from "react";
+import { Box } from "@adapters/mui";
 
-import Box from "@mui/material/Box";
+import React from "react";
 
 import { CODE_FONT_FAMILY, CODE_LINE_HEIGHT } from "../../constants";
 import { getLineTokens, getTokenColor } from "../../util/syntax";
@@ -36,19 +36,21 @@ export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
     >
       {lines.map((line, lineIndex) => (
         <Box key={`${lineIndex}-${line}`} component="div">
-          {getLineTokens(line, language).map(({ type, content }, tokenIndex) => (
-            <Box
-              key={`${lineIndex}-${tokenIndex}`}
-              component="span"
-              sx={{
-                color: getTokenColor(type, tokenColors, fallbackColor),
-                overflowWrap: "anywhere",
-                wordBreak: "break-word",
-              }}
-            >
-              {content}
-            </Box>
-          ))}
+          {getLineTokens(line, language).map(
+            ({ type, content }, tokenIndex) => (
+              <Box
+                key={`${lineIndex}-${tokenIndex}`}
+                component="span"
+                sx={{
+                  color: getTokenColor(type, tokenColors, fallbackColor),
+                  overflowWrap: "anywhere",
+                  wordBreak: "break-word",
+                }}
+              >
+                {content}
+              </Box>
+            ),
+          )}
           {line.length === 0 ? "\u00A0" : null}
         </Box>
       ))}
@@ -57,4 +59,3 @@ export const HighlightedSnippet: React.FC<HighlightedSnippetProps> = ({
 };
 
 export default HighlightedSnippet;
-
