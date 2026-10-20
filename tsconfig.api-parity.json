@@ -4,8 +4,10 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@eduriam/ui-core": ["src/eduriam-ui-core/src/index.ts"]
+      "@eduriam/ui-core": ["src/eduriam-ui-core/src/index.ts"],
+      "@adapters/mui": ["node_modules/@mui/material/index.d.ts"],
+      "@adapters/mui-icons": ["node_modules/@mui/icons-material/index.d.ts"]
     }
   },
-  "include": ["tests/export-parity.test-d.ts"]
+  "include": ["tests/export-parity.test-d.ts", "src/eduriam-ui-x/src/**/*.d.ts"]
 }

@@ -1,0 +1,34 @@
+{
+  "type": "CODE_EXPLAINER",
+  "purpose": "Demonstrate relevant code through coordinated steps. Reuse the same grounded example; focus and annotate the syntax being discussed.",
+  "tags": ["syntax", "code", "programming", "example", "comparison"],
+  "capabilities": [
+    "code steps",
+    "animated code changes",
+    "focusLineNumber",
+    "callouts",
+    "errors",
+    "scrolling"
+  ],
+  "example": {
+    "type": "CODE_EXPLAINER",
+    "id": "code",
+    "startTime": 0,
+    "column": "first",
+    "steps": [
+      {
+        "id": "declaration",
+        "startTime": 0,
+        "language": "csharp",
+        "code": "namespace Learning;\nclass Example {}",
+        "focusLineNumber": 1,
+        "callouts": [
+          {
+            "lineNumber": 1,
+            "message": "Namespace declaration"
+          }
+        ]
+      }
+    ]
+  }
+}

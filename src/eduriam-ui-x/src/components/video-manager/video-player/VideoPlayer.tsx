@@ -37,6 +37,8 @@ export interface IVideoPlayer {
   onEnded?: () => void;
   /** Forces the player to pause when true. */
   paused?: boolean;
+  /** External seek request; revision permits repeated seeks to the same time. */
+  seekRequest?: { timeMs: number; revision: number };
 }
 
 /**
@@ -50,12 +52,25 @@ export const VideoPlayer: React.FC<IVideoPlayer> = ({
   style: styleProp,
   onEnded,
   paused = false,
+  seekRequest,
 }) => {
   const playerRef = useRef<PlayerRef>(null);
 
   const { videoComponent, durationInFrames, fps, videoWidth, videoHeight } =
     useMemo(() => VideoBuilder.buildVideo(videoDefinition), [videoDefinition]);
 
+  useEffect(() => {
+    if (seekRequest)
+      playerRef.current?.seekTo(
+        Math.max(
+          0,
+          Math.min(
+            durationInFrames - 1,
+            Math.round((seekRequest.timeMs / 1000) * fps),
+          ),
+        ),
+      );
+  }, [seekRequest, fps, durationInFrames]);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [playbackState, setPlaybackState] = useState<VideoPlaybackState>(
     autoPlay ? "playing" : "paused",

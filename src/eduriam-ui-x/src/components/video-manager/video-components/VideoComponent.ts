@@ -26,6 +26,8 @@ export interface BaseVideoComponent {
   id: IDString;
   type: ComponentType;
   startTime: number;
+  /** Optional exclusive end, relative to the containing slide (milliseconds). */
+  endTime?: number;
   column: VideoComponentColumn;
 }
 

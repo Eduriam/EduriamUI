@@ -1,0 +1,6 @@
+{
+  "type": "ONE_CODE_HEADER",
+  "purpose": "Present a short code title or syntax expression. For evolving code use CODE_EXPLANATION or RAW CODE_EXPLAINER.",
+  "tags": ["code", "heading"],
+  "capabilities": ["slide appearance"]
+}

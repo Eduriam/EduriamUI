@@ -1,0 +1,6 @@
+{
+  "type": "GIT_GRAPH_DIAGRAM",
+  "purpose": "Explain relevant relationships or processes with coherent evolving diagram steps.",
+  "tags": ["diagram", "relationships", "process", "git_graph_diagram"],
+  "capabilities": ["diagram steps", "state transitions"]
+}

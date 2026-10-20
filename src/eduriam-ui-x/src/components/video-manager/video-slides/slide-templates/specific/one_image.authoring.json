@@ -1,0 +1,6 @@
+{
+  "type": "ONE_IMAGE",
+  "purpose": "Illustrate a relevant concrete situation with one image.",
+  "tags": ["image", "illustration"],
+  "capabilities": ["slide appearance"]
+}

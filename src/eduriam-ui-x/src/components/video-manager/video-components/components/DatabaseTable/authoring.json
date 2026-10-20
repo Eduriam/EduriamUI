@@ -1,0 +1,6 @@
+{
+  "type": "DATABASE_TABLE",
+  "purpose": "Display database records and columns.",
+  "tags": ["database", "records", "comparison"],
+  "capabilities": ["reveal"]
+}

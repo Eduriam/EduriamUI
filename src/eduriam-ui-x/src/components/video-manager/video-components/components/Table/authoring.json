@@ -1,0 +1,6 @@
+{
+  "type": "TABLE",
+  "purpose": "Compare concrete values or alternatives.",
+  "tags": ["comparison", "values"],
+  "capabilities": ["reveal"]
+}

@@ -1,4 +1,5 @@
 import type { Slide } from "../video-slides/Slide";
+import { millisecondsToFrames } from "../video-timing/timing";
 
 type SlideWithTiming = {
   slide: Slide;
@@ -15,7 +16,7 @@ const normalizeStartTimeMs = (startTime: unknown): number => {
 };
 
 const toFrame = (ms: number, fps: number): number =>
-  Math.max(0, Math.round((ms / 1000) * fps));
+  Math.max(0, millisecondsToFrames(ms, fps));
 
 export const buildSlideTimings = (
   slides: Slide[],

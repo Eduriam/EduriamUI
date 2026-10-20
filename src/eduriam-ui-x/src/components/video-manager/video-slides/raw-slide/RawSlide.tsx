@@ -17,6 +17,7 @@ import {
   type IBackgroundVideo,
 } from "../../video-components/components/BackgroundVideo/BackgroundVideo";
 import { VideoComponentFactory } from "../../video-components/factory/VideoComponentFactory";
+import { millisecondsToFrames } from "../../video-timing/timing";
 import type { BaseSlide } from "../BaseSlide";
 import { Column } from "./Column";
 
@@ -120,14 +121,28 @@ export const RawSlide: React.FC<IRawSlideProps> = ({ slide, fps }) => {
                 const startMs = component.startTime ?? 0;
                 const startFrame = Math.max(
                   0,
-                  Math.round((startMs / 1000) * fps),
+                  millisecondsToFrames(startMs, fps),
                 );
                 const key =
                   (component as { id?: string }).id ??
                   `component-${column}-${index}`;
 
                 return (
-                  <Sequence key={key} from={startFrame} layout="none">
+                  <Sequence
+                    key={key}
+                    from={startFrame}
+                    durationInFrames={
+                      component.endTime === null ||
+                      component.endTime === undefined
+                        ? undefined
+                        : Math.max(
+                            1,
+                            millisecondsToFrames(component.endTime, fps) -
+                              startFrame,
+                          )
+                    }
+                    layout="none"
+                  >
                     <Box
                       sx={{
                         width: "100%",

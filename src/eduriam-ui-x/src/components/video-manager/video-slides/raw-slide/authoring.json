@@ -1,0 +1,10 @@
+{
+  "type": "RAW",
+  "purpose": "Compose coordinated components in up to three columns; use a shared grounded visual idea and bookmark every component and internal action.",
+  "tags": ["composition", "code", "diagram"],
+  "capabilities": [
+    "component reveals",
+    "component lifetimes",
+    "internal actions"
+  ]
+}

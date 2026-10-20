@@ -1,6 +1,6 @@
 {
   "name": "@eduriam/ui-x",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {

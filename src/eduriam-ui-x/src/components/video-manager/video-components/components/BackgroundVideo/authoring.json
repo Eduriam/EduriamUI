@@ -1,0 +1,6 @@
+{
+  "type": "BACKGROUND_VIDEO",
+  "purpose": "Decorative background only; does not satisfy teaching-content activity checks.",
+  "tags": ["background"],
+  "capabilities": ["background playback"]
+}

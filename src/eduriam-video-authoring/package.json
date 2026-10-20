@@ -1,0 +1,26 @@
+{
+  "name": "@eduriam/video-authoring",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/catalog.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "ts-json-schema-generator": "^2.9.0"
+  },
+  "types": "./dist/index.d.mts"
+}

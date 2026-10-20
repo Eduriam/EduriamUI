@@ -4,6 +4,7 @@ import React from "react";
 
 import type { Scene } from "../video-scenes/Scene";
 import { SlideFactory } from "../video-slides/factory/SlideFactory";
+import { millisecondsToFrames } from "../video-timing/timing";
 import type { Video } from "../video/Video";
 import type { VideoDefinition } from "../video/VideoDefinition";
 import { buildSlideTimings } from "./slideTiming";
@@ -19,12 +20,25 @@ const SceneRenderer: React.FC<SceneRendererProps> = ({
   fps,
   sceneDurationFrames,
 }) => {
-  const slideTimings = buildSlideTimings(scene.slides, fps, sceneDurationFrames);
+  const slideTimings = buildSlideTimings(
+    scene.slides,
+    fps,
+    sceneDurationFrames,
+  );
 
   return (
     <AbsoluteFill>
       {scene.audio ? (
-        <Html5Audio src={scene.audio.url} pauseWhenBuffering />
+        <Html5Audio
+          src={scene.audio.url}
+          trimBefore={millisecondsToFrames(scene.audio.startMs ?? 0, fps)}
+          trimAfter={
+            scene.audio.endMs === null || scene.audio.endMs === undefined
+              ? undefined
+              : millisecondsToFrames(scene.audio.endMs, fps)
+          }
+          pauseWhenBuffering
+        />
       ) : null}
       {slideTimings.map(({ slide, from, durationInFrames }, index) => (
         <Sequence

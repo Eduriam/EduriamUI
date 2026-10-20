@@ -1,0 +1,6 @@
+{
+  "type": "ARCHITECTURE_DIAGRAM",
+  "purpose": "Explain relevant relationships or processes with coherent evolving diagram steps.",
+  "tags": ["diagram", "relationships", "process", "architecture_diagram"],
+  "capabilities": ["diagram steps", "state transitions"]
+}

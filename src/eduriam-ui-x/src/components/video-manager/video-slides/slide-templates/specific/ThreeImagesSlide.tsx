@@ -5,13 +5,13 @@ import type { BaseSlide } from "../../BaseSlide";
 import type { IRawSlide } from "../../raw-slide/RawSlide";
 import { RawSlide } from "../../raw-slide/RawSlide";
 
-type SlideImage = Pick<IImage, "id" | "startTime" | "url">;
+type ThreeImagesSlideImage = Pick<IImage, "id" | "startTime" | "url">;
 
 export interface IThreeImagesSlide extends BaseSlide {
   type: "THREE_IMAGES";
-  leftImage: SlideImage;
-  middleImage: SlideImage;
-  rightImage: SlideImage;
+  leftImage: ThreeImagesSlideImage;
+  middleImage: ThreeImagesSlideImage;
+  rightImage: ThreeImagesSlideImage;
 }
 
 export interface IThreeImagesSlideProps {

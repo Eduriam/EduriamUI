@@ -1,0 +1,6 @@
+{
+  "type": "TERMINAL_EXPLAINER",
+  "purpose": "Show actual output evolving with the explanation.",
+  "tags": ["output", "command", "terminal"],
+  "capabilities": ["output steps", "animated changes"]
+}

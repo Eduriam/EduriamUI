@@ -13,6 +13,8 @@ export type Scene = {
   slides: Slide[];
   audio?: {
     url: string;
+    startMs?: number;
+    endMs?: number;
     captions?: Caption[];
   };
   duration: number; // Duration in milliseconds

@@ -1,0 +1,6 @@
+{
+  "type": "THREE_IMAGES",
+  "purpose": "Compare three relevant images; each image has its own timed reveal.",
+  "tags": ["image", "comparison"],
+  "capabilities": ["image reveals"]
+}

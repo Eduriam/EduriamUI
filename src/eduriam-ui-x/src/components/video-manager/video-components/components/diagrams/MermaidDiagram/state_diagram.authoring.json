@@ -1,0 +1,6 @@
+{
+  "type": "STATE_DIAGRAM",
+  "purpose": "Explain relevant relationships or processes with coherent evolving diagram steps.",
+  "tags": ["diagram", "relationships", "process", "state_diagram"],
+  "capabilities": ["diagram steps", "state transitions"]
+}

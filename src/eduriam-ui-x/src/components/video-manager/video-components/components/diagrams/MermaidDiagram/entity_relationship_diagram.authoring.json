@@ -1,0 +1,11 @@
+{
+  "type": "ENTITY_RELATIONSHIP_DIAGRAM",
+  "purpose": "Explain relevant relationships or processes with coherent evolving diagram steps.",
+  "tags": [
+    "diagram",
+    "relationships",
+    "process",
+    "entity_relationship_diagram"
+  ],
+  "capabilities": ["diagram steps", "state transitions"]
+}
