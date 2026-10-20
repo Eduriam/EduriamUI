@@ -1,6 +1,0 @@
-{
-  "type": "BROWSER",
-  "purpose": "Show the visible result of a relevant web example.",
-  "tags": ["web", "html", "output"],
-  "capabilities": ["reveal"]
-}

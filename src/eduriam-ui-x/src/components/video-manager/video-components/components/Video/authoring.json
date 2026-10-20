@@ -1,6 +1,0 @@
-{
-  "type": "VIDEO",
-  "purpose": "Use a short silent foreground clip when visible motion supports the narration. Playback ends at the actual clip duration.",
-  "tags": ["situation", "motion", "illustration"],
-  "capabilities": ["foreground playback", "temporary illustration"]
-}

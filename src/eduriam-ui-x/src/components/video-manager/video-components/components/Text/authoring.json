@@ -1,6 +1,0 @@
-{
-  "type": "TEXT",
-  "purpose": "Name a concept or emphasize a concise point; do not simply repeat the narration for every slide.",
-  "tags": ["label", "emphasis", "title"],
-  "capabilities": ["reveal"]
-}

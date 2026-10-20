@@ -1,6 +1,0 @@
-{
-  "type": "BACKGROUND_COLOR",
-  "purpose": "Decorative background color; never counts as teaching activity.",
-  "tags": ["background"],
-  "capabilities": ["decorative"]
-}

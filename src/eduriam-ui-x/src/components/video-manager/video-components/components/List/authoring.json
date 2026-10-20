@@ -1,6 +1,0 @@
-{
-  "type": "LIST",
-  "purpose": "Reveal a meaningful enumeration progressively as its items are discussed.",
-  "tags": ["enumeration", "sequence", "points"],
-  "capabilities": ["item reveals"]
-}

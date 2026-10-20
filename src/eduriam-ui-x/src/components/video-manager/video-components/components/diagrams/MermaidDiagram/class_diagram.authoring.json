@@ -1,6 +1,0 @@
-{
-  "type": "CLASS_DIAGRAM",
-  "purpose": "Explain relevant relationships or processes with coherent evolving diagram steps.",
-  "tags": ["diagram", "relationships", "process", "class_diagram"],
-  "capabilities": ["diagram steps", "state transitions"]
-}

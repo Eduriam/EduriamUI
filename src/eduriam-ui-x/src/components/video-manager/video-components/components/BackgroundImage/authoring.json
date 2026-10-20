@@ -1,6 +1,0 @@
-{
-  "type": "BACKGROUND_IMAGE",
-  "purpose": "Decorative background image; never counts as teaching activity.",
-  "tags": ["background"],
-  "capabilities": ["decorative"]
-}

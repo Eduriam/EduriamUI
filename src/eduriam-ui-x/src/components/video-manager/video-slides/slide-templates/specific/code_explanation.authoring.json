@@ -1,6 +1,0 @@
-{
-  "type": "CODE_EXPLANATION",
-  "purpose": "Show a coherent grounded code example; use codeExplanation.steps to change code, focus lines and add annotations as the explanation develops.",
-  "tags": ["code", "syntax"],
-  "capabilities": ["code steps", "focus", "annotations"]
-}
