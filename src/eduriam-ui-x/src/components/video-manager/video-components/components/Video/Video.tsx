@@ -15,7 +15,6 @@ import type { BaseVideoComponent } from "../../VideoComponent";
 export interface IVideo extends BaseVideoComponent {
   type: "VIDEO";
   url: string;
-  assetId?: string;
   mediaDurationMs?: number;
   size?: ComponentSize;
 }

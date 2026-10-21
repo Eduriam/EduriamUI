@@ -17,7 +17,7 @@ import {
   type IBackgroundVideo,
 } from "../../video-components/components/BackgroundVideo/BackgroundVideo";
 import { VideoComponentFactory } from "../../video-components/factory/VideoComponentFactory";
-import { millisecondsToFrames } from "../../video-timing/timing";
+import { millisecondsToFrames } from "../../util/timing";
 import type { BaseSlide } from "../BaseSlide";
 import { Column } from "./Column";
 

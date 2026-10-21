@@ -4,7 +4,7 @@ import React from "react";
 
 import type { Scene } from "../video-scenes/Scene";
 import { SlideFactory } from "../video-slides/factory/SlideFactory";
-import { millisecondsToFrames } from "../video-timing/timing";
+import { millisecondsToFrames } from "../util/timing";
 import type { Video } from "../video/Video";
 import type { VideoDefinition } from "../video/VideoDefinition";
 import { buildSlideTimings } from "./slideTiming";

@@ -1,5 +1,5 @@
 import type { Slide } from "../video-slides/Slide";
-import { millisecondsToFrames } from "../video-timing/timing";
+import { millisecondsToFrames } from "../util/timing";
 
 type SlideWithTiming = {
   slide: Slide;
