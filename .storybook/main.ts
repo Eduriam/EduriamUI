@@ -1,6 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { createRequire } from "module";
 import { dirname, join } from "path";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const require = createRequire(import.meta.url);
 
@@ -31,6 +32,11 @@ const config: StorybookConfig = {
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
+  },
+  async viteFinal(config) {
+    // Resolve each workspace's aliases using its own tsconfig.json.
+    config.plugins = [...(config.plugins ?? []), tsconfigPaths()];
+    return config;
   },
 };
 export default config;
