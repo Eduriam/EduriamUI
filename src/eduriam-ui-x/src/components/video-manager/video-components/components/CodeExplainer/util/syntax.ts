@@ -1,5 +1,7 @@
-import { Prism } from "../../../../../study-session/components/study-blocks/exercise/components/specific/CodeEditor/windows/prismInit";
 import type { CodeExplainerColorMode, RawTokenPart, TokenPart } from "../types";
+import { getGrammar, Prism } from "../languageConfig";
+
+export { getGrammar, resolveLanguage } from "../languageConfig";
 
 type PrismToken =
   | string
@@ -8,33 +10,6 @@ type PrismToken =
       content: PrismToken | PrismToken[];
       alias?: string | string[];
     };
-
-const LANGUAGE_ALIASES: Record<string, string> = {
-  js: "javascript",
-  ts: "typescript",
-  py: "python",
-  html: "markup",
-  xml: "markup",
-  shell: "bash",
-  sh: "bash",
-};
-
-export const resolveLanguage = (language: string): string => {
-  const lower = language.toLowerCase();
-  return LANGUAGE_ALIASES[lower] ?? lower;
-};
-
-export const getGrammar = (language: string): Prism.Grammar | undefined => {
-  const resolved = resolveLanguage(language);
-  if (
-    resolved === "bash" &&
-    !Prism.languages.bash &&
-    !Prism.languages.shell
-  ) {
-    return Prism.languages.clike ?? Prism.languages.markup ?? undefined;
-  }
-  return Prism.languages[resolved] ?? Prism.languages.markup ?? undefined;
-};
 
 export const getTokenColors = (
   colorMode: CodeExplainerColorMode,
@@ -142,4 +117,3 @@ export const getLineTokens = (line: string, language: string): TokenPart[] => {
     };
   });
 };
-

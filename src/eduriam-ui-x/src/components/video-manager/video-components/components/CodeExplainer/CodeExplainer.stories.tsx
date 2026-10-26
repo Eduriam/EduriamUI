@@ -1,8 +1,10 @@
 import { theme } from "@eduriam/ui-core";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Player } from "@remotion/player";
+import { expect } from "storybook/test";
 
 import { CodeExplainer, type ICodeExplainer } from "./CodeExplainer";
+import { getGrammar, getLineTokens, getTokenColor, getTokenColors } from "./util/syntax";
 import { getTotalDurationFramesFromStepStarts } from "./util/timing";
 
 const STORYBOOK_FPS = 30;
@@ -340,6 +342,67 @@ export const LongCodeAutoScroll: Story = {
         },
       ], 3200),
     },
+  },
+};
+
+export const CSharpWalkthrough: Story = {
+  render: JavaScriptWalkthrough.render,
+  args: {
+    comp: {
+      id: "code-explainer-csharp",
+      type: "CODE_EXPLAINER",
+      startTime: 0,
+      column: "first",
+      showLineNumbers: true,
+      steps: withStepStartTimes([
+        {
+          id: "csharp-1",
+          language: "csharp",
+          code: `// A simple greeting
+public class Greeter
+{
+    public string Greet(string name)
+    {
+        return "Hello, " + name;
+    }
+}`,
+        },
+        {
+          id: "csharp-2",
+          language: "csharp",
+          code: `// A simple greeting
+public class Greeter
+{
+    public string Greet(string name)
+    {
+        return "Hello, " + name;
+    }
+}
+
+var greeting = new Greeter().Greet("Ada");
+Console.WriteLine(greeting);`,
+          callouts: [
+            {
+              lineNumber: 11,
+              message: "The greeting is written to the console.",
+              code: `Console.WriteLine("Hello, Ada");`,
+            },
+          ],
+        },
+      ], 2800),
+    },
+  },
+  play: async () => {
+    expect(getGrammar("csharp")).toBeDefined();
+    const tokens = [
+      ...getLineTokens('public class Greeter { string name = "Ada"; int count = 1; }', "csharp"),
+      ...getLineTokens("// A simple greeting", "csharp"),
+    ];
+    const colors = getTokenColors("DARK");
+    for (const type of ["keyword", "class-name", "string", "number", "comment"]) {
+      expect(tokens.some((token) => token.type === type)).toBe(true);
+      expect(getTokenColor(type, colors, "#e2e8f0")).not.toBe("#e2e8f0");
+    }
   },
 };
 
