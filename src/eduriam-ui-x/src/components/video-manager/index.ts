@@ -15,6 +15,18 @@ export type { Scene } from "./video-scenes/Scene";
 export type { Video } from "./video/Video";
 export type { VideoDefinition } from "./video/VideoDefinition";
 
+export {
+  TwoHeaderSlide,
+  type ITwoHeaderSlide,
+  type ITwoHeaderSlideProps,
+} from "./video-slides/slide-templates/specific/TwoHeaderSlide";
+export {
+  TwoCodeHeaderSlide,
+  type ITwoCodeHeaderSlide,
+  type ITwoCodeHeaderSlideProps,
+} from "./video-slides/slide-templates/specific/TwoCodeHeaderSlide";
+export type { ITimedSlideHeader } from "./video-slides/slide-templates/specific/TimedSlideHeader";
+
 // Types - slides
 export type { BaseSlide } from "./video-slides/BaseSlide";
 export type { IRawSlide } from "./video-slides/raw-slide/RawSlide";

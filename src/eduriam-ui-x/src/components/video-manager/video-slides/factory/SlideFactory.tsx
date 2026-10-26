@@ -8,12 +8,18 @@ import { OneCodeHeaderSlide } from "../slide-templates/specific/OneCodeHeaderSli
 import { OneHeaderSlide } from "../slide-templates/specific/OneHeaderSlide";
 import { OneImageSlide } from "../slide-templates/specific/OneImageSlide";
 import { ThreeImagesSlide } from "../slide-templates/specific/ThreeImagesSlide";
+import { TwoCodeHeaderSlide } from "../slide-templates/specific/TwoCodeHeaderSlide";
+import { TwoHeaderSlide } from "../slide-templates/specific/TwoHeaderSlide";
 
 export class SlideFactory {
   static renderSlide(slide: Slide, fps: number): React.ReactNode {
     switch (slide.type) {
       case "RAW":
         return <RawSlide slide={slide} fps={fps} />;
+      case "TWO_HEADER":
+        return <TwoHeaderSlide slide={slide} fps={fps} />;
+      case "TWO_CODE_HEADER":
+        return <TwoCodeHeaderSlide slide={slide} fps={fps} />;
       case "ONE_HEADER":
         return <OneHeaderSlide slide={slide} fps={fps} />;
       case "CODE_EXPLANATION":
